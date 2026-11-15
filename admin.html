@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7STARBOYS Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#090909;color:white;
+ font-family:Arial,sans-serif;padding:20px;
+}
+header{
+ background:#171717;border:1px solid #e50914;
+ padding:20px;border-radius:14px;text-align:center;
+}
+h1{margin:0;color:#fff}
+h1 span{color:#e50914}
+p{color:#bbb}
+.card{
+ background:#171717;padding:18px;margin-top:18px;
+ border-radius:12px;border:1px solid #333;
+}
+h2{color:#ff3038;font-size:19px}
+input,select{
+ width:100%;padding:12px;margin:8px 0;
+ background:#080808;color:white;
+ border:1px solid #555;border-radius:7px;
+}
+button{
+ padding:12px;border:0;border-radius:7px;
+ background:#e50914;color:white;font-weight:bold;
+ width:100%;margin-top:10px;
+}
+.note{color:#ffb4b4;font-size:14px;line-height:1.6}
+a{color:#ff646b}
+</style>
+</head>
+<body>
+
+<header>
+<h1>7<span>STER</span>BOYS</h1>
+<p>ADMIN CONTROL PANEL</p>
+</header>
+
+<div class="card">
+<h2>স্বাগতম, Admin!</h2>
+<p>এটি 7STARBOYS-এর নতুন Admin Panel।</p>
+<p class="note">
+এই প্যানেলটি এখন প্রাথমিক ডিজাইন।
+সদস্য অনুমোদন ও পদ পরিবর্তনের কাজ
+Firebase-এর নিরাপদ Admin অনুমতি যুক্ত করার
+পর চালু হবে।
+</p>
+</div>
+
+<div class="card">
+<h2>সদস্য নিয়ন্ত্রণ</h2>
+<p>নতুন সদস্যদের অনুমোদন ও তথ্য পরিচালনা</p>
+<button disabled>সদস্য অনুমোদন (শিগগিরই)</button>
+</div>
+
+<div class="card">
+<h2>পদ নির্ধারণ</h2>
+<select disabled>
+<option>পদ নির্বাচন</option>
+<option>সভাপতি</option>
+<option>সহ-সভাপতি</option>
+<option>সাধারণ সম্পাদক</option>
+<option>সাংগঠনিক সম্পাদক</option>
+<option>সদস্য</option>
+</select>
+<button disabled>পদ নির্ধারণ (শিগগিরই)</button>
+</div>
+
+<div class="card">
+<h2>পোস্ট নিয়ন্ত্রণ</h2>
+<p>ছবি ও ভিডিও পোস্ট পরিচালনা</p>
+<button disabled>পোস্ট নিয়ন্ত্রণ (শিগগিরই)</button>
+</div>
+
+<div class="card">
+<p>7STARBOYS © 2026</p>
+<a href="home.html">মূল ওয়েবসাইটে ফিরে যাও</a>
+</div>
+
+</body>
+</html>

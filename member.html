@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7STARBOYS - Member Dashboard</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
+header{background:#171717;padding:20px;text-align:center;border-bottom:2px solid #e50914}
+header h2{margin:0;color:#ff2525;letter-spacing:2px}
+header p{color:#aaa}
+.container{max-width:600px;margin:25px auto;padding:15px}
+.card{background:#171717;padding:22px;border-radius:14px;border:1px solid #333;margin-bottom:20px}
+h3{color:#ff3030}
+.profile{text-align:center;margin:15px 0 25px}
+.profile img{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid #e50914;display:none}
+.profile-name{color:white;font-size:20px;font-weight:bold;margin-top:10px}
+.info{padding:13px;margin:10px 0;background:#242424;border-radius:8px}
+.label{color:#aaa;font-size:13px}
+.value{font-size:16px;margin-top:6px;overflow-wrap:anywhere}
+.status{color:#20d66b}
+.designation{color:#ffbd35}
+button{width:100%;padding:13px;background:#e50914;color:white;border:0;border-radius:8px;font-size:16px;margin-top:12px;cursor:pointer}
+button:disabled{opacity:.5}
+input[type=file]{width:100%;padding:12px;background:#242424;color:white;border-radius:8px;margin-top:12px}
+textarea{width:100%;min-height:100px;padding:13px;background:#242424;color:white;border:1px solid #444;border-radius:8px;margin-top:12px;font-size:15px;resize:vertical}
+.note{color:#aaa;font-size:13px;text-align:center;margin-top:18px}
+#uploadMessage,#postMessage{text-align:center;color:#ffbd35;font-size:14px;margin-top:12px}
+.post{background:#242424;padding:15px;border-radius:10px;margin-top:15px;border:1px solid #444}
+.post-header{display:flex;align-items:center;gap:10px}
+.post-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #e50914}
+.post-author{font-weight:bold}
+.post-designation{font-size:12px;color:#ffbd35;margin-top:4px}
+.post-date{font-size:11px;color:#999;margin-top:4px}
+.post-text{white-space:pre-wrap;overflow-wrap:anywhere;margin:15px 0}
+.post-media{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-top:10px;background:#111}
+.delete-post{background:#555;color:#ff7777;font-size:13px;padding:9px}
+.empty{text-align:center;color:#aaa;padding:20px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>7STARBOYS</h2>
+<p>MEMBER DASHBOARD</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h3>সদস্যের প্রোফাইল</h3>
+
+<div class="profile">
+<img id="photo" alt="সদস্যের ছবি">
+<div class="profile-name" id="profileName">লোড হচ্ছে...</div>
+</div>
+
+<div class="info">
+<div class="label">প্রোফাইল ছবি পরিবর্তন</div>
+<input type="file" id="photoFile" accept="image/*">
+<button id="uploadPhoto" disabled>ছবি আপলোড করুন</button>
+<div id="uploadMessage"></div>
+</div>
+
+<div class="info">
+<div class="label">সদস্যের নাম</div>
+<div class="value" id="name">লোড হচ্ছে...</div>
+</div>
+
+<div class="info">
+<div class="label">ইমেইল</div>
+<div class="value" id="email">লোড হচ্ছে...</div>
+</div>
+
+<div class="info">
+<div class="label">জন্ম তারিখ</div>
+<div class="value" id="birthDate">লোড হচ্ছে...</div>
+</div>
+
+<div class="info">
+<div class="label">সদস্যের পদ</div>
+<div class="value designation" id="designation">লোড হচ্ছে...</div>
+</div>
+
+<div class="info">
+<div class="label">অ্যাকাউন্টের অবস্থা</div>
+<div class="value status" id="status">লোড হচ্ছে...</div>
+</div>
+
+<button id="logout">লগআউট</button>
+<p class="note">7STARBOYS — একতা আমাদের শক্তি</p>
+</div>
+
+<div class="card">
+<h3>নতুন পোস্ট করুন</h3>
+<textarea id="postText" maxlength="1000" placeholder="আপনার মনের কথা লিখুন..."></textarea>
+<div class="label">ছবি অথবা ভিডিও নির্বাচন করুন (ঐচ্ছিক)</div>
+<input type="file" id="postFile" accept="image/*,video/*">
+<button id="publishPost">পোস্ট প্রকাশ করুন</button>
+<div id="postMessage"></div>
+<p class="note">ছবি ও ভিডিও সর্বোচ্চ ২৫ MB।</p>
+</div>
+
+<div class="card">
+<h3>সদস্যদের পোস্ট</h3>
+<div id="postFeed">
+<div class="empty">পোস্ট লোড হচ্ছে...</div>
+</div>
+</div>
+
+</div>
+
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+ getAuth,onAuthStateChanged,signOut,
+ setPersistence,browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,doc,getDoc,updateDoc,
+ collection,addDoc,query,orderBy,onSnapshot,
+ deleteDoc,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ authDomain: "starboys-7539f.firebaseapp.com",
+ projectId: "starboys-7539f",
+ storageBucket: "starboys-7539f.firebasestorage.app",
+ messagingSenderId: "542462403066",
+ appId: "1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId: "G-RES9E2QY2N"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const CLOUD_NAME="iwza5did";
+const UPLOAD_PRESET="sevenstarboys";
+
+let currentUser=null;
+let memberData=null;
+let selectedFile=null;
+let unsubscribePosts=null;
+
+const photo=document.getElementById("photo");
+const photoFile=document.getElementById("photoFile");
+const uploadButton=document.getElementById("uploadPhoto");
+const uploadMessage=document.getElementById("uploadMessage");
+
+const postText=document.getElementById("postText");
+const postFile=document.getElementById("postFile");
+const publishPost=document.getElementById("publishPost");
+const postMessage=document.getElementById("postMessage");
+const postFeed=document.getElementById("postFeed");
+
+// Local login session চালু রাখা
+try{
+ await setPersistence(auth,browserLocalPersistence);
+}catch(error){
+ console.error("Session persistence error:",error);
+}
+
+// সদস্যের তথ্য লোড
+onAuthStateChanged(auth,async(user)=>{
+
+ if(!user){
+  location.replace("login.html");
+  return;
+ }
+
+ try{
+  const snap=await getDoc(doc(db,"members",user.uid));
+
+  if(!snap.exists() || snap.data().status!=="approved"){
+   await signOut(auth);
+   location.replace("login.html");
+   return;
+  }
+
+  currentUser=user;
+  memberData=snap.data();
+
+  const memberName=memberData.name || "নাম নেই";
+
+  document.getElementById("name").textContent=memberName;
+  document.getElementById("profileName").textContent=memberName;
+  document.getElementById("email").textContent=memberData.email || user.email || "নেই";
+  document.getElementById("birthDate").textContent=memberData.birthDate || "দেওয়া হয়নি";
+  document.getElementById("designation").textContent=memberData.designation || "পদবি নির্ধারণ করা হয়নি";
+  document.getElementById("status").textContent="অনুমোদিত সদস্য";
+
+  if(memberData.photoURL){
+   photo.src=memberData.photoURL;
+   photo.style.display="inline-block";
+  }
+
+  loadPosts();
+
+ }catch(error){
+  console.error(error);
+  document.getElementById("status").textContent="তথ্য লোড করা যায়নি: "+error.message;
+ }
+});
+
+// প্রোফাইল ছবি নির্বাচন
+photoFile.addEventListener("change",(event)=>{
+
+ selectedFile=event.target.files[0];
+
+ if(!selectedFile){
+  uploadButton.disabled=true;
+  return;
+ }
+
+ if(!selectedFile.type.startsWith("image/")){
+  uploadMessage.textContent="শুধু ছবি নির্বাচন করুন।";
+  selectedFile=null;
+  uploadButton.disabled=true;
+  return;
+ }
+
+ if(selectedFile.size>5*1024*1024){
+  uploadMessage.textContent="ছবি ৫ MB-এর কম হতে হবে।";
+  selectedFile=null;
+  uploadButton.disabled=true;
+  return;
+ }
+
+ photo.src=URL.createObjectURL(selectedFile);
+ photo.style.display="inline-block";
+
+ uploadMessage.textContent="ছবি নির্বাচন হয়েছে।";
+ uploadButton.disabled=false;
+});
+
+// প্রোফাইল ছবি আপলোড
+uploadButton.addEventListener("click",async()=>{
+
+ if(!currentUser || !selectedFile) return;
+
+ uploadButton.disabled=true;
+ uploadMessage.textContent="ছবি আপলোড হচ্ছে... অপেক্ষা করো।";
+
+ try{
+  const formData=new FormData();
+  formData.append("file",selectedFile);
+  formData.append("upload_preset",UPLOAD_PRESET);
+
+  const response=await fetch(
+   `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+   {method:"POST",body:formData}
+  );
+
+  const result=await response.json();
+
+  if(!response.ok){
+   throw new Error(result.error?.message || "ছবি আপলোড হয়নি");
+  }
+
+  const imageURL=result.secure_url;
+
+  await updateDoc(doc(db,"members",currentUser.uid),{
+   photoURL:imageURL
+  });
+
+  await updateDoc(doc(db,"publicProfiles",currentUser.uid),{
+   photoURL:imageURL
+  });
+
+  memberData.photoURL=imageURL;
+  photo.src=imageURL;
+  photo.style.display="inline-block";
+
+  uploadMessage.textContent="ছবি সফলভাবে আপলোড হয়েছে! ❤️";
+  selectedFile=null;
+  photoFile.value="";
+
+ }catch(error){
+  console.error(error);
+  uploadMessage.textContent="সমস্যা হয়েছে: "+error.message;
+ }finally{
+  uploadButton.disabled=!selectedFile;
+ }
+});
+
+// Cloudinary-তে পোস্টের ছবি বা ভিডিও আপলোড
+async function uploadPostMedia(file){
+
+ const isVideo=file.type.startsWith("video/");
+ const endpoint=isVideo?"video":"image";
+
+ const formData=new FormData();
+ formData.append("file",file);
+ formData.append("upload_preset",UPLOAD_PRESET);
+
+ const response=await fetch(
+  `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${endpoint}/upload`,
+  {method:"POST",body:formData}
+ );
+
+ const result=await response.json();
+
+ if(!response.ok){
+  throw new Error(result.error?.message || "মিডিয়া আপলোড হয়নি");
+ }
+
+ return {
+  url:result.secure_url,
+  type:isVideo?"video":"image"
+ };
+}
+
+// পোস্ট প্রকাশ
+publishPost.addEventListener("click",async()=>{
+
+ if(!currentUser || !memberData) return;
+
+ const textValue=postText.value.trim();
+ const file=postFile.files[0];
+
+ if(!textValue && !file){
+  postMessage.textContent="কিছু লিখুন অথবা ছবি/ভিডিও দিন।";
+  return;
+ }
+
+ if(textValue.length>1000){
+  postMessage.textContent="লেখা ১০০০ অক্ষরের মধ্যে রাখুন।";
+  return;
+ }
+
+ if(file){
+  const isVideo=file.type.startsWith("video/");
+  const isImage=file.type.startsWith("image/");
+
+  if(!isVideo && !isImage){
+   postMessage.textContent="শুধু ছবি অথবা ভিডিও নির্বাচন করুন।";
+   return;
+  }
+
+  if(file.size>25*1024*1024){
+   postMessage.textContent="ফাইল ২৫ MB-এর কম হতে হবে।";
+   return;
+  }
+ }
+
+ publishPost.disabled=true;
+ postMessage.textContent="পোস্ট তৈরি হচ্ছে... অপেক্ষা করো।";
+
+ try{
+
+  let mediaURL="";
+  let mediaType="text";
+
+  if(file){
+   const uploaded=await uploadPostMedia(file);
+   mediaURL=uploaded.url;
+   mediaType=uploaded.type;
+  }
+
+  await addDoc(collection(db,"posts"),{
+   authorUid:currentUser.uid,
+   authorName:memberData.name || "নাম নেই",
+   authorPhoto:memberData.photoURL || "",
+   text:textValue,
+   mediaURL:mediaURL,
+   mediaType:mediaType,
+   createdAt:serverTimestamp()
+  });
+
+  postText.value="";
+  postFile.value="";
+  postMessage.textContent="পোস্ট সফলভাবে প্রকাশ হয়েছে! ❤️";
+
+ }catch(error){
+  console.error(error);
+  postMessage.textContent="পোস্ট হয়নি: "+error.message;
+ }finally{
+  publishPost.disabled=false;
+ }
+});
+
+// তারিখ দেখানো
+function formatDate(timestamp){
+
+ if(!timestamp || !timestamp.toDate) return "এইমাত্র";
+
+ return timestamp.toDate().toLocaleString("bn-BD",{
+  dateStyle:"medium",
+  timeStyle:"short"
+ });
+}
+
+// পোস্টগুলো লোড
+function loadPosts(){
+
+ if(unsubscribePosts) unsubscribePosts();
+
+ const q=query(
+  collection(db,"posts"),
+  orderBy("createdAt","desc")
+ );
+
+ unsubscribePosts=onSnapshot(q,(snapshot)=>{
+
+  postFeed.innerHTML="";
+
+  if(snapshot.empty){
+   postFeed.innerHTML='<div class="empty">এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি আপনিই করুন! ❤️</div>';
+   return;
+  }
+
+  snapshot.forEach((postDoc)=>{
+
+   const data=postDoc.data();
+
+   const post=document.createElement("div");
+   post.className="post";
+
+   const postHeader=document.createElement("div");
+   postHeader.className="post-header";
+
+   const avatar=document.createElement("img");
+   avatar.className="post-avatar";
+   avatar.alt="সদস্যের ছবি";
+
+   if(data.authorPhoto){
+    avatar.src=data.authorPhoto;
+   }else{
+    avatar.style.display="none";
+   }
+
+   const authorInfo=document.createElement("div");
+
+   const author=document.createElement("div");
+   author.className="post-author";
+   author.textContent=data.authorName || "সদস্য";
+
+   const designation=document.createElement("div");
+   designation.className="post-designation";
+   designation.textContent=data.authorUid===currentUser.uid
+    ? (memberData.designation || "")
+    : "";
+
+   const date=document.createElement("div");
+   date.className="post-date";
+   date.textContent=formatDate(data.createdAt);
+
+   authorInfo.append(author,designation,date);
+   postHeader.append(avatar,authorInfo);
+   post.append(postHeader);
+
+   if(data.text){
+    const text=document.createElement("div");
+    text.className="post-text";
+    text.textContent=data.text;
+    post.append(text);
+   }
+
+   if(data.mediaURL && data.mediaType==="image"){
+    const media=document.createElement("img");
+    media.className="post-media";
+    media.src=data.mediaURL;
+    media.alt="পোস্টের ছবি";
+    media.loading="lazy";
+    post.append(media);
+   }
+
+   if(data.mediaURL && data.mediaType==="video"){
+    const media=document.createElement("video");
+    media.className="post-media";
+    media.src=data.mediaURL;
+    media.controls=true;
+    media.preload="metadata";
+    post.append(media);
+   }
+
+   if(data.authorUid===currentUser.uid){
+    const deleteButton=document.createElement("button");
+    deleteButton.className="delete-post";
+    deleteButton.textContent="পোস্ট মুছুন";
+
+    deleteButton.addEventListener("click",async()=>{
+
+     if(!confirm("আপনি কি এই পোস্টটি মুছতে চান?")) return;
+
+     deleteButton.disabled=true;
+
+     try{
+      await deleteDoc(doc(db,"posts",postDoc.id));
+     }catch(error){
+      console.error(error);
+      alert("পোস্ট মুছতে সমস্যা হয়েছে: "+error.message);
+      deleteButton.disabled=false;
+     }
+    });
+
+    post.append(deleteButton);
+   }
+
+   postFeed.append(post);
+  });
+
+ },(error)=>{
+  console.error(error);
+  postFeed.textContent="পোস্ট লোড হয়নি: "+error.message;
+ });
+}
+
+// লগআউট
+document.getElementById("logout").onclick=async()=>{
+
+ if(unsubscribePosts) unsubscribePosts();
+
+ try{
+  await signOut(auth);
+  location.replace("login.html");
+ }catch(error){
+  alert("লগআউট হয়নি: "+error.message);
+ }
+};
+
+</script>
+</body>
+</html>

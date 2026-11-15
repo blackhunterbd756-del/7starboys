@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7STARBOYS Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#090909;color:white}
+header{background:#171717;border-bottom:2px solid #e00000;padding:20px;display:flex;justify-content:space-between;align-items:center}
+h1{font-size:22px;color:#ff2424;margin:0}
+main{max-width:850px;margin:auto;padding:18px}
+.card{background:#191919;border:1px solid #383838;border-radius:12px;padding:16px;margin:14px 0}
+button,select{padding:11px;border:0;border-radius:7px;font-size:14px;margin:5px 3px}
+button{cursor:pointer;font-weight:bold}
+.approve{background:#168b45;color:white}
+.reject{background:#c52323;color:white}
+.save{background:#b90000;color:white}
+.logout,.refresh{background:#333;color:white}
+select{background:#292929;color:white;border:1px solid #555}
+.info{color:#bbb;font-size:14px;line-height:1.8}
+.status{color:#ffcc45;font-weight:bold}
+#message{padding:12px;color:#ffcc45}
+</style>
+</head>
+<body>
+
+<header>
+<h1>7STARBOYS ADMIN</h1>
+<button class="logout" id="logout">Logout</button>
+</header>
+
+<main>
+<h2>সদস্য নিয়ন্ত্রণ</h2>
+<p class="info">সদস্যদের অনুমোদন এবং পদবি নির্ধারণ করো।</p>
+<button class="refresh" id="refresh">তালিকা Refresh</button>
+<div id="message">লোড হচ্ছে...</div>
+<div id="members"></div>
+</main>
+
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+ getAuth,onAuthStateChanged,signOut
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,doc,getDoc,getDocs,collection,
+ updateDoc,setDoc,deleteDoc
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ authDomain:"starboys-7539f.firebaseapp.com",
+ projectId:"starboys-7539f",
+ storageBucket:"starboys-7539f.firebasestorage.app",
+ messagingSenderId:"542462403066",
+ appId:"1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId:"G-RES9E2QY2N"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const message=document.getElementById("message");
+const membersBox=document.getElementById("members");
+
+function showMessage(text){
+ message.textContent=text;
+}
+
+function safe(text){
+ return String(text??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+// অনুমোদিত সদস্যের Public Profile তৈরি বা আপডেট
+async function syncPublicProfile(uid){
+ const snap=await getDoc(doc(db,"members",uid));
+
+ if(!snap.exists()) return;
+
+ const m=snap.data();
+
+ if(m.status!=="approved"){
+  await deleteDoc(doc(db,"publicProfiles",uid));
+  return;
+ }
+
+ const profile={
+  name:m.name||"নাম নেই",
+  designation:m.designation||"সদস্য"
+ };
+
+ if(m.photoURL){
+  profile.photoURL=m.photoURL;
+ }
+
+ await setDoc(doc(db,"publicProfiles",uid),profile);
+}
+
+async function loadMembers(){
+ showMessage("সদস্যদের তথ্য লোড হচ্ছে...");
+ membersBox.innerHTML="";
+
+ try{
+  const result=await getDocs(collection(db,"members"));
+
+  if(result.empty){
+   showMessage("কোনো সদস্য পাওয়া যায়নি।");
+   return;
+  }
+
+  result.forEach(memberDoc=>{
+   const m=memberDoc.data();
+   const uid=memberDoc.id;
+
+   const card=document.createElement("div");
+   card.className="card";
+
+   card.innerHTML=`
+   <h3>${safe(m.name||"নাম নেই")}</h3>
+   <div class="info">
+   ইমেইল: ${safe(m.email||"")}<br>
+   জন্ম তারিখ: ${safe(m.birthDate||"")}<br>
+   বর্তমান পদ: ${safe(m.designation||"নির্ধারিত নয়")}<br>
+   অবস্থা: <span class="status">${safe(m.status||"অজানা")}</span>
+   </div>
+
+   <div>
+   <button class="approve" data-action="approve" data-id="${safe(uid)}">অনুমোদন</button>
+   <button class="reject" data-action="reject" data-id="${safe(uid)}">বাতিল</button>
+   </div>
+
+   <div>
+   <select class="designation">
+   <option value="">পদবি নির্বাচন</option>
+   <option value="সভাপতি">সভাপতি</option>
+   <option value="সহ-সভাপতি">সহ-সভাপতি</option>
+   <option value="সাধারণ সম্পাদক">সাধারণ সম্পাদক</option>
+   <option value="সাংগঠনিক সম্পাদক">সাংগঠনিক সম্পাদক</option>
+   <option value="সদস্য">সদস্য</option>
+   </select>
+   <button class="save" data-action="designation" data-id="${safe(uid)}">পদবি Save</button>
+   </div>
+   `;
+
+   membersBox.appendChild(card);
+
+   card.querySelector(".designation").value=m.designation||"";
+  });
+
+  showMessage("মোট সদস্য: "+result.size);
+
+ }catch(error){
+  console.error(error);
+  showMessage("তথ্য লোড হয়নি: "+error.message);
+ }
+}
+
+membersBox.addEventListener("click",async(event)=>{
+ const button=event.target.closest("button[data-action]");
+ if(!button)return;
+
+ const uid=button.dataset.id;
+ const action=button.dataset.action;
+
+ button.disabled=true;
+
+ try{
+  if(action==="approve"){
+   await updateDoc(doc(db,"members",uid),{
+    status:"approved"
+   });
+
+   await syncPublicProfile(uid);
+   showMessage("সদস্য অনুমোদন হয়েছে এবং তালিকায় যোগ হয়েছে।");
+  }
+
+  if(action==="reject"){
+   await updateDoc(doc(db,"members",uid),{
+    status:"rejected"
+   });
+
+   await deleteDoc(doc(db,"publicProfiles",uid));
+   showMessage("সদস্য বাতিল হয়েছে।");
+  }
+
+  if(action==="designation"){
+   const select=button.parentElement.querySelector(".designation");
+
+   if(!select.value){
+    alert("আগে পদবি নির্বাচন করো।");
+    button.disabled=false;
+    return;
+   }
+
+   await updateDoc(doc(db,"members",uid),{
+    designation:select.value
+   });
+
+   const memberSnap=await getDoc(doc(db,"members",uid));
+
+   if(memberSnap.exists()&&memberSnap.data().status==="approved"){
+    await syncPublicProfile(uid);
+   }
+
+   showMessage("পদবি পরিবর্তন হয়েছে।");
+  }
+
+  await loadMembers();
+
+ }catch(error){
+  console.error(error);
+  showMessage("কাজটি হয়নি: "+error.message);
+  button.disabled=false;
+ }
+});
+
+document.getElementById("refresh").onclick=loadMembers;
+
+document.getElementById("logout").onclick=async()=>{
+ await signOut(auth);
+ location.href="login.html";
+};
+
+onAuthStateChanged(auth,async(user)=>{
+ if(!user){
+  location.href="login.html";
+  return;
+ }
+
+ try{
+  const adminDoc=await getDoc(doc(db,"admins",user.uid));
+
+  if(!adminDoc.exists()){
+   showMessage("তোমার Admin অনুমতি নেই।");
+   await signOut(auth);
+   return;
+  }
+
+  await loadMembers();
+
+ }catch(error){
+  console.error(error);
+  showMessage("Admin যাচাই করা যায়নি: "+error.message);
+ }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7STARBOYS - Home</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}
+header{background:#080808;padding:20px;text-align:center;border-bottom:2px solid #e00000}
+.logo{color:#ff1717;font-size:28px;font-weight:bold;letter-spacing:2px}
+header p{color:#aaa}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:13px;background:#181818}
+nav a{color:white;text-decoration:none;padding:10px 14px;background:#292929;border-radius:6px;font-size:14px}
+nav a:hover{background:#d00000}
+.hero{text-align:center;padding:45px 15px;background:linear-gradient(135deg,#250000,#111,#350000)}
+.hero h1{font-size:30px}
+.hero h1 span{color:#ff1717}
+.hero p{color:#ccc}
+.btn{display:inline-block;background:#df0000;color:white;padding:12px 20px;border:0;border-radius:6px;margin:8px 4px;font-weight:bold;text-decoration:none;cursor:pointer}
+.container{max-width:950px;margin:auto;padding:20px}
+.heading{border-left:4px solid red;padding-left:10px;margin:15px 0 20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.card,.post{background:#1d1d1d;border:1px solid #333;border-radius:10px;padding:16px;margin-bottom:15px}
+.card{text-align:center}
+.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;background:#333;border:3px solid #e00000}
+.position{color:#ff3636;font-weight:bold}
+.muted{color:#aaa;font-size:13px}
+.post img,.post video{width:100%;max-height:450px;object-fit:contain;border-radius:8px;margin-top:10px;background:#080808}
+.post-author{display:flex;align-items:center;gap:10px}
+.post-author img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.post-author strong{color:#ff5555}
+#message,#memberMessage,#postMessage{color:#ffbd35;text-align:center;padding:12px}
+footer{text-align:center;padding:22px;background:#080808;color:#aaa;margin-top:30px}
+</style>
+</head>
+
+<body>
+<header>
+ <div class="logo">7STARBOYS</div>
+ <p>একতা • সম্মান • বন্ধুত্ব</p>
+</header>
+
+<nav>
+ <a href="index.html">হোম</a>
+ <a href="#members">সদস্য</a>
+ <a href="#posts">পোস্ট</a>
+ <a href="member.html">Dashboard</a>
+ <a href="login.html">লগইন</a>
+ <a href="register.html">রেজিস্ট্রেশন</a>
+</nav>
+
+<section class="hero">
+ <h1>WELCOME TO <span>7STARBOYS</span></h1>
+ <p>আমাদের সংগঠন, আমাদের পরিচয়, আমাদের গর্ব।</p>
+ <a class="btn" href="members.html">সদস্যদের দেখুন</a>
+ <a class="btn" href="login.html">সদস্য লগইন</a>
+</section>
+
+<div class="container" id="members">
+ <h2 class="heading">আমাদের সদস্যবৃন্দ</h2>
+ <div id="memberMessage">সদস্যদের তথ্য লোড হচ্ছে...</div>
+ <div class="cards" id="memberList"></div>
+</div>
+
+<div class="container" id="posts">
+ <h2 class="heading">সদস্যদের পোস্ট</h2>
+ <div id="postMessage">পোস্ট লোড হচ্ছে...</div>
+ <div id="feed"></div>
+</div>
+
+<div class="container" id="about">
+ <h2 class="heading">আমাদের সম্পর্কে</h2>
+ <div class="card">
+  <h3>7STARBOYS</h3>
+  <p>বন্ধুত্ব, ঐক্য ও সম্মানের একটি কমিউনিটি।</p>
+  <p class="muted">আমাদের সংগঠন, আমাদের পরিচয়, আমাদের গর্ব।</p>
+ </div>
+</div>
+
+<footer>© 2026 7STARBOYS | All Rights Reserved</footer>
+
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {getAuth,onAuthStateChanged}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,doc,getDoc,getDocs,collection
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ authDomain:"starboys-7539f.firebaseapp.com",
+ projectId:"starboys-7539f",
+ storageBucket:"starboys-7539f.firebasestorage.app",
+ messagingSenderId:"542462403066",
+ appId:"1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId:"G-RES9E2QY2N"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const memberMessage=document.getElementById("memberMessage");
+const postMessage=document.getElementById("postMessage");
+const memberList=document.getElementById("memberList");
+const feed=document.getElementById("feed");
+
+function makeText(tag,text,className){
+ const el=document.createElement(tag);
+ el.textContent=text;
+ if(className)el.className=className;
+ return el;
+}
+
+async function loadMembers(){
+ memberList.innerHTML="";
+ memberMessage.textContent="সদস্যদের তথ্য লোড হচ্ছে...";
+
+ try{
+  const result=await getDocs(collection(db,"publicProfiles"));
+
+  if(result.empty){
+   memberMessage.textContent="এখনো কোনো অনুমোদিত সদস্য নেই।";
+   return;
+  }
+
+  result.forEach(item=>{
+   const data=item.data();
+   const card=document.createElement("div");
+   card.className="card";
+
+   if(data.photoURL){
+    const img=document.createElement("img");
+    img.className="avatar";
+    img.src=data.photoURL;
+    img.alt="সদস্যের ছবি";
+    card.appendChild(img);
+   }else{
+    const avatar=makeText("div",(data.name||"?").charAt(0),"avatar");
+    avatar.style.display="grid";
+    avatar.style.placeItems="center";
+    card.appendChild(avatar);
+   }
+
+   card.appendChild(makeText("h3",data.name||"নাম নেই"));
+   card.appendChild(makeText("p",data.designation||"সদস্য","position"));
+   memberList.appendChild(card);
+  });
+
+  memberMessage.textContent="মোট সদস্য: "+result.size;
+
+ }catch(error){
+  console.error(error);
+  memberMessage.textContent="সদস্যদের তালিকা লোড হয়নি: "+error.message;
+ }
+}
+
+async function loadPosts(){
+ feed.innerHTML="";
+ postMessage.textContent="পোস্ট লোড হচ্ছে...";
+
+ try{
+  const result=await getDocs(collection(db,"posts"));
+
+  if(result.empty){
+   postMessage.textContent="এখনো কোনো পোস্ট করা হয়নি।";
+   return;
+  }
+
+  const posts=[];
+  result.forEach(item=>{
+   posts.push({id:item.id,data:item.data()});
+  });
+
+  posts.sort((a,b)=>{
+   const ta=a.data.createdAt?.toMillis?.()||0;
+   const tb=b.data.createdAt?.toMillis?.()||0;
+   return tb-ta;
+  });
+
+  posts.forEach(item=>{
+   const data=item.data;
+   const post=document.createElement("div");
+   post.className="post";
+
+   const author=document.createElement("div");
+   author.className="post-author";
+
+   if(data.authorPhoto){
+    const photo=document.createElement("img");
+    photo.src=data.authorPhoto;
+    photo.alt="সদস্যের ছবি";
+    author.appendChild(photo);
+   }
+
+   author.appendChild(makeText("strong",data.authorName||"সদস্য"));
+   post.appendChild(author);
+
+   if(data.text){
+    post.appendChild(makeText("p",data.text));
+   }
+
+   if(data.mediaURL && data.mediaType==="image"){
+    const img=document.createElement("img");
+    img.src=data.mediaURL;
+    img.alt="পোস্টের ছবি";
+    img.loading="lazy";
+    post.appendChild(img);
+   }
+
+   if(data.mediaURL && data.mediaType==="video"){
+    const video=document.createElement("video");
+    video.src=data.mediaURL;
+    video.controls=true;
+    video.preload="metadata";
+    post.appendChild(video);
+   }
+
+   const date=data.createdAt?.toDate?.();
+   if(date){
+    post.appendChild(makeText("p",date.toLocaleString("bn-BD"),"muted"));
+   }
+
+   feed.appendChild(post);
+  });
+
+  postMessage.textContent="মোট পোস্ট: "+posts.length;
+
+ }catch(error){
+  console.error(error);
+  postMessage.textContent="পোস্ট লোড হয়নি: "+error.message;
+ }
+}
+
+onAuthStateChanged(auth,async user=>{
+ memberList.innerHTML="";
+ feed.innerHTML="";
+
+ if(!user){
+  memberMessage.textContent="সদস্যদের তালিকা দেখতে লগইন করুন।";
+  postMessage.textContent="পোস্ট দেখতে অনুমোদিত সদস্য হিসেবে লগইন করুন।";
+  return;
+ }
+
+ try{
+  const snap=await getDoc(doc(db,"members",user.uid));
+
+  if(!snap.exists()||snap.data().status!=="approved"){
+   memberMessage.textContent="আপনার অ্যাকাউন্ট এখনো অনুমোদিত নয়।";
+   postMessage.textContent="অ্যাডমিন অনুমোদনের পর পোস্ট দেখতে পারবেন।";
+   return;
+  }
+
+  await loadMembers();
+  await loadPosts();
+
+ }catch(error){
+  console.error(error);
+  memberMessage.textContent="যাচাই করা যায়নি: "+error.message;
+  postMessage.textContent="পোস্ট লোড করা যায়নি।";
+ }
+});
+</script>
+</body>
+</html>

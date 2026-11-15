@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7STARBOYS Login</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#101010;color:white;font-family:Arial}
+.box{max-width:430px;margin:55px auto;background:#1d1d1d;padding:25px;border-radius:12px;border:1px solid #444}
+h1{text-align:center;color:#f11}
+p{text-align:center;color:#aaa}
+input{width:100%;padding:14px;margin:12px 0;background:#101010;color:white;border:1px solid #555;border-radius:6px}
+button{width:100%;padding:14px;background:#e00000;color:white;border:0;border-radius:7px;font-size:17px;font-weight:bold}
+button:disabled{opacity:.6}
+#message{color:#ff5555;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>7STARBOYS</h1>
+<p>সদস্য লগইন</p>
+
+<form id="loginForm">
+<input id="email" type="email" placeholder="আপনার Gmail" required>
+<input id="password" type="password" placeholder="আপনার পাসওয়ার্ড" required>
+<button id="loginBtn" type="submit">লগইন করুন</button>
+</form>
+
+<p id="message"></p>
+<p>অ্যাকাউন্ট নেই? <a href="register.html" style="color:red">রেজিস্ট্রেশন করুন</a></p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+ getAuth,
+ signInWithEmailAndPassword,
+ signOut,
+ setPersistence,
+ browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,
+ doc,
+ getDoc
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ authDomain: "starboys-7539f.firebaseapp.com",
+ projectId: "starboys-7539f",
+ storageBucket: "starboys-7539f.firebasestorage.app",
+ messagingSenderId: "542462403066",
+ appId: "1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId: "G-RES9E2QY2N"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+const button = document.getElementById("loginBtn");
+
+form.addEventListener("submit", async (e) => {
+ e.preventDefault();
+
+ button.disabled = true;
+ message.textContent = "লগইন হচ্ছে...";
+
+ try {
+  await setPersistence(auth, browserLocalPersistence);
+
+  const result = await signInWithEmailAndPassword(
+   auth,
+   document.getElementById("email").value.trim(),
+   document.getElementById("password").value
+  );
+
+  const member = await getDoc(
+   doc(db, "members", result.user.uid)
+  );
+
+  if (!member.exists()) {
+   await signOut(auth);
+   throw new Error("সদস্যের তথ্য পাওয়া যায়নি।");
+  }
+
+  if (member.data().status !== "approved") {
+   await signOut(auth);
+   throw new Error("অ্যাডমিনের অনুমোদনের অপেক্ষায় আছেন।");
+  }
+
+  message.textContent = "লগইন সফল! সদস্য পেজ খুলছে...";
+
+  window.location.replace("member.html");
+
+ } catch (error) {
+  console.error(error);
+  message.textContent = "সমস্যা: " + error.message;
+ } finally {
+  button.disabled = false;
+ }
+});
+</script>
+</body>
+</html>
