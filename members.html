@@ -8,48 +8,156 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
-header{background:#171717;padding:20px;text-align:center;border-bottom:2px solid #e50914}
-header h2{color:#ff2525;margin:0}
-header p{color:#aaa}
-main{max-width:850px;margin:auto;padding:18px}
-h3{color:#ff3030}
-#message{color:#ffbd35;text-align:center;padding:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{background:#191919;border:1px solid #383838;border-radius:13px;padding:20px;text-align:center}
-.card img,.avatar{width:100px;height:100px;border-radius:50%;border:3px solid #e50914;object-fit:cover;margin:auto}
-.avatar{display:grid;place-items:center;background:#333;font-size:30px;font-weight:bold}
-.name{font-size:18px;font-weight:bold;margin-top:12px}
-.designation{color:#ffbd35;margin-top:8px}
-button{background:#e50914;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;margin:5px}
-.details{background:#252525;border:1px solid #555;border-radius:12px;padding:18px;margin-top:12px;text-align:left;line-height:2}
+
+body{
+ margin:0;
+ background:#070914;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+
+header{
+ background:#10152a;
+ padding:24px 15px;
+ text-align:center;
+ border-bottom:1px solid #00e5ff;
+ box-shadow:0 5px 25px #00e5ff15;
+}
+
+header h2{
+ color:#00e5ff;
+ margin:0;
+ letter-spacing:3px;
+}
+
+header p{color:#aaa;margin-bottom:0}
+
+main{max-width:950px;margin:auto;padding:20px}
+
+h3{color:#00e5ff}
+
+#message{
+ color:#00e5ff;
+ text-align:center;
+ padding:18px;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
+}
+
+.card{
+ background:linear-gradient(145deg,#121a30,#0b1020);
+ border:1px solid #263b60;
+ border-radius:16px;
+ padding:22px;
+ text-align:center;
+ transition:.3s;
+}
+
+.card:hover{
+ border-color:#00e5ff;
+ box-shadow:0 0 22px #00e5ff20;
+ transform:translateY(-4px);
+}
+
+.card img,.avatar{
+ width:105px;
+ height:105px;
+ border-radius:50%;
+ border:3px solid #00e5ff;
+ object-fit:cover;
+ margin:auto;
+}
+
+.avatar{
+ display:grid;
+ place-items:center;
+ background:#242d49;
+ font-size:34px;
+ font-weight:bold;
+ color:#00e5ff;
+}
+
+.name{
+ font-size:19px;
+ font-weight:bold;
+ margin-top:14px;
+}
+
+.designation{
+ color:#bd9cff;
+ margin-top:8px;
+}
+
+button{
+ background:linear-gradient(90deg,#00bcd4,#7544ff);
+ color:white;
+ border:0;
+ padding:11px 16px;
+ border-radius:8px;
+ cursor:pointer;
+ margin:5px;
+ font-weight:bold;
+}
+
+button:hover{opacity:.85}
+
+.details{
+ background:#080e1d;
+ border:1px solid #34476b;
+ border-radius:12px;
+ padding:15px;
+ margin-top:12px;
+ text-align:left;
+ line-height:2;
+}
+
 .details h3{text-align:center}
+
 .hidden{display:none}
+
+.top-buttons{
+ text-align:center;
+ margin-bottom:20px;
+}
 </style>
 </head>
 
 <body>
+
 <header>
 <h2>7STARBOYS</h2>
-<p>সকল সদস্যের তালিকা</p>
+<p>OFFICIAL COMMUNITY · MEMBERS</p>
 </header>
 
 <main>
+
 <h3>আমাদের সদস্যবৃন্দ</h3>
+
+<div class="top-buttons">
 <button id="refresh">তালিকা Refresh</button>
 <button id="back">Dashboard</button>
-<div id="message">লোড হচ্ছে...</div>
+</div>
+
+<div id="message">সদস্যদের তালিকা লোড হচ্ছে...</div>
 <div class="grid" id="members"></div>
+
 </main>
 
 <script type="module">
+
 import {initializeApp}
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {getAuth,onAuthStateChanged}
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
-import {getFirestore,doc,getDoc,getDocs,collection}
+import {
+ getFirestore,doc,getDoc,getDocs,collection
+}
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
@@ -73,11 +181,15 @@ let currentUser=null;
 let myProfile=null;
 
 async function loadMembers(){
+
  message.textContent="সদস্যদের তালিকা লোড হচ্ছে...";
  membersBox.innerHTML="";
 
  try{
-  const result=await getDocs(collection(db,"publicProfiles"));
+
+  const result=await getDocs(
+   collection(db,"publicProfiles")
+  );
 
   if(result.empty){
    message.textContent="এখনো কোনো সদস্যের প্রোফাইল যোগ করা হয়নি।";
@@ -85,31 +197,44 @@ async function loadMembers(){
   }
 
   result.forEach(item=>{
+
    const data=item.data();
    const uid=item.id;
 
    const card=document.createElement("div");
    card.className="card";
 
+   // Profile Photo
+
    if(data.photoURL){
+
     const img=document.createElement("img");
     img.src=data.photoURL;
     img.alt="সদস্যের ছবি";
     card.appendChild(img);
+
    }else{
+
     const avatar=document.createElement("div");
     avatar.className="avatar";
     avatar.textContent=(data.name||"?").charAt(0);
     card.appendChild(avatar);
+
    }
+
+   // Member Name
 
    const name=document.createElement("div");
    name.className="name";
    name.textContent=data.name||"নাম নেই";
 
+   // Designation
+
    const designation=document.createElement("div");
    designation.className="designation";
    designation.textContent=data.designation||"সদস্য";
+
+   // Details Section
 
    const details=document.createElement("div");
    details.className="details hidden";
@@ -129,39 +254,64 @@ async function loadMembers(){
    const dobInfo=document.createElement("div");
 
    if(uid===currentUser.uid){
-    dobInfo.textContent="জন্ম তারিখ: "+(myProfile.birthDate||"দেওয়া নেই");
+    dobInfo.textContent=
+     "জন্ম তারিখ: "+(myProfile.birthDate||"দেওয়া নেই");
    }else{
     dobInfo.textContent="জন্ম তারিখ: ব্যক্তিগত";
    }
 
    details.appendChild(dobInfo);
 
-   const button=document.createElement("button");
-   button.textContent="বিস্তারিত দেখুন";
+   // Details Button
 
-   button.onclick=()=>{
+   const detailsButton=document.createElement("button");
+   detailsButton.textContent="বিস্তারিত দেখুন";
+
+   detailsButton.onclick=()=>{
+
     details.classList.toggle("hidden");
-    button.textContent=details.classList.contains("hidden")
-     ?"বিস্তারিত দেখুন":"বন্ধ করুন";
+
+    detailsButton.textContent=
+     details.classList.contains("hidden")
+     ?"বিস্তারিত দেখুন"
+     :"বন্ধ করুন";
+
+   };
+
+   // Profile Button
+
+   const profileButton=document.createElement("button");
+   profileButton.textContent="প্রোফাইল দেখুন";
+
+   profileButton.onclick=()=>{
+    location.href="profile.html?uid="+encodeURIComponent(uid);
    };
 
    card.appendChild(name);
    card.appendChild(designation);
-   card.appendChild(button);
+   card.appendChild(detailsButton);
+   card.appendChild(profileButton);
    card.appendChild(details);
 
    membersBox.appendChild(card);
+
   });
 
   message.textContent="মোট সদস্য: "+result.size;
 
  }catch(error){
+
   console.error(error);
   message.textContent="তালিকা লোড হয়নি: "+error.message;
+
  }
+
 }
 
+// Authentication Check
+
 onAuthStateChanged(auth,async user=>{
+
  if(!user){
   location.replace("login.html");
   return;
@@ -170,7 +320,10 @@ onAuthStateChanged(auth,async user=>{
  currentUser=user;
 
  try{
-  const snap=await getDoc(doc(db,"members",user.uid));
+
+  const snap=await getDoc(
+   doc(db,"members",user.uid)
+  );
 
   if(!snap.exists()||snap.data().status!=="approved"){
    location.replace("login.html");
@@ -178,11 +331,16 @@ onAuthStateChanged(auth,async user=>{
   }
 
   myProfile=snap.data();
+
   await loadMembers();
 
  }catch(error){
+
+  console.error(error);
   message.textContent="যাচাই করা যায়নি: "+error.message;
+
  }
+
 });
 
 document.getElementById("refresh").onclick=loadMembers;
@@ -190,6 +348,8 @@ document.getElementById("refresh").onclick=loadMembers;
 document.getElementById("back").onclick=()=>{
  location.href="member.html";
 };
+
 </script>
+
 </body>
 </html>
