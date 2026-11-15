@@ -1,192 +1,354 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070914">
+<meta name="description" content="7STARBOYS Official Community - একতা, সম্মান ও বন্ধুত্বের বন্ধনে আমাদের সকল সদস্য একসাথে।">
 <title>7STARBOYS | Official Community</title>
+
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#070914;
-  --card:#101729;
-  --cyan:#00e5ff;
-  --purple:#9b4dff;
-  --text:#f4f7ff;
-  --muted:#aab5ca;
+ --bg:#060814;
+ --card:#10182b;
+ --cyan:#00e5ff;
+ --purple:#9b4dff;
+ --text:#f4f7ff;
+ --muted:#aab5ca;
 }
+html{scroll-behavior:smooth}
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,sans-serif;
+ overflow-x:hidden;
+}
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:-1;
+ background:
+ radial-gradient(circle at 10% 15%,#073b5730,transparent 35%),
+ radial-gradient(circle at 90% 70%,#571c7830,transparent 35%);
 }
 header{
-  padding:22px 16px;
-  text-align:center;
-  border-bottom:1px solid #173c54;
-  background:#090e1d;
-  box-shadow:0 5px 25px #00e5ff12;
+ position:sticky;
+ top:0;
+ z-index:10;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:17px 7%;
+ background:#080d1be8;
+ backdrop-filter:blur(16px);
+ border-bottom:1px solid #00e5ff30;
 }
 .logo{
-  margin:0;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:var(--cyan);
-  text-shadow:0 0 15px #00e5ff99;
+ font-size:27px;
+ font-weight:1000;
+ letter-spacing:3px;
+ color:var(--cyan);
+ text-shadow:0 0 15px #00e5ff90;
 }
-header p{color:var(--muted);margin:9px 0 0}
-main{max-width:950px;margin:auto;padding:22px 16px}
+.logo span{color:white}
+nav{display:flex;gap:23px}
+nav a{
+ color:#cbd5e8;
+ text-decoration:none;
+ font-size:14px;
+ transition:.3s;
+}
+nav a:hover{color:var(--cyan)}
+.menu-btn{
+ display:none;
+ background:none;
+ border:1px solid #00e5ff66;
+ color:var(--cyan);
+ border-radius:8px;
+ padding:7px 12px;
+ font-size:20px;
+}
 .hero{
-  text-align:center;
-  padding:65px 20px;
-  border:1px solid #24516b;
-  border-radius:20px;
-  background:
-  radial-gradient(circle at 15% 15%,#173a59 0,transparent 40%),
-  radial-gradient(circle at 85% 85%,#32175b 0,transparent 40%),
-  #0d1426;
-  box-shadow:0 0 30px #00e5ff12;
+ min-height:690px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:80px 20px;
+ position:relative;
+ overflow:hidden;
 }
+.orb{
+ position:absolute;
+ width:300px;
+ height:300px;
+ border-radius:50%;
+ filter:blur(100px);
+ opacity:.18;
+ animation:float 7s infinite alternate;
+}
+.orb.one{background:var(--cyan);left:-100px;top:100px}
+.orb.two{background:var(--purple);right:-100px;bottom:50px}
+@keyframes float{
+ from{transform:translateY(-20px)}
+ to{transform:translateY(30px)}
+}
+.hero-content{position:relative;z-index:1;max-width:850px}
 .tag{
-  display:inline-block;
-  padding:8px 15px;
-  border:1px solid var(--cyan);
-  border-radius:30px;
-  color:var(--cyan);
-  font-size:12px;
-  letter-spacing:2px;
+ display:inline-block;
+ padding:10px 20px;
+ border:1px solid #00e5ff80;
+ border-radius:30px;
+ color:var(--cyan);
+ font-size:12px;
+ letter-spacing:3px;
+ background:#00e5ff0c;
+ box-shadow:0 0 20px #00e5ff18;
 }
-.hero h2{
-  font-size:clamp(28px,6vw,43px);
-  margin:22px 0 12px;
+.hero h1{
+ font-size:clamp(38px,8vw,75px);
+ line-height:1.15;
+ margin:27px 0 18px;
+ font-weight:1000;
 }
-.hero h2 span{
-  color:var(--cyan);
-  text-shadow:0 0 18px #00e5ff88;
+.hero h1 span{
+ color:var(--cyan);
+ text-shadow:0 0 25px #00e5ff70;
 }
 .hero p{
-  max-width:600px;
-  margin:0 auto;
-  color:var(--muted);
-  line-height:1.9;
+ max-width:650px;
+ margin:auto;
+ color:var(--muted);
+ font-size:16px;
+ line-height:2;
 }
 .buttons{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  max-width:560px;
-  margin:30px auto 0;
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:15px;
+ margin-top:35px;
 }
-a{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  padding:15px 10px;
-  border-radius:10px;
-  color:#061018;
-  background:var(--cyan);
-  font-weight:bold;
-  box-shadow:0 0 16px #00e5ff30;
-  transition:.25s;
+.btn{
+ display:inline-block;
+ text-decoration:none;
+ padding:15px 25px;
+ border-radius:10px;
+ font-weight:bold;
+ color:#041018;
+ background:var(--cyan);
+ box-shadow:0 0 20px #00e5ff35;
+ transition:.3s;
 }
-a:hover{transform:translateY(-3px);box-shadow:0 0 25px #00e5ff70}
-a.secondary{
-  color:#fff;
-  background:#151e33;
-  border:1px solid #7045a8;
-  box-shadow:0 0 14px #9b4dff18;
+.btn:hover{
+ transform:translateY(-5px);
+ box-shadow:0 0 30px #00e5ff80;
 }
-a.secondary:hover{border-color:var(--purple)}
-.section-title{
-  text-align:center;
-  margin:38px 0 18px;
-  color:var(--cyan);
-  letter-spacing:1px;
+.btn.secondary{
+ color:white;
+ background:#151c31;
+ border:1px solid #9b4dff80;
+ box-shadow:0 0 20px #9b4dff18;
+}
+.btn.secondary:hover{border-color:var(--purple)}
+.section{
+ max-width:1100px;
+ margin:auto;
+ padding:65px 20px;
+}
+.heading{text-align:center;margin-bottom:38px}
+.heading small{
+ color:var(--cyan);
+ letter-spacing:3px;
+ font-weight:bold;
+}
+.heading h2{
+ font-size:clamp(25px,5vw,38px);
+ margin-top:12px;
+}
+.heading p{
+ color:var(--muted);
+ margin-top:12px;
+ line-height:1.8;
 }
 .cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:20px;
 }
 .card{
-  padding:23px;
-  border-radius:15px;
-  background:var(--card);
-  border:1px solid #26334b;
-  transition:.25s;
+ padding:28px 23px;
+ border:1px solid #253650;
+ border-radius:17px;
+ background:linear-gradient(145deg,#121c32,#0b1020);
+ transition:.3s;
 }
 .card:hover{
-  border-color:var(--cyan);
-  box-shadow:0 0 20px #00e5ff15;
+ transform:translateY(-7px);
+ border-color:var(--cyan);
+ box-shadow:0 10px 35px #00e5ff16;
 }
-.card h3{color:var(--cyan);margin-top:0}
-.card p{color:var(--muted);line-height:1.8;margin-bottom:0}
+.card .number{
+ font-size:30px;
+ color:var(--cyan);
+ margin-bottom:18px;
+ text-shadow:0 0 15px #00e5ff70;
+}
+.card h3{margin-bottom:12px;font-size:20px}
+.card p{color:var(--muted);line-height:1.8;font-size:14px}
+.join{
+ text-align:center;
+ padding:55px 20px;
+ border:1px solid #7045a866;
+ border-radius:20px;
+ background:
+ radial-gradient(circle at 20% 20%,#00e5ff16,transparent 45%),
+ radial-gradient(circle at 80% 80%,#9b4dff20,transparent 45%),
+ #101629;
+}
+.join h2{font-size:clamp(25px,5vw,36px);margin-bottom:15px}
+.join p{color:var(--muted);line-height:1.8}
 footer{
-  margin-top:35px;
-  padding:25px 15px;
-  text-align:center;
-  color:#8491a9;
-  border-top:1px solid #1c2b42;
+ margin-top:50px;
+ text-align:center;
+ padding:30px 15px;
+ border-top:1px solid #24334b;
+ color:#8793aa;
+ font-size:13px;
+ line-height:2;
 }
 footer span{color:var(--cyan)}
-@media(max-width:520px){
-  .buttons,.cards{grid-template-columns:1fr}
-  .hero{padding:45px 16px}
+@media(max-width:700px){
+ header{padding:15px 5%}
+ .logo{font-size:23px}
+ .menu-btn{display:block}
+ nav{
+  display:none;
+  position:absolute;
+  top:65px;
+  left:0;
+  width:100%;
+  padding:20px;
+  background:#0a1020;
+  border-bottom:1px solid #00e5ff44;
+  flex-direction:column;
+  text-align:center;
+  gap:22px;
+ }
+ nav.open{display:flex}
+ .hero{min-height:610px}
+ .cards{grid-template-columns:1fr}
+ .section{padding:50px 18px}
+ .btn{width:100%;max-width:300px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1 class="logo">7STARBOYS</h1>
-  <p>আমাদের সংগঠন, আমাদের পরিচয়</p>
+ <div class="logo">7STAR<span>BOYS</span></div>
+ <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
+ <nav id="navigation">
+  <a href="#home" onclick="closeMenu()">HOME</a>
+  <a href="#about" onclick="closeMenu()">ABOUT</a>
+  <a href="members.html">MEMBERS</a>
+  <a href="login.html">LOGIN</a>
+ </nav>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="tag">OFFICIAL COMMUNITY</div>
-    <h2>WELCOME TO <span>7STARBOYS</span></h2>
-    <p>
-      একতা, সম্মান ও বন্ধুত্বের বন্ধনে
-      আমাদের সকল সদস্য একসাথে।
-      আমাদের কমিউনিটিতে স্বাগতম।
-    </p>
+<section class="hero" id="home">
+ <div class="orb one"></div>
+ <div class="orb two"></div>
 
-    <div class="buttons">
-      <a href="login.html">লগইন করুন</a>
-      <a href="register.html">নতুন সদস্য নিবন্ধন</a>
-      <a class="secondary" href="members.html">সদস্য তালিকা</a>
-      <a class="secondary" href="admin-panel.html">Admin Panel</a>
-    </div>
-  </section>
+ <div class="hero-content">
+  <div class="tag">✦ OFFICIAL COMMUNITY ✦</div>
 
-  <h2 class="section-title">ABOUT OUR COMMUNITY</h2>
+  <h1>WELCOME TO<br><span>7STARBOYS</span></h1>
 
-  <section class="cards">
-    <div class="card">
-      <h3>আমাদের সম্পর্কে</h3>
-      <p>
-        7STARBOYS একটি সদস্যভিত্তিক কমিউনিটি।
-        এখানে সদস্যদের পরিচয়, পদবি, ছবি
-        এবং কমিউনিটির কার্যক্রম তুলে ধরা হবে।
-      </p>
-    </div>
+  <p>
+   আমাদের সংগঠন, আমাদের পরিচয়।
+   একতা, সম্মান ও বন্ধুত্বের বন্ধনে
+   আমাদের সকল সদস্য একসাথে।
+   স্বাগতম আমাদের অফিসিয়াল কমিউনিটিতে।
+  </p>
 
-    <div class="card">
-      <h3>আমাদের লক্ষ্য</h3>
-      <p>
-        সবার মধ্যে ঐক্য, সহযোগিতা,
-        সম্মান ও ভ্রাতৃত্ব বজায় রাখা।
-        একসাথে এগিয়ে যাওয়াই আমাদের লক্ষ্য।
-      </p>
-    </div>
-  </section>
-</main>
+  <div class="buttons">
+   <a class="btn" href="login.html">LOGIN NOW ↗</a>
+   <a class="btn secondary" href="register.html">JOIN COMMUNITY</a>
+   <a class="btn secondary" href="members.html">OUR MEMBERS</a>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="about">
+ <div class="heading">
+  <small>ABOUT OUR COMMUNITY</small>
+  <h2>আমাদের কমিউনিটি</h2>
+  <p>একসাথে থাকা, একে অপরকে সম্মান করা এবং সামনে এগিয়ে যাওয়া।</p>
+ </div>
+
+ <div class="cards">
+  <div class="card">
+   <div class="number">01</div>
+   <h3>আমাদের পরিচয়</h3>
+   <p>
+    7STARBOYS একটি সদস্যভিত্তিক কমিউনিটি।
+    এখানে সদস্যদের পরিচয়, পদবি ও কার্যক্রম তুলে ধরা হয়।
+   </p>
+  </div>
+
+  <div class="card">
+   <div class="number">02</div>
+   <h3>আমাদের লক্ষ্য</h3>
+   <p>
+    সবার মধ্যে ঐক্য, সহযোগিতা, সম্মান ও
+    বন্ধুত্ব বজায় রেখে একসাথে এগিয়ে যাওয়া।
+   </p>
+  </div>
+
+  <div class="card">
+   <div class="number">03</div>
+   <h3>আমাদের বন্ধন</h3>
+   <p>
+    পারস্পরিক শ্রদ্ধা ও সহযোগিতার মাধ্যমে
+    একটি সুন্দর ও সক্রিয় কমিউনিটি গড়ে তোলা।
+   </p>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="join">
+  <h2>BE A PART OF 7STARBOYS</h2>
+  <p>
+   আমাদের কমিউনিটির সদস্য হতে আজই নিবন্ধন করুন।
+   একসাথে গড়ে তুলি সুন্দর একটি বন্ধন।
+  </p>
+  <div class="buttons">
+   <a class="btn" href="register.html">REGISTER NOW ↗</a>
+   <a class="btn secondary" href="members.html">EXPLORE MEMBERS</a>
+  </div>
+ </div>
+</section>
 
 <footer>
-  <span>7STARBOYS</span> © 2026 | All Rights Reserved
+ <span>7STARBOYS</span> © 2026 | All Rights Reserved
+ <br>আমাদের সংগঠন, আমাদের পরিচয়
 </footer>
+
+<script>
+function toggleMenu(){
+ document.getElementById("navigation").classList.toggle("open");
+}
+function closeMenu(){
+ document.getElementById("navigation").classList.remove("open");
+}
+</script>
 
 </body>
 </html>
