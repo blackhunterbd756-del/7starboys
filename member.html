@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070914">
-<title>7STARBOYS | Member Dashboard</title>
+<title>7STARBOYS | Social Dashboard</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -18,189 +18,420 @@
  --muted:#91a0bf;
  --line:#ffffff18;
 }
-html{scroll-behavior:smooth;scroll-padding-top:85px}
 body{
- background:
- radial-gradient(circle at 15% 10%,#11234a 0,transparent 30%),
- radial-gradient(circle at 90% 80%,#29133e 0,transparent 35%),
- var(--bg);
+ min-height:100vh;
  color:var(--text);
  font-family:Arial,sans-serif;
- min-height:100vh;
+ background:
+ radial-gradient(circle at 12% 8%,#142c50 0,transparent 30%),
+ radial-gradient(circle at 90% 80%,#29133e 0,transparent 35%),
+ var(--bg);
 }
 button,input,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
+button:disabled{opacity:.55;cursor:not-allowed}
+
 .topbar{
- height:70px;display:flex;align-items:center;
- justify-content:space-between;padding:0 24px;
- background:#080d1bea;border-bottom:1px solid #00e5ff44;
- position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);
+ height:68px;
+ position:sticky;
+ top:0;
+ z-index:20;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 22px;
+ background:#080d1bea;
+ border-bottom:1px solid #00e5ff44;
+ backdrop-filter:blur(18px);
 }
 .brand{
- font-size:23px;font-weight:900;letter-spacing:2px;
- color:var(--cyan);text-shadow:0 0 15px #00e5ff77;
+ font-size:22px;
+ font-weight:900;
+ letter-spacing:2px;
+ color:var(--cyan);
+ text-shadow:0 0 15px #00e5ff77;
 }
 .brand small{
- display:block;font-size:9px;color:var(--muted);
- letter-spacing:3px;margin-top:4px;
+ display:block;
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:3px;
+ margin-top:3px;
 }
-.top-right{display:flex;align-items:center;gap:12px}
-.top-avatar{
- width:40px;height:40px;border-radius:50%;
- object-fit:cover;border:2px solid var(--cyan);
+.top-right{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-size:13px;
+}
+.avatar{
+ width:40px;
+ height:40px;
+ border-radius:50%;
+ object-fit:cover;
+ border:2px solid var(--cyan);
 }
 .layout{
- max-width:1350px;margin:auto;
- display:grid;grid-template-columns:245px minmax(0,1fr) 245px;
- gap:20px;padding:24px;
+ max-width:1400px;
+ margin:auto;
+ padding:20px;
+ display:grid;
+ grid-template-columns:230px minmax(0,1fr) 220px;
+ gap:18px;
 }
 .panel{
- background:#101729dd;border:1px solid var(--line);
- border-radius:17px;padding:18px;
+ background:#101729ef;
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:17px;
  box-shadow:0 10px 35px #0004;
 }
-.sidebar{position:sticky;top:90px;height:max-content}
-.side-profile{text-align:center;padding:10px 0 20px}
+.sidebar,.right{
+ position:sticky;
+ top:86px;
+ height:max-content;
+}
+.side-profile{
+ text-align:center;
+ padding:8px 0 18px;
+}
 .side-profile img{
- width:85px;height:85px;border-radius:50%;
- object-fit:cover;border:2px solid var(--cyan);
+ width:82px;
+ height:82px;
+ border-radius:50%;
+ object-fit:cover;
+ border:2px solid var(--cyan);
  box-shadow:0 0 20px #00e5ff55;
 }
-.side-profile h3{margin-top:12px;font-size:17px}
-.side-profile p{color:var(--muted);font-size:12px;margin-top:5px}
+.side-profile h3{
+ margin-top:10px;
+ font-size:16px;
+}
+.side-profile p{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:5px;
+}
 .nav-item{
- display:flex;align-items:center;gap:12px;padding:13px;
- border-radius:10px;color:#dce8ff;margin-top:6px;
- text-decoration:none;cursor:pointer;
+ width:100%;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:12px;
+ margin-top:5px;
+ border:0;
+ border-radius:10px;
+ background:transparent;
+ color:#dce8ff;
+ text-align:left;
 }
-.nav-item:hover,.nav-item.active{background:#00e5ff17;color:var(--cyan)}
+.nav-item:hover,
+.nav-item.active{
+ background:#00e5ff17;
+ color:var(--cyan);
+}
 .main{min-width:0}
+.view{display:none}
+.view.active{display:block}
 .welcome{
- padding:25px;border-radius:18px;
+ padding:23px;
+ border-radius:18px;
  background:linear-gradient(120deg,#102c48,#21143e);
- border:1px solid #00e5ff44;margin-bottom:18px;
+ border:1px solid #00e5ff44;
+ margin-bottom:17px;
+ position:relative;
+ overflow:hidden;
 }
-.welcome h2{font-size:23px}
-.welcome p{color:#c0cce3;margin-top:9px;font-size:13px}
-.section-title{font-size:18px;color:var(--cyan);margin-bottom:16px}
-.card{margin-bottom:18px}
-.profile-cover{
- height:105px;background:linear-gradient(110deg,#00e5ff44,#9b4dff55);
- border-radius:12px;margin-bottom:-43px;
+.welcome:after{
+ content:"✦";
+ position:absolute;
+ right:25px;
+ top:8px;
+ font-size:75px;
+ color:#00e5ff22;
+ animation:float 5s ease-in-out infinite;
 }
-.profile-details{text-align:center;padding-bottom:15px}
-.profile-details img{
- width:90px;height:90px;border-radius:50%;
- object-fit:cover;border:4px solid var(--panel);background:#080d19;
+@keyframes float{
+ 50%{transform:translateY(14px) rotate(25deg)}
 }
-.profile-details h2{font-size:20px;margin-top:9px}
-.profile-details p{font-size:12px;color:var(--muted);margin-top:5px}
-.info-row{
- display:flex;justify-content:space-between;gap:10px;
- padding:13px 2px;border-bottom:1px solid var(--line);font-size:13px;
+.welcome h2{font-size:22px}
+.welcome p{
+ font-size:13px;
+ color:#c0cce3;
+ margin-top:8px;
 }
-.info-row span:first-child{color:var(--muted)}
-.info-row span:last-child{text-align:right;overflow-wrap:anywhere}
-.status{color:#32e99d}
-.designation{color:#ffd16b}
-.field{
- width:100%;padding:13px;background:#080e1e;
- border:1px solid var(--line);border-radius:10px;
- color:white;margin-top:10px;outline:none;
+.title{
+ font-size:18px;
+ color:var(--cyan);
+ margin-bottom:15px;
 }
-.field:focus{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff22}
-textarea.field{min-height:105px;resize:vertical}
-.file-label{display:block;color:var(--muted);font-size:12px;margin-top:14px}
-.primary{
- border:0;border-radius:10px;padding:12px 17px;
- background:linear-gradient(100deg,var(--cyan),#a3f7ff);
- color:#06101c;font-weight:bold;margin-top:12px;width:100%;
- box-shadow:0 0 16px #00e5ff22;
-}
-.primary:hover{filter:brightness(1.1)}
-.secondary{
- background:#17223a;color:white;border:1px solid var(--line);
- border-radius:9px;padding:10px;margin-top:10px;
-}
-.danger{
- background:#3b1829;color:#ff9bb0;
- border:1px solid #ff557044;border-radius:9px;padding:9px 12px;
-}
-.message{font-size:12px;color:var(--cyan);margin-top:10px;text-align:center}
-.post{margin-top:15px}
-.post-head{display:flex;align-items:center;gap:11px}
-.post-head img{
- width:43px;height:43px;border-radius:50%;
- object-fit:cover;border:2px solid var(--cyan);
-}
-.post-name{font-weight:bold;font-size:14px}
-.post-time{font-size:11px;color:var(--muted);margin-top:5px}
-.post-content{
- white-space:pre-wrap;overflow-wrap:anywhere;
- line-height:1.7;margin:16px 0;font-size:14px;
-}
-.post-media{
- width:100%;max-height:430px;object-fit:contain;
- background:#05070c;border-radius:12px;margin-top:12px;
-}
-.post-actions{display:flex;gap:8px;margin-top:14px}
-.post-actions button{
- flex:1;padding:11px 5px;background:#18243b;
- color:#dceaff;border:1px solid var(--line);border-radius:9px;
-}
-.post-actions button.liked{color:var(--cyan);border-color:var(--cyan)}
-.like-count{font-size:12px;color:var(--muted);margin-top:12px}
-.comment-area{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-.comment{padding:11px;background:#080e1e;border-radius:10px;margin-top:9px}
-.comment-name{font-size:12px;color:var(--cyan);font-weight:bold}
-.comment-text{
- font-size:13px;margin-top:6px;white-space:pre-wrap;overflow-wrap:anywhere;
-}
-.reply-area{margin:10px 0 0 15px;border-left:2px solid var(--purple);padding-left:10px}
-.reply{padding:9px;background:#15172c;border-radius:8px;margin-top:7px}
-.reply-name{font-size:12px;color:#d2a5ff}
-.reply-text{font-size:12px;margin-top:5px;white-space:pre-wrap}
-.empty{text-align:center;color:var(--muted);padding:25px 10px;font-size:13px}
-.right-panel{position:sticky;top:90px;height:max-content}
-.right-panel h3{color:var(--cyan);font-size:15px;margin-bottom:13px}
-.right-panel p{font-size:12px;color:var(--muted);line-height:1.7}
-.right-panel .rule{padding:12px 0;border-bottom:1px solid var(--line)}
-.logout{width:100%;margin-top:16px}
-.bottom-nav{display:none}
-footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
-.hidden{display:none!important}
-#authError{
- display:none;margin:20px;padding:20px;
- border:1px solid #ff557066;border-radius:12px;
- background:#3b182922;color:#ffb0bd;text-align:center;
+.muted{
+ color:var(--muted);
+ font-size:12px;
  line-height:1.7;
 }
+.field{
+ width:100%;
+ padding:12px;
+ background:#080e1e;
+ border:1px solid var(--line);
+ border-radius:10px;
+ color:white;
+ margin-top:10px;
+ outline:none;
+}
+.field:focus{
+ border-color:var(--cyan);
+ box-shadow:0 0 12px #00e5ff22;
+}
+textarea.field{
+ min-height:95px;
+ resize:vertical;
+}
+.primary{
+ width:100%;
+ border:0;
+ border-radius:10px;
+ padding:12px 16px;
+ background:linear-gradient(100deg,var(--cyan),#a3f7ff);
+ color:#06101c;
+ font-weight:bold;
+ margin-top:11px;
+}
+.secondary{
+ background:#17223a;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:9px;
+ padding:9px 12px;
+}
+.danger{
+ background:#3b1829;
+ color:#ff9bb0;
+ border:1px solid #ff557044;
+ border-radius:9px;
+ padding:9px 12px;
+}
+.message{
+ font-size:12px;
+ color:var(--cyan);
+ margin-top:9px;
+ text-align:center;
+}
+.file-label{
+ display:block;
+ color:var(--muted);
+ font-size:12px;
+ margin-top:12px;
+}
+
+/* MY PROFILE */
+.profile-cover{
+ height:155px;
+ border-radius:13px;
+ background:
+ radial-gradient(circle at 20% 30%,#9b4dff99,transparent 35%),
+ radial-gradient(circle at 80% 70%,#00e5ff88,transparent 40%),
+ linear-gradient(120deg,#102c48,#21143e);
+ border:1px solid #00e5ff44;
+ position:relative;
+ overflow:hidden;
+}
+.profile-cover:after{
+ content:"7STARBOYS";
+ position:absolute;
+ right:18px;
+ bottom:15px;
+ font-size:24px;
+ font-weight:900;
+ letter-spacing:4px;
+ color:#ffffff35;
+}
+.profile-head{
+ display:flex;
+ align-items:end;
+ gap:16px;
+ margin:-48px 15px 18px;
+ position:relative;
+}
+.profile-head img{
+ width:105px;
+ height:105px;
+ border-radius:50%;
+ object-fit:cover;
+ border:5px solid var(--panel);
+ box-shadow:0 0 20px #00e5ff55;
+}
+.profile-head h2{font-size:21px}
+.profile-head p{
+ font-size:12px;
+ color:var(--muted);
+ margin-top:5px;
+}
+.info-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:10px;
+ margin-top:14px;
+}
+.info{
+ background:#080e1e;
+ border:1px solid var(--line);
+ border-radius:10px;
+ padding:12px;
+ min-width:0;
+}
+.info small{
+ color:var(--purple);
+ font-weight:bold;
+}
+.info p{
+ font-size:13px;
+ margin-top:6px;
+ overflow-wrap:anywhere;
+}
+
+/* POSTS */
+.post{margin-top:14px}
+.post-head{
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+.post-head img{
+ width:42px;
+ height:42px;
+ border-radius:50%;
+ object-fit:cover;
+ border:2px solid var(--cyan);
+}
+.post-name{
+ font-weight:bold;
+ font-size:14px;
+}
+.post-time{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:4px;
+}
+.post-content{
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+ line-height:1.7;
+ margin:14px 0;
+ font-size:14px;
+}
+.post-media{
+ width:100%;
+ max-height:430px;
+ object-fit:contain;
+ background:#05070c;
+ border-radius:12px;
+ margin-top:10px;
+}
+.post-actions{
+ display:flex;
+ gap:8px;
+ margin-top:12px;
+}
+.post-actions button{
+ flex:1;
+ padding:10px 5px;
+ background:#18243b;
+ color:#dceaff;
+ border:1px solid var(--line);
+ border-radius:9px;
+}
+.post-actions button.liked{
+ color:var(--cyan);
+ border-color:var(--cyan);
+}
+.comment-area{
+ margin-top:12px;
+ border-top:1px solid var(--line);
+ padding-top:10px;
+}
+.comment{
+ padding:10px;
+ background:#080e1e;
+ border-radius:9px;
+ margin-top:8px;
+}
+.comment-name{
+ font-size:12px;
+ color:var(--cyan);
+ font-weight:bold;
+}
+.comment-text{
+ font-size:13px;
+ margin-top:5px;
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+}
+.empty{
+ text-align:center;
+ color:var(--muted);
+ padding:22px 8px;
+ font-size:13px;
+}
+#authError{
+ display:none;
+ margin:18px;
+ padding:18px;
+ border:1px solid #ff557066;
+ border-radius:12px;
+ background:#3b182922;
+ color:#ffb0bd;
+ text-align:center;
+ line-height:1.7;
+}
+.mobile-nav{display:none}
+.hidden{display:none!important}
+
 @media(max-width:1050px){
- .layout{grid-template-columns:210px minmax(0,1fr)}
- .right-panel{display:none}
+ .layout{grid-template-columns:205px minmax(0,1fr)}
+ .right{display:none}
 }
 @media(max-width:700px){
- .topbar{height:62px;padding:0 14px}
- .brand{font-size:19px}
- .layout{display:block;padding:13px}
+ .topbar{height:60px;padding:0 12px}
+ .brand{font-size:18px}
+ .layout{display:block;padding:12px}
  .sidebar{display:none}
- .welcome{padding:20px}
- .welcome h2{font-size:20px}
- .panel{padding:15px}
- .bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  display:flex;justify-content:space-around;
-  background:#090e1ef5;border-top:1px solid #00e5ff44;
-  padding:10px 4px calc(10px + env(safe-area-inset-bottom));
-  z-index:30;backdrop-filter:blur(18px);
+ .panel{padding:14px}
+ .mobile-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:30;
+  display:flex;
+  justify-content:space-around;
+  background:#090e1ef5;
+  border-top:1px solid #00e5ff44;
+  padding:8px 2px calc(8px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(18px);
  }
- .bottom-nav a{
-  color:var(--muted);text-decoration:none;
-  font-size:10px;text-align:center;
+ .mobile-nav button{
+  background:none;
+  border:0;
+  color:var(--muted);
+  font-size:10px;
  }
- .bottom-nav a span{display:block;font-size:20px;margin-bottom:4px}
+ .mobile-nav span{
+  display:block;
+  font-size:19px;
+  margin-bottom:3px;
+ }
+ .info-grid{grid-template-columns:1fr}
+ .profile-head img{width:82px;height:82px}
+ .profile-head h2{font-size:18px}
  footer{padding-bottom:85px}
+}
+footer{
+ text-align:center;
+ padding:22px;
+ color:var(--muted);
+ font-size:11px;
 }
 </style>
 </head>
@@ -208,111 +439,355 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
 <body>
 
 <header class="topbar">
- <div class="brand">7STARBOYS<small>OFFICIAL COMMUNITY</small></div>
+ <div class="brand">
+  7STARBOYS
+  <small>OFFICIAL COMMUNITY</small>
+ </div>
  <div class="top-right">
   <span id="topName">Member</span>
-  <img id="topAvatar" class="top-avatar" alt="Profile">
+  <img id="topAvatar" class="avatar" alt="Profile">
  </div>
 </header>
 
 <div id="authError"></div>
 
-<div class="layout" id="dashboard">
+<div class="layout" id="dashboard" style="display:none">
 
 <aside class="sidebar panel">
+
  <div class="side-profile">
   <img id="sideAvatar" alt="Member">
   <h3 id="sideName">লোড হচ্ছে...</h3>
   <p>7STARBOYS MEMBER</p>
  </div>
- <div class="nav-item active" onclick="go('home')">🏠 Dashboard</div>
- <div class="nav-item" onclick="go('profile')">👤 My Profile</div>
- <div class="nav-item" onclick="go('create')">✍️ Create Post</div>
- <div class="nav-item" onclick="go('feed')">🌐 Community Feed</div>
- <button class="danger logout" id="logoutBtn">Logout</button>
+
+ <button class="nav-item active" data-view="home">🏠 Home</button>
+ <button class="nav-item" data-view="myProfile">👤 My Profile</button>
+ <button class="nav-item" data-view="create">✍️ Create Post</button>
+ <button class="nav-item" data-view="feed">🌐 Community Feed</button>
+ <button class="nav-item" data-view="stories">⭕ Stories</button>
+ <button class="nav-item" data-view="messenger">💬 Messenger</button>
+ <button class="nav-item" data-view="notifications">🔔 Notifications</button>
+ <button class="nav-item" data-view="friends">🤝 Friends</button>
+ <button class="nav-item" data-view="members">🔎 Members Search</button>
+ <button class="nav-item" data-view="videos">🎬 Short Videos</button>
+ <button class="nav-item" data-view="groups">👥 Groups</button>
+ <button class="nav-item" data-view="saved">🔖 Saved Posts</button>
+ <button class="nav-item" data-view="settings">⚙️ Settings & Privacy</button>
+ <button class="nav-item hidden" id="adminNav" data-view="admin">🛡️ Admin Panel</button>
+
+ <button class="danger" id="logoutBtn" style="width:100%;margin-top:14px">
+  Logout
+ </button>
 </aside>
 
 <main class="main">
 
-<section class="welcome" id="home">
- <h2>Welcome to 7STARBOYS ✨</h2>
- <p>একতা, সম্মান ও বন্ধুত্বের বন্ধনে আমাদের কমিউনিটি।</p>
-</section>
+<!-- HOME -->
+<section class="view active" id="home">
 
-<section class="panel card" id="profile">
- <h3 class="section-title">👤 Member Profile</h3>
- <div class="profile-cover"></div>
- <div class="profile-details">
-  <img id="profilePhoto" alt="Profile Photo">
-  <h2 id="memberName">লোড হচ্ছে...</h2>
-  <p id="memberRole">MEMBER</p>
+ <div class="welcome">
+  <h2>Welcome to 7STARBOYS ✨</h2>
+  <p>একতা, সম্মান ও বন্ধুত্বের বন্ধনে আমাদের কমিউনিটি।</p>
  </div>
- <div class="info-row"><span>নাম</span><span id="nameValue">-</span></div>
- <div class="info-row"><span>ইমেইল</span><span id="emailValue">-</span></div>
- <div class="info-row"><span>জন্ম তারিখ</span><span id="birthValue">-</span></div>
- <div class="info-row"><span>পদবি</span><span class="designation" id="roleValue">-</span></div>
- <div class="info-row"><span>অ্যাকাউন্ট</span><span class="status" id="statusValue">-</span></div>
- <label class="file-label">প্রোফাইল ছবি পরিবর্তন</label>
- <input class="field" type="file" id="photoFile" accept="image/*">
- <button class="primary" id="uploadPhoto">📸 ছবি আপলোড</button>
- <div class="message" id="photoMessage"></div>
+
+ <div class="panel">
+  <h3 class="title">🌌 Your Community Dashboard</h3>
+  <p class="muted">
+   তোমার প্রোফাইল, নতুন পোস্ট এবং কমিউনিটির আপডেট এক জায়গায়।
+  </p>
+
+  <div class="info-grid">
+   <div class="info">
+    <small>ACCOUNT STATUS</small>
+    <p class="status">Approved Member</p>
+   </div>
+   <div class="info">
+    <small>COMMUNITY</small>
+    <p>7STARBOYS Official</p>
+   </div>
+  </div>
+
+  <button class="primary" data-jump="create">
+   ✍️ Create a Post
+  </button>
+ </div>
+
+ <div class="panel" style="margin-top:15px">
+  <h3 class="title">🌐 Latest Community Posts</h3>
+  <div id="homeFeed">
+   <div class="empty">পোস্ট লোড হচ্ছে...</div>
+  </div>
+ </div>
+
 </section>
 
-<section class="panel card" id="create">
- <h3 class="section-title">✍️ Create New Post</h3>
- <textarea class="field" id="postText" maxlength="1000" placeholder="আপনার মনের কথা লিখুন..."></textarea>
- <label class="file-label">ছবি অথবা ভিডিও (সর্বোচ্চ ২৫ MB)</label>
- <input class="field" type="file" id="postFile" accept="image/*,video/*">
- <button class="primary" id="publishPost">🚀 Publish Post</button>
- <div class="message" id="postMessage"></div>
+<!-- MY PROFILE -->
+<section class="view" id="myProfile">
+
+ <div class="panel">
+  <h3 class="title">👤 MY PROFILE</h3>
+
+  <div class="profile-cover"></div>
+
+  <div class="profile-head">
+   <img id="profilePhoto" alt="Profile photo">
+   <div>
+    <h2 id="memberName">লোড হচ্ছে...</h2>
+    <p id="memberRole">MEMBER</p>
+   </div>
+  </div>
+
+  <div class="info-grid">
+
+   <div class="info">
+    <small>নাম</small>
+    <p id="nameValue">-</p>
+   </div>
+
+   <div class="info">
+    <small>ইমেইল</small>
+    <p id="emailValue">-</p>
+   </div>
+
+   <div class="info">
+    <small>জন্ম তারিখ</small>
+    <p id="birthValue">-</p>
+   </div>
+
+   <div class="info">
+    <small>পদবি</small>
+    <p id="roleValue">-</p>
+   </div>
+
+   <div class="info">
+    <small>অ্যাকাউন্ট</small>
+    <p id="statusValue" class="status">-</p>
+   </div>
+
+  </div>
+
+  <label class="file-label">
+   প্রোফাইল ছবি পরিবর্তন (সর্বোচ্চ ৫ MB)
+  </label>
+
+  <input class="field" type="file" id="photoFile" accept="image/*">
+
+  <button class="primary" id="uploadPhoto">
+   📸 ছবি আপলোড
+  </button>
+
+  <div class="message" id="photoMessage"></div>
+ </div>
+
+ <div class="panel" style="margin-top:15px">
+  <h3 class="title">📝 MY POSTS</h3>
+  <div id="myPosts">
+   <div class="empty">তোমার পোস্ট লোড হচ্ছে...</div>
+  </div>
+ </div>
+
 </section>
 
-<section class="panel card" id="feed">
- <h3 class="section-title">🌐 Community Feed</h3>
- <div id="postFeed"><div class="empty">পোস্ট লোড হচ্ছে...</div></div>
+<!-- CREATE POST -->
+<section class="view" id="create">
+ <div class="panel">
+  <h3 class="title">✍️ Create New Post</h3>
+
+  <textarea
+   class="field"
+   id="postText"
+   maxlength="1000"
+   placeholder="আপনার মনের কথা লিখুন..."
+  ></textarea>
+
+  <label class="file-label">
+   ছবি অথবা ভিডিও (সর্বোচ্চ ২৫ MB)
+  </label>
+
+  <input
+   class="field"
+   type="file"
+   id="postFile"
+   accept="image/*,video/*"
+  >
+
+  <button class="primary" id="publishPost">
+   🚀 Publish Post
+  </button>
+
+  <div class="message" id="postMessage"></div>
+ </div>
+</section>
+
+<!-- COMMUNITY FEED -->
+<section class="view" id="feed">
+ <div class="panel">
+  <h3 class="title">🌐 Community Feed</h3>
+  <div id="postFeed">
+   <div class="empty">পোস্ট লোড হচ্ছে...</div>
+  </div>
+ </div>
+</section>
+
+<!-- OTHER SECTIONS -->
+<section class="view" id="stories">
+ <div class="panel">
+  <h3 class="title">⭕ Stories</h3>
+  <p class="muted">
+   Stories-এর ইন্টারফেস প্রস্তুত। Story প্রকাশ ও ২৪ ঘণ্টা পর
+   স্বয়ংক্রিয়ভাবে সরানোর সুবিধার জন্য পরবর্তী ধাপে stories
+   collection ও rules যুক্ত করতে হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="messenger">
+ <div class="panel">
+  <h3 class="title">💬 Messenger</h3>
+  <p class="muted">
+   Private chat এখনো Firebase-এ সংযুক্ত নয়।
+   নিরাপদ ব্যক্তিগত কথোপকথনের জন্য conversation ও message
+   rules তৈরি করতে হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="notifications">
+ <div class="panel">
+  <h3 class="title">🔔 Notifications</h3>
+  <p class="muted">
+   Like, comment ও friend request notification পরবর্তী ধাপে
+   সংযুক্ত হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="friends">
+ <div class="panel">
+  <h3 class="title">🤝 Friends & Requests</h3>
+  <p class="muted">
+   Friend request পাঠানো ও গ্রহণের ব্যবস্থা পরবর্তী ধাপে
+   নিরাপদভাবে যুক্ত হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="members">
+ <div class="panel">
+  <h3 class="title">🔎 Members Search</h3>
+  <p class="muted">
+   সদস্য অনুসন্ধানের জন্য publicProfiles collection-এর
+   অনুমতি ও প্রয়োজনীয় তথ্য একসঙ্গে সমন্বয় করতে হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="videos">
+ <div class="panel">
+  <h3 class="title">🎬 Short Videos</h3>
+  <p class="muted">
+   ভিডিও পোস্ট বর্তমানে Community Feed-এ দেখা যাবে।
+   আলাদা short-video feed পরবর্তী ধাপে যুক্ত হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="groups">
+ <div class="panel">
+  <h3 class="title">👥 Groups</h3>
+  <p class="muted">
+   গ্রুপ তৈরি, সদস্য যোগ এবং গ্রুপ পোস্টের জন্য আলাদা
+   secure Firestore structure প্রয়োজন।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="saved">
+ <div class="panel">
+  <h3 class="title">🔖 Saved Posts</h3>
+  <p class="muted">
+   Saved posts-এর জন্য ব্যক্তিগত saved collection ও rules
+   পরবর্তী ধাপে যুক্ত হবে।
+  </p>
+ </div>
+</section>
+
+<section class="view" id="settings">
+ <div class="panel">
+  <h3 class="title">⚙️ Settings & Privacy</h3>
+  <p class="muted">
+   তোমার অ্যাকাউন্টের নিরাপত্তা বজায় রাখতে এখানে আপাতত
+   লগআউট অপশন রয়েছে। প্রোফাইল পরিবর্তনের সুবিধা
+   অনুমোদিত fields অনুযায়ী যুক্ত হবে।
+  </p>
+  <button class="danger" id="logoutBtn2">Logout</button>
+ </div>
+</section>
+
+<section class="view" id="admin">
+ <div class="panel">
+  <h3 class="title">🛡️ Admin Panel</h3>
+  <p class="muted">
+   অ্যাডমিন ব্যবস্থাপনার জন্য তোমার বিদ্যমান admin-panel.html
+   ব্যবহার করো।
+  </p>
+  <a href="admin-panel.html"
+     style="color:var(--cyan);display:inline-block;margin-top:12px">
+   Open Admin Panel ↗
+  </a>
+ </div>
 </section>
 
 </main>
 
-<aside class="right-panel panel">
- <h3>⭐ Community Rules</h3>
- <div class="rule"><p>🤝 সকল সদস্যকে সম্মান করতে হবে।</p></div>
- <div class="rule"><p>💙 বন্ধুত্ব ও একতা বজায় রাখতে হবে।</p></div>
- <div class="rule"><p>🚫 কোনো সদস্যকে অপমান করা যাবে না।</p></div>
- <div class="rule"><p>🌟 সুন্দর ও ইতিবাচক পোস্ট করতে হবে।</p></div>
- <p style="margin-top:16px">7STARBOYS — আমাদের সংগঠন, আমাদের পরিচয়।</p>
+<aside class="right panel">
+ <h3 class="title">⭐ Community Rules</h3>
+ <div class="rule">🤝 সকল সদস্যকে সম্মান করতে হবে।</div>
+ <div class="rule">💙 বন্ধুত্ব ও একতা বজায় রাখতে হবে।</div>
+ <div class="rule">🚫 কাউকে অপমান করা যাবে না।</div>
+ <div class="rule">🌟 ইতিবাচক পোস্ট করতে হবে।</div>
+ <p class="muted" style="margin-top:14px">
+  7STARBOYS — আমাদের সংগঠন, আমাদের পরিচয়।
+ </p>
 </aside>
 
 </div>
 
-<nav class="bottom-nav">
- <a href="#home"><span>🏠</span>Home</a>
- <a href="#profile"><span>👤</span>Profile</a>
- <a href="#create"><span>✍️</span>Post</a>
- <a href="#feed"><span>🌐</span>Feed</a>
+<nav class="mobile-nav">
+ <button data-view="home"><span>🏠</span>Home</button>
+ <button data-view="myProfile"><span>👤</span>Profile</button>
+ <button data-view="create"><span>✍️</span>Post</button>
+ <button data-view="feed"><span>🌐</span>Feed</button>
+ <button data-view="settings"><span>⚙️</span>More</button>
 </nav>
 
 <footer>© 2026 7STARBOYS | OFFICIAL COMMUNITY</footer>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
 import {
  getAuth,onAuthStateChanged,signOut
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
 import {
  getFirestore,doc,getDoc,setDoc,collection,addDoc,
  query,orderBy,onSnapshot,serverTimestamp,deleteDoc
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-/* SAME FIREBASE CONFIG AS LOGIN PAGE */
-const firebaseConfig = {
- apiKey: "AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
- authDomain: "starboys-7539f.firebaseapp.com",
- projectId: "starboys-7539f",
- storageBucket: "starboys-7539f.firebasestorage.app",
- messagingSenderId: "542462403066",
- appId: "1:542462403066:web:a6e204f3402b72cdecc443",
- measurementId: "G-RES9E2QY2N"
+/* FIREBASE CONFIG */
+const firebaseConfig={
+ apiKey:"AIzaSyCHveS2KQKztiMAPPhXryVNFrElEvehFs",
+ authDomain:"starboys-7539f.firebaseapp.com",
+ projectId:"starboys-7539f",
+ storageBucket:"starboys-7539f.firebasestorage.app",
+ messagingSenderId:"542462403066",
+ appId:"1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId:"G-RES9E2QY2N"
 };
 
 const CLOUDINARY_CLOUD_NAME="iwza5did";
@@ -324,64 +799,382 @@ const db=getFirestore(app);
 
 let currentUser=null;
 let memberData={};
+let postsCache=[];
 let feedUnsubscribe=null;
-let feedListeners=[];
-let likedPosts=new Set();
+let likeUnsubs=[];
 
 const $=id=>document.getElementById(id);
+const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
 
-function showMessage(id,message){
- $(id).textContent=message;
+function msg(id,text){
+ $(id).textContent=text;
 }
-function go(id){
- $(id)?.scrollIntoView({behavior:"smooth",block:"start"});
-}
-window.go=go;
 
+/* NAVIGATION */
+function showView(id){
+ document.querySelectorAll(".view").forEach(v=>{
+  v.classList.toggle("active",v.id===id);
+ });
+
+ document.querySelectorAll("[data-view]").forEach(b=>{
+  b.classList.toggle("active",b.dataset.view===id);
+ });
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("[data-view]").forEach(b=>{
+ b.addEventListener("click",()=>showView(b.dataset.view));
+});
+
+document.querySelectorAll("[data-jump]").forEach(b=>{
+ b.addEventListener("click",()=>showView(b.dataset.jump));
+});
+
+/* PROFILE PHOTO */
 function setPhoto(url){
- const safe=url || "https://placehold.co/150x150/101729/00e5ff?text=7SB";
- ["profilePhoto","topAvatar","sideAvatar"].forEach(id=>$(id).src=safe);
-}
-
-function stopFeedListeners(){
- feedListeners.forEach(unsubscribe=>{
-  try{unsubscribe()}catch(e){}
+ ["topAvatar","sideAvatar","profilePhoto"].forEach(id=>{
+  $(id).src=url||fallback;
  });
- feedListeners=[];
 }
 
+/* CLOUDINARY UPLOAD */
 function uploadCloudinary(file){
- return new Promise((resolve,reject)=>{
-  const data=new FormData();
-  data.append("file",file);
-  data.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
-  fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,{
-   method:"POST",body:data
-  }).then(async response=>{
-   const result=await response.json();
-   if(!response.ok)throw new Error(result.error?.message || "Upload failed");
-   resolve(result.secure_url);
-  }).catch(reject);
+ const data=new FormData();
+
+ data.append("file",file);
+ data.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
+
+ return fetch(
+  `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+  {
+   method:"POST",
+   body:data
+  }
+ ).then(async r=>{
+  const d=await r.json();
+
+  if(!r.ok){
+   throw new Error(d.error?.message||"Upload failed");
+  }
+
+  return d.secure_url;
  });
 }
 
+/* PROFILE DATA */
 function renderProfile(){
- const name=memberData.name || "7STARBOYS Member";
- const role=memberData.designation || "Member";
+
+ const name=memberData.name||"7STARBOYS Member";
+ const role=memberData.designation||"Member";
+
  $("topName").textContent=name;
  $("sideName").textContent=name;
  $("memberName").textContent=name;
  $("memberRole").textContent=role;
+
  $("nameValue").textContent=name;
- $("emailValue").textContent=currentUser.email || "";
- $("birthValue").textContent=memberData.birthDate || "উল্লেখ নেই";
+ $("emailValue").textContent=memberData.email||currentUser.email||"";
+ $("birthValue").textContent=memberData.birthDate||"উল্লেখ নেই";
  $("roleValue").textContent=role;
  $("statusValue").textContent="Approved";
- setPhoto(memberData.photoURL || "");
+
+ setPhoto(memberData.photoURL||"");
+}
+
+/* CREATE POST CARD */
+function makePostCard(post,id,container){
+
+ const card=document.createElement("article");
+ card.className="panel post";
+
+ const head=document.createElement("div");
+ head.className="post-head";
+
+ const avatar=document.createElement("img");
+ avatar.src=post.authorPhoto||fallback;
+ avatar.alt="Member";
+
+ const htxt=document.createElement("div");
+
+ const name=document.createElement("div");
+ name.className="post-name";
+ name.textContent=post.authorName||"Member";
+
+ const time=document.createElement("div");
+ time.className="post-time";
+ time.textContent=
+  post.createdAt?.toDate?.().toLocaleString("bn-BD")
+  ||"সদ্য প্রকাশিত";
+
+ htxt.append(name,time);
+ head.append(avatar,htxt);
+ card.append(head);
+
+ if(post.text){
+  const t=document.createElement("div");
+  t.className="post-content";
+  t.textContent=post.text;
+  card.append(t);
+ }
+
+ if(post.mediaURL){
+
+  if(post.mediaType==="video"){
+   const v=document.createElement("video");
+   v.src=post.mediaURL;
+   v.controls=true;
+   v.className="post-media";
+   card.append(v);
+  }else{
+   const im=document.createElement("img");
+   im.src=post.mediaURL;
+   im.className="post-media";
+   im.alt="Post image";
+   card.append(im);
+  }
+ }
+
+ const actions=document.createElement("div");
+ actions.className="post-actions";
+
+ const like=document.createElement("button");
+ like.textContent="💙 Like";
+
+ const comment=document.createElement("button");
+ comment.textContent="💬 Comment";
+
+ actions.append(like,comment);
+ card.append(actions);
+
+ const count=document.createElement("div");
+ count.className="muted";
+ count.style.marginTop="10px";
+ card.append(count);
+
+ const area=document.createElement("div");
+ area.className="comment-area";
+ area.hidden=true;
+
+ const list=document.createElement("div");
+
+ const input=document.createElement("textarea");
+ input.className="field";
+ input.rows=2;
+ input.placeholder="মন্তব্য লিখুন...";
+
+ const send=document.createElement("button");
+ send.className="primary";
+ send.textContent="মন্তব্য প্রকাশ";
+
+ area.append(list,input,send);
+ card.append(area);
+
+ const likeRef=doc(db,"posts",id,"likes",currentUser.uid);
+
+ getDoc(likeRef).then(s=>{
+  if(s.exists())like.classList.add("liked");
+ }).catch(console.error);
+
+ /* LIKE */
+ like.addEventListener("click",async()=>{
+
+  like.disabled=true;
+
+  try{
+   const s=await getDoc(likeRef);
+
+   if(s.exists()){
+    await deleteDoc(likeRef);
+    like.classList.remove("liked");
+   }else{
+    await setDoc(likeRef,{
+     uid:currentUser.uid,
+     name:memberData.name||"Member",
+     createdAt:serverTimestamp()
+    });
+
+    like.classList.add("liked");
+   }
+
+  }catch(e){
+   alert("Like করা যায়নি: "+e.message);
+  }
+
+  like.disabled=false;
+ });
+
+ comment.addEventListener("click",()=>{
+  area.hidden=!area.hidden;
+ });
+
+ /* COMMENT */
+ send.addEventListener("click",async()=>{
+
+  const text=input.value.trim();
+  if(!text)return;
+
+  send.disabled=true;
+
+  try{
+   await addDoc(
+    collection(db,"posts",id,"comments"),
+    {
+     authorUid:currentUser.uid,
+     authorName:memberData.name||"Member",
+     text,
+     createdAt:serverTimestamp()
+    }
+   );
+
+   input.value="";
+
+  }catch(e){
+   alert("মন্তব্য করা যায়নি: "+e.message);
+  }
+
+  send.disabled=false;
+ });
+
+ /* COMMENT LISTENER */
+ const cq=query(
+  collection(db,"posts",id,"comments"),
+  orderBy("createdAt","asc")
+ );
+
+ const cu=onSnapshot(cq,snap=>{
+
+  list.innerHTML="";
+
+  snap.forEach(cs=>{
+
+   const d=cs.data();
+
+   const box=document.createElement("div");
+   box.className="comment";
+
+   const n=document.createElement("div");
+   n.className="comment-name";
+   n.textContent=d.authorName||"Member";
+
+   const tx=document.createElement("div");
+   tx.className="comment-text";
+   tx.textContent=d.text||"";
+
+   box.append(n,tx);
+   list.append(box);
+  });
+
+ },e=>console.error("Comments:",e));
+
+ likeUnsubs.push(cu);
+
+ /* LIKE COUNT */
+ const lq=collection(db,"posts",id,"likes");
+
+ const lu=onSnapshot(lq,s=>{
+  count.textContent="💙 "+s.size+" জন Like করেছেন";
+ },e=>console.error(e));
+
+ likeUnsubs.push(lu);
+
+ /* DELETE OWN POST */
+ if(post.authorUid===currentUser.uid){
+
+  const del=document.createElement("button");
+  del.className="danger";
+  del.style.marginTop="12px";
+  del.textContent="🗑 Delete My Post";
+
+  del.addEventListener("click",async()=>{
+
+   if(!confirm("এই পোস্টটি মুছে ফেলতে চাও?"))return;
+
+   del.disabled=true;
+
+   try{
+    await deleteDoc(doc(db,"posts",id));
+   }catch(e){
+    alert("মুছতে সমস্যা: "+e.message);
+    del.disabled=false;
+   }
+  });
+
+  card.append(del);
+ }
+
+ container.append(card);
+}
+
+/* RENDER POSTS */
+function renderAllPosts(){
+
+ ["postFeed","homeFeed","myPosts"].forEach(id=>{
+  $(id).innerHTML="";
+ });
+
+ if(!postsCache.length){
+
+  $("postFeed").innerHTML=
+   '<div class="empty">এখনো কোনো পোস্ট নেই।</div>';
+
+  $("homeFeed").innerHTML=
+   '<div class="empty">এখনো কোনো পোস্ট নেই।</div>';
+
+  $("myPosts").innerHTML=
+   '<div class="empty">তুমি এখনো কোনো পোস্ট করোনি।</div>';
+
+  return;
+ }
+
+ postsCache.forEach(({id,data})=>{
+
+  makePostCard(data,id,$("postFeed"));
+
+  if(data.authorUid===currentUser.uid){
+   makePostCard(data,id,$("myPosts"));
+  }
+ });
+
+ postsCache.slice(0,3).forEach(({id,data})=>{
+  makePostCard(data,id,$("homeFeed"));
+ });
+
+}
+
+/* COMMUNITY FEED */
+function startFeed(){
+
+ if(feedUnsubscribe)feedUnsubscribe();
+
+ likeUnsubs.forEach(u=>u());
+ likeUnsubs=[];
+
+ const q=query(
+  collection(db,"posts"),
+  orderBy("createdAt","desc")
+ );
+
+ feedUnsubscribe=onSnapshot(q,s=>{
+
+  postsCache=s.docs.map(d=>({
+   id:d.id,
+   data:d.data()
+  }));
+
+  renderAllPosts();
+
+ },e=>{
+
+  $("postFeed").textContent=
+   "পোস্ট লোড করা যায়নি: "+e.message;
+
+ });
 }
 
 /* AUTHENTICATION */
 onAuthStateChanged(auth,async user=>{
+
  if(!user){
   location.replace("login.html");
   return;
@@ -390,427 +1183,172 @@ onAuthStateChanged(auth,async user=>{
  currentUser=user;
 
  try{
-  const ref=doc(db,"members",user.uid);
-  const snap=await getDoc(ref);
 
-  if(!snap.exists()){
+  const snap=await getDoc(
+   doc(db,"members",user.uid)
+  );
+
+  if(!snap.exists()||snap.data().status!=="approved"){
+
    $("authError").style.display="block";
-   $("authError").textContent="সদস্যের তথ্য পাওয়া যায়নি। অ্যাডমিনের সঙ্গে যোগাযোগ করুন।";
+
+   $("authError").textContent=
+    "সদস্যপদ অনুমোদিত নয় বা সদস্যের তথ্য পাওয়া যায়নি।";
+
    await signOut(auth);
    return;
   }
 
   memberData=snap.data();
 
-  if(memberData.status!=="approved"){
-   $("authError").style.display="block";
-   $("authError").textContent="আপনার সদস্যপদ এখনো অনুমোদিত হয়নি। অনুমোদনের পর Dashboard ব্যবহার করতে পারবেন।";
-   await signOut(auth);
-   return;
-  }
+  $("dashboard").style.display="grid";
 
   renderProfile();
   startFeed();
 
- }catch(error){
-  console.error("Member loading error:",error);
+  const adminSnap=await getDoc(
+   doc(db,"admins",user.uid)
+  );
+
+  if(adminSnap.exists()){
+   $("adminNav").classList.remove("hidden");
+  }
+
+ }catch(e){
+
   $("authError").style.display="block";
-  $("authError").textContent="তথ্য লোড করা যায়নি: "+error.message+
-   " | Firebase Firestore Rules পরীক্ষা করুন।";
+  $("authError").textContent=
+   "তথ্য লোড করা যায়নি: "+e.message;
+
  }
 });
 
-/* PROFILE PHOTO */
+/* PROFILE PHOTO UPLOAD */
 $("uploadPhoto").addEventListener("click",async()=>{
+
  const file=$("photoFile").files[0];
 
- if(!currentUser)return showMessage("photoMessage","লগইন যাচাই হচ্ছে।");
- if(!file)return showMessage("photoMessage","আগে একটি ছবি নির্বাচন করুন।");
- if(!file.type.startsWith("image/"))return showMessage("photoMessage","শুধু ছবি নির্বাচন করুন।");
- if(file.size>5*1024*1024)return showMessage("photoMessage","ছবি ৫ MB-এর কম হতে হবে।");
+ if(!file){
+  return msg("photoMessage","আগে একটি ছবি নির্বাচন করুন।");
+ }
+
+ if(!file.type.startsWith("image/")){
+  return msg("photoMessage","শুধু ছবি নির্বাচন করুন।");
+ }
+
+ if(file.size>5*1024*1024){
+  return msg("photoMessage","ছবি ৫ MB-এর কম হতে হবে।");
+ }
 
  $("uploadPhoto").disabled=true;
- showMessage("photoMessage","ছবি আপলোড হচ্ছে...");
+ msg("photoMessage","ছবি আপলোড হচ্ছে...");
 
  try{
+
   const url=await uploadCloudinary(file);
 
-  await setDoc(doc(db,"members",currentUser.uid),{
-   photoURL:url
-  },{merge:true});
-
-  await setDoc(doc(db,"publicProfiles",currentUser.uid),{
-   name:memberData.name || "Member",
-   photoURL:url
-  },{merge:true});
+  await setDoc(
+   doc(db,"members",currentUser.uid),
+   {photoURL:url},
+   {merge:true}
+  );
 
   memberData.photoURL=url;
   setPhoto(url);
-  showMessage("photoMessage","প্রোফাইল ছবি আপডেট হয়েছে!");
 
- }catch(error){
-  showMessage("photoMessage","সমস্যা: "+error.message);
+  msg("photoMessage","প্রোফাইল ছবি আপডেট হয়েছে!");
+
+ }catch(e){
+
+  msg("photoMessage","সমস্যা: "+e.message);
+
  }
+
  $("uploadPhoto").disabled=false;
 });
 
-/* CREATE POST */
+/* PUBLISH POST */
 $("publishPost").addEventListener("click",async()=>{
+
  const text=$("postText").value.trim();
  const file=$("postFile").files[0];
 
- if(!currentUser)return showMessage("postMessage","লগইন যাচাই হচ্ছে।");
- if(!text && !file)return showMessage("postMessage","কিছু লিখুন অথবা ছবি/ভিডিও দিন।");
- if(file && file.size>25*1024*1024)return showMessage("postMessage","ফাইল ২৫ MB-এর বেশি হতে পারবে না।");
+ if(!text&&!file){
+  return msg("postMessage","কিছু লিখুন অথবা ছবি/ভিডিও দিন।");
+ }
+
+ if(file&&file.size>25*1024*1024){
+  return msg("postMessage","ফাইল ২৫ MB-এর বেশি হতে পারবে না।");
+ }
 
  $("publishPost").disabled=true;
- showMessage("postMessage","পোস্ট প্রকাশ হচ্ছে...");
+ msg("postMessage","পোস্ট প্রকাশ হচ্ছে...");
 
  try{
-  let mediaURL="",mediaType="";
+
+  let mediaURL="";
+  let mediaType="text";
 
   if(file){
-   if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
-    throw new Error("শুধু ছবি অথবা ভিডিও আপলোড করুন।");
+
+   if(
+    !file.type.startsWith("image/")&&
+    !file.type.startsWith("video/")
+   ){
+    throw new Error("শুধু ছবি অথবা ভিডিও দিন");
    }
+
    mediaURL=await uploadCloudinary(file);
-   mediaType=file.type.startsWith("video/")?"video":"image";
+
+   mediaType=file.type.startsWith("video/")
+    ?"video"
+    :"image";
   }
 
-  await addDoc(collection(db,"posts"),{
-   uid:currentUser.uid,
-   name:memberData.name || "Member",
-   photoURL:memberData.photoURL || "",
-   designation:memberData.designation || "Member",
-   text,
-   mediaURL,
-   mediaType,
-   createdAt:serverTimestamp()
-  });
+  await addDoc(
+   collection(db,"posts"),
+   {
+    authorUid:currentUser.uid,
+    authorName:memberData.name||"Member",
+    authorPhoto:memberData.photoURL||"",
+    text,
+    mediaURL,
+    mediaType,
+    createdAt:serverTimestamp()
+   }
+  );
 
   $("postText").value="";
   $("postFile").value="";
-  showMessage("postMessage","পোস্ট প্রকাশ হয়েছে!");
 
- }catch(error){
-  showMessage("postMessage","সমস্যা: "+error.message);
+  msg("postMessage","পোস্ট প্রকাশ হয়েছে!");
+
+  showView("feed");
+
+ }catch(e){
+
+  msg("postMessage","সমস্যা: "+e.message);
+
  }
+
  $("publishPost").disabled=false;
 });
 
-/* COMMUNITY FEED */
-function startFeed(){
- if(feedUnsubscribe)feedUnsubscribe();
- stopFeedListeners();
-
- const postsQuery=query(
-  collection(db,"posts"),
-  orderBy("createdAt","desc")
- );
-
- feedUnsubscribe=onSnapshot(postsQuery,snapshot=>{
-  stopFeedListeners();
-
-  const feed=$("postFeed");
-  feed.innerHTML="";
-
-  if(snapshot.empty){
-   feed.innerHTML='<div class="empty">এখনো কোনো পোস্ট নেই। প্রথম পোস্টটি করুন!</div>';
-   return;
-  }
-
-  snapshot.forEach(postSnap=>{
-   const p=postSnap.data();
-   const id=postSnap.id;
-
-   const card=document.createElement("article");
-   card.className="panel post";
-
-   const head=document.createElement("div");
-   head.className="post-head";
-
-   const avatar=document.createElement("img");
-   avatar.src=p.photoURL || "https://placehold.co/100x100/101729/00e5ff?text=7SB";
-   avatar.alt="Member";
-
-   const headText=document.createElement("div");
-   const name=document.createElement("div");
-   name.className="post-name";
-   name.textContent=p.name || "Member";
-
-   const time=document.createElement("div");
-   time.className="post-time";
-   time.textContent=p.createdAt?.toDate?.().toLocaleString("bn-BD") || "সদ্য প্রকাশিত";
-
-   headText.append(name,time);
-   head.append(avatar,headText);
-   card.append(head);
-
-   if(p.text){
-    const content=document.createElement("div");
-    content.className="post-content";
-    content.textContent=p.text;
-    card.append(content);
-   }
-
-   if(p.mediaURL){
-    if(p.mediaType==="video"){
-     const video=document.createElement("video");
-     video.src=p.mediaURL;
-     video.controls=true;
-     video.className="post-media";
-     card.append(video);
-    }else{
-     const image=document.createElement("img");
-     image.src=p.mediaURL;
-     image.className="post-media";
-     image.alt="Post image";
-     card.append(image);
-    }
-   }
-
-   const actions=document.createElement("div");
-   actions.className="post-actions";
-
-   const like=document.createElement("button");
-   like.textContent="💙 Like";
-   like.className=likedPosts.has(id)?"liked":"";
-
-   const comment=document.createElement("button");
-   comment.textContent="💬 Comment";
-
-   actions.append(like,comment);
-   card.append(actions);
-
-   const count=document.createElement("div");
-   count.className="like-count";
-   card.append(count);
-
-   const commentArea=document.createElement("div");
-   commentArea.className="comment-area";
-   commentArea.hidden=true;
-
-   const commentsList=document.createElement("div");
-
-   const commentInput=document.createElement("textarea");
-   commentInput.className="field";
-   commentInput.placeholder="মন্তব্য লিখুন...";
-   commentInput.rows=2;
-
-   const sendComment=document.createElement("button");
-   sendComment.className="primary";
-   sendComment.textContent="মন্তব্য প্রকাশ";
-
-   commentArea.append(commentsList,commentInput,sendComment);
-   card.append(commentArea);
-
-   /* CHECK EXISTING LIKE */
-   const likeRef=doc(db,"posts",id,"likes",currentUser.uid);
-
-   getDoc(likeRef).then(existing=>{
-    if(existing.exists())likedPosts.add(id);
-    else likedPosts.delete(id);
-    like.classList.toggle("liked",likedPosts.has(id));
-   }).catch(error=>console.error("Like check:",error));
-
-   /* LIKE BUTTON */
-   like.addEventListener("click",async()=>{
-    like.disabled=true;
-    try{
-     const existing=await getDoc(likeRef);
-
-     if(existing.exists()){
-      await deleteDoc(likeRef);
-      likedPosts.delete(id);
-     }else{
-      await setDoc(likeRef,{
-       uid:currentUser.uid,
-       name:memberData.name || "Member"
-      });
-      likedPosts.add(id);
-     }
-
-     like.classList.toggle("liked",likedPosts.has(id));
-    }catch(error){
-     alert("Like করা যায়নি: "+error.message);
-    }
-    like.disabled=false;
-   });
-
-   comment.addEventListener("click",()=>{
-    commentArea.hidden=!commentArea.hidden;
-   });
-
-   /* SEND COMMENT */
-   sendComment.addEventListener("click",async()=>{
-    const value=commentInput.value.trim();
-    if(!value)return;
-
-    sendComment.disabled=true;
-    try{
-     await addDoc(collection(db,"posts",id,"comments"),{
-      uid:currentUser.uid,
-      name:memberData.name || "Member",
-      text:value,
-      createdAt:serverTimestamp()
-     });
-     commentInput.value="";
-    }catch(error){
-     alert("মন্তব্য করা যায়নি: "+error.message);
-    }
-    sendComment.disabled=false;
-   });
-
-   /* COMMENT LISTENER */
-   const commentQuery=query(
-    collection(db,"posts",id,"comments"),
-    orderBy("createdAt","asc")
-   );
-
-   const commentUnsub=onSnapshot(commentQuery,comments=>{
-    commentsList.innerHTML="";
-
-    comments.forEach(c=>{
-     const data=c.data();
-
-     const item=document.createElement("div");
-     item.className="comment";
-
-     const author=document.createElement("div");
-     author.className="comment-name";
-     author.textContent=data.name || "Member";
-
-     const text=document.createElement("div");
-     text.className="comment-text";
-     text.textContent=data.text || "";
-
-     item.append(author,text);
-
-     const replyArea=document.createElement("div");
-     replyArea.className="reply-area";
-
-     const replyList=document.createElement("div");
-
-     const replyInput=document.createElement("input");
-     replyInput.className="field";
-     replyInput.placeholder="উত্তর লিখুন...";
-
-     const replyButton=document.createElement("button");
-     replyButton.className="secondary";
-     replyButton.textContent="Reply";
-
-     replyButton.addEventListener("click",async()=>{
-      const value=replyInput.value.trim();
-      if(!value)return;
-
-      replyButton.disabled=true;
-      try{
-       await addDoc(
-        collection(db,"posts",id,"comments",c.id,"replies"),
-        {
-         uid:currentUser.uid,
-         name:memberData.name || "Member",
-         text:value,
-         createdAt:serverTimestamp()
-        }
-       );
-       replyInput.value="";
-      }catch(error){
-       alert("উত্তর দেওয়া যায়নি: "+error.message);
-      }
-      replyButton.disabled=false;
-     });
-
-     replyArea.append(replyList,replyInput,replyButton);
-     item.append(replyArea);
-     commentsList.append(item);
-
-     /* REPLY LISTENER */
-     const repliesQuery=query(
-      collection(db,"posts",id,"comments",c.id,"replies"),
-      orderBy("createdAt","asc")
-     );
-
-     const replyUnsub=onSnapshot(repliesQuery,replies=>{
-      replyList.innerHTML="";
-
-      replies.forEach(r=>{
-       const rd=r.data();
-
-       const box=document.createElement("div");
-       box.className="reply";
-
-       const rn=document.createElement("div");
-       rn.className="reply-name";
-       rn.textContent=rd.name || "Member";
-
-       const rt=document.createElement("div");
-       rt.className="reply-text";
-       rt.textContent=rd.text || "";
-
-       box.append(rn,rt);
-       replyList.append(box);
-      });
-     },error=>console.error("Reply listener:",error));
-
-     feedListeners.push(replyUnsub);
-    });
-   },error=>console.error("Comment listener:",error));
-
-   feedListeners.push(commentUnsub);
-
-   /* LIKE COUNT */
-   const countUnsub=onSnapshot(
-    collection(db,"posts",id,"likes"),
-    likes=>{
-     count.textContent="💙 "+likes.size+" জন Like করেছেন";
-    },
-    error=>console.error("Like count:",error)
-   );
-   feedListeners.push(countUnsub);
-
-   /* DELETE OWN POST */
-   if(p.uid===currentUser.uid){
-    const del=document.createElement("button");
-    del.className="danger";
-    del.style.marginTop="12px";
-    del.textContent="🗑 Delete My Post";
-
-    del.addEventListener("click",async()=>{
-     if(!confirm("এই পোস্টটি মুছে ফেলতে চাও?"))return;
-
-     del.disabled=true;
-     try{
-      await deleteDoc(doc(db,"posts",id));
-     }catch(error){
-      alert("পোস্ট মুছতে সমস্যা: "+error.message);
-      del.disabled=false;
-     }
-    });
-
-    card.append(del);
-   }
-
-   feed.append(card);
-  });
-
- },error=>{
-  console.error("Feed error:",error);
-  $("postFeed").innerHTML=
-   '<div class="empty">পোস্ট লোড করা যায়নি: '+error.message+'</div>';
- });
-}
-
 /* LOGOUT */
-$("logoutBtn").addEventListener("click",async()=>{
+async function logout(){
+
  if(!confirm("লগআউট করতে চাও?"))return;
+
  try{
   await signOut(auth);
   location.replace("login.html");
- }catch(error){
-  alert("Logout করা যায়নি: "+error.message);
+ }catch(e){
+  alert("Logout করা যায়নি: "+e.message);
  }
-});
+}
+
+$("logoutBtn").addEventListener("click",logout);
+$("logoutBtn2").addEventListener("click",logout);
 
 </script>
 </body>
