@@ -23,7 +23,7 @@ h3{color:#ff3030}
 .value{font-size:16px;margin-top:6px;overflow-wrap:anywhere}
 .status{color:#20d66b}
 .designation{color:#ffbd35}
-button{width:100%;padding:13px;background:#e50914;color:white;border:0;border-radius:8px;font-size:16px;margin-top:12px;cursor:pointer}
+button{width:100%;padding:13px;background:#e50914;color:white;border:0;border-radius:8px;font-size:15px;margin-top:12px;cursor:pointer}
 button:disabled{opacity:.5}
 input[type=file]{width:100%;padding:12px;background:#242424;color:white;border-radius:8px;margin-top:12px}
 textarea{width:100%;min-height:100px;padding:13px;background:#242424;color:white;border:1px solid #444;border-radius:8px;margin-top:12px;font-size:15px;resize:vertical}
@@ -39,6 +39,16 @@ textarea{width:100%;min-height:100px;padding:13px;background:#242424;color:white
 .post-media{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-top:10px;background:#111}
 .delete-post{background:#555;color:#ff7777;font-size:13px;padding:9px}
 .empty{text-align:center;color:#aaa;padding:20px}
+.post-actions{display:flex;gap:10px;margin-top:12px}
+.post-actions button{width:50%;margin:0;background:#333;border:1px solid #555}
+.post-actions button.liked{background:#64151b;border-color:#e50914;color:#ff7777}
+.like-count{color:#ffbd35;font-size:13px;margin-top:8px}
+.comment-area{margin-top:15px;border-top:1px solid #444;padding-top:12px}
+.comment{background:#191919;padding:10px;border-radius:8px;margin-top:8px}
+.comment-name{color:#ffbd35;font-size:13px;font-weight:bold}
+.comment-text{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:5px}
+.comment-date{font-size:11px;color:#888;margin-top:5px}
+.comment-input{min-height:65px}
 </style>
 </head>
 
@@ -127,7 +137,7 @@ import {
 import {
  getFirestore,doc,getDoc,updateDoc,
  collection,addDoc,query,orderBy,onSnapshot,
- deleteDoc,serverTimestamp
+ deleteDoc,serverTimestamp,setDoc
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -151,6 +161,7 @@ let currentUser=null;
 let memberData=null;
 let selectedFile=null;
 let unsubscribePosts=null;
+let postSubUnsubs=[];
 
 const photo=document.getElementById("photo");
 const photoFile=document.getElementById("photoFile");
@@ -163,14 +174,12 @@ const publishPost=document.getElementById("publishPost");
 const postMessage=document.getElementById("postMessage");
 const postFeed=document.getElementById("postFeed");
 
-// Local login session চালু রাখা
 try{
  await setPersistence(auth,browserLocalPersistence);
 }catch(error){
  console.error("Session persistence error:",error);
 }
 
-// সদস্যের তথ্য লোড
 onAuthStateChanged(auth,async(user)=>{
 
  if(!user){
@@ -212,7 +221,6 @@ onAuthStateChanged(auth,async(user)=>{
  }
 });
 
-// প্রোফাইল ছবি নির্বাচন
 photoFile.addEventListener("change",(event)=>{
 
  selectedFile=event.target.files[0];
@@ -238,12 +246,10 @@ photoFile.addEventListener("change",(event)=>{
 
  photo.src=URL.createObjectURL(selectedFile);
  photo.style.display="inline-block";
-
  uploadMessage.textContent="ছবি নির্বাচন হয়েছে।";
  uploadButton.disabled=false;
 });
 
-// প্রোফাইল ছবি আপলোড
 uploadButton.addEventListener("click",async()=>{
 
  if(!currentUser || !selectedFile) return;
@@ -293,7 +299,6 @@ uploadButton.addEventListener("click",async()=>{
  }
 });
 
-// Cloudinary-তে পোস্টের ছবি বা ভিডিও আপলোড
 async function uploadPostMedia(file){
 
  const isVideo=file.type.startsWith("video/");
@@ -320,7 +325,6 @@ async function uploadPostMedia(file){
  };
 }
 
-// পোস্ট প্রকাশ
 publishPost.addEventListener("click",async()=>{
 
  if(!currentUser || !memberData) return;
@@ -357,7 +361,6 @@ publishPost.addEventListener("click",async()=>{
  postMessage.textContent="পোস্ট তৈরি হচ্ছে... অপেক্ষা করো।";
 
  try{
-
   let mediaURL="";
   let mediaType="text";
 
@@ -389,7 +392,6 @@ publishPost.addEventListener("click",async()=>{
  }
 });
 
-// তারিখ দেখানো
 function formatDate(timestamp){
 
  if(!timestamp || !timestamp.toDate) return "এইমাত্র";
@@ -400,7 +402,6 @@ function formatDate(timestamp){
  });
 }
 
-// পোস্টগুলো লোড
 function loadPosts(){
 
  if(unsubscribePosts) unsubscribePosts();
@@ -412,6 +413,9 @@ function loadPosts(){
 
  unsubscribePosts=onSnapshot(q,(snapshot)=>{
 
+  postSubUnsubs.forEach(unsub=>unsub());
+  postSubUnsubs=[];
+
   postFeed.innerHTML="";
 
   if(snapshot.empty){
@@ -422,6 +426,7 @@ function loadPosts(){
   snapshot.forEach((postDoc)=>{
 
    const data=postDoc.data();
+   const postId=postDoc.id;
 
    const post=document.createElement("div");
    post.className="post";
@@ -484,19 +489,168 @@ function loadPosts(){
     post.append(media);
    }
 
+   // Like ও Comment বাটন
+   const actions=document.createElement("div");
+   actions.className="post-actions";
+
+   const likeButton=document.createElement("button");
+   likeButton.textContent="❤️ Like";
+
+   const commentButton=document.createElement("button");
+   commentButton.textContent="💬 Comment";
+
+   actions.append(likeButton,commentButton);
+   post.append(actions);
+
+   const likeCount=document.createElement("div");
+   likeCount.className="like-count";
+   likeCount.textContent="লাইক লোড হচ্ছে...";
+   post.append(likeCount);
+
+   // Like সংখ্যা ও নিজের Like অবস্থা
+   const likesRef=collection(db,"posts",postId,"likes");
+   const myLikeRef=doc(db,"posts",postId,"likes",currentUser.uid);
+
+   const likeUnsub=onSnapshot(likesRef,(likesSnap)=>{
+    likeCount.textContent=likesSnap.size+" জন Like দিয়েছেন";
+   },(error)=>{
+    likeCount.textContent="Like লোড হয়নি: "+error.message;
+   });
+
+   const myLikeUnsub=onSnapshot(myLikeRef,(likeSnap)=>{
+    if(likeSnap.exists()){
+     likeButton.classList.add("liked");
+     likeButton.textContent="❤️ Liked";
+    }else{
+     likeButton.classList.remove("liked");
+     likeButton.textContent="❤️ Like";
+    }
+   });
+
+   postSubUnsubs.push(likeUnsub,myLikeUnsub);
+
+   likeButton.addEventListener("click",async()=>{
+    likeButton.disabled=true;
+
+    try{
+     const existing=await getDoc(myLikeRef);
+
+     if(existing.exists()){
+      await deleteDoc(myLikeRef);
+     }else{
+      await setDoc(myLikeRef,{
+       uid:currentUser.uid,
+       name:memberData.name || "সদস্য",
+       createdAt:serverTimestamp()
+      });
+     }
+    }catch(error){
+     alert("Like দিতে সমস্যা হয়েছে: "+error.message);
+    }finally{
+     likeButton.disabled=false;
+    }
+   });
+
+   // মন্তব্যের জায়গা
+   const commentArea=document.createElement("div");
+   commentArea.className="comment-area";
+   commentArea.style.display="none";
+
+   const commentList=document.createElement("div");
+   commentList.className="comment-list";
+
+   const commentInput=document.createElement("textarea");
+   commentInput.className="comment-input";
+   commentInput.maxLength=500;
+   commentInput.placeholder="আপনার মন্তব্য লিখুন...";
+
+   const sendComment=document.createElement("button");
+   sendComment.textContent="মন্তব্য প্রকাশ করুন";
+
+   commentArea.append(commentList,commentInput,sendComment);
+   post.append(commentArea);
+
+   const commentsRef=collection(db,"posts",postId,"comments");
+   const commentsQuery=query(commentsRef,orderBy("createdAt","asc"));
+
+   const commentsUnsub=onSnapshot(commentsQuery,(commentsSnap)=>{
+    commentList.innerHTML="";
+
+    if(commentsSnap.empty){
+     commentList.textContent="এখনো কোনো মন্তব্য নেই।";
+     return;
+    }
+
+    commentsSnap.forEach((commentDoc)=>{
+     const commentData=commentDoc.data();
+
+     const item=document.createElement("div");
+     item.className="comment";
+
+     const commentName=document.createElement("div");
+     commentName.className="comment-name";
+     commentName.textContent=commentData.authorName || "সদস্য";
+
+     const commentText=document.createElement("div");
+     commentText.className="comment-text";
+     commentText.textContent=commentData.text || "";
+
+     const commentDate=document.createElement("div");
+     commentDate.className="comment-date";
+     commentDate.textContent=formatDate(commentData.createdAt);
+
+     item.append(commentName,commentText,commentDate);
+     commentList.append(item);
+    });
+   },(error)=>{
+    commentList.textContent="মন্তব্য লোড হয়নি: "+error.message;
+   });
+
+   postSubUnsubs.push(commentsUnsub);
+
+   commentButton.addEventListener("click",()=>{
+    commentArea.style.display=
+     commentArea.style.display==="none"?"block":"none";
+   });
+
+   sendComment.addEventListener("click",async()=>{
+    const value=commentInput.value.trim();
+
+    if(!value){
+     alert("মন্তব্য লিখুন।");
+     return;
+    }
+
+    sendComment.disabled=true;
+
+    try{
+     await addDoc(commentsRef,{
+      authorUid:currentUser.uid,
+      authorName:memberData.name || "সদস্য",
+      text:value,
+      createdAt:serverTimestamp()
+     });
+
+     commentInput.value="";
+    }catch(error){
+     alert("মন্তব্য প্রকাশ হয়নি: "+error.message);
+    }finally{
+     sendComment.disabled=false;
+    }
+   });
+
    if(data.authorUid===currentUser.uid){
     const deleteButton=document.createElement("button");
     deleteButton.className="delete-post";
     deleteButton.textContent="পোস্ট মুছুন";
 
     deleteButton.addEventListener("click",async()=>{
-
      if(!confirm("আপনি কি এই পোস্টটি মুছতে চান?")) return;
 
      deleteButton.disabled=true;
 
      try{
-      await deleteDoc(doc(db,"posts",postDoc.id));
+      await deleteDoc(doc(db,"posts",postId));
      }catch(error){
       console.error(error);
       alert("পোস্ট মুছতে সমস্যা হয়েছে: "+error.message);
@@ -516,10 +670,10 @@ function loadPosts(){
  });
 }
 
-// লগআউট
 document.getElementById("logout").onclick=async()=>{
 
  if(unsubscribePosts) unsubscribePosts();
+ postSubUnsubs.forEach(unsub=>unsub());
 
  try{
   await signOut(auth);
