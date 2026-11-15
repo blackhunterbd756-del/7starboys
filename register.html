@@ -4,53 +4,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>7STARBOYS Registration</title>
+<meta name="theme-color" content="#070914">
+<title>7STARBOYS | Join Community</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;padding:20px;background:#101010;color:white;font-family:Arial}
-.box{max-width:430px;margin:35px auto;background:#1d1d1d;padding:24px;border-radius:12px;border:1px solid #444}
-h1{text-align:center;color:#f11}
-p{text-align:center;color:#aaa}
-input{width:100%;padding:13px;margin:10px 0;background:#101010;color:white;border:1px solid #555;border-radius:6px}
-button{width:100%;padding:14px;background:#e00000;color:white;border:0;border-radius:7px;font-size:17px;font-weight:bold}
-button:disabled{opacity:.6}
-#message{color:#ff5555;overflow-wrap:anywhere}
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+ --bg:#070914;
+ --card:rgba(15,23,42,.82);
+ --cyan:#00e5ff;
+ --purple:#9b4dff;
+ --text:#f4f7ff;
+ --muted:#9ba8c7;
+}
+
+body{
+ min-height:100vh;
+ background:
+ radial-gradient(circle at 15% 20%,#12244b 0,transparent 35%),
+ radial-gradient(circle at 85% 80%,#30124b 0,transparent 35%),
+ var(--bg);
+ color:var(--text);
+ font-family:Arial,sans-serif;
+ padding:25px;
+ overflow-x:hidden;
+}
+
+.orb{
+ position:fixed;
+ width:250px;height:250px;
+ border-radius:50%;
+ filter:blur(90px);
+ opacity:.22;
+ pointer-events:none;
+ animation:float 8s infinite alternate;
+}
+.orb.one{background:var(--cyan);top:5%;left:-100px}
+.orb.two{background:var(--purple);bottom:0;right:-100px;animation-delay:2s}
+
+@keyframes float{
+ to{transform:translate(50px,45px) scale(1.2)}
+}
+
+.topbar{
+ max-width:1100px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.logo{
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:2px;
+ color:white;
+ text-shadow:0 0 15px var(--cyan);
+}
+.logo span{color:var(--cyan)}
+
+.topbar a{
+ color:var(--cyan);
+ text-decoration:none;
+ border:1px solid #00e5ff66;
+ padding:10px 17px;
+ border-radius:25px;
+}
+
+.main{
+ max-width:1000px;
+ margin:45px auto;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:35px;
+ align-items:center;
+}
+
+.visual{text-align:center;padding:20px}
+.visual h2{
+ font-size:35px;
+ line-height:1.25;
+ margin:20px 0 12px;
+}
+.visual h2 span{color:var(--cyan)}
+.visual p{color:var(--muted);line-height:1.8}
+
+.character{
+ width:220px;height:220px;
+ margin:auto;
+ position:relative;
+ border:1px solid #00e5ff55;
+ border-radius:50%;
+ background:radial-gradient(circle,#142b46,#090d1b 70%);
+ box-shadow:0 0 35px #00e5ff33,inset 0 0 35px #9b4dff22;
+ display:grid;
+ place-items:center;
+ animation:float 4s ease-in-out infinite alternate;
+}
+.character svg{width:155px;height:155px}
+
+.ring{
+ position:absolute;inset:-13px;
+ border:2px dashed #00e5ff88;
+ border-radius:50%;
+ animation:spin 15s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.card{
+ background:var(--card);
+ border:1px solid #ffffff20;
+ border-radius:22px;
+ padding:30px;
+ backdrop-filter:blur(18px);
+ box-shadow:0 15px 60px #0008,0 0 25px #00e5ff13;
+ animation:appear .8s ease;
+}
+@keyframes appear{
+ from{opacity:0;transform:translateY(25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.card h1{
+ text-align:center;
+ font-size:27px;
+ margin-bottom:8px;
+}
+.card h1 span{color:var(--cyan)}
+.subtitle{
+ text-align:center;
+ color:var(--muted);
+ font-size:14px;
+ margin-bottom:25px;
+}
+
+label{
+ display:block;
+ color:#c9d4ef;
+ font-size:13px;
+ margin:13px 0 7px;
+}
+
+input{
+ width:100%;
+ padding:14px;
+ border-radius:10px;
+ border:1px solid #ffffff25;
+ outline:none;
+ background:#080d1b;
+ color:white;
+ font-size:15px;
+ transition:.3s;
+}
+input:focus{
+ border-color:var(--cyan);
+ box-shadow:0 0 14px #00e5ff35;
+}
+input::placeholder{color:#71809f}
+input[type="date"]{color-scheme:dark}
+
+button{
+ width:100%;
+ padding:15px;
+ margin-top:22px;
+ border:0;
+ border-radius:10px;
+ color:#06101c;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+ background:linear-gradient(100deg,var(--cyan),#83f5ff);
+ box-shadow:0 0 22px #00e5ff45;
+ transition:.3s;
+}
+button:hover{
+ transform:translateY(-2px);
+ box-shadow:0 0 30px #00e5ff88;
+}
+button:disabled{opacity:.55;cursor:not-allowed}
+
+#message{
+ text-align:center;
+ margin-top:16px;
+ font-size:14px;
+ line-height:1.6;
+ overflow-wrap:anywhere;
+}
+
+.bottom{
+ text-align:center;
+ margin-top:20px;
+ color:var(--muted);
+ font-size:14px;
+}
+.bottom a{color:var(--cyan);text-decoration:none}
+
+.footer{
+ text-align:center;
+ color:#65718d;
+ font-size:12px;
+ margin-top:30px;
+}
+
+@media(max-width:750px){
+ body{padding:18px}
+ .main{grid-template-columns:1fr;margin:30px auto;gap:20px}
+ .visual{padding:5px}
+ .visual h2{font-size:27px}
+ .character{width:165px;height:165px}
+ .character svg{width:115px;height:115px}
+ .card{padding:23px}
+}
 </style>
 </head>
+
 <body>
-<div class="box">
-<h1>7STARBOYS</h1>
-<p>সদস্য হওয়ার জন্য রেজিস্ট্রেশন করুন</p>
+<div class="orb one"></div>
+<div class="orb two"></div>
 
-<form id="registerForm">
-<input id="name" placeholder="আপনার পুরো নাম" required>
-<input id="email" type="email" placeholder="আপনার Gmail" required>
-<label>জন্মতারিখ</label>
-<input id="birthDate" type="date" required>
-<input id="password" type="password" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" minlength="6" required>
-<button id="submitBtn" type="submit">রেজিস্ট্রেশন করুন</button>
-</form>
+<header class="topbar">
+ <div class="logo">7<span>STAR</span>BOYS</div>
+ <a href="index.html">হোম পেজ</a>
+</header>
 
-<p id="message"></p>
-<p>আগে অ্যাকাউন্ট আছে? <a href="login.html" style="color:red">লগইন করুন</a></p>
-</div>
+<main class="main">
+
+<section class="visual">
+ <div class="character">
+  <div class="ring"></div>
+  <svg viewBox="0 0 180 180" fill="none">
+   <path d="M90 18 L145 48 V108 Q145 145 90 164 Q35 145 35 108 V48 Z"
+    stroke="#00e5ff" stroke-width="3"/>
+   <path d="M55 75 Q90 35 125 75 L119 118 Q90 145 61 118 Z"
+    fill="#142b46" stroke="#9b4dff" stroke-width="3"/>
+   <path d="M65 88 L82 88 L78 100 L65 100 Z M98 88 L115 88 L115 100 L102 100 Z"
+    fill="#00e5ff"/>
+   <path d="M76 113 Q90 120 104 113" stroke="#00e5ff" stroke-width="3" stroke-linecap="round"/>
+   <path d="M90 18 V5 M35 48 L19 38 M145 48 L161 38"
+    stroke="#9b4dff" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+ </div>
+
+ <h2>JOIN THE <span>FUTURE</span></h2>
+ <p>
+  একতা, সম্মান ও বন্ধুত্বের বন্ধনে
+  আমাদের 7STARBOYS কমিউনিটিতে
+  তোমাকে স্বাগতম।
+ </p>
+</section>
+
+<section class="card">
+ <h1>CREATE YOUR <span>ACCOUNT</span></h1>
+ <p class="subtitle">7STARBOYS Official Member Registration</p>
+
+ <form id="registerForm">
+
+  <label>আপনার পুরো নাম</label>
+  <input id="name" type="text"
+   placeholder="আপনার নাম লিখুন" required>
+
+  <label>আপনার Gmail</label>
+  <input id="email" type="email"
+   placeholder="example@gmail.com" required>
+
+  <label>জন্মতারিখ</label>
+  <input id="birthDate" type="date" required>
+
+  <label>পাসওয়ার্ড</label>
+  <input id="password" type="password"
+   placeholder="কমপক্ষে ৬ অক্ষর" minlength="6" required>
+
+  <button id="submitBtn" type="submit">
+   CREATE ACCOUNT
+  </button>
+ </form>
+
+ <p id="message" aria-live="polite"></p>
+
+ <div class="bottom">
+  আগে অ্যাকাউন্ট আছে?
+  <a href="login.html">লগইন করুন</a>
+ </div>
+</section>
+
+</main>
+
+<footer class="footer">
+ © 2026 7STARBOYS | OFFICIAL COMMUNITY
+</footer>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
  getAuth,
  createUserWithEmailAndPassword,
  setPersistence,
  browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+} from
+"https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
 import {
  getFirestore,
  doc,
  setDoc,
  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
  apiKey: "AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
@@ -72,7 +333,10 @@ const button = document.getElementById("submitBtn");
 
 form.addEventListener("submit", async (e) => {
  e.preventDefault();
+
  button.disabled = true;
+ button.textContent = "CREATING ACCOUNT...";
+ message.style.color = "#00e5ff";
  message.textContent = "অ্যাকাউন্ট তৈরি হচ্ছে...";
 
  const name = document.getElementById("name").value.trim();
@@ -95,17 +359,34 @@ form.addEventListener("submit", async (e) => {
    createdAt: serverTimestamp()
   });
 
+  message.style.color = "#00e5ff";
   message.textContent =
    "রেজিস্ট্রেশন সফল! অ্যাডমিন অনুমোদনের জন্য অপেক্ষা করুন।";
+
   form.reset();
 
  } catch (error) {
   console.error(error);
-  message.textContent = "সমস্যা: " + error.message;
+
+  message.style.color = "#ff647c";
+
+  const errors = {
+   "auth/email-already-in-use": "এই ইমেইল দিয়ে আগে অ্যাকাউন্ট খোলা হয়েছে।",
+   "auth/invalid-email": "সঠিক ইমেইল ঠিকানা লিখুন।",
+   "auth/weak-password": "আরও শক্তিশালী পাসওয়ার্ড দিন।",
+   "auth/network-request-failed": "ইন্টারনেট সংযোগ পরীক্ষা করুন।",
+   "permission-denied": "ডাটাবেজ অনুমতি পরীক্ষা করতে হবে।"
+  };
+
+  message.textContent =
+   errors[error.code] || "সমস্যা হয়েছে: " + error.message;
+
  } finally {
   button.disabled = false;
+  button.textContent = "CREATE ACCOUNT";
  }
 });
 </script>
+
 </body>
 </html>
