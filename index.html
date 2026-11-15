@@ -1,63 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>7STARBOYS</title>
+<title>7STARBOYS | Official Community</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
-header{background:#171717;padding:25px 15px;text-align:center;border-bottom:2px solid #e50914}
-h1{margin:0;color:#ff2525;font-size:30px}
-header p{color:#aaa;margin-bottom:0}
-main{max-width:850px;margin:auto;padding:20px}
-.hero{text-align:center;padding:45px 15px;background:linear-gradient(145deg,#240000,#111);border:1px solid #7c1111;border-radius:15px}
-.hero h2{font-size:26px}
-.hero p{color:#ccc;line-height:1.8}
-.buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
-a{display:block;text-align:center;text-decoration:none;padding:14px 8px;background:#e50914;color:white;border-radius:8px;font-weight:bold}
-a.secondary{background:#292929;border:1px solid #555}
-.card{background:#171717;border:1px solid #333;border-radius:12px;padding:20px;margin-top:18px}
-.card h3{color:#ff3038}
-.card p{color:#bbb;line-height:1.8}
-footer{text-align:center;color:#888;padding:25px}
-@media(max-width:450px){.buttons{grid-template-columns:1fr}}
+:root{
+  --bg:#070914;
+  --card:#101729;
+  --cyan:#00e5ff;
+  --purple:#9b4dff;
+  --text:#f4f7ff;
+  --muted:#aab5ca;
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+header{
+  padding:22px 16px;
+  text-align:center;
+  border-bottom:1px solid #173c54;
+  background:#090e1d;
+  box-shadow:0 5px 25px #00e5ff12;
+}
+.logo{
+  margin:0;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:var(--cyan);
+  text-shadow:0 0 15px #00e5ff99;
+}
+header p{color:var(--muted);margin:9px 0 0}
+main{max-width:950px;margin:auto;padding:22px 16px}
+.hero{
+  text-align:center;
+  padding:65px 20px;
+  border:1px solid #24516b;
+  border-radius:20px;
+  background:
+  radial-gradient(circle at 15% 15%,#173a59 0,transparent 40%),
+  radial-gradient(circle at 85% 85%,#32175b 0,transparent 40%),
+  #0d1426;
+  box-shadow:0 0 30px #00e5ff12;
+}
+.tag{
+  display:inline-block;
+  padding:8px 15px;
+  border:1px solid var(--cyan);
+  border-radius:30px;
+  color:var(--cyan);
+  font-size:12px;
+  letter-spacing:2px;
+}
+.hero h2{
+  font-size:clamp(28px,6vw,43px);
+  margin:22px 0 12px;
+}
+.hero h2 span{
+  color:var(--cyan);
+  text-shadow:0 0 18px #00e5ff88;
+}
+.hero p{
+  max-width:600px;
+  margin:0 auto;
+  color:var(--muted);
+  line-height:1.9;
+}
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  max-width:560px;
+  margin:30px auto 0;
+}
+a{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  padding:15px 10px;
+  border-radius:10px;
+  color:#061018;
+  background:var(--cyan);
+  font-weight:bold;
+  box-shadow:0 0 16px #00e5ff30;
+  transition:.25s;
+}
+a:hover{transform:translateY(-3px);box-shadow:0 0 25px #00e5ff70}
+a.secondary{
+  color:#fff;
+  background:#151e33;
+  border:1px solid #7045a8;
+  box-shadow:0 0 14px #9b4dff18;
+}
+a.secondary:hover{border-color:var(--purple)}
+.section-title{
+  text-align:center;
+  margin:38px 0 18px;
+  color:var(--cyan);
+  letter-spacing:1px;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+.card{
+  padding:23px;
+  border-radius:15px;
+  background:var(--card);
+  border:1px solid #26334b;
+  transition:.25s;
+}
+.card:hover{
+  border-color:var(--cyan);
+  box-shadow:0 0 20px #00e5ff15;
+}
+.card h3{color:var(--cyan);margin-top:0}
+.card p{color:var(--muted);line-height:1.8;margin-bottom:0}
+footer{
+  margin-top:35px;
+  padding:25px 15px;
+  text-align:center;
+  color:#8491a9;
+  border-top:1px solid #1c2b42;
+}
+footer span{color:var(--cyan)}
+@media(max-width:520px){
+  .buttons,.cards{grid-template-columns:1fr}
+  .hero{padding:45px 16px}
+}
 </style>
 </head>
 <body>
+
 <header>
-<h1>7STARBOYS</h1>
-<p>আমাদের সংগঠন, আমাদের পরিচয়</p>
+  <h1 class="logo">7STARBOYS</h1>
+  <p>আমাদের সংগঠন, আমাদের পরিচয়</p>
 </header>
 
 <main>
-<section class="hero">
-<h2>স্বাগতম 7STARBOYS-এ</h2>
-<p>একতা, সম্মান ও বন্ধুত্বের বন্ধনে
-আমাদের সকল সদস্য একসাথে।</p>
-<div class="buttons">
-<a href="login.html">লগইন</a>
-<a href="register.html">নতুন সদস্য নিবন্ধন</a>
-<a class="secondary" href="members.html">সদস্য তালিকা</a>
-<a class="secondary" href="admin-panel.html">Admin Panel</a>
-</div>
-</section>
+  <section class="hero">
+    <div class="tag">OFFICIAL COMMUNITY</div>
+    <h2>WELCOME TO <span>7STARBOYS</span></h2>
+    <p>
+      একতা, সম্মান ও বন্ধুত্বের বন্ধনে
+      আমাদের সকল সদস্য একসাথে।
+      আমাদের কমিউনিটিতে স্বাগতম।
+    </p>
 
-<section class="card">
-<h3>আমাদের সম্পর্কে</h3>
-<p>7STARBOYS একটি সদস্যভিত্তিক কমিউনিটি।
-এখানে সদস্যদের পরিচয়, পদবি, ছবি এবং
-সবার পোস্ট দেখা যাবে।</p>
-</section>
+    <div class="buttons">
+      <a href="login.html">লগইন করুন</a>
+      <a href="register.html">নতুন সদস্য নিবন্ধন</a>
+      <a class="secondary" href="members.html">সদস্য তালিকা</a>
+      <a class="secondary" href="admin-panel.html">Admin Panel</a>
+    </div>
+  </section>
 
-<section class="card">
-<h3>আমাদের লক্ষ্য</h3>
-<p>সবার মধ্যে ঐক্য, সহযোগিতা ও ভ্রাতৃত্ব
-বজায় রাখা।</p>
-</section>
+  <h2 class="section-title">ABOUT OUR COMMUNITY</h2>
+
+  <section class="cards">
+    <div class="card">
+      <h3>আমাদের সম্পর্কে</h3>
+      <p>
+        7STARBOYS একটি সদস্যভিত্তিক কমিউনিটি।
+        এখানে সদস্যদের পরিচয়, পদবি, ছবি
+        এবং কমিউনিটির কার্যক্রম তুলে ধরা হবে।
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>আমাদের লক্ষ্য</h3>
+      <p>
+        সবার মধ্যে ঐক্য, সহযোগিতা,
+        সম্মান ও ভ্রাতৃত্ব বজায় রাখা।
+        একসাথে এগিয়ে যাওয়াই আমাদের লক্ষ্য।
+      </p>
+    </div>
+  </section>
 </main>
 
-<footer>7STARBOYS © 2026</footer>
+<footer>
+  <span>7STARBOYS</span> © 2026 | All Rights Reserved
+</footer>
+
 </body>
 </html>
