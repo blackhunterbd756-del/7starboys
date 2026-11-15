@@ -6,559 +6,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070914">
 <title>7STARBOYS | Member Login</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
-:root{
- --bg:#070914;
- --cyan:#00e5ff;
- --purple:#9b4dff;
- --text:#f4f7ff;
- --muted:#aab5ca;
-}
-
-body{
- min-height:100vh;
- background:
- radial-gradient(circle at 15% 30%,#073b5740,transparent 35%),
- radial-gradient(circle at 85% 80%,#571c7840,transparent 35%),
- var(--bg);
- color:var(--text);
- font-family:Arial,sans-serif;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:25px;
- overflow-x:hidden;
-}
-
-.page{
- width:100%;
- max-width:1050px;
- display:grid;
- grid-template-columns:1fr 420px;
- align-items:center;
- gap:45px;
-}
-
-/* LEFT ANIMATION */
-
-.scene{
- position:relative;
- min-height:460px;
- display:flex;
- align-items:center;
- justify-content:center;
- overflow:hidden;
-}
-
-.scene-title{
- position:absolute;
- top:15px;
- left:10px;
- color:var(--cyan);
- letter-spacing:4px;
- font-size:13px;
-}
-
-.character{
- width:100%;
- max-width:420px;
- position:relative;
- z-index:2;
- animation:characterIn 1.2s ease both, float 4s ease-in-out infinite 1.2s;
- filter:drop-shadow(0 0 20px #00e5ff40);
-}
-
-@keyframes characterIn{
- from{opacity:0;transform:translateX(-70px)}
- to{opacity:1;transform:translateX(0)}
-}
-
-@keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-12px)}
-}
-
-.energy{
- position:absolute;
- width:0;
- height:5px;
- right:3%;
- top:48%;
- border-radius:20px;
- background:linear-gradient(90deg,#fff,#00e5ff,#9b4dff,transparent);
- box-shadow:0 0 12px #00e5ff,0 0 30px #00e5ff;
- animation:fire 2.7s infinite;
- z-index:3;
-}
-
-.energy:after{
- content:"";
- position:absolute;
- width:20px;
- height:20px;
- right:0;
- top:-8px;
- border-radius:50%;
- background:#fff;
- box-shadow:0 0 20px 8px #00e5ff;
-}
-
-@keyframes fire{
- 0%,20%,100%{width:0;opacity:0}
- 22%{width:0;opacity:1}
- 30%{width:65%;opacity:1}
- 37%{width:0;opacity:0}
- 65%{width:0;opacity:0}
- 68%{width:55%;opacity:1}
- 74%{width:0;opacity:0}
-}
-
-.flash{
- position:absolute;
- right:5%;
- top:42%;
- width:55px;
- height:55px;
- border-radius:50%;
- background:#00e5ff;
- filter:blur(30px);
- opacity:0;
- animation:flash 2.7s infinite;
-}
-
-@keyframes flash{
- 0%,20%,100%{opacity:0}
- 25%{opacity:.9}
- 38%{opacity:0}
- 68%{opacity:.7}
- 76%{opacity:0}
-}
-
-.scene-glow{
- position:absolute;
- width:260px;
- height:260px;
- border-radius:50%;
- background:#00e5ff;
- filter:blur(100px);
- opacity:.12;
-}
-
-/* LOGIN CARD */
-
-.login-card{
- position:relative;
- padding:35px 28px;
- border:1px solid #24516b;
- border-radius:22px;
- background:linear-gradient(145deg,#121c32ee,#0b1020f5);
- box-shadow:0 0 40px #00e5ff12,0 20px 70px #0008;
- backdrop-filter:blur(18px);
- animation:cardIn 1s ease both;
-}
-
-@keyframes cardIn{
- from{opacity:0;transform:translateY(35px)}
- to{opacity:1;transform:translateY(0)}
-}
-
-.logo{
- text-align:center;
- color:var(--cyan);
- font-size:30px;
- font-weight:1000;
- letter-spacing:3px;
- text-shadow:0 0 18px #00e5ff90;
-}
-
-.subtitle{
- text-align:center;
- color:var(--muted);
- margin-top:10px;
- font-size:14px;
-}
-
-.line{
- width:65px;
- height:3px;
- margin:20px auto 28px;
- border-radius:5px;
- background:linear-gradient(90deg,var(--cyan),var(--purple));
- box-shadow:0 0 12px var(--cyan);
-}
-
-label{
- display:block;
- font-size:13px;
- color:#cbd5e8;
- margin:16px 0 8px;
-}
-
-.input-wrap{position:relative}
-
-input{
- width:100%;
- padding:15px;
- border:1px solid #34435c;
- border-radius:10px;
- outline:none;
- background:#080e1c;
- color:white;
- font-size:15px;
- transition:.3s;
-}
-
-input:focus{
- border-color:var(--cyan);
- box-shadow:0 0 15px #00e5ff30;
-}
-
+:root{--bg:#070914;--cyan:#00e5ff;--purple:#9b4dff;--text:#f4f7ff;--muted:#aab5ca}
+body{min-height:100vh;background:radial-gradient(circle at 15% 30%,#073b5740,transparent 35%),radial-gradient(circle at 85% 80%,#571c7840,transparent 35%),var(--bg);color:var(--text);font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;padding:25px;overflow-x:hidden}
+.page{width:100%;max-width:1050px;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:45px}
+.scene{position:relative;min-height:460px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.scene-title{position:absolute;top:15px;left:10px;color:var(--cyan);letter-spacing:4px;font-size:13px}
+.character{width:100%;max-width:420px;position:relative;z-index:2;animation:characterIn 1.2s ease both,float 4s ease-in-out infinite 1.2s;filter:drop-shadow(0 0 20px #00e5ff40)}
+@keyframes characterIn{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.energy{position:absolute;width:0;height:5px;right:3%;top:48%;border-radius:20px;background:linear-gradient(90deg,#fff,#00e5ff,#9b4dff,transparent);box-shadow:0 0 12px #00e5ff,0 0 30px #00e5ff;animation:fire 2.7s infinite;z-index:3}
+.energy:after{content:"";position:absolute;width:20px;height:20px;right:0;top:-8px;border-radius:50%;background:#fff;box-shadow:0 0 20px 8px #00e5ff}
+@keyframes fire{0%,20%,100%{width:0;opacity:0}22%{width:0;opacity:1}30%{width:65%;opacity:1}37%{width:0;opacity:0}65%{width:0;opacity:0}68%{width:55%;opacity:1}74%{width:0;opacity:0}}
+.flash{position:absolute;right:5%;top:42%;width:55px;height:55px;border-radius:50%;background:#00e5ff;filter:blur(30px);opacity:0;animation:flash 2.7s infinite}
+@keyframes flash{0%,20%,100%{opacity:0}25%{opacity:.9}38%{opacity:0}68%{opacity:.7}76%{opacity:0}}
+.scene-glow{position:absolute;width:260px;height:260px;border-radius:50%;background:#00e5ff;filter:blur(100px);opacity:.12}
+.login-card{position:relative;padding:35px 28px;border:1px solid #24516b;border-radius:22px;background:linear-gradient(145deg,#121c32ee,#0b1020f5);box-shadow:0 0 40px #00e5ff12,0 20px 70px #0008;backdrop-filter:blur(18px);animation:cardIn 1s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+.logo{text-align:center;color:var(--cyan);font-size:30px;font-weight:1000;letter-spacing:3px;text-shadow:0 0 18px #00e5ff90}
+.subtitle{text-align:center;color:var(--muted);margin-top:10px;font-size:14px}
+.line{width:65px;height:3px;margin:20px auto 28px;border-radius:5px;background:linear-gradient(90deg,var(--cyan),var(--purple));box-shadow:0 0 12px var(--cyan)}
+label{display:block;font-size:13px;color:#cbd5e8;margin:16px 0 8px}
+input{width:100%;padding:15px;border:1px solid #34435c;border-radius:10px;outline:none;background:#080e1c;color:white;font-size:15px;transition:.3s}
+input:focus{border-color:var(--cyan);box-shadow:0 0 15px #00e5ff30}
 input::placeholder{color:#758198}
-
-button{
- width:100%;
- padding:15px;
- margin-top:23px;
- border:0;
- border-radius:10px;
- background:linear-gradient(100deg,#00cce8,#00e5ff);
- color:#061018;
- font-size:16px;
- font-weight:900;
- cursor:pointer;
- box-shadow:0 0 20px #00e5ff35;
- transition:.3s;
-}
-
-button:hover{
- transform:translateY(-3px);
- box-shadow:0 0 30px #00e5ff80;
-}
-
-button:disabled{
- opacity:.65;
- cursor:not-allowed;
- transform:none;
-}
-
-.spinner{
- display:none;
- width:17px;
- height:17px;
- margin-right:8px;
- vertical-align:middle;
- border:2px solid #07121a55;
- border-top-color:#07121a;
- border-radius:50%;
- animation:spin .7s linear infinite;
-}
-
+button{width:100%;padding:15px;margin-top:23px;border:0;border-radius:10px;background:linear-gradient(100deg,#00cce8,#00e5ff);color:#061018;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 0 20px #00e5ff35;transition:.3s}
+button:hover{transform:translateY(-3px);box-shadow:0 0 30px #00e5ff80}
+button:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.spinner{display:none;width:17px;height:17px;margin-right:8px;vertical-align:middle;border:2px solid #07121a55;border-top-color:#07121a;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 button.loading .spinner{display:inline-block}
-
-#message{
- min-height:22px;
- margin-top:16px;
- text-align:center;
- font-size:13px;
- line-height:1.7;
- overflow-wrap:anywhere;
-}
-
-#message.error{color:#ff6b82}
-#message.success{color:#48ffc1}
-#message.info{color:var(--cyan)}
-
-.register{
- text-align:center;
- margin-top:22px;
- color:var(--muted);
- font-size:14px;
-}
-
-.register a{
- color:var(--cyan);
- text-decoration:none;
- font-weight:bold;
-}
-
+#message{min-height:22px;margin-top:16px;text-align:center;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+#message.error{color:#ff6b82}#message.success{color:#48ffc1}#message.info{color:var(--cyan)}
+.register{text-align:center;margin-top:22px;color:var(--muted);font-size:14px}
+.register a{color:var(--cyan);text-decoration:none;font-weight:bold}
 .register a:hover{text-decoration:underline}
-
-.back{
- display:block;
- text-align:center;
- margin-top:20px;
- color:#8491a9;
- text-decoration:none;
- font-size:13px;
-}
-
+.back{display:block;text-align:center;margin-top:20px;color:#8491a9;text-decoration:none;font-size:13px}
 .back:hover{color:var(--cyan)}
-
-@media(max-width:800px){
- .page{
-  max-width:430px;
-  grid-template-columns:1fr;
-  gap:8px;
- }
- .scene{min-height:210px}
- .scene-title{
-  top:5px;
-  left:0;
-  right:0;
-  text-align:center;
- }
- .character{max-width:230px}
- .energy{top:50%;right:4%}
- .flash{top:43%}
- .login-card{padding:30px 23px}
-}
-
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{
-  animation-duration:.01ms!important;
-  animation-iteration-count:1!important;
-  scroll-behavior:auto!important;
- }
-}
+@media(max-width:800px){.page{max-width:430px;grid-template-columns:1fr;gap:8px}.scene{min-height:210px}.scene-title{top:5px;left:0;right:0;text-align:center}.character{max-width:230px}.energy{top:50%;right:4%}.flash{top:43%}.login-card{padding:30px 23px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
-
 <main class="page">
-
-<!-- SCI-FI CHARACTER ANIMATION -->
 <section class="scene">
- <div class="scene-title">✦ FUTURE TECHNOLOGY ✦</div>
- <div class="scene-glow"></div>
-
- <svg class="character" viewBox="0 0 420 420"
-      xmlns="http://www.w3.org/2000/svg">
-
-  <defs>
-   <linearGradient id="armor" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#00e5ff"/>
-    <stop offset="1" stop-color="#3441a0"/>
-   </linearGradient>
-   <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#293d63"/>
-    <stop offset="1" stop-color="#101729"/>
-   </linearGradient>
-  </defs>
-
-  <!-- Abstract futuristic character -->
-  <ellipse cx="200" cy="370" rx="115" ry="18" fill="#00e5ff" opacity=".12"/>
-
-  <!-- legs -->
-  <path d="M145 255 L125 350 L170 350 L195 265Z" fill="url(#body)" stroke="#00e5ff" stroke-width="3"/>
-  <path d="M195 265 L210 350 L260 350 L250 250Z" fill="#111c35" stroke="#00e5ff" stroke-width="3"/>
-  <path d="M125 345 L175 345 L180 370 L115 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
-  <path d="M210 345 L260 345 L280 370 L210 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
-
-  <!-- body armor -->
-  <path d="M135 155 L205 135 L275 165 L260 275 L145 275 L120 205Z"
-        fill="url(#body)" stroke="url(#armor)" stroke-width="5"/>
-
-  <path d="M165 170 L205 155 L245 173 L235 245 L170 245Z"
-        fill="#14243c" stroke="#00e5ff" stroke-width="2"/>
-
-  <path d="M180 190 L205 178 L230 190 L220 222 L185 222Z"
-        fill="#00e5ff" opacity=".18"/>
-
-  <!-- head -->
-  <path d="M155 75 Q165 35 210 38 Q260 40 270 88
-           L260 145 Q210 175 160 140Z"
-        fill="#17243e" stroke="#00e5ff" stroke-width="5"/>
-
-  <!-- visor -->
-  <path d="M160 95 Q210 65 263 95 L255 125 Q210 145 168 125Z"
-        fill="#07101d" stroke="#9b4dff" stroke-width="3"/>
-  <path d="M175 103 Q210 85 247 103"
-        fill="none" stroke="#00e5ff" stroke-width="5" stroke-linecap="round"/>
-
-  <!-- shoulder armor -->
-  <path d="M120 160 Q85 145 70 180 L90 220 L145 210Z"
-        fill="#172943" stroke="#00e5ff" stroke-width="4"/>
-  <path d="M255 165 Q290 145 315 175 L300 220 L250 210Z"
-        fill="#172943" stroke="#00e5ff" stroke-width="4"/>
-
-  <!-- arms -->
-  <path d="M95 205 L65 245 L100 265 L145 220Z"
-        fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
-  <path d="M290 205 L315 220 L350 190 L330 170Z"
-        fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
-
-  <!-- fictional energy device -->
-  <path d="M300 174 L355 160 L380 174 L355 192 L300 190Z"
-        fill="#17243e" stroke="#00e5ff" stroke-width="3"/>
-  <path d="M340 191 L350 218 L365 216 L360 187Z"
-        fill="#293d63" stroke="#9b4dff" stroke-width="2"/>
-  <circle cx="371" cy="176" r="7" fill="#00e5ff"/>
-  <circle cx="371" cy="176" r="3" fill="white"/>
-
-  <!-- armor lights -->
-  <circle cx="145" cy="190" r="5" fill="#00e5ff"/>
-  <circle cx="265" cy="190" r="5" fill="#9b4dff"/>
-  <path d="M185 250 L225 250" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/>
-
- </svg>
-
- <div class="energy"></div>
- <div class="flash"></div>
+<div class="scene-title">✦ FUTURE TECHNOLOGY ✦</div>
+<div class="scene-glow"></div>
+<svg class="character" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="armor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#3441a0"/></linearGradient>
+<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#293d63"/><stop offset="1" stop-color="#101729"/></linearGradient>
+</defs>
+<ellipse cx="200" cy="370" rx="115" ry="18" fill="#00e5ff" opacity=".12"/>
+<path d="M145 255 L125 350 L170 350 L195 265Z" fill="url(#body)" stroke="#00e5ff" stroke-width="3"/>
+<path d="M195 265 L210 350 L260 350 L250 250Z" fill="#111c35" stroke="#00e5ff" stroke-width="3"/>
+<path d="M125 345 L175 345 L180 370 L115 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
+<path d="M210 345 L260 345 L280 370 L210 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
+<path d="M135 155 L205 135 L275 165 L260 275 L145 275 L120 205Z" fill="url(#body)" stroke="url(#armor)" stroke-width="5"/>
+<path d="M165 170 L205 155 L245 173 L235 245 L170 245Z" fill="#14243c" stroke="#00e5ff" stroke-width="2"/>
+<path d="M180 190 L205 178 L230 190 L220 222 L185 222Z" fill="#00e5ff" opacity=".18"/>
+<path d="M155 75 Q165 35 210 38 Q260 40 270 88 L260 145 Q210 175 160 140Z" fill="#17243e" stroke="#00e5ff" stroke-width="5"/>
+<path d="M160 95 Q210 65 263 95 L255 125 Q210 145 168 125Z" fill="#07101d" stroke="#9b4dff" stroke-width="3"/>
+<path d="M175 103 Q210 85 247 103" fill="none" stroke="#00e5ff" stroke-width="5" stroke-linecap="round"/>
+<path d="M120 160 Q85 145 70 180 L90 220 L145 210Z" fill="#172943" stroke="#00e5ff" stroke-width="4"/>
+<path d="M255 165 Q290 145 315 175 L300 220 L250 210Z" fill="#172943" stroke="#00e5ff" stroke-width="4"/>
+<path d="M95 205 L65 245 L100 265 L145 220Z" fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
+<path d="M290 205 L315 220 L350 190 L330 170Z" fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
+<path d="M300 174 L355 160 L380 174 L355 192 L300 190Z" fill="#17243e" stroke="#00e5ff" stroke-width="3"/>
+<path d="M340 191 L350 218 L365 216 L360 187Z" fill="#293d63" stroke="#9b4dff" stroke-width="2"/>
+<circle cx="371" cy="176" r="7" fill="#00e5ff"/><circle cx="371" cy="176" r="3" fill="white"/>
+<circle cx="145" cy="190" r="5" fill="#00e5ff"/><circle cx="265" cy="190" r="5" fill="#9b4dff"/>
+<path d="M185 250 L225 250" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/>
+</svg>
+<div class="energy"></div><div class="flash"></div>
 </section>
 
-<!-- LOGIN FORM -->
 <section class="login-card">
-
- <h1 class="logo">7STARBOYS</h1>
- <p class="subtitle">OFFICIAL MEMBER LOGIN</p>
- <div class="line"></div>
-
- <form id="loginForm">
-
-  <label for="email">ইমেইল ঠিকানা</label>
-  <div class="input-wrap">
-   <input id="email" type="email"
-          placeholder="আপনার Gmail লিখুন"
-          autocomplete="username" required>
-  </div>
-
-  <label for="password">পাসওয়ার্ড</label>
-  <div class="input-wrap">
-   <input id="password" type="password"
-          placeholder="আপনার পাসওয়ার্ড লিখুন"
-          autocomplete="current-password" required>
-  </div>
-
-  <button id="loginBtn" type="submit">
-   <span class="spinner"></span>
-   <span id="buttonText">LOGIN NOW ↗</span>
-  </button>
-
- </form>
-
- <p id="message" aria-live="polite"></p>
-
- <div class="register">
-  অ্যাকাউন্ট নেই?
-  <a href="register.html">নতুন সদস্য নিবন্ধন করুন</a>
- </div>
-
- <a class="back" href="index.html">← হোম পেজে ফিরে যান</a>
-
+<h1 class="logo">7STARBOYS</h1>
+<p class="subtitle">OFFICIAL MEMBER LOGIN</p>
+<div class="line"></div>
+<form id="loginForm">
+<label for="email">ইমেইল ঠিকানা</label>
+<input id="email" type="email" placeholder="আপনার Gmail লিখুন" autocomplete="username" required>
+<label for="password">পাসওয়ার্ড</label>
+<input id="password" type="password" placeholder="আপনার পাসওয়ার্ড লিখুন" autocomplete="current-password" required>
+<button id="loginBtn" type="submit"><span class="spinner"></span><span id="buttonText">LOGIN NOW ↗</span></button>
+</form>
+<p id="message" aria-live="polite"></p>
+<div class="register">অ্যাকাউন্ট নেই? <a href="register.html">নতুন সদস্য নিবন্ধন করুন</a></div>
+<a class="back" href="index.html">← হোম পেজে ফিরে যান</a>
 </section>
 </main>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import {getAuth,setPersistence,browserLocalPersistence,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-import {
- getAuth,
- signInWithEmailAndPassword,
- signOut,
- setPersistence,
- browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-
-import {
- getFirestore,
- doc,
- getDoc
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
-
-const firebaseConfig = {
- apiKey: "AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
- authDomain: "starboys-7539f.firebaseapp.com",
- projectId: "starboys-7539f",
- storageBucket: "starboys-7539f.firebasestorage.app",
- messagingSenderId: "542462403066",
- appId: "1:542462403066:web:a6e204f3402b72cdecc443",
- measurementId: "G-RES9E2QY2N"
+const firebaseConfig={
+ apiKey:"AIzaSyCHveS2kKQKztiMAPPhXryVNFrElEvehFs",
+ authDomain:"starboys-7539f.firebaseapp.com",
+ projectId:"starboys-7539f",
+ storageBucket:"starboys-7539f.firebasestorage.app",
+ messagingSenderId:"542462403066",
+ appId:"1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId:"G-RES9E2QY2N"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-const form = document.getElementById("loginForm");
-const message = document.getElementById("message");
-const button = document.getElementById("loginBtn");
-const buttonText = document.getElementById("buttonText");
+const form=document.getElementById("loginForm");
+const message=document.getElementById("message");
+const button=document.getElementById("loginBtn");
+const buttonText=document.getElementById("buttonText");
 
 function showMessage(text,type){
- message.textContent = text;
- message.className = type;
+ message.textContent=text;
+ message.className=type;
 }
 
-form.addEventListener("submit", async (e) => {
- e.preventDefault();
+let submitting=false;
 
- button.disabled = true;
+form.addEventListener("submit",async(e)=>{
+ e.preventDefault();
+ if(submitting)return;
+ submitting=true;
+ button.disabled=true;
  button.classList.add("loading");
- buttonText.textContent = "লগইন হচ্ছে...";
+ buttonText.textContent="লগইন হচ্ছে...";
  showMessage("আপনার তথ্য যাচাই করা হচ্ছে...","info");
 
- try {
+ try{
+  // Login এবং Dashboard একই local persistence ব্যবহার করবে
   await setPersistence(auth,browserLocalPersistence);
 
-  const result = await signInWithEmailAndPassword(
-   auth,
-   document.getElementById("email").value.trim(),
-   document.getElementById("password").value
-  );
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
 
-  const member = await getDoc(
-   doc(db,"members",result.user.uid)
-  );
+  const result=await signInWithEmailAndPassword(auth,email,password);
 
-  if(!member.exists()){
+  // Firestore-এ সদস্যের অনুমোদন যাচাই
+  const memberSnap=await getDoc(doc(db,"members",result.user.uid));
+
+  if(!memberSnap.exists()){
    await signOut(auth);
    throw new Error("সদস্যের তথ্য পাওয়া যায়নি।");
   }
 
-  if(member.data().status !== "approved"){
+  if(memberSnap.data().status!=="approved"){
    await signOut(auth);
    throw new Error("অ্যাডমিনের অনুমোদনের অপেক্ষায় আছেন।");
   }
 
-  showMessage("✓ লগইন সফল! স্বাগতম 7STARBOYS-এ।","success");
-  buttonText.textContent = "SUCCESS ✓";
+  // Persistence সম্পন্ন হয়েছে কি না নিশ্চিত হওয়া
+  await auth.authStateReady();
 
-  setTimeout(()=>{
-   window.location.replace("member.html");
-  },900);
+  if(!auth.currentUser || auth.currentUser.uid!==result.user.uid){
+   throw new Error("লগইন সেশন সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।");
+  }
+
+  showMessage("✓ লগইন সফল! Dashboard-এ নেওয়া হচ্ছে...","success");
+  buttonText.textContent="SUCCESS ✓";
+
+  // সরাসরি একই সাইটের Dashboard-এ পাঠানো
+  window.location.replace(new URL("member.html",window.location.href).href);
 
  }catch(error){
-  console.error(error);
+  console.error("Login error:",error);
+  let errorText=error.message;
 
-  let errorText = error.message;
-
-  if(error.code === "auth/invalid-credential" ||
-     error.code === "auth/wrong-password" ||
-     error.code === "auth/user-not-found"){
-   errorText = "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।";
-  }else if(error.code === "auth/invalid-email"){
-   errorText = "সঠিক ইমেইল ঠিকানা লিখুন।";
-  }else if(error.code === "auth/too-many-requests"){
-   errorText = "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে চেষ্টা করুন।";
+  if(error.code==="auth/invalid-credential"||error.code==="auth/wrong-password"||error.code==="auth/user-not-found"){
+   errorText="ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।";
+  }else if(error.code==="auth/invalid-email"){
+   errorText="সঠিক ইমেইল ঠিকানা লিখুন।";
+  }else if(error.code==="auth/too-many-requests"){
+   errorText="অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে চেষ্টা করুন।";
+  }else if(error.code==="auth/network-request-failed"){
+   errorText="ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
   }
 
   showMessage("সমস্যা: "+errorText,"error");
+  buttonText.textContent="LOGIN NOW ↗";
 
  }finally{
-  button.disabled = false;
+  submitting=false;
+  button.disabled=false;
   button.classList.remove("loading");
-  if(buttonText.textContent !== "SUCCESS ✓"){
-   buttonText.textContent = "LOGIN NOW ↗";
-  }
  }
 });
 </script>
-
 </body>
 </html>
