@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7STARBOYS - Profile</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#070914;
+ color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:20px;
+ text-align:center;
+ background:#10152a;
+ border-bottom:1px solid #00e5ff;
+}
+header h2{
+ margin:0;
+ color:#00e5ff;
+ letter-spacing:3px;
+}
+header p{color:#aaa}
+main{max-width:850px;margin:auto;padding:18px}
+button{
+ background:linear-gradient(90deg,#00bcd4,#7544ff);
+ color:white;border:0;padding:11px 18px;
+ border-radius:8px;cursor:pointer;margin:5px;
+}
+.profile{
+ background:#111a30;
+ border:1px solid #00bcd455;
+ border-radius:18px;
+ padding:25px;
+ text-align:center;
+ margin-bottom:22px;
+}
+.profile img,.avatar{
+ width:115px;height:115px;
+ border-radius:50%;
+ border:3px solid #00e5ff;
+ object-fit:cover;
+}
+.avatar{
+ display:grid;place-items:center;
+ margin:auto;background:#242d49;
+ font-size:40px;
+}
+.profile h2{color:#00e5ff;margin-bottom:5px}
+.designation{color:#bd9cff}
+.post{
+ background:#111a30;
+ border:1px solid #343d5b;
+ border-radius:15px;
+ padding:17px;
+ margin:15px 0;
+}
+.post-text{
+ white-space:pre-wrap;
+ line-height:1.7;
+ overflow-wrap:anywhere;
+}
+.post img,.post video{
+ width:100%;max-height:450px;
+ object-fit:contain;
+ border-radius:10px;
+ margin-top:12px;
+ background:#05070d;
+}
+.stats{
+ color:#9ba9c8;
+ font-size:14px;
+ margin-top:15px;
+}
+#message{
+ color:#00e5ff;
+ text-align:center;
+ padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>7STARBOYS</h2>
+<p>MEMBER PROFILE</p>
+</header>
+
+<main>
+
+<div style="text-align:center">
+<button onclick="location.href='member.html'">Dashboard</button>
+<button onclick="location.href='members.html'">Members</button>
+</div>
+
+<div id="message">প্রোফাইল লোড হচ্ছে...</div>
+
+<section id="profile" class="profile" style="display:none">
+<div id="photo"></div>
+<h2 id="name"></h2>
+<div id="designation" class="designation"></div>
+</section>
+
+<h3 style="color:#00e5ff">সদস্যের পোস্ট</h3>
+<div id="posts"></div>
+
+</main>
+
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {getAuth,onAuthStateChanged}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,doc,getDoc,getDocs,
+ collection,query,where,orderBy
+}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ authDomain:"starboys-7539f.firebaseapp.com",
+ projectId:"starboys-7539f",
+ storageBucket:"starboys-7539f.firebasestorage.app",
+ messagingSenderId:"542462403066",
+ appId:"1:542462403066:web:a6e204f3402b72cdecc443",
+ measurementId:"G-RES9E2QY2N"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const message=document.getElementById("message");
+const postsBox=document.getElementById("posts");
+
+const requestedUid=
+ new URLSearchParams(location.search).get("uid");
+
+function showProfile(data){
+ const photoBox=document.getElementById("photo");
+
+ if(data.photoURL){
+  const img=document.createElement("img");
+  img.src=data.photoURL;
+  img.alt="সদস্যের ছবি";
+  photoBox.appendChild(img);
+ }else{
+  const avatar=document.createElement("div");
+  avatar.className="avatar";
+  avatar.textContent=(data.name||"?").charAt(0);
+  photoBox.appendChild(avatar);
+ }
+
+ document.getElementById("name").textContent=
+  data.name||"নাম নেই";
+
+ document.getElementById("designation").textContent=
+  data.designation||"সদস্য";
+
+ document.getElementById("profile").style.display="block";
+}
+
+function formatDate(timestamp){
+ if(!timestamp || !timestamp.toDate) return "";
+ return timestamp.toDate().toLocaleString("bn-BD");
+}
+
+async function loadPosts(uid){
+ postsBox.innerHTML="";
+ const q=query(
+  collection(db,"posts"),
+  where("authorUid","==",uid),
+  orderBy("createdAt","desc")
+ );
+
+ const result=await getDocs(q);
+
+ if(result.empty){
+  postsBox.textContent="এই সদস্য এখনো কোনো পোস্ট করেননি।";
+  return;
+ }
+
+ const postList=result.docs;
+
+ const cards=await Promise.all(postList.map(async item=>{
+  const data=item.data();
+
+  const [likes,comments]=await Promise.all([
+   getDocs(collection(db,"posts",item.id,"likes")),
+   getDocs(collection(db,"posts",item.id,"comments"))
+  ]);
+
+  const card=document.createElement("div");
+  card.className="post";
+
+  if(data.text){
+   const text=document.createElement("div");
+   text.className="post-text";
+   text.textContent=data.text;
+   card.appendChild(text);
+  }
+
+  if(data.mediaURL && data.mediaType==="image"){
+   const img=document.createElement("img");
+   img.src=data.mediaURL;
+   img.alt="পোস্টের ছবি";
+   img.loading="lazy";
+   card.appendChild(img);
+  }
+
+  if(data.mediaURL && data.mediaType==="video"){
+   const video=document.createElement("video");
+   video.src=data.mediaURL;
+   video.controls=true;
+   video.preload="metadata";
+   card.appendChild(video);
+  }
+
+  const stats=document.createElement("div");
+  stats.className="stats";
+  stats.textContent=
+   "❤️ Like: "+likes.size+
+   "   💬 Comment: "+comments.size;
+
+  card.appendChild(stats);
+
+  const date=document.createElement("div");
+  date.className="stats";
+  date.textContent=formatDate(data.createdAt);
+  card.appendChild(date);
+
+  return card;
+ }));
+
+ cards.forEach(card=>postsBox.appendChild(card));
+}
+
+onAuthStateChanged(auth,async user=>{
+ if(!user){
+  location.replace("login.html");
+  return;
+ }
+
+ try{
+  const myDoc=await getDoc(doc(db,"members",user.uid));
+
+  if(!myDoc.exists() || myDoc.data().status!=="approved"){
+   location.replace("login.html");
+   return;
+  }
+
+  const profileUid=requestedUid||user.uid;
+
+  const profileDoc=await getDoc(
+   doc(db,"publicProfiles",profileUid)
+  );
+
+  if(!profileDoc.exists()){
+   message.textContent="এই সদস্যের প্রোফাইল পাওয়া যায়নি।";
+   return;
+  }
+
+  showProfile(profileDoc.data());
+
+  message.textContent="";
+  await loadPosts(profileUid);
+
+ }catch(error){
+  console.error(error);
+  message.textContent=
+   "প্রোফাইল লোড হয়নি: "+error.message;
+ }
+});
+</script>
+
+</body>
+</html>
