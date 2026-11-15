@@ -10,69 +10,44 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
- --bg:#070914;
- --panel:#101729;
- --cyan:#00e5ff;
- --purple:#9b4dff;
- --text:#f4f7ff;
- --muted:#91a0bf;
+ --bg:#070914;--panel:#101729;--cyan:#00e5ff;
+ --purple:#9b4dff;--text:#f4f7ff;--muted:#91a0bf;
  --line:#ffffff18;
 }
 body{
- min-height:100vh;
- color:var(--text);
- font-family:Arial,sans-serif;
+ min-height:100vh;color:var(--text);font-family:Arial,sans-serif;
  background:
  radial-gradient(circle at 12% 8%,#142c50 0,transparent 30%),
- radial-gradient(circle at 90% 80%,#29133e 0,transparent 35%),
- var(--bg);
+ radial-gradient(circle at 90% 80%,#29133e 0,transparent 35%),var(--bg);
 }
 button,input,textarea{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
-
 .topbar{
  height:68px;position:sticky;top:0;z-index:20;
  display:flex;align-items:center;justify-content:space-between;
  padding:0 22px;background:#080d1bea;
- border-bottom:1px solid #00e5ff44;
- backdrop-filter:blur(18px);
+ border-bottom:1px solid #00e5ff44;backdrop-filter:blur(18px);
 }
-.brand{
- font-size:22px;font-weight:900;letter-spacing:2px;
- color:var(--cyan);text-shadow:0 0 15px #00e5ff77;
-}
-.brand small{
- display:block;font-size:9px;color:var(--muted);
- letter-spacing:3px;margin-top:3px;
-}
+.brand{font-size:22px;font-weight:900;letter-spacing:2px;color:var(--cyan);text-shadow:0 0 15px #00e5ff77}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:3px;margin-top:3px}
 .top-right{display:flex;align-items:center;gap:10px;font-size:13px}
-.avatar{
- width:40px;height:40px;border-radius:50%;
- object-fit:cover;border:2px solid var(--cyan);
-}
+.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
 .layout{
  max-width:1400px;margin:auto;padding:20px;
- display:grid;grid-template-columns:230px minmax(0,1fr) 220px;
- gap:18px;
+ display:grid;grid-template-columns:230px minmax(0,1fr) 220px;gap:18px;
 }
 .layout.hidden{display:none!important}
-.panel{
- background:#101729ef;border:1px solid var(--line);
- border-radius:17px;padding:17px;box-shadow:0 10px 35px #0004;
-}
+.panel{background:#101729ef;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 10px 35px #0004}
 .sidebar,.right{position:sticky;top:86px;height:max-content}
 .side-profile{text-align:center;padding:8px 0 18px}
-.side-profile img{
- width:82px;height:82px;border-radius:50%;object-fit:cover;
- border:2px solid var(--cyan);box-shadow:0 0 20px #00e5ff55;
-}
+.side-profile img{width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan);box-shadow:0 0 20px #00e5ff55}
 .side-profile h3{margin-top:10px;font-size:16px}
 .side-profile p{font-size:11px;color:var(--muted);margin-top:5px}
 .nav-item{
- width:100%;display:flex;align-items:center;gap:10px;
- padding:12px;margin-top:5px;border:0;border-radius:10px;
- background:transparent;color:#dce8ff;text-align:left;
+ width:100%;display:flex;align-items:center;gap:10px;padding:12px;
+ margin-top:5px;border:0;border-radius:10px;background:transparent;
+ color:#dce8ff;text-align:left;
 }
 .nav-item:hover,.nav-item.active{background:#00e5ff17;color:var(--cyan)}
 .main{min-width:0}
@@ -81,12 +56,11 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .welcome{
  padding:23px;border-radius:18px;
  background:linear-gradient(120deg,#102c48,#21143e);
- border:1px solid #00e5ff44;margin-bottom:17px;
- position:relative;overflow:hidden;
+ border:1px solid #00e5ff44;margin-bottom:17px;position:relative;overflow:hidden;
 }
 .welcome:after{
- content:"✦";position:absolute;right:25px;top:8px;
- font-size:75px;color:#00e5ff22;animation:float 5s ease-in-out infinite;
+ content:"✦";position:absolute;right:25px;top:8px;font-size:75px;
+ color:#00e5ff22;animation:float 5s ease-in-out infinite;
 }
 @keyframes float{50%{transform:translateY(14px) rotate(25deg)}}
 .welcome h2{font-size:22px}
@@ -94,9 +68,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .title{font-size:18px;color:var(--cyan);margin-bottom:15px}
 .muted{color:var(--muted);font-size:12px;line-height:1.7}
 .field{
- width:100%;padding:12px;background:#080e1e;
- border:1px solid var(--line);border-radius:10px;
- color:white;margin-top:10px;outline:none;
+ width:100%;padding:12px;background:#080e1e;border:1px solid var(--line);
+ border-radius:10px;color:white;margin-top:10px;outline:none;
 }
 .field:focus{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff22}
 textarea.field{min-height:95px;resize:vertical}
@@ -105,22 +78,13 @@ textarea.field{min-height:95px;resize:vertical}
  background:linear-gradient(100deg,var(--cyan),#a3f7ff);
  color:#06101c;font-weight:bold;margin-top:11px;
 }
-.secondary{
- background:#17223a;color:white;border:1px solid var(--line);
- border-radius:9px;padding:9px 12px;
-}
-.danger{
- background:#3b1829;color:#ff9bb0;
- border:1px solid #ff557044;border-radius:9px;padding:9px 12px;
-}
+.secondary{background:#17223a;color:white;border:1px solid var(--line);border-radius:9px;padding:9px 12px}
+.danger{background:#3b1829;color:#ff9bb0;border:1px solid #ff557044;border-radius:9px;padding:9px 12px}
 .message{font-size:12px;color:var(--cyan);margin-top:9px;text-align:center}
 .file-label{display:block;color:var(--muted);font-size:12px;margin-top:12px}
-
-/* PROFILE */
 .profile-cover{
  height:155px;border-radius:13px;
- background:
- radial-gradient(circle at 20% 30%,#9b4dff99,transparent 35%),
+ background:radial-gradient(circle at 20% 30%,#9b4dff99,transparent 35%),
  radial-gradient(circle at 80% 70%,#00e5ff88,transparent 40%),
  linear-gradient(120deg,#102c48,#21143e);
  border:1px solid #00e5ff44;position:relative;overflow:hidden;
@@ -129,66 +93,37 @@ textarea.field{min-height:95px;resize:vertical}
  content:"7STARBOYS";position:absolute;right:18px;bottom:15px;
  font-size:24px;font-weight:900;letter-spacing:4px;color:#ffffff35;
 }
-.profile-head{
- display:flex;align-items:end;gap:16px;
- margin:-48px 15px 18px;position:relative;
-}
-.profile-head img{
- width:105px;height:105px;border-radius:50%;object-fit:cover;
- border:5px solid var(--panel);box-shadow:0 0 20px #00e5ff55;
-}
+.profile-head{display:flex;align-items:end;gap:16px;margin:-48px 15px 18px;position:relative}
+.profile-head img{width:105px;height:105px;border-radius:50%;object-fit:cover;border:5px solid var(--panel);box-shadow:0 0 20px #00e5ff55}
 .profile-head h2{font-size:21px}
 .profile-head p{font-size:12px;color:var(--muted);margin-top:5px}
-.info-grid{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:10px;margin-top:14px;
-}
-.info{
- background:#080e1e;border:1px solid var(--line);
- border-radius:10px;padding:12px;min-width:0;
-}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.info{background:#080e1e;border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
 .info small{color:var(--purple);font-weight:bold}
 .info p{font-size:13px;margin-top:6px;overflow-wrap:anywhere}
-
-/* POSTS */
 .post{margin-top:14px}
 .post-head{display:flex;align-items:center;gap:10px}
-.post-head img{
- width:42px;height:42px;border-radius:50%;object-fit:cover;
- border:2px solid var(--cyan);
-}
+.post-head img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
 .post-name{font-weight:bold;font-size:14px}
 .post-time{font-size:11px;color:var(--muted);margin-top:4px}
-.post-content{
- white-space:pre-wrap;overflow-wrap:anywhere;
- line-height:1.7;margin:14px 0;font-size:14px;
-}
-.post-media{
- width:100%;max-height:430px;object-fit:contain;
- background:#05070c;border-radius:12px;margin-top:10px;
-}
+.post-content{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:14px 0;font-size:14px}
+.post-media{width:100%;max-height:430px;object-fit:contain;background:#05070c;border-radius:12px;margin-top:10px}
 .post-actions{display:flex;gap:8px;margin-top:12px}
-.post-actions button{
- flex:1;padding:10px 5px;background:#18243b;
- color:#dceaff;border:1px solid var(--line);border-radius:9px;
-}
+.post-actions button{flex:1;padding:10px 5px;background:#18243b;color:#dceaff;border:1px solid var(--line);border-radius:9px}
 .post-actions button.liked{color:var(--cyan);border-color:var(--cyan)}
 .comment-area{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
 .comment{padding:10px;background:#080e1e;border-radius:9px;margin-top:8px}
 .comment-name{font-size:12px;color:var(--cyan);font-weight:bold}
-.comment-text{
- font-size:13px;margin-top:5px;white-space:pre-wrap;overflow-wrap:anywhere;
-}
+.comment-text{font-size:13px;margin-top:5px;white-space:pre-wrap;overflow-wrap:anywhere}
 .empty{text-align:center;color:var(--muted);padding:22px 8px;font-size:13px}
 #authError{
- display:none;margin:18px;padding:18px;
- border:1px solid #ff557066;border-radius:12px;
- background:#3b182922;color:#ffb0bd;text-align:center;line-height:1.7;
+ display:none;margin:18px;padding:18px;border:1px solid #ff557066;
+ border-radius:12px;background:#3b182922;color:#ffb0bd;
+ text-align:center;line-height:1.7;
 }
 .mobile-nav{display:none}
 .hidden{display:none!important}
 .rule{font-size:12px;line-height:1.8;margin:10px 0;color:#dce8ff}
-
 @media(max-width:1050px){
  .layout{grid-template-columns:205px minmax(0,1fr)}
  .right{display:none}
@@ -201,8 +136,8 @@ textarea.field{min-height:95px;resize:vertical}
  .panel{padding:14px}
  .mobile-nav{
   position:fixed;bottom:0;left:0;right:0;z-index:30;
-  display:flex;justify-content:space-around;
-  background:#090e1ef5;border-top:1px solid #00e5ff44;
+  display:flex;justify-content:space-around;background:#090e1ef5;
+  border-top:1px solid #00e5ff44;
   padding:8px 2px calc(8px + env(safe-area-inset-bottom));
   backdrop-filter:blur(18px);
  }
@@ -238,7 +173,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
   <h3 id="sideName">লোড হচ্ছে...</h3>
   <p>7STARBOYS MEMBER</p>
  </div>
-
  <button class="nav-item active" data-view="home">🏠 Home</button>
  <button class="nav-item" data-view="myProfile">👤 My Profile</button>
  <button class="nav-item" data-view="create">✍️ Create Post</button>
@@ -375,8 +309,7 @@ import {initializeApp}
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
- getAuth,onAuthStateChanged,signOut,
- setPersistence,browserLocalPersistence
+ getAuth,onAuthStateChanged,signOut
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
 import {
@@ -407,7 +340,8 @@ let memberData={};
 let postsCache=[];
 let feedUnsubscribe=null;
 let postCardUnsubs=[];
-let authReady=false;
+let authCheckStarted=false;
+let authGeneration=0;
 
 const $=id=>document.getElementById(id);
 const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
@@ -747,71 +681,102 @@ function startFeed(){
  });
 }
 
-/* AUTHENTICATION */
+/* AUTHENTICATION - SESSION FIX */
+async function checkMember(user){
+ const thisGeneration=++authGeneration;
+
+ if(!user){
+  currentUser=null;
+  memberData={};
+
+  if(feedUnsubscribe){
+   feedUnsubscribe();
+   feedUnsubscribe=null;
+  }
+
+  clearPostListeners();
+  $("dashboard").classList.add("hidden");
+
+  showError(
+   "Firebase লগইন সেশন পাওয়া যায়নি। একই ব্রাউজারে Login করে আবার চেষ্টা করো।"
+  );
+
+  console.error("Firebase Auth User:",auth.currentUser);
+  console.error("Current URL:",window.location.href);
+  return;
+ }
+
+ currentUser=user;
+ hideError();
+
+ try{
+  const memberRef=doc(db,"members",user.uid);
+  const memberSnap=await getDoc(memberRef);
+
+  // পুরোনো request-এর ফলাফল যেন নতুন login state বদলে না দেয়
+  if(thisGeneration!==authGeneration)return;
+
+  if(!memberSnap.exists()){
+   $("dashboard").classList.add("hidden");
+   showError("এই অ্যাকাউন্টের সদস্য তথ্য পাওয়া যায়নি। Admin-এর সঙ্গে যোগাযোগ করো।");
+   return;
+  }
+
+  memberData=memberSnap.data();
+
+  if(memberData.status!=="approved"){
+   $("dashboard").classList.add("hidden");
+   showError("তোমার সদস্যপদ এখনো অনুমোদিত হয়নি।");
+   return;
+  }
+
+  $("dashboard").classList.remove("hidden");
+
+  renderProfile();
+  startFeed();
+
+  try{
+   const adminSnap=await getDoc(doc(db,"admins",user.uid));
+
+   if(thisGeneration!==authGeneration)return;
+
+   if(adminSnap.exists()){
+    $("adminNav").classList.remove("hidden");
+   }else{
+    $("adminNav").classList.add("hidden");
+   }
+  }catch(adminError){
+   console.warn("Admin check:",adminError);
+   $("adminNav").classList.add("hidden");
+  }
+
+ }catch(error){
+  console.error("Member loading error:",error);
+
+  if(thisGeneration===authGeneration){
+   $("dashboard").classList.add("hidden");
+   showError("সদস্যের তথ্য লোড করা যায়নি: "+error.message);
+  }
+ }
+}
+
 async function startAuthentication(){
  try{
-  /*
-   * Keep Firebase login session in this browser.
-   * Login page should use the same persistence.
-   */
-  await setPersistence(auth,browserLocalPersistence);
+  // Firebase-এর প্রথম Auth state প্রস্তুত হওয়া পর্যন্ত অপেক্ষা
+  await auth.authStateReady();
 
-  onAuthStateChanged(auth,async user=>{
-   if(authReady===false)authReady=true;
+  if(authCheckStarted)return;
+  authCheckStarted=true;
 
-   if(!user){
-    if(feedUnsubscribe)feedUnsubscribe();
-    clearPostListeners();
+  // প্রথমে বর্তমান user পরীক্ষা
+  await checkMember(auth.currentUser);
 
-    showError("তোমার লগইন সেশন পাওয়া যায়নি। Login পেজে গিয়ে আবার লগইন করো।");
-
-    setTimeout(()=>{
-     location.replace("login.html");
-    },1800);
-
-    return;
-   }
-
-   currentUser=user;
-   hideError();
-
-   try{
-    const memberRef=doc(db,"members",user.uid);
-    const memberSnap=await getDoc(memberRef);
-
-    if(!memberSnap.exists()){
-     showError("এই অ্যাকাউন্টের সদস্য তথ্য পাওয়া যায়নি। Admin-এর সঙ্গে যোগাযোগ করো।");
-     return;
-    }
-
-    memberData=memberSnap.data();
-
-    if(memberData.status!=="approved"){
-     showError("তোমার সদস্যপদ এখনো অনুমোদিত হয়নি।");
-     return;
-    }
-
-    $("dashboard").classList.remove("hidden");
-
-    renderProfile();
-    startFeed();
-
-    try{
-     const adminSnap=await getDoc(doc(db,"admins",user.uid));
-     if(adminSnap.exists()){
-      $("adminNav").classList.remove("hidden");
-     }else{
-      $("adminNav").classList.add("hidden");
-     }
-    }catch(adminError){
-     console.warn("Admin check:",adminError);
-     $("adminNav").classList.add("hidden");
-    }
-
-   }catch(error){
-    console.error("Member loading error:",error);
-    showError("সদস্যের তথ্য লোড করা যায়নি: "+error.message);
-   }
+  // পরবর্তীতে login/logout পরিবর্তন পর্যবেক্ষণ
+  onAuthStateChanged(auth,async(user)=>{
+   await checkMember(user);
+  },(error)=>{
+   console.error("Auth state error:",error);
+   showError("Authentication সমস্যা: "+error.message);
   });
 
  }catch(error){
