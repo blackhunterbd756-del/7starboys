@@ -421,10 +421,20 @@ async function loadFriends(){
 
  }catch(e){
   say("requestList","লোড করা যায়নি: "+e.message);
+
+async function acceptRequest(id,r){
+ try{
+  await updateDoc(doc(db,"friendRequests",id),{status:"accepted"});
+  await setDoc(doc(db,"friends",currentUser.uid,"list",r.fromUid),{
+   uid:r.fromUid,
+   createdAt:serverTimestamp()
+  });
+  loadFriends();
+ }catch(e){
+  alert(e.message);
  }
 }
-{
- try{await updateDoc(doc(db,"friendRequests",id),{status:"accepted"});await setDoc(doc(db,"friends",currentUser.uid,"list",r.fromUid),{uid:r.fromUid,createdAt:serverTimestamp()});loadFriends()}catch(e){alert(e.message)}
+
 }
 async function rejectRequest(id){try{await updateDoc(doc(db,"friendRequests",id),{status:"rejected"});loadFriends()}catch(e){alert(e.message)}}
 async function loadNotifications(){
