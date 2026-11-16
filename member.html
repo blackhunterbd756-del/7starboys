@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -353,9 +352,91 @@ async function sendRequest(m){
  }
 }
 
+
 async function loadFriends(){
  clear($("requestList"));
  clear($("friendsList"));
+
+ try{
+  const [incoming,outgoing]=await Promise.all([
+   getDocs(query(collection(db,"friendRequests"),where("toUid","==",currentUser.uid))),
+   getDocs(query(collection(db,"friendRequests"),where("fromUid","==",currentUser.uid)))
+  ]);
+
+  incoming.forEach(d=>{
+   const r=d.data();
+   if(r.status==="pending"){
+    const x=document.createElement("div");
+    x.className="item";
+    x.textContent=(r.fromName||"একজন সদস্য")+" তোমাকে Friend Request পাঠিয়েছেন। ";
+
+    const yes=document.createElement("button");
+    yes.className="primary";
+    yes.style.width="auto";
+    yes.textContent="Accept";
+    yes.onclick=()=>acceptRequest(d.id,r);
+
+    const no=document.createElement("button");
+    no.className="danger";
+    no.textContent="Reject";
+    no.onclick=()=>rejectRequest(d.id);
+
+    x.append(yes,no);
+    $("requestList").append(x);
+   }
+  });
+
+  if(!$("requestList").children.length){
+   say("requestList","নতুন অনুরোধ নেই।");
+  }
+
+  const uniqueFriends=new Map();
+
+  [...incoming.docs,...outgoing.docs].forEach(d=>{
+   const r=d.data();
+   if(r.status==="accepted"){
+    const uid=r.fromUid===currentUser.uid?r.toUid:r.fromUid;
+    if(uid && uid!==currentUser.uid) uniqueFriends.set(uid,uid);
+   }
+  });
+
+  for(const uid of uniqueFriends.keys()){
+   const person=await getDoc(doc(db,"publicProfiles",uid));
+   if(person.exists()){
+    $("friendsList").append(memberCard({uid,...person.data()},false));
+   }
+  }
+
+  if(!$("friendsList").children.length){
+   say("friendsList","এখনো বন্ধু নেই।");
+  }
+
+ }catch(e){
+  say("requestList","লোড করা যায়নি: "+e.message);
+ }
+}
+
+async function acceptRequest(id,r){
+ try{
+  await updateDoc(doc(db,"friendRequests",id),{status:"accepted"});
+  await setDoc(doc(db,"friends",currentUser.uid,"list",r.fromUid),{
+   uid:r.fromUid,
+   createdAt:serverTimestamp()
+  });
+  loadFriends();
+ }catch(e){
+  alert(e.message);
+ }
+}
+
+async function rejectRequest(id){
+ try{
+  await updateDoc(doc(db,"friendRequests",id),{status:"rejected"});
+  loadFriends();
+ }catch(e){
+  alert(e.message);
+ }
+}
 
  try{
   const [incoming,outgoing]=await Promise.all([
