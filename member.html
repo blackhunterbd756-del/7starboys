@@ -291,16 +291,133 @@ $("memberSearch").oninput=async()=>{
  try{const profiles=await getProfiles();clear($("searchResults"));profiles.filter(m=>(m.name||"").toLowerCase().includes(term)).forEach(m=>$("searchResults").append(memberCard(m)))}catch(e){say("searchResults",e.message)}
 };
 $("chatSearch").oninput=()=>renderChatMembers(chatMembers.filter(m=>(m.name||"").toLowerCase().includes($("chatSearch").value.toLowerCase())));
+
 async function sendRequest(m){
- try{const id=currentUser.uid+"_"+m.uid;await setDoc(doc(db,"friendRequests",id),{fromUid:currentUser.uid,toUid:m.uid,fromName:safeName(memberData),fromPhoto:memberData.photoURL||"",toName:m.name,status:"pending",createdAt:serverTimestamp()});alert("Friend request পাঠানো হয়েছে")}
- catch(e){alert("Request পাঠানো যায়নি: "+e.message)}
-}
-async function loadFriends(){
- clear($("requestList"));clear($("friendsList"));
  try{
- const incoming=await getDocs(query(collection(db,"friendRequests"),where("toUid","==",currentUser.uid)));
- const outgoing=await getDocs(query(collection(db,"friendRequests"),where("fromUid","==",currentUser.uid)));
- incoming.forEach(d=>{const r=d.data();if(r.status==="pending"){const x=document.createElement("div");x.className="item";x.textContent=(r.fromName||"একজন সদস্য")+" তোমাকে Friend Request পাঠিয়েছেন। ";const yes=document.createElement("button");yes.className="primary";yes.style.width="auto";yes.textContent="Accept";yes.onclick=()=>acceptRequest(d.id,r);const no=document.createElement("button");no.className="danger";no.textContent="Reject";no.onclick=()=>rejectRequest(d.id);x.append(yes,no);$("requestList").append(x)}});
+  const id=currentUser.uid+"_"+m.uid;
+  const reverseId=m.uid+"_"+currentUser.uid;
+  const ref=doc(db,"friendRequests",id);
+  const reverseRef=doc(db,"friendRequests",reverseId);
+
+  const existing=await getDoc(ref);
+  const reverse=await getDoc(reverseRef);
+
+  if(existing.exists()){
+   const status=existing.data().status;
+   if(status==="pending"){
+    alert("এই সদস্যকে ইতিমধ্যে Friend Request পাঠানো হয়েছে।");
+    return;
+   }
+   if(status==="accepted"){
+    alert("তোমরা ইতিমধ্যে বন্ধু।");
+    return;
+   }
+   if(status==="rejected"){
+    await deleteDoc(ref);
+   }
+  }
+
+  if(reverse.exists()){
+   const status=reverse.data().status;
+   if(status==="accepted"){
+    alert("তোমরা ইতিমধ্যে বন্ধু।");
+    return;
+   }
+   if(status==="pending"){
+    alert("এই সদস্য তোমাকে Friend Request পাঠিয়েছেন। Friends থেকে Accept করো।");
+    return;
+   }
+  }
+
+  await setDoc(ref,{
+   fromUid:currentUser.uid,
+   toUid:m.uid,
+   fromName:safeName(memberData),
+   fromPhoto:memberData.photoURL||"",
+   toName:m.name,
+   status:"pending",
+   createdAt:serverTimestamp()
+  });
+
+  alert("Friend Request পাঠানো হয়েছে।");
+ }catch(e){
+  alert("Request পাঠানো যায়নি: "+e.message);
+ }
+}
+
+}
+
+async function loadFriends(){
+ clear($("requestList"));
+ clear($("friendsList"));
+
+ try{
+  const [incoming,outgoing]=await Promise.all([
+   getDocs(query(collection(db,"friendRequests"),where("toUid","==",currentUser.uid))),
+   getDocs(query(collection(db,"friendRequests"),where("fromUid","==",currentUser.uid)))
+  ]);
+
+  incoming.forEach(d=>{
+   const r=d.data();
+
+   if(r.status==="pending"){
+    const x=document.createElement("div");
+    x.className="item";
+    x.textContent=(r.fromName||"একজন সদস্য")+" তোমাকে Friend Request পাঠিয়েছেন। ";
+
+    const yes=document.createElement("button");
+    yes.className="primary";
+    yes.style.width="auto";
+    yes.textContent="Accept";
+    yes.onclick=()=>acceptRequest(d.id,r);
+
+    const no=document.createElement("button");
+    no.className="danger";
+    no.textContent="Reject";
+    no.onclick=()=>rejectRequest(d.id);
+
+    x.append(yes,no);
+    $("requestList").append(x);
+   }
+  });
+
+  if(!$("requestList").children.length){
+   say("requestList","নতুন অনুরোধ নেই।");
+  }
+
+  const uniqueFriends=new Map();
+
+  [...incoming.docs,...outgoing.docs].forEach(d=>{
+   const r=d.data();
+
+   if(r.status==="accepted"){
+    const uid=r.fromUid===currentUser.uid?r.toUid:r.fromUid;
+
+    if(uid && uid!==currentUser.uid){
+     uniqueFriends.set(uid,uid);
+    }
+   }
+  });
+
+  for(const uid of uniqueFriends.keys()){
+   const person=await getDoc(doc(db,"publicProfiles",uid));
+
+   if(person.exists()){
+    $("friendsList").append(
+     memberCard({uid,...person.data()},false)
+    );
+   }
+  }
+
+  if(!$("friendsList").children.length){
+   say("friendsList","এখনো বন্ধু নেই।");
+  }
+
+ }catch(e){
+  say("requestList","লোড করা যায়নি: "+e.message);
+ }
+}
+;const no=document.createElement("button");no.className="danger";no.textContent="Reject";no.onclick=()=>rejectRequest(d.id);x.append(yes,no);$("requestList").append(x)}});
  if(!$("requestList").children.length)say("requestList","নতুন অনুরোধ নেই।");
  const accepted=[...incoming.docs,...outgoing.docs].filter(d=>d.data().status==="accepted");
  for(const d of accepted){const r=d.data(),uid=r.fromUid===currentUser.uid?r.toUid:r.fromUid;const person=await getDoc(doc(db,"publicProfiles",uid));if(person.exists())$("friendsList").append(memberCard({uid,...person.data()},false))}
