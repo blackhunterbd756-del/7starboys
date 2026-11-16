@@ -6,126 +6,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070914">
 <title>7STARBOYS | Social Dashboard</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#070914;--panel:#101729;--cyan:#00e5ff;--purple:#9b4dff;--text:#f4f7ff;--muted:#91a0bf;--line:#ffffff18}
 body{min-height:100vh;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(circle at 12% 8%,#142c50 0,transparent 30%),radial-gradient(circle at 90% 80%,#29133e 0,transparent 35%),var(--bg)}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-.topbar{height:68px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#080d1bea;border-bottom:1px solid #00e5ff44;backdrop-filter:blur(18px)}
-.brand{font-size:22px;font-weight:900;letter-spacing:2px;color:var(--cyan);text-shadow:0 0 15px #00e5ff77}
-.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:3px;margin-top:3px}
-.top-right{display:flex;align-items:center;gap:10px;font-size:13px}
+button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5}
+.topbar{height:65px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#080d1bea;border-bottom:1px solid #00e5ff44}
+.brand{font-size:21px;font-weight:900;letter-spacing:2px;color:var(--cyan)}
+.brand small{display:block;font-size:9px;color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:10px}
 .avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
-.layout{max-width:1400px;margin:auto;padding:20px;display:grid;grid-template-columns:230px minmax(0,1fr) 220px;gap:18px}
-.layout.hidden{display:none!important}
-.panel{background:#101729ef;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 10px 35px #0004}
-.sidebar,.right{position:sticky;top:86px;height:max-content}
-.side-profile{text-align:center;padding:8px 0 18px}
-.side-profile img{width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan);box-shadow:0 0 20px #00e5ff55}
-.side-profile h3{margin-top:10px;font-size:16px}
-.side-profile p{font-size:11px;color:var(--muted);margin-top:5px}
-.nav-item{width:100%;display:flex;align-items:center;gap:10px;padding:12px;margin-top:5px;border:0;border-radius:10px;background:transparent;color:#dce8ff;text-align:left}
+.layout{max-width:1400px;margin:auto;padding:18px;display:grid;grid-template-columns:220px minmax(0,1fr) 200px;gap:15px}
+.layout.hidden{display:none!important}.panel{background:#101729ef;border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 10px 30px #0004}
+.sidebar,.right{position:sticky;top:82px;height:max-content}.side-profile{text-align:center;padding:8px 0 15px}
+.side-profile img{width:75px;height:75px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.side-profile h3{margin-top:8px}.side-profile p{font-size:11px;color:var(--muted)}
+.nav-item{width:100%;display:block;text-align:left;padding:11px;margin-top:4px;border:0;border-radius:9px;background:transparent;color:#dce8ff}
 .nav-item:hover,.nav-item.active{background:#00e5ff17;color:var(--cyan)}
-.main{min-width:0}
-.view{display:none}
-.view.active{display:block}
-.welcome{padding:23px;border-radius:18px;background:linear-gradient(120deg,#102c48,#21143e);border:1px solid #00e5ff44;margin-bottom:17px;position:relative;overflow:hidden}
-.welcome:after{content:"✦";position:absolute;right:25px;top:8px;font-size:75px;color:#00e5ff22;animation:float 5s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(14px) rotate(25deg)}}
-.welcome h2{font-size:22px}
-.welcome p{font-size:13px;color:#c0cce3;margin-top:8px}
-.title{font-size:18px;color:var(--cyan);margin-bottom:15px}
-.muted{color:var(--muted);font-size:12px;line-height:1.7}
-.field{width:100%;padding:12px;background:#080e1e;border:1px solid var(--line);border-radius:10px;color:white;margin-top:10px;outline:none}
-.field:focus{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff22}
-textarea.field{min-height:95px;resize:vertical}
-.primary{width:100%;border:0;border-radius:10px;padding:12px 16px;background:linear-gradient(100deg,var(--cyan),#a3f7ff);color:#06101c;font-weight:bold;margin-top:11px}
-.secondary{background:#17223a;color:white;border:1px solid var(--line);border-radius:9px;padding:9px 12px}
-.danger{background:#3b1829;color:#ff9bb0;border:1px solid #ff557044;border-radius:9px;padding:9px 12px}
-.message{font-size:12px;color:var(--cyan);margin-top:9px;text-align:center}
-.file-label{display:block;color:var(--muted);font-size:12px;margin-top:12px}
-.profile-cover{height:155px;border-radius:13px;background:radial-gradient(circle at 20% 30%,#9b4dff99,transparent 35%),radial-gradient(circle at 80% 70%,#00e5ff88,transparent 40%),linear-gradient(120deg,#102c48,#21143e);border:1px solid #00e5ff44;position:relative;overflow:hidden}
-.profile-cover:after{content:"7STARBOYS";position:absolute;right:18px;bottom:15px;font-size:24px;font-weight:900;letter-spacing:4px;color:#ffffff35}
-.profile-head{display:flex;align-items:end;gap:16px;margin:-48px 15px 18px;position:relative}
-.profile-head img{width:105px;height:105px;border-radius:50%;object-fit:cover;border:5px solid var(--panel);box-shadow:0 0 20px #00e5ff55}
-.profile-head h2{font-size:21px}
-.profile-head p{font-size:12px;color:var(--muted);margin-top:5px}
-.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.info{background:#080e1e;border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
-.info small{color:var(--purple);font-weight:bold}
-.info p{font-size:13px;margin-top:6px;overflow-wrap:anywhere}
-.post{margin-top:14px}
-.post-head{display:flex;align-items:center;gap:10px}
-.post-head img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
-.post-name{font-weight:bold;font-size:14px}
-.post-time{font-size:11px;color:var(--muted);margin-top:4px}
-.post-content{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:14px 0;font-size:14px}
-.post-media{width:100%;max-height:430px;object-fit:contain;background:#05070c;border-radius:12px;margin-top:10px}
-.post-actions{display:flex;gap:8px;margin-top:12px}
-.post-actions button{flex:1;padding:10px 5px;background:#18243b;color:#dceaff;border:1px solid var(--line);border-radius:9px}
+.main{min-width:0}.view{display:none}.view.active{display:block}
+.title{font-size:18px;color:var(--cyan);margin-bottom:13px}
+.welcome{padding:22px;border-radius:15px;background:linear-gradient(120deg,#102c48,#21143e);border:1px solid #00e5ff44;margin-bottom:15px}
+.welcome p,.muted{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.7}
+.field{width:100%;padding:12px;background:#080e1e;border:1px solid var(--line);border-radius:9px;color:white;margin-top:10px;outline:none}
+textarea.field{min-height:80px;resize:vertical}
+.primary{width:100%;border:0;border-radius:9px;padding:12px;background:linear-gradient(100deg,var(--cyan),#a3f7ff);color:#06101c;font-weight:bold;margin-top:10px}
+.secondary,.danger{border-radius:8px;padding:9px 12px;background:#17223a;color:white;border:1px solid var(--line)}
+.danger{background:#3b1829;color:#ff9bb0}
+.message{font-size:12px;color:var(--cyan);margin-top:9px}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.info{background:#080e1e;border:1px solid var(--line);border-radius:9px;padding:11px;overflow-wrap:anywhere}
+.info small{color:var(--purple)}.info p{font-size:13px;margin-top:5px}
+.post{margin-top:13px}.post-head{display:flex;align-items:center;gap:10px}
+.post-head img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.post-name{font-weight:bold;font-size:14px}.post-time{font-size:10px;color:var(--muted);margin-top:4px}
+.post-content{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:12px 0;font-size:14px}
+.post-media{width:100%;max-height:400px;object-fit:contain;background:#05070c;border-radius:10px;margin-top:9px}
+.post-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.post-actions button{flex:1;padding:9px 4px;background:#18243b;color:#dceaff;border:1px solid var(--line);border-radius:8px}
 .post-actions button.liked{color:var(--cyan);border-color:var(--cyan)}
-.comment-area{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.comment{padding:10px;background:#080e1e;border-radius:9px;margin-top:8px}
-.comment-name{font-size:12px;color:var(--cyan);font-weight:bold}
-.comment-text{font-size:13px;margin-top:5px;white-space:pre-wrap;overflow-wrap:anywhere}
-.empty{text-align:center;color:var(--muted);padding:22px 8px;font-size:13px}
-#authError{display:none;margin:18px;padding:18px;border:1px solid #ff557066;border-radius:12px;background:#3b182922;color:#ffb0bd;text-align:center;line-height:1.7;overflow-wrap:anywhere}
-#authError a{color:var(--cyan);font-weight:bold}
-.mobile-nav{display:none}
-
-/* MESSENGER */
-.chat-member{width:100%;display:flex;align-items:center;gap:12px;padding:12px;margin-top:8px;background:#080e1e;border:1px solid #ffffff22;border-radius:12px;color:white;text-align:left}
-.chat-member:hover{border-color:var(--cyan);background:#00e5ff10}
-.chat-member img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
-.chat-member-info{flex:1;min-width:0}
-.chat-member-info b{display:block;overflow-wrap:anywhere}
-.chat-member-info small{display:block;color:var(--muted);margin-top:5px}
-.chat-header{display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff22;padding-bottom:12px}
-.chat-header img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
-.chat-messages{height:350px;overflow-y:auto;padding:12px 2px}
-.chat-bubble{max-width:82%;width:max-content;padding:11px 13px;margin:9px 0;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere}
-.chat-mine{margin-left:auto;background:#06465a;border:1px solid #00e5ff55}
-.chat-theirs{margin-right:auto;background:#20243a;border:1px solid #9b4dff55}
-.chat-time{display:block;font-size:10px;color:#aab8d2;margin-top:6px;text-align:right}
-.chat-compose{border-top:1px solid #ffffff22;padding-top:10px}
+.comment{padding:9px;background:#080e1e;border-radius:8px;margin-top:7px;font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:20px 8px;font-size:13px}
+.profile-cover{height:115px;border-radius:12px;background:linear-gradient(120deg,#102c48,#9b4dff,#00e5ff)}
+.profile-head{display:flex;align-items:end;gap:12px;margin:-35px 12px 15px;position:relative}
+.profile-head img{width:82px;height:82px;border-radius:50%;object-fit:cover;border:4px solid var(--panel)}
+.file-label{display:block;color:var(--muted);font-size:12px;margin-top:12px}
 .hidden{display:none!important}
-.rule{font-size:12px;line-height:1.8;margin:10px 0;color:#dce8ff}
-@media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr)}.right{display:none}}
-@media(max-width:700px){
- .topbar{height:60px;padding:0 12px}.brand{font-size:18px}
- .layout{display:block;padding:12px}.sidebar{display:none}.panel{padding:14px}
- .mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;justify-content:space-around;background:#090e1ef5;border-top:1px solid #00e5ff44;padding:8px 2px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(18px)}
- .mobile-nav button{background:none;border:0;color:var(--muted);font-size:10px;min-width:0;flex:1}
- .mobile-nav button.active{color:var(--cyan)}
- .mobile-nav span{display:block;font-size:19px;margin-bottom:3px}
- .info-grid{grid-template-columns:1fr}
- .profile-head img{width:82px;height:82px}
- .profile-head h2{font-size:18px}
- .chat-messages{height:55vh;min-height:260px}
- footer{padding-bottom:85px}
-}
-footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
+.chat-member{width:100%;display:flex;align-items:center;gap:10px;padding:10px;margin-top:8px;background:#080e1e;border:1px solid #ffffff22;border-radius:10px;color:white;text-align:left}
+.chat-member img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.chat-messages{height:330px;overflow:auto;padding:10px}
+.chat-bubble{max-width:82%;width:max-content;padding:10px;margin:8px 0;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.chat-mine{margin-left:auto;background:#06465a}.chat-theirs{background:#20243a}
+.story-row{display:flex;gap:10px;overflow-x:auto;padding:8px 0}
+.story{min-width:100px;background:#080e1e;border:1px solid var(--cyan);border-radius:10px;padding:8px;text-align:center}
+.story img,.story video{width:75px;height:90px;object-fit:cover;border-radius:8px}
+.item{padding:12px;margin-top:9px;background:#080e1e;border:1px solid var(--line);border-radius:10px}
+.item button{margin:7px 5px 0 0}
+.rule{font-size:12px;line-height:1.8;margin:9px 0}
+.mobile-nav{display:none}
+#authError{display:none;margin:15px;padding:15px;color:#ffb0bd;background:#3b182922;border:1px solid #ff557066;border-radius:10px}
+@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.right{display:none}}
+@media(max-width:700px){.layout{display:block;padding:10px}.sidebar{display:none}.panel{padding:12px}.mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;justify-content:space-around;background:#090e1ef5;border-top:1px solid #00e5ff44;padding:8px 2px calc(8px + env(safe-area-inset-bottom))}.mobile-nav button{background:none;border:0;color:var(--muted);font-size:10px;flex:1}.mobile-nav button.active{color:var(--cyan)}.mobile-nav span{display:block;font-size:18px;margin-bottom:3px}.info-grid{grid-template-columns:1fr}footer{padding-bottom:85px}}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:11px}
 </style>
 </head>
-
 <body>
 <header class="topbar">
  <div class="brand">7STARBOYS<small>OFFICIAL COMMUNITY</small></div>
- <div class="top-right"><span id="topName">Member</span><img id="topAvatar" class="avatar" alt="Profile"></div>
+ <div class="top-right"><span id="topName">Member</span><img id="topAvatar" class="avatar" alt=""></div>
 </header>
-
 <div id="authError"></div>
 
 <div class="layout hidden" id="dashboard">
 <aside class="sidebar panel">
- <div class="side-profile">
-  <img id="sideAvatar" alt="Member">
-  <h3 id="sideName">লোড হচ্ছে...</h3>
-  <p>7STARBOYS MEMBER</p>
- </div>
+ <div class="side-profile"><img id="sideAvatar" alt=""><h3 id="sideName">Member</h3><p>7STARBOYS MEMBER</p></div>
  <button class="nav-item active" data-view="home">🏠 Home</button>
  <button class="nav-item" data-view="myProfile">👤 My Profile</button>
  <button class="nav-item" data-view="create">✍️ Create Post</button>
@@ -138,149 +91,55 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
  <button class="nav-item" data-view="videos">🎬 Short Videos</button>
  <button class="nav-item" data-view="groups">👥 Groups</button>
  <button class="nav-item" data-view="saved">🔖 Saved Posts</button>
- <button class="nav-item" data-view="settings">⚙️ Settings & Privacy</button>
+ <button class="nav-item" data-view="settings">⚙️ Settings</button>
  <button class="nav-item hidden" id="adminNav" data-view="admin">🛡️ Admin Panel</button>
- <button class="danger" id="logoutBtn" style="width:100%;margin-top:14px">Logout</button>
+ <button class="danger" id="logoutBtn" style="width:100%;margin-top:12px">Logout</button>
 </aside>
 
 <main class="main">
 <section class="view active" id="home">
  <div class="welcome"><h2>Welcome to 7STARBOYS ✨</h2><p>একতা, সম্মান ও বন্ধুত্বের বন্ধনে আমাদের কমিউনিটি।</p></div>
- <div class="panel">
-  <h3 class="title">🌌 Your Community Dashboard</h3>
-  <p class="muted">তোমার প্রোফাইল, নতুন পোস্ট এবং কমিউনিটির আপডেট এক জায়গায়।</p>
-  <div class="info-grid">
-   <div class="info"><small>ACCOUNT STATUS</small><p>Approved Member</p></div>
-   <div class="info"><small>COMMUNITY</small><p>7STARBOYS Official</p></div>
-  </div>
-  <button class="primary" data-jump="create">✍️ Create a Post</button>
- </div>
- <div class="panel" style="margin-top:15px"><h3 class="title">🌐 Latest Community Posts</h3><div id="homeFeed"><div class="empty">পোস্ট লোড হচ্ছে...</div></div></div>
+ <div class="panel"><h3 class="title">🌌 Community Dashboard</h3><p class="muted">তোমার কমিউনিটির সব আপডেট এখানে।</p><button class="primary" data-jump="create">✍️ Create Post</button></div>
+ <div class="panel" style="margin-top:12px"><h3 class="title">Latest Posts</h3><div id="homeFeed"></div></div>
 </section>
 
 <section class="view" id="myProfile">
- <div class="panel">
-  <h3 class="title">👤 MY PROFILE</h3><div class="profile-cover"></div>
-  <div class="profile-head"><img id="profilePhoto" alt="Profile photo"><div><h2 id="memberName">লোড হচ্ছে...</h2><p id="memberRole">MEMBER</p></div></div>
-  <div class="info-grid">
-   <div class="info"><small>নাম</small><p id="nameValue">-</p></div>
-   <div class="info"><small>ইমেইল</small><p id="emailValue">-</p></div>
-   <div class="info"><small>জন্ম তারিখ</small><p id="birthValue">-</p></div>
-   <div class="info"><small>পদবি</small><p id="roleValue">-</p></div>
-   <div class="info"><small>অ্যাকাউন্ট</small><p id="statusValue">-</p></div>
-  </div>
-  <label class="file-label">প্রোফাইল ছবি পরিবর্তন (সর্বোচ্চ ৫ MB)</label>
-  <input class="field" type="file" id="photoFile" accept="image/*">
-  <button class="primary" id="uploadPhoto">📸 ছবি আপলোড</button>
-  <div class="message" id="photoMessage"></div>
- </div>
- <div class="panel" style="margin-top:15px"><h3 class="title">📝 MY POSTS</h3><div id="myPosts"><div class="empty">তোমার পোস্ট লোড হচ্ছে...</div></div></div>
+ <div class="panel"><h3 class="title">👤 MY PROFILE</h3><div class="profile-cover"></div>
+ <div class="profile-head"><img id="profilePhoto" alt=""><div><h2 id="memberName"></h2><p id="memberRole" class="muted"></p></div></div>
+ <div class="info-grid"><div class="info"><small>নাম</small><p id="nameValue"></p></div><div class="info"><small>ইমেইল</small><p id="emailValue"></p></div><div class="info"><small>জন্ম তারিখ</small><p id="birthValue"></p></div><div class="info"><small>পদবি</small><p id="roleValue"></p></div></div>
+ <label class="file-label">প্রোফাইল ছবি (৫ MB সর্বোচ্চ)</label><input class="field" type="file" id="photoFile" accept="image/*"><button class="primary" id="uploadPhoto">ছবি আপলোড</button><div id="photoMessage" class="message"></div></div>
+ <div class="panel" style="margin-top:12px"><h3 class="title">MY POSTS</h3><div id="myPosts"></div></div>
 </section>
 
-<section class="view" id="create">
- <div class="panel">
-  <h3 class="title">✍️ Create New Post</h3>
-  <textarea class="field" id="postText" maxlength="1000" placeholder="আপনার মনের কথা লিখুন..."></textarea>
-  <label class="file-label">ছবি অথবা ভিডিও (সর্বোচ্চ ২৫ MB)</label>
-  <input class="field" type="file" id="postFile" accept="image/*,video/*">
-  <button class="primary" id="publishPost">🚀 Publish Post</button>
-  <div class="message" id="postMessage"></div>
- </div>
-</section>
+<section class="view" id="create"><div class="panel"><h3 class="title">✍️ Create Post</h3><textarea class="field" id="postText" maxlength="1000" placeholder="আপনার মনের কথা লিখুন..."></textarea><label class="file-label">ছবি অথবা ভিডিও (২৫ MB সর্বোচ্চ)</label><input class="field" type="file" id="postFile" accept="image/*,video/*"><button class="primary" id="publishPost">🚀 Publish Post</button><div id="postMessage" class="message"></div></div></section>
+<section class="view" id="feed"><div class="panel"><h3 class="title">🌐 Community Feed</h3><div id="postFeed"></div></div></section>
 
-<section class="view" id="feed"><div class="panel"><h3 class="title">🌐 Community Feed</h3><div id="postFeed"><div class="empty">পোস্ট লোড হচ্ছে...</div></div></div></section>
-<section class="view" id="stories"><div class="panel"><h3 class="title">⭕ Stories</h3><p class="muted">Stories-এর ফিচার পরবর্তী ধাপে Firebase-এ সংযুক্ত হবে।</p></div></section>
+<section class="view" id="stories"><div class="panel"><h3 class="title">⭕ Stories</h3><input class="field" type="file" id="storyFile" accept="image/*,video/*"><button class="primary" id="uploadStory">Story Upload</button><div id="storyMessage" class="message"></div><div id="storyList" class="story-row"></div></div></section>
 
-<section class="view" id="messenger">
- <div class="panel">
-  <h3 class="title">💬 7STARBOYS Messenger</h3>
-  <p class="muted">সদস্যদের সঙ্গে ব্যক্তিগতভাবে কথা বলো।</p>
+<section class="view" id="messenger"><div class="panel"><h3 class="title">💬 Messenger</h3><input class="field" id="chatSearch" placeholder="সদস্য খুঁজুন..."><div id="memberList"></div><div id="chatWindow" class="hidden"><button class="secondary" id="backToMembers">← ফিরে যাও</button><h3 id="chatName" style="margin:12px 0"></h3><div id="chatMessages" class="chat-messages"></div><textarea class="field" id="chatText" placeholder="মেসেজ লিখুন..."></textarea><button class="primary" id="sendMessage">মেসেজ পাঠান</button><div id="chatStatus" class="message"></div></div></div></section>
 
-  <input class="field" id="chatSearch" type="search" placeholder="🔎 সদস্যের নাম খুঁজুন...">
-
-  <div id="memberList" style="margin-top:12px">
-   <div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>
-  </div>
-
-  <div id="chatWindow" class="hidden" style="margin-top:15px">
-   <div class="chat-header">
-    <button class="secondary" id="backToMembers">←</button>
-    <img id="chatAvatar" alt="Member">
-    <div>
-     <b id="chatName">Member</b>
-     <div class="muted" id="chatRole"></div>
-    </div>
-   </div>
-
-   <div id="chatMessages" class="chat-messages">
-    <div class="empty">মেসেজ লোড হচ্ছে...</div>
-   </div>
-
-   <div class="chat-compose">
-    <textarea class="field" id="chatText" rows="2" maxlength="1000" placeholder="মেসেজ লিখুন..."></textarea>
-    <button class="primary" id="sendMessage">📩 মেসেজ পাঠান</button>
-    <div class="message" id="chatStatus"></div>
-   </div>
-  </div>
- </div>
-</section>
-
-<section class="view" id="notifications"><div class="panel"><h3 class="title">🔔 Notifications</h3><p class="muted">Like, comment ও friend request notification পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
-<section class="view" id="friends"><div class="panel"><h3 class="title">🤝 Friends & Requests</h3><p class="muted">Friend request-এর ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
-<section class="view" id="members"><div class="panel"><h3 class="title">🔎 Members Search</h3><p class="muted">সদস্য অনুসন্ধানের ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
-<section class="view" id="videos"><div class="panel"><h3 class="title">🎬 Short Videos</h3><p class="muted">ভিডিও পোস্ট বর্তমানে Community Feed-এ দেখা যাবে।</p></div></section>
-<section class="view" id="groups"><div class="panel"><h3 class="title">👥 Groups</h3><p class="muted">গ্রুপের ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
-<section class="view" id="saved"><div class="panel"><h3 class="title">🔖 Saved Posts</h3><p class="muted">Saved posts-এর ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
-
-<section class="view" id="settings">
- <div class="panel">
-  <h3 class="title">⚙️ Settings & Privacy</h3>
-  <p class="muted">তোমার অ্যাকাউন্টের নিরাপত্তা বজায় রাখো।</p>
-
-  <a href="admin-panel.html"
-     id="adminMoreNav"
-     class="nav-item hidden"
-     style="text-decoration:none;margin-top:15px">
-     🛡️ Admin Panel
-  </a>
-
-  <button class="danger" id="logoutBtn2">Logout</button>
- </div>
-</section>
-<section class="view" id="admin">
- <div class="panel"><h3 class="title">🛡️ Admin Panel</h3><p class="muted">অ্যাডমিন ব্যবস্থাপনার জন্য বিদ্যমান Admin Panel ব্যবহার করো।</p><a href="admin-panel.html" style="color:var(--cyan);display:inline-block;margin-top:12px">Open Admin Panel ↗</a></div>
-</section>
+<section class="view" id="notifications"><div class="panel"><h3 class="title">🔔 Notifications</h3><div id="notificationList"></div></div></section>
+<section class="view" id="friends"><div class="panel"><h3 class="title">🤝 Friends & Requests</h3><h4>বন্ধুত্বের অনুরোধ</h4><div id="requestList"></div><h4 style="margin-top:18px">আমার বন্ধুরা</h4><div id="friendsList"></div></div></section>
+<section class="view" id="members"><div class="panel"><h3 class="title">🔎 Members Search</h3><input class="field" id="memberSearch" placeholder="নাম দিয়ে খুঁজুন..."><div id="searchResults"></div></div></section>
+<section class="view" id="videos"><div class="panel"><h3 class="title">🎬 Short Videos</h3><div id="videoFeed"></div></div></section>
+<section class="view" id="groups"><div class="panel"><h3 class="title">👥 Groups</h3><input class="field" id="groupName" maxlength="60" placeholder="গ্রুপের নাম"><textarea class="field" id="groupDescription" placeholder="গ্রুপের বিবরণ"></textarea><button class="primary" id="createGroup">গ্রুপ তৈরি করুন</button><div id="groupList"></div></div></section>
+<section class="view" id="saved"><div class="panel"><h3 class="title">🔖 Saved Posts</h3><div id="savedList"></div></div></section>
+<section class="view" id="settings"><div class="panel"><h3 class="title">⚙️ Settings & Privacy</h3><p class="muted">তোমার অ্যাকাউন্ট নিরাপদ রাখো।</p><a id="adminMoreNav" class="hidden" href="admin-panel.html">Admin Panel</a><button class="danger" id="logoutBtn2" style="margin-top:15px">Logout</button></div></section>
+<section class="view" id="admin"><div class="panel"><h3 class="title">🛡️ Admin Panel</h3><a href="admin-panel.html">Open Admin Panel ↗</a></div></section>
 </main>
 
-<aside class="right panel">
- <h3 class="title">⭐ Community Rules</h3>
- <div class="rule">🤝 সকল সদস্যকে সম্মান করতে হবে।</div>
- <div class="rule">💙 বন্ধুত্ব ও একতা বজায় রাখতে হবে।</div>
- <div class="rule">🚫 কাউকে অপমান করা যাবে না।</div>
- <div class="rule">🌟 ইতিবাচক পোস্ট করতে হবে।</div>
- <p class="muted" style="margin-top:14px">7STARBOYS — আমাদের সংগঠন, আমাদের পরিচয়।</p>
-</aside>
+<aside class="right panel"><h3 class="title">⭐ Community Rules</h3><div class="rule">🤝 সকল সদস্যকে সম্মান করতে হবে।</div><div class="rule">💙 বন্ধুত্ব ও একতা বজায় রাখতে হবে।</div><div class="rule">🚫 কাউকে অপমান করা যাবে না।</div><div class="rule">🌟 ইতিবাচক পোস্ট করতে হবে।</div></aside>
 </div>
 
 <nav class="mobile-nav">
- <button class="active" data-view="home"><span>🏠</span>Home</button>
- <button data-view="myProfile"><span>👤</span>Profile</button>
- <button data-view="create"><span>✍️</span>Post</button>
- <button data-view="feed"><span>🌐</span>Feed</button>
- <button data-view="messenger"><span>💬</span>Chat</button>
- <button data-view="settings"><span>⚙️</span>More</button>
+<button class="active" data-view="home"><span>🏠</span>Home</button><button data-view="myProfile"><span>👤</span>Profile</button><button data-view="create"><span>✍️</span>Post</button><button data-view="feed"><span>🌐</span>Feed</button><button data-view="messenger"><span>💬</span>Chat</button><button data-view="settings"><span>⚙️</span>More</button>
 </nav>
-
 <footer>© 2026 7STARBOYS | OFFICIAL COMMUNITY</footer>
 
 <script type="module">
 import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,signOut} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-import {
- getFirestore,doc,getDoc,setDoc,updateDoc,
- collection,addDoc,getDocs,query,orderBy,
- onSnapshot,serverTimestamp,deleteDoc
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+import {getFirestore,doc,getDoc,setDoc,updateDoc,collection,addDoc,getDocs,query,where,orderBy,onSnapshot,serverTimestamp,deleteDoc} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
@@ -291,739 +150,256 @@ const firebaseConfig={
  appId:"1:542462403066:web:a6e204f3402b72cdecc443",
  measurementId:"G-RES9E2QY2N"
 };
-
 const CLOUDINARY_CLOUD_NAME="iwza5did";
 const CLOUDINARY_UPLOAD_PRESET="sevenstarboys";
-
-const app=getApps().find(item=>item.name==="7STARBOYS_LOGIN")
- || initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
-
-const auth=getAuth(app);
-const db=getFirestore(app);
-
-let currentUser=null;
-let memberData={};
-let postsCache=[];
-let feedUnsubscribe=null;
-let postCardUnsubs=[];
-let authGeneration=0;
-let authReady=false;
-
-/* MESSENGER STATE */
-let activeChatId=null;
-let activeChatUnsubscribe=null;
-let chatMembers=[];
-let chatLoading=false;
-
+const app=getApps().find(a=>a.name==="7STARBOYS_LOGIN")||initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
+const auth=getAuth(app),db=getFirestore(app);
 const $=id=>document.getElementById(id);
 const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
+let currentUser=null,memberData={},postsCache=[],chatMembers=[],activeChatId=null,chatUnsub=null,feedUnsub=null;
 
-function msg(id,text){
-  $(id).textContent=text;
-}
-
-function chatStatus(text){
-  msg("chatStatus",text);
-}
-
-function showError(text){
-  $("authError").style.display="block";
-  $("authError").textContent=text;
-}
-
-function hideError(){
-  $("authError").style.display="none";
-  $("authError").textContent="";
-}
-
-/* NAVIGATION */
+function say(id,t){$(id).textContent=t}
+function safeName(d){return d.name||"7STARBOYS Member"}
+function profilePhoto(d){return d.photoURL||fallback}
+function showError(t){$("authError").style.display="block";say("authError",t)}
+function hideError(){$("authError").style.display="none"}
 function showView(id){
- document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
- document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
- window.scrollTo({top:0,behavior:"smooth"});
-
- if(id==="messenger" && currentUser){
-  loadChatMembers();
- }
+ document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===id));
+ document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("active",x.dataset.view===id));
+ if(id==="messenger")loadMembers();
+ if(id==="friends")loadFriends();
+ if(id==="notifications")loadNotifications();
+ if(id==="members")loadSearch();
+ if(id==="stories")loadStories();
+ if(id==="groups")loadGroups();
+ if(id==="saved")loadSaved();
+ if(id==="videos")renderVideos();
 }
-document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
-document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.jump)));
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+document.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>showView(b.dataset.jump));
 
-/* PROFILE PHOTO */
-function setPhoto(url){
- ["topAvatar","sideAvatar","profilePhoto"].forEach(id=>$(id).src=url||fallback);
+async function uploadFile(file){
+ const f=new FormData();f.append("file",file);f.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
+ const r=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,{method:"POST",body:f});
+ const d=await r.json();if(!r.ok)throw Error(d.error?.message||"Upload failed");return d.secure_url;
 }
-
-/* CLOUDINARY UPLOAD */
-async function uploadCloudinary(file){
- const data=new FormData();
- data.append("file",file);
- data.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
- const response=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,{method:"POST",body:data});
- const result=await response.json();
- if(!response.ok)throw new Error(result.error?.message||"Upload failed");
- return result.secure_url;
-}
-
-/* PROFILE DATA */
 function renderProfile(){
- const name=memberData.name||"7STARBOYS Member";
- const role=memberData.designation||"Member";
- $("topName").textContent=name;
- $("sideName").textContent=name;
- $("memberName").textContent=name;
- $("memberRole").textContent=role;
- $("nameValue").textContent=name;
- $("emailValue").textContent=memberData.email||currentUser?.email||"";
- $("birthValue").textContent=memberData.birthDate||"উল্লেখ নেই";
- $("roleValue").textContent=role;
- $("statusValue").textContent="Approved";
- setPhoto(memberData.photoURL||"");
+ const n=safeName(memberData),role=memberData.designation||"Member",photo=profilePhoto(memberData);
+ ["topAvatar","sideAvatar","profilePhoto"].forEach(id=>$(id).src=photo);
+ say("topName",n);say("sideName",n);say("memberName",n);say("memberRole",role);
+ say("nameValue",n);say("emailValue",memberData.email||currentUser.email||"");
+ say("birthValue",memberData.birthDate||"উল্লেখ নেই");say("roleValue",role);
 }
-
-/* STOP OLD POST LISTENERS */
-function clearPostListeners(){
- postCardUnsubs.forEach(unsubscribe=>{try{unsubscribe()}catch(e){}});
- postCardUnsubs=[];
-}
-
-/* POST CARD */
-function makePostCard(post,id,container){
- const card=document.createElement("article");
- card.className="panel post";
-
- const head=document.createElement("div");
- head.className="post-head";
- const avatar=document.createElement("img");
- avatar.src=post.authorPhoto||fallback;
- avatar.alt="Member";
-
- const htxt=document.createElement("div");
- const name=document.createElement("div");
- name.className="post-name";
- name.textContent=post.authorName||"Member";
-
- const time=document.createElement("div");
- time.className="post-time";
- const date=post.createdAt?.toDate?.();
- time.textContent=date?date.toLocaleString("bn-BD"):"সদ্য প্রকাশিত";
- htxt.append(name,time);
- head.append(avatar,htxt);
- card.append(head);
-
- if(post.text){
-  const t=document.createElement("div");
-  t.className="post-content";
-  t.textContent=post.text;
-  card.append(t);
- }
-
- if(post.mediaURL){
-  if(post.mediaType==="video"){
-   const video=document.createElement("video");
-   video.src=post.mediaURL;
-   video.controls=true;
-   video.className="post-media";
-   card.append(video);
-  }else{
-   const image=document.createElement("img");
-   image.src=post.mediaURL;
-   image.className="post-media";
-   image.alt="Post image";
-   card.append(image);
-  }
- }
-
- const actions=document.createElement("div");
- actions.className="post-actions";
- const like=document.createElement("button");
- like.textContent="💙 Like";
- const comment=document.createElement("button");
- comment.textContent="💬 Comment";
- actions.append(like,comment);
- card.append(actions);
-
- const count=document.createElement("div");
- count.className="muted";
- count.style.marginTop="10px";
- card.append(count);
-
- const area=document.createElement("div");
- area.className="comment-area";
- area.hidden=true;
- const list=document.createElement("div");
- const input=document.createElement("textarea");
- input.className="field";
- input.rows=2;
- input.maxLength=500;
- input.placeholder="মন্তব্য লিখুন...";
- const send=document.createElement("button");
- send.className="primary";
- send.textContent="মন্তব্য প্রকাশ";
- area.append(list,input,send);
- card.append(area);
-
+function stopChat(){if(chatUnsub)chatUnsub();chatUnsub=null;activeChatId=null}
+function clear(el){el.replaceChildren()}
+function makePost(p,id,container){
+ const card=document.createElement("article");card.className="panel post";
+ const head=document.createElement("div");head.className="post-head";
+ const img=document.createElement("img");img.src=p.authorPhoto||fallback;
+ const meta=document.createElement("div"),name=document.createElement("div"),time=document.createElement("div");
+ name.className="post-name";name.textContent=p.authorName||"Member";
+ time.className="post-time";time.textContent=p.createdAt?.toDate?.()?.toLocaleString("bn-BD")||"সদ্য প্রকাশিত";
+ meta.append(name,time);head.append(img,meta);card.append(head);
+ if(p.text){const t=document.createElement("div");t.className="post-content";t.textContent=p.text;card.append(t)}
+ if(p.mediaURL){if(p.mediaType==="video"){const v=document.createElement("video");v.src=p.mediaURL;v.controls=true;v.className="post-media";card.append(v)}else{const im=document.createElement("img");im.src=p.mediaURL;im.className="post-media";card.append(im)}}
+ const actions=document.createElement("div");actions.className="post-actions";
+ const like=document.createElement("button"),comment=document.createElement("button"),save=document.createElement("button");
+ like.textContent="💙 Like";comment.textContent="💬 Comment";save.textContent="🔖 Save";
+ actions.append(like,comment,save);card.append(actions);
+ const count=document.createElement("div");count.className="muted";card.append(count);
+ const area=document.createElement("div");area.hidden=true;
+ const comments=document.createElement("div"),input=document.createElement("textarea");input.className="field";input.maxLength=500;input.placeholder="মন্তব্য লিখুন";
+ const send=document.createElement("button");send.className="primary";send.textContent="মন্তব্য পাঠান";
+ area.append(comments,input,send);card.append(area);
  const likeRef=doc(db,"posts",id,"likes",currentUser.uid);
- getDoc(likeRef).then(s=>{if(s.exists())like.classList.add("liked")}).catch(e=>console.error("Like check:",e));
-
- like.addEventListener("click",async()=>{
-  if(!currentUser)return;
-  like.disabled=true;
-  try{
-   const snapshot=await getDoc(likeRef);
-   if(snapshot.exists()){
-    await deleteDoc(likeRef);
-    like.classList.remove("liked");
-   }else{
-    await setDoc(likeRef,{uid:currentUser.uid,name:memberData.name||"Member",createdAt:serverTimestamp()});
-    like.classList.add("liked");
-   }
-  }catch(e){alert("Like করা যায়নি: "+e.message)}
-  like.disabled=false;
- });
-
- comment.addEventListener("click",()=>area.hidden=!area.hidden);
-
- send.addEventListener("click",async()=>{
-  const text=input.value.trim();
-  if(!text||!currentUser)return;
-  send.disabled=true;
-  try{
-   await addDoc(collection(db,"posts",id,"comments"),{
-    authorUid:currentUser.uid,
-    authorName:memberData.name||"Member",
-    text,
-    createdAt:serverTimestamp()
-   });
-   input.value="";
-  }catch(e){alert("মন্তব্য করা যায়নি: "+e.message)}
-  send.disabled=false;
- });
-
- const commentQuery=query(collection(db,"posts",id,"comments"),orderBy("createdAt","asc"));
- const commentUnsub=onSnapshot(commentQuery,snapshot=>{
-  list.innerHTML="";
-  snapshot.forEach(commentDoc=>{
-   const data=commentDoc.data();
-   const box=document.createElement("div");
-   box.className="comment";
-   const commentName=document.createElement("div");
-   commentName.className="comment-name";
-   commentName.textContent=data.authorName||"Member";
-   const commentText=document.createElement("div");
-   commentText.className="comment-text";
-   commentText.textContent=data.text||"";
-   box.append(commentName,commentText);
-   list.append(box);
-  });
- },e=>console.error("Comments:",e));
- postCardUnsubs.push(commentUnsub);
-
- const likeUnsub=onSnapshot(collection(db,"posts",id,"likes"),snapshot=>{
-  count.textContent="💙 "+snapshot.size+" জন Like করেছেন";
- },e=>console.error("Likes:",e));
- postCardUnsubs.push(likeUnsub);
-
- if(post.authorUid===currentUser.uid){
-  const del=document.createElement("button");
-  del.className="danger";
-  del.style.marginTop="12px";
-  del.textContent="🗑 Delete My Post";
-  del.addEventListener("click",async()=>{
-   if(!confirm("এই পোস্টটি মুছে ফেলতে চাও?"))return;
-   del.disabled=true;
-   try{await deleteDoc(doc(db,"posts",id))}
-   catch(e){alert("মুছতে সমস্যা: "+e.message);del.disabled=false}
-  });
-  card.append(del);
- }
+ getDoc(likeRef).then(s=>{if(s.exists())like.classList.add("liked")}).catch(console.error);
+ like.onclick=async()=>{like.disabled=true;try{const s=await getDoc(likeRef);if(s.exists()){await deleteDoc(likeRef);like.classList.remove("liked")}else{await setDoc(likeRef,{uid:currentUser.uid,name:safeName(memberData),createdAt:serverTimestamp()});like.classList.add("liked")}}catch(e){alert(e.message)}like.disabled=false};
+ comment.onclick=()=>area.hidden=!area.hidden;
+ send.onclick=async()=>{if(!input.value.trim())return;send.disabled=true;try{await addDoc(collection(db,"posts",id,"comments"),{authorUid:currentUser.uid,authorName:safeName(memberData),text:input.value.trim(),createdAt:serverTimestamp()});input.value=""}catch(e){alert(e.message)}send.disabled=false};
+ onSnapshot(query(collection(db,"posts",id,"comments"),orderBy("createdAt","asc")),s=>{clear(comments);s.forEach(c=>{const x=document.createElement("div");x.className="comment";x.textContent=(c.data().authorName||"Member")+": "+(c.data().text||"");comments.append(x)})},console.error);
+ onSnapshot(collection(db,"posts",id,"likes"),s=>sayCount(count,s.size),console.error);
+ save.onclick=async()=>{try{await setDoc(doc(db,"savedPosts",currentUser.uid,"posts",id),{postId:id,savedAt:serverTimestamp()});save.textContent="✓ Saved"}catch(e){alert("Save করা যায়নি: "+e.message)}};
+ if(p.authorUid===currentUser.uid){const del=document.createElement("button");del.className="danger";del.textContent="🗑 Delete";del.onclick=async()=>{if(confirm("পোস্ট মুছতে চাও?"))try{await deleteDoc(doc(db,"posts",id))}catch(e){alert(e.message)}};card.append(del)}
  container.append(card);
 }
-
-/* RENDER POSTS */
-function renderAllPosts(){
- clearPostListeners();
- ["postFeed","homeFeed","myPosts"].forEach(id=>$(id).innerHTML="");
-
- if(!postsCache.length){
-  $("postFeed").innerHTML='<div class="empty">এখনো কোনো পোস্ট নেই।</div>';
-  $("homeFeed").innerHTML='<div class="empty">এখনো কোনো পোস্ট নেই।</div>';
-  $("myPosts").innerHTML='<div class="empty">তুমি এখনো কোনো পোস্ট করোনি।</div>';
-  return;
- }
-
- postsCache.forEach(({id,data})=>{
-  makePostCard(data,id,$("postFeed"));
-  if(data.authorUid===currentUser.uid)makePostCard(data,id,$("myPosts"));
- });
- postsCache.slice(0,3).forEach(({id,data})=>makePostCard(data,id,$("homeFeed")));
-}
-
-/* COMMUNITY FEED */
-function stopFeed(){
- if(feedUnsubscribe){feedUnsubscribe();feedUnsubscribe=null}
- clearPostListeners();
+function sayCount(el,n){el.textContent="💙 "+n+" জন Like করেছেন"}
+function renderPosts(){
+ ["postFeed","homeFeed","myPosts"].forEach(id=>clear($(id)));
+ if(!postsCache.length){["postFeed","homeFeed","myPosts"].forEach(id=>say(id,"এখনো কোনো পোস্ট নেই।"));return}
+ postsCache.forEach(({id,data})=>{makePost(data,id,$("postFeed"));if(data.authorUid===currentUser.uid)makePost(data,id,$("myPosts"))});
+ postsCache.slice(0,3).forEach(({id,data})=>makePost(data,id,$("homeFeed")));
+ renderVideos();
 }
 function startFeed(){
- stopFeed();
- const postsQuery=query(collection(db,"posts"),orderBy("createdAt","desc"));
- feedUnsubscribe=onSnapshot(postsQuery,snapshot=>{
-  postsCache=snapshot.docs.map(d=>({id:d.id,data:d.data()}));
-  renderAllPosts();
- },error=>{
-  console.error("Feed error:",error);
-  $("postFeed").textContent="পোস্ট লোড করা যায়নি: "+error.message;
- });
+ if(feedUnsub)feedUnsub();
+ feedUnsub=onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc")),s=>{postsCache=s.docs.map(d=>({id:d.id,data:d.data()}));renderPosts()},e=>say("postFeed","Feed error: "+e.message));
 }
-
-/* ==========================
-   7STARBOYS PRIVATE MESSENGER
-   ========================== */
-
-function stopActiveChat(){
- if(activeChatUnsubscribe){
-  activeChatUnsubscribe();
-  activeChatUnsubscribe=null;
- }
- activeChatId=null;
+function renderVideos(){
+ clear($("videoFeed"));const videos=postsCache.filter(x=>x.data.mediaType==="video");
+ if(!videos.length){say("videoFeed","এখনো কোনো ভিডিও নেই।");return}
+ videos.forEach(x=>makePost(x.data,x.id,$("videoFeed")));
 }
-
-async function loadChatMembers(){
- if(!currentUser || chatLoading)return;
-
- chatLoading=true;
- const list=$("memberList");
- list.innerHTML='<div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>';
-
- try{
-  const snapshot=await getDocs(collection(db,"publicProfiles"));
-
-  if(!currentUser)return;
-
-  chatMembers=[];
-
-  snapshot.forEach(item=>{
-   if(item.id===currentUser.uid)return;
-
-   const data=item.data();
-   if(!data.name)return;
-
-   chatMembers.push({
-    uid:item.id,
-    name:data.name,
-    designation:data.designation||"সদস্য",
-    photoURL:data.photoURL||fallback
-   });
-  });
-
-  chatMembers.sort((a,b)=>a.name.localeCompare(b.name,"bn"));
-  renderChatMembers(chatMembers);
-
- }catch(error){
-  console.error("Messenger member loading:",error);
-  list.textContent="সদস্য লোড করা যায়নি: "+error.message;
- }finally{
-  chatLoading=false;
- }
-}
-
-function renderChatMembers(members){
- const list=$("memberList");
- list.innerHTML="";
-
- if(!members.length){
-  list.innerHTML='<div class="empty">অন্য কোনো অনুমোদিত সদস্য পাওয়া যায়নি।</div>';
-  return;
- }
-
- members.forEach(member=>{
-  const button=document.createElement("button");
-  button.className="chat-member";
-
-  const image=document.createElement("img");
-  image.src=member.photoURL;
-  image.alt="";
-  image.onerror=()=>{image.src=fallback};
-
-  const info=document.createElement("div");
-  info.className="chat-member-info";
-
-  const name=document.createElement("b");
-  name.textContent=member.name;
-
-  const role=document.createElement("small");
-  role.textContent=member.designation;
-
-  const icon=document.createElement("span");
-  icon.textContent="💬";
-
-  info.append(name,role);
-  button.append(image,info,icon);
-
-  button.addEventListener("click",()=>openPrivateChat(member));
-  list.appendChild(button);
- });
-}
-
-$("chatSearch").addEventListener("input",()=>{
- const search=$("chatSearch").value.trim().toLowerCase();
-
- renderChatMembers(
-  chatMembers.filter(member=>
-   member.name.toLowerCase().includes(search) ||
-   member.designation.toLowerCase().includes(search)
-  )
- );
-});
-
-async function openPrivateChat(member){
- if(!currentUser)return;
-
- stopActiveChat();
-
- const participants=[currentUser.uid,member.uid].sort();
- const chatId=participants.join("_");
- activeChatId=chatId;
-
- $("memberList").classList.add("hidden");
- $("chatSearch").classList.add("hidden");
- $("chatWindow").classList.remove("hidden");
-
- $("chatAvatar").src=member.photoURL;
- $("chatAvatar").onerror=()=>{$("chatAvatar").src=fallback};
- $("chatName").textContent=member.name;
- $("chatRole").textContent=member.designation;
- $("chatMessages").innerHTML='<div class="empty">চ্যাট খুলছে...</div>';
- chatStatus("চ্যাট লোড হচ্ছে...");
-
- try{
-  const chatRef=doc(db,"conversations",chatId);
-  const chatSnap=await getDoc(chatRef);
-
-  if(activeChatId!==chatId)return;
-
-  if(!chatSnap.exists()){
-   await setDoc(chatRef,{
-    participants:participants,
-    createdAt:serverTimestamp(),
-    updatedAt:serverTimestamp(),
-    lastMessage:"",
-    lastSenderId:""
-   });
-  }else{
-   const savedParticipants=chatSnap.data().participants||[];
-   if(!savedParticipants.includes(currentUser.uid) ||
-      !savedParticipants.includes(member.uid)){
-    throw new Error("এই কথোপকথনে প্রবেশের অনুমতি নেই।");
-   }
-  }
-
-  if(activeChatId!==chatId)return;
-
-  const messagesQuery=query(
-   collection(db,"conversations",chatId,"messages"),
-   orderBy("createdAt","asc")
-  );
-
-  activeChatUnsubscribe=onSnapshot(
-   messagesQuery,
-   snapshot=>{
-    if(activeChatId!==chatId)return;
-
-    const box=$("chatMessages");
-    box.innerHTML="";
-
-    if(snapshot.empty){
-     box.innerHTML='<div class="empty">এখনো কোনো মেসেজ নেই। প্রথম মেসেজটি পাঠাও! 💙</div>';
-     return;
-    }
-
-    snapshot.forEach(messageDoc=>{
-     const data=messageDoc.data();
-
-     const bubble=document.createElement("div");
-     bubble.className="chat-bubble "+(
-      data.senderId===currentUser.uid
-       ?"chat-mine"
-       :"chat-theirs"
-     );
-
-     const text=document.createElement("div");
-     text.textContent=data.text||"";
-
-     const time=document.createElement("small");
-     time.className="chat-time";
-
-     const date=data.createdAt?.toDate?.();
-     time.textContent=date
-      ?date.toLocaleTimeString("bn-BD",{hour:"2-digit",minute:"2-digit"})
-      :"পাঠানো হচ্ছে...";
-
-     bubble.append(text,time);
-     box.appendChild(bubble);
-    });
-
-    box.scrollTop=box.scrollHeight;
-   },
-   error=>{
-    console.error("Chat listener:",error);
-    if(activeChatId===chatId){
-     $("chatMessages").textContent="মেসেজ লোড হয়নি: "+error.message;
-    }
-   }
-  );
-
-  chatStatus("");
-
- }catch(error){
-  console.error("Open private chat:",error);
-  chatStatus("চ্যাট খোলা যায়নি: "+error.message);
- }
-}
-
-$("sendMessage").addEventListener("click",async()=>{
- const input=$("chatText");
- const text=input.value.trim();
-
- if(!text)return;
- if(!currentUser || !activeChatId){
-  chatStatus("আগে একজন সদস্য নির্বাচন করো।");
-  return;
- }
-
- const chatId=activeChatId;
- const button=$("sendMessage");
-
- button.disabled=true;
- chatStatus("মেসেজ পাঠানো হচ্ছে...");
-
- try{
-  const chatRef=doc(db,"conversations",chatId);
-
-  await addDoc(
-   collection(db,"conversations",chatId,"messages"),
-   {
-    senderId:currentUser.uid,
-    text:text,
-    imageURL:"",
-    createdAt:serverTimestamp()
-   }
-  );
-
-  if(activeChatId===chatId){
-   input.value="";
-  }
-
-  try{
-   await updateDoc(chatRef,{
-    lastMessage:text,
-    lastSenderId:currentUser.uid,
-    updatedAt:serverTimestamp()
-   });
-  }catch(updateError){
-   console.warn("Conversation preview update:",updateError);
-  }
-
-  if(activeChatId===chatId){
-   chatStatus("মেসেজ পাঠানো হয়েছে 💙");
-  }
-
- }catch(error){
-  console.error("Send message:",error);
-  chatStatus("মেসেজ পাঠানো যায়নি: "+error.message);
- }finally{
-  button.disabled=false;
- }
-});
-
-$("chatText").addEventListener("keydown",event=>{
- if(event.key==="Enter" && !event.shiftKey){
-  event.preventDefault();
-  $("sendMessage").click();
- }
-});
-
-$("backToMembers").addEventListener("click",()=>{
- stopActiveChat();
-
- $("chatWindow").classList.add("hidden");
- $("memberList").classList.remove("hidden");
- $("chatSearch").classList.remove("hidden");
- $("chatText").value="";
- chatStatus("");
-});
-
-/* AUTHENTICATION */
-async function checkMember(user){
- const generation=++authGeneration;
-
- if(!user){
-  currentUser=null;
-  memberData={};
-  postsCache=[];
-  stopFeed();
-  stopActiveChat();
-  $("dashboard").classList.add("hidden");
-  $("adminNav").classList.add("hidden");
-  showError("লগইন সেশন পাওয়া যায়নি। একই ব্রাউজারে Login পেজে গিয়ে আবার লগইন করুন।");
-  return;
- }
-
- currentUser=user;
- hideError();
-
- try{
-  const memberSnap=await getDoc(doc(db,"members",user.uid));
-  if(generation!==authGeneration)return;
-
-  if(!memberSnap.exists()){
-   stopFeed();
-   $("dashboard").classList.add("hidden");
-   showError("এই অ্যাকাউন্টের সদস্য তথ্য পাওয়া যায়নি। Admin-এর সঙ্গে যোগাযোগ করুন।");
-   return;
-  }
-
-  memberData=memberSnap.data();
-
-  if(memberData.status!=="approved"){
-   stopFeed();
-   $("dashboard").classList.add("hidden");
-   showError("তোমার সদস্যপদ এখনো অনুমোদিত হয়নি। Admin-এর অনুমোদনের অপেক্ষা করো।");
-   return;
-  }
-
-  $("dashboard").classList.remove("hidden");
-  renderProfile();
-  startFeed();
-
-  try{
-   const adminSnap=await getDoc(doc(db,"admins",user.uid));
-   if(generation!==authGeneration)return;
-
-   const isAdmin=adminSnap.exists();
-
-   $("adminNav").classList.toggle("hidden",!isAdmin);
-   $("adminMoreNav").classList.toggle("hidden",!isAdmin);
-
-  }catch(adminError){
-   console.warn("Admin check:",adminError);
-
-   $("adminNav").classList.add("hidden");
-   $("adminMoreNav").classList.add("hidden");
-  }
-
- }catch(error){
-  console.error("Member loading error:",error);
-  if(generation===authGeneration){
-   stopFeed();
-   $("dashboard").classList.add("hidden");
-   showError("সদস্যের তথ্য লোড করা যায়নি: "+error.message);
-  }
- }
-}
-
-async function startAuthentication(){
- try{
-  await setPersistence(auth,browserLocalPersistence);
-
-  if(authReady)return;
-  authReady=true;
-
-  onAuthStateChanged(auth,async user=>{
-   await checkMember(user);
-  },error=>{
-   console.error("Auth state error:",error);
-   showError("Firebase Authentication সমস্যা: "+error.message);
-  });
-
- }catch(error){
-  console.error("Authentication setup error:",error);
-  showError("Firebase চালু করা যায়নি: "+error.message);
- }
-}
-startAuthentication();
-
-/* PROFILE PHOTO UPLOAD */
-$("uploadPhoto").addEventListener("click",async()=>{
- const file=$("photoFile").files[0];
- if(!file)return msg("photoMessage","আগে একটি ছবি নির্বাচন করুন।");
- if(!file.type.startsWith("image/"))return msg("photoMessage","শুধু ছবি নির্বাচন করুন।");
- if(file.size>5*1024*1024)return msg("photoMessage","ছবি ৫ MB-এর কম হতে হবে।");
- if(!currentUser)return msg("photoMessage","লগইন সেশন পাওয়া যায়নি।");
-
- $("uploadPhoto").disabled=true;
- msg("photoMessage","ছবি আপলোড হচ্ছে...");
-
- try{
-  const url=await uploadCloudinary(file);
-  await setDoc(doc(db,"members",currentUser.uid),{photoURL:url},{merge:true});
-  memberData.photoURL=url;
-  setPhoto(url);
-  msg("photoMessage","প্রোফাইল ছবি আপডেট হয়েছে!");
- }catch(error){
-  console.error(error);
-  msg("photoMessage","সমস্যা: "+error.message);
- }
- $("uploadPhoto").disabled=false;
-});
 
 /* PUBLISH POST */
-$("publishPost").addEventListener("click",async()=>{
- const text=$("postText").value.trim();
- const file=$("postFile").files[0];
-
- if(!text&&!file)return msg("postMessage","কিছু লিখুন অথবা ছবি/ভিডিও দিন।");
- if(file&&file.size>25*1024*1024)return msg("postMessage","ফাইল ২৫ MB-এর বেশি হতে পারবে না।");
- if(!currentUser)return msg("postMessage","লগইন সেশন পাওয়া যায়নি।");
-
- $("publishPost").disabled=true;
- msg("postMessage","পোস্ট প্রকাশ হচ্ছে...");
-
+$("publishPost").onclick=async()=>{
+ const text=$("postText").value.trim(),file=$("postFile").files[0];
+ if(!text&&!file)return say("postMessage","কিছু লিখুন অথবা ফাইল দিন।");
+ if(file&&file.size>25*1024*1024)return say("postMessage","ফাইল ২৫ MB-এর বেশি নয়।");
+ $("publishPost").disabled=true;say("postMessage","প্রকাশ হচ্ছে...");
  try{
-  let mediaURL="";
-  let mediaType="text";
+ let mediaURL="",mediaType="text";
+ if(file){if(!file.type.startsWith("image/")&&!file.type.startsWith("video/"))throw Error("শুধু ছবি বা ভিডিও দিন");mediaURL=await uploadFile(file);mediaType=file.type.startsWith("video/")?"video":"image"}
+ await addDoc(collection(db,"posts"),{authorUid:currentUser.uid,authorName:safeName(memberData),authorPhoto:memberData.photoURL||"",text,mediaURL,mediaType,createdAt:serverTimestamp()});
+ $("postText").value="";$("postFile").value="";say("postMessage","পোস্ট প্রকাশ হয়েছে!");showView("feed");
+ }catch(e){say("postMessage","সমস্যা: "+e.message)}$("publishPost").disabled=false;
+};
 
-  if(file){
-   if(!file.type.startsWith("image/")&&!file.type.startsWith("video/"))throw new Error("শুধু ছবি অথবা ভিডিও দিন");
-   mediaURL=await uploadCloudinary(file);
-   mediaType=file.type.startsWith("video/")?"video":"image";
-  }
+/* PROFILE PHOTO */
+$("uploadPhoto").onclick=async()=>{
+ const f=$("photoFile").files[0];if(!f)return say("photoMessage","ছবি নির্বাচন করুন");
+ if(!f.type.startsWith("image/")||f.size>5*1024*1024)return say("photoMessage","ছবি ৫ MB-এর কম হতে হবে");
+ $("uploadPhoto").disabled=true;
+ try{const url=await uploadFile(f);await updateDoc(doc(db,"members",currentUser.uid),{photoURL:url});memberData.photoURL=url;renderProfile();say("photoMessage","ছবি আপডেট হয়েছে")}
+ catch(e){say("photoMessage",e.message)}$("uploadPhoto").disabled=false;
+};
 
-  await addDoc(collection(db,"posts"),{
-   authorUid:currentUser.uid,
-   authorName:memberData.name||"Member",
-   authorPhoto:memberData.photoURL||"",
-   text,
-   mediaURL,
-   mediaType,
-   createdAt:serverTimestamp()
-  });
+/* MEMBER DIRECTORY + FRIEND REQUESTS */
+async function getProfiles(){
+ const s=await getDocs(collection(db,"publicProfiles"));
+ return s.docs.filter(d=>d.id!==currentUser.uid).map(d=>({uid:d.id,...d.data()}));
+}
+function memberCard(m,withRequest=true){
+ const box=document.createElement("div");box.className="item";
+ const n=document.createElement("b");n.textContent=m.name||"Member";box.append(n);
+ const role=document.createElement("div");role.className="muted";role.textContent=m.designation||"সদস্য";box.append(role);
+ const chat=document.createElement("button");chat.className="secondary";chat.textContent="💬 Message";chat.onclick=()=>{showView("messenger");openChat(m)};box.append(chat);
+ if(withRequest){const b=document.createElement("button");b.className="primary";b.style.width="auto";b.textContent="🤝 Friend Request";b.onclick=()=>sendRequest(m);box.append(b)}
+ return box;
+}
+async function loadSearch(){
+ try{const profiles=await getProfiles();clear($("searchResults"));profiles.forEach(m=>$("searchResults").append(memberCard(m)))}catch(e){say("searchResults","লোড হয়নি: "+e.message)}
+}
+$("memberSearch").oninput=async()=>{
+ const term=$("memberSearch").value.trim().toLowerCase();
+ try{const profiles=await getProfiles();clear($("searchResults"));profiles.filter(m=>(m.name||"").toLowerCase().includes(term)).forEach(m=>$("searchResults").append(memberCard(m)))}catch(e){say("searchResults",e.message)}
+};
+$("chatSearch").oninput=()=>renderChatMembers(chatMembers.filter(m=>(m.name||"").toLowerCase().includes($("chatSearch").value.toLowerCase())));
+async function sendRequest(m){
+ try{const id=currentUser.uid+"_"+m.uid;await setDoc(doc(db,"friendRequests",id),{fromUid:currentUser.uid,toUid:m.uid,fromName:safeName(memberData),fromPhoto:memberData.photoURL||"",toName:m.name,status:"pending",createdAt:serverTimestamp()});alert("Friend request পাঠানো হয়েছে")}
+ catch(e){alert("Request পাঠানো যায়নি: "+e.message)}
+}
+async function loadFriends(){
+ clear($("requestList"));clear($("friendsList"));
+ try{
+ const incoming=await getDocs(query(collection(db,"friendRequests"),where("toUid","==",currentUser.uid)));
+ const outgoing=await getDocs(query(collection(db,"friendRequests"),where("fromUid","==",currentUser.uid)));
+ incoming.forEach(d=>{const r=d.data();if(r.status==="pending"){const x=document.createElement("div");x.className="item";x.textContent=(r.fromName||"একজন সদস্য")+" তোমাকে Friend Request পাঠিয়েছেন। ";const yes=document.createElement("button");yes.className="primary";yes.style.width="auto";yes.textContent="Accept";yes.onclick=()=>acceptRequest(d.id,r);const no=document.createElement("button");no.className="danger";no.textContent="Reject";no.onclick=()=>rejectRequest(d.id);x.append(yes,no);$("requestList").append(x)}});
+ if(!$("requestList").children.length)say("requestList","নতুন অনুরোধ নেই।");
+ const accepted=[...incoming.docs,...outgoing.docs].filter(d=>d.data().status==="accepted");
+ for(const d of accepted){const r=d.data(),uid=r.fromUid===currentUser.uid?r.toUid:r.fromUid;const person=await getDoc(doc(db,"publicProfiles",uid));if(person.exists())$("friendsList").append(memberCard({uid,...person.data()},false))}
+ if(!$("friendsList").children.length)say("friendsList","এখনো বন্ধু নেই।");
+ }catch(e){say("requestList","লোড করা যায়নি: "+e.message)}
+}
+async function acceptRequest(id,r){
+ try{await updateDoc(doc(db,"friendRequests",id),{status:"accepted"});await setDoc(doc(db,"friends",currentUser.uid,"list",r.fromUid),{uid:r.fromUid,createdAt:serverTimestamp()});loadFriends()}catch(e){alert(e.message)}
+}
+async function rejectRequest(id){try{await updateDoc(doc(db,"friendRequests",id),{status:"rejected"});loadFriends()}catch(e){alert(e.message)}}
+async function loadNotifications(){
+ clear($("notificationList"));
+ try{
+ const a=await getDocs(query(collection(db,"friendRequests"),where("toUid","==",currentUser.uid)));
+ const b=await getDocs(query(collection(db,"friendRequests"),where("fromUid","==",currentUser.uid)));
+ [...a.docs,...b.docs].forEach(d=>{const r=d.data();const x=document.createElement("div");x.className="item";x.textContent=r.status==="pending"?(r.fromUid===currentUser.uid?"তোমার Friend Request অপেক্ষায় আছে।":"তোমার কাছে নতুন Friend Request এসেছে।"):(r.status==="accepted"?"Friend Request গ্রহণ করা হয়েছে।":"Friend Request: "+r.status);$("notificationList").append(x)});
+ if(!$("notificationList").children.length)say("notificationList","এখনো কোনো Notification নেই।");
+ }catch(e){say("notificationList",e.message)}
+}
 
-  $("postText").value="";
-  $("postFile").value="";
-  msg("postMessage","পোস্ট প্রকাশ হয়েছে!");
-  showView("feed");
+/* STORIES */
+$("uploadStory").onclick=async()=>{
+ const f=$("storyFile").files[0];if(!f)return say("storyMessage","ছবি বা ভিডিও নির্বাচন করো");
+ if(!f.type.startsWith("image/")&&!f.type.startsWith("video/"))return say("storyMessage","শুধু ছবি বা ভিডিও");
+ if(f.size>25*1024*1024)return say("storyMessage","ফাইল ২৫ MB-এর কম হতে হবে");
+ $("uploadStory").disabled=true;
+ try{const url=await uploadFile(f);await addDoc(collection(db,"stories"),{authorUid:currentUser.uid,authorName:safeName(memberData),authorPhoto:memberData.photoURL||"",mediaURL:url,mediaType:f.type.startsWith("video/")?"video":"image",createdAt:serverTimestamp()});say("storyMessage","Story আপলোড হয়েছে");loadStories()}
+ catch(e){say("storyMessage","সমস্যা: "+e.message)}$("uploadStory").disabled=false;
+};
+async function loadStories(){
+ clear($("storyList"));
+ try{const s=await getDocs(query(collection(db,"stories"),orderBy("createdAt","desc")));
+ s.forEach(d=>{const r=d.data(),date=r.createdAt?.toDate?.();if(date&&Date.now()-date.getTime()>86400000)return;const x=document.createElement("div");x.className="story";const n=document.createElement("div");n.textContent=r.authorName||"Member";let media;if(r.mediaType==="video"){media=document.createElement("video");media.src=r.mediaURL;media.controls=true}else{media=document.createElement("img");media.src=r.mediaURL}x.append(n,media);$("storyList").append(x)});
+ if(!$("storyList").children.length)say("storyList","এখনো কোনো Story নেই।");
+ }catch(e){say("storyList","লোড হয়নি: "+e.message)}
+}
 
- }catch(error){
-  console.error(error);
-  msg("postMessage","সমস্যা: "+error.message);
- }
- $("publishPost").disabled=false;
+/* GROUPS */
+$("createGroup").onclick=async()=>{
+ const name=$("groupName").value.trim(),description=$("groupDescription").value.trim();if(!name)return alert("গ্রুপের নাম লিখুন");
+ try{const g=await addDoc(collection(db,"groups"),{name,description,createdBy:currentUser.uid,createdAt:serverTimestamp()});await setDoc(doc(db,"groups",g.id,"members",currentUser.uid),{uid:currentUser.uid,joinedAt:serverTimestamp()});$("groupName").value="";$("groupDescription").value="";loadGroups()}
+ catch(e){alert("গ্রুপ তৈরি হয়নি: "+e.message)}
+};
+async function loadGroups(){
+ clear($("groupList"));
+ try{const s=await getDocs(collection(db,"groups"));s.forEach(d=>{const g=d.data(),x=document.createElement("div");x.className="item";const h=document.createElement("b");h.textContent=g.name||"Group";const p=document.createElement("p");p.className="muted";p.textContent=g.description||"";const b=document.createElement("button");b.className="secondary";b.textContent="Join Group";b.onclick=async()=>{try{await setDoc(doc(db,"groups",d.id,"members",currentUser.uid),{uid:currentUser.uid,joinedAt:serverTimestamp()});b.textContent="Joined ✓"}catch(e){alert(e.message)}};x.append(h,p,b);$("groupList").append(x)});
+ if(!$("groupList").children.length)say("groupList","এখনো কোনো Group নেই।");
+ }catch(e){say("groupList","লোড হয়নি: "+e.message)}
+}
+
+/* SAVED POSTS */
+async function loadSaved(){
+ clear($("savedList"));
+ try{const s=await getDocs(collection(db,"savedPosts",currentUser.uid,"posts"));for(const d of s.docs){const post=await getDoc(doc(db,"posts",d.id));if(post.exists())makePost(post.data(),post.id,$("savedList"))}
+ if(!$("savedList").children.length)say("savedList","কোনো Saved Post নেই।");
+ }catch(e){say("savedList","লোড হয়নি: "+e.message)}
+}
+
+/* MESSENGER */
+async function loadMembers(){
+ try{chatMembers=await getProfiles();renderChatMembers(chatMembers)}catch(e){say("memberList","সদস্য লোড হয়নি: "+e.message)}
+}
+function renderChatMembers(list){
+ clear($("memberList"));list.forEach(m=>{const b=document.createElement("button");b.className="chat-member";const im=document.createElement("img");im.src=m.photoURL||fallback;const n=document.createElement("span");n.textContent=m.name||"Member";b.append(im,n);b.onclick=()=>openChat(m);$("memberList").append(b)});
+ if(!list.length)say("memberList","অন্য কোনো সদস্য পাওয়া যায়নি।");
+}
+async function openChat(m){
+ stopChat();const participants=[currentUser.uid,m.uid].sort(),id=participants.join("_");activeChatId=id;
+ $("chatWindow").classList.remove("hidden");$("memberList").classList.add("hidden");$("chatSearch").classList.add("hidden");say("chatName",m.name||"Member");say("chatStatus","চ্যাট লোড হচ্ছে...");
+ try{
+ const ref=doc(db,"conversations",id),s=await getDoc(ref);
+ if(!s.exists())await setDoc(ref,{participants,createdAt:serverTimestamp(),updatedAt:serverTimestamp(),lastMessage:"",lastSenderId:""});
+ else if(!s.data().participants?.includes(currentUser.uid)||!s.data().participants?.includes(m.uid))throw Error("অনুমতি নেই");
+ chatUnsub=onSnapshot(query(collection(db,"conversations",id,"messages"),orderBy("createdAt","asc")),snap=>{
+ if(activeChatId!==id)return;clear($("chatMessages"));
+ snap.forEach(d=>{const r=d.data(),b=document.createElement("div");b.className="chat-bubble "+(r.senderId===currentUser.uid?"chat-mine":"chat-theirs");b.textContent=r.text||"";$("chatMessages").append(b)});
+ $("chatMessages").scrollTop=$("chatMessages").scrollHeight;
+ });say("chatStatus","");
+ }catch(e){say("chatStatus","চ্যাট খোলা যায়নি: "+e.message)}
+}
+$("sendMessage").onclick=async()=>{
+ const text=$("chatText").value.trim(),id=activeChatId;if(!text||!id)return;
+ $("sendMessage").disabled=true;
+ try{await addDoc(collection(db,"conversations",id,"messages"),{senderId:currentUser.uid,text,imageURL:"",createdAt:serverTimestamp()});await updateDoc(doc(db,"conversations",id),{lastMessage:text,lastSenderId:currentUser.uid,updatedAt:serverTimestamp()});$("chatText").value="";say("chatStatus","মেসেজ পাঠানো হয়েছে")}
+ catch(e){say("chatStatus","মেসেজ পাঠানো যায়নি: "+e.message)}
+ $("sendMessage").disabled=false;
+};
+$("backToMembers").onclick=()=>{stopChat();$("chatWindow").classList.add("hidden");$("memberList").classList.remove("hidden");$("chatSearch").classList.remove("hidden")};
+
+/* AUTH */
+onAuthStateChanged(auth,async user=>{
+ if(!user){currentUser=null;if(feedUnsub)feedUnsub();$("dashboard").classList.add("hidden");showError("লগইন সেশন পাওয়া যায়নি। Login পেজে গিয়ে লগইন করুন।");return}
+ currentUser=user;hideError();
+ try{
+ const s=await getDoc(doc(db,"members",user.uid));
+ if(!s.exists())throw Error("সদস্যের তথ্য পাওয়া যায়নি।");
+ memberData=s.data();if(memberData.status!=="approved")throw Error("তোমার সদস্যপদ এখনো অনুমোদিত হয়নি।");
+ $("dashboard").classList.remove("hidden");renderProfile();startFeed();
+ try{const a=await getDoc(doc(db,"admins",user.uid));$("adminNav").classList.toggle("hidden",!a.exists());$("adminMoreNav").classList.toggle("hidden",!a.exists())}catch(e){console.warn(e)}
+ }catch(e){$("dashboard").classList.add("hidden");showError(e.message)}
 });
+setPersistence(auth,browserLocalPersistence).catch(console.error);
 
 /* LOGOUT */
-async function logout(){
- if(!confirm("লগআউট করতে চাও?"))return;
- try{
-  stopActiveChat();
-  await signOut(auth);
-  location.replace("login.html");
- }catch(error){
-  alert("Logout করা যায়নি: "+error.message);
- }
-}
-$("logoutBtn").addEventListener("click",logout);
-$("logoutBtn2").addEventListener("click",logout);
+async function logout(){if(confirm("লগআউট করতে চাও?")){stopChat();try{await signOut(auth);location.replace("login.html")}catch(e){alert(e.message)}}}
+$("logoutBtn").onclick=logout;$("logoutBtn2").onclick=logout;
 </script>
 </body>
 </html>
