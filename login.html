@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070914">
 <title>7STARBOYS | Member Login</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#070914;--cyan:#00e5ff;--purple:#9b4dff;--text:#f4f7ff;--muted:#aab5ca}
@@ -38,7 +39,9 @@ button:disabled{opacity:.65;cursor:not-allowed;transform:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 button.loading .spinner{display:inline-block}
 #message{min-height:22px;margin-top:16px;text-align:center;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
-#message.error{color:#ff6b82}#message.success{color:#48ffc1}#message.info{color:var(--cyan)}
+#message.error{color:#ff6b82}
+#message.success{color:#48ffc1}
+#message.info{color:var(--cyan)}
 .register{text-align:center;margin-top:22px;color:var(--muted);font-size:14px}
 .register a{color:var(--cyan);text-decoration:none;font-weight:bold}
 .register a:hover{text-decoration:underline}
@@ -48,11 +51,14 @@ button.loading .spinner{display:inline-block}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
+
 <body>
 <main class="page">
+
 <section class="scene">
 <div class="scene-title">✦ FUTURE TECHNOLOGY ✦</div>
 <div class="scene-glow"></div>
+
 <svg class="character" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <linearGradient id="armor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#3441a0"/></linearGradient>
@@ -79,20 +85,29 @@ button.loading .spinner{display:inline-block}
 <circle cx="145" cy="190" r="5" fill="#00e5ff"/><circle cx="265" cy="190" r="5" fill="#9b4dff"/>
 <path d="M185 250 L225 250" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/>
 </svg>
-<div class="energy"></div><div class="flash"></div>
+
+<div class="energy"></div>
+<div class="flash"></div>
 </section>
 
 <section class="login-card">
 <h1 class="logo">7STARBOYS</h1>
 <p class="subtitle">OFFICIAL MEMBER LOGIN</p>
 <div class="line"></div>
+
 <form id="loginForm">
 <label for="email">ইমেইল ঠিকানা</label>
 <input id="email" type="email" placeholder="আপনার Gmail লিখুন" autocomplete="username" required>
+
 <label for="password">পাসওয়ার্ড</label>
 <input id="password" type="password" placeholder="আপনার পাসওয়ার্ড লিখুন" autocomplete="current-password" required>
-<button id="loginBtn" type="submit"><span class="spinner"></span><span id="buttonText">LOGIN NOW ↗</span></button>
+
+<button id="loginBtn" type="submit">
+<span class="spinner"></span>
+<span id="buttonText">LOGIN NOW ↗</span>
+</button>
 </form>
+
 <p id="message" aria-live="polite"></p>
 <div class="register">অ্যাকাউন্ট নেই? <a href="register.html">নতুন সদস্য নিবন্ধন করুন</a></div>
 <a class="back" href="index.html">← হোম পেজে ফিরে যান</a>
@@ -101,8 +116,20 @@ button.loading .spinner{display:inline-block}
 
 <script type="module">
 import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-import {getAuth,setPersistence,browserLocalPersistence,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+import {
+ getAuth,
+ setPersistence,
+ browserLocalPersistence,
+ signInWithEmailAndPassword,
+ signOut
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+ getFirestore,
+ doc,
+ getDoc
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyCHveS2kKQKztiMAPPhXryVNFrElEvehFs4",
@@ -114,7 +141,10 @@ const firebaseConfig={
  measurementId:"G-RES9E2QY2N"
 };
 
-const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+// আলাদা নাম ব্যবহার করে Firebase App-এর সংঘর্ষ এড়ানো
+const app=getApps().find(item=>item.name==="7STARBOYS_LOGIN")
+ || initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
+
 const auth=getAuth(app);
 const db=getFirestore(app);
 
@@ -132,7 +162,9 @@ let submitting=false;
 
 form.addEventListener("submit",async(e)=>{
  e.preventDefault();
+
  if(submitting)return;
+
  submitting=true;
  button.disabled=true;
  button.classList.add("loading");
@@ -140,7 +172,6 @@ form.addEventListener("submit",async(e)=>{
  showMessage("আপনার তথ্য যাচাই করা হচ্ছে...","info");
 
  try{
-  // Login এবং Dashboard একই local persistence ব্যবহার করবে
   await setPersistence(auth,browserLocalPersistence);
 
   const email=document.getElementById("email").value.trim();
@@ -148,7 +179,6 @@ form.addEventListener("submit",async(e)=>{
 
   const result=await signInWithEmailAndPassword(auth,email,password);
 
-  // Firestore-এ সদস্যের অনুমোদন যাচাই
   const memberSnap=await getDoc(doc(db,"members",result.user.uid));
 
   if(!memberSnap.exists()){
@@ -161,24 +191,19 @@ form.addEventListener("submit",async(e)=>{
    throw new Error("অ্যাডমিনের অনুমোদনের অপেক্ষায় আছেন।");
   }
 
-  // Persistence সম্পন্ন হয়েছে কি না নিশ্চিত হওয়া
-  await auth.authStateReady();
-
-  if(!auth.currentUser || auth.currentUser.uid!==result.user.uid){
-   throw new Error("লগইন সেশন সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।");
-  }
-
   showMessage("✓ লগইন সফল! Dashboard-এ নেওয়া হচ্ছে...","success");
   buttonText.textContent="SUCCESS ✓";
 
-  // সরাসরি একই সাইটের Dashboard-এ পাঠানো
-  window.location.replace(new URL("member.html",window.location.href).href);
+  window.location.replace("member.html");
 
  }catch(error){
   console.error("Login error:",error);
-  let errorText=error.message;
 
-  if(error.code==="auth/invalid-credential"||error.code==="auth/wrong-password"||error.code==="auth/user-not-found"){
+  let errorText="আবার চেষ্টা করুন।";
+
+  if(error.code==="auth/api-key-not-valid.-please-pass-a-valid-api-key."){
+   errorText="Firebase API Key গ্রহণ করছে না। Firebase Console-এর Key যাচাই প্রয়োজন।";
+  }else if(error.code==="auth/invalid-credential"||error.code==="auth/wrong-password"||error.code==="auth/user-not-found"){
    errorText="ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।";
   }else if(error.code==="auth/invalid-email"){
    errorText="সঠিক ইমেইল ঠিকানা লিখুন।";
@@ -186,6 +211,12 @@ form.addEventListener("submit",async(e)=>{
    errorText="অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে চেষ্টা করুন।";
   }else if(error.code==="auth/network-request-failed"){
    errorText="ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+  }else if(error.code==="auth/unauthorized-domain"){
+   errorText="এই ওয়েবসাইট Firebase-এ অনুমোদিত নয়।";
+  }else if(error.code==="permission-denied"||error.code==="firestore/permission-denied"){
+   errorText="সদস্যের তথ্য যাচাই করা যাচ্ছে না।";
+  }else if(error.message){
+   errorText=error.message;
   }
 
   showMessage("সমস্যা: "+errorText,"error");
