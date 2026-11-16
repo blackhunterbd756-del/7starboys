@@ -706,6 +706,282 @@ async function logout(){
 }
 $("logoutBtn").addEventListener("click",logout);
 $("logoutBtn2").addEventListener("click",logout);
+
+/* ===== 7STARBOYS PRIVATE MESSENGER ===== */
+
+let activeChatId = null;
+let activeChatUnsubscribe = null;
+let chatMembers = [];
+
+const chatElement = id => document.getElementById(id);
+
+function chatStatus(message) {
+  chatElement("chatStatus").textContent = message;
+}
+
+async function loadChatMembers() {
+  const list = chatElement("memberList");
+
+  list.innerHTML = "সদস্যদের তালিকা লোড হচ্ছে...";
+
+  try {
+    const snapshot = await getDocs(
+      collection(db, "publicProfiles")
+    );
+
+    chatMembers = [];
+
+    snapshot.forEach(item => {
+      if (item.id === currentUser.uid) return;
+
+      const data = item.data();
+
+      if (!data.name) return;
+
+      chatMembers.push({
+        uid: item.id,
+        name: data.name,
+        designation: data.designation || "সদস্য",
+        photoURL: data.photoURL || ""
+      });
+    });
+
+    renderChatMembers(chatMembers);
+
+  } catch (error) {
+    console.error(error);
+    list.textContent = "সদস্য লোড হয়নি: " + error.message;
+  }
+}
+
+function renderChatMembers(members) {
+  const list = chatElement("memberList");
+  list.innerHTML = "";
+
+  if (!members.length) {
+    list.textContent = "কোনো সদস্য পাওয়া যায়নি।";
+    return;
+  }
+
+  members.forEach(member => {
+    const button = document.createElement("button");
+
+    button.style.cssText =
+      "width:100%;display:flex;align-items:center;gap:12px;padding:12px;margin:6px 0;background:#080e1e;border:1px solid #00e5ff44;border-radius:12px;color:white;text-align:left;";
+
+    const image = document.createElement("img");
+    image.src = member.photoURL;
+    image.alt = "";
+    image.style.cssText =
+      "width:45px;height:45px;border-radius:50%;object-fit:cover;background:#222;";
+
+    const info = document.createElement("div");
+    info.style.flex = "1";
+
+    const name = document.createElement("b");
+    name.textContent = member.name;
+
+    const role = document.createElement("div");
+    role.className = "muted";
+    role.textContent = member.designation;
+
+    const icon = document.createElement("span");
+    icon.textContent = "💬";
+
+    info.append(name, role);
+    button.append(image, info, icon);
+
+    button.addEventListener("click", () => {
+      openPrivateChat(member);
+    });
+
+    list.appendChild(button);
+  });
+}
+
+chatElement("chatSearch").addEventListener("input", event => {
+  const search = event.target.value.trim().toLowerCase();
+
+  renderChatMembers(
+    chatMembers.filter(member =>
+      member.name.toLowerCase().includes(search) ||
+      member.designation.toLowerCase().includes(search)
+    )
+  );
+});
+
+async function openPrivateChat(member) {
+  if (!currentUser) return;
+
+  if (activeChatUnsubscribe) {
+    activeChatUnsubscribe();
+    activeChatUnsubscribe = null;
+  }
+
+  const participants = [
+    currentUser.uid,
+    member.uid
+  ].sort();
+
+  const chatId = participants.join("_");
+  activeChatId = chatId;
+
+  chatElement("memberList").classList.add("hidden");
+  chatElement("chatSearch").classList.add("hidden");
+  chatElement("chatWindow").classList.remove("hidden");
+
+  chatElement("chatAvatar").src = member.photoURL;
+  chatElement("chatName").textContent = member.name;
+  chatElement("chatRole").textContent = member.designation;
+  chatElement("chatMessages").textContent = "চ্যাট লোড হচ্ছে...";
+
+  try {
+    const chatRef = doc(db, "conversations", chatId);
+    const chatSnap = await getDoc(chatRef);
+
+    if (!chatSnap.exists()) {
+      await setDoc(chatRef, {
+        participants: participants,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        lastMessage: "",
+        lastSenderId: ""
+      });
+    }
+
+    if (activeChatId !== chatId) return;
+
+    const messagesQuery = query(
+      collection(db, "conversations", chatId, "messages"),
+      orderBy("createdAt", "asc")
+    );
+
+    activeChatUnsubscribe = onSnapshot(
+      messagesQuery,
+      snapshot => {
+        if (activeChatId !== chatId) return;
+
+        const box = chatElement("chatMessages");
+        box.innerHTML = "";
+
+        if (snapshot.empty) {
+          box.textContent = "এখনো কোনো মেসেজ নেই। প্রথম মেসেজ পাঠাও! 💙";
+          return;
+        }
+
+        snapshot.forEach(item => {
+          const data = item.data();
+
+          const bubble = document.createElement("div");
+
+          bubble.style.cssText =
+            "max-width:82%;width:max-content;padding:11px 13px;margin:9px 0;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere;" +
+            (data.senderId === currentUser.uid
+              ? "margin-left:auto;background:#06465a;"
+              : "margin-right:auto;background:#20243a;");
+
+          const messageText = document.createElement("div");
+          messageText.textContent = data.text || "";
+
+          const time = document.createElement("small");
+          time.style.cssText =
+            "display:block;text-align:right;color:#aab8d2;margin-top:6px;";
+
+          const date = data.createdAt?.toDate?.();
+
+          time.textContent = date
+            ? date.toLocaleTimeString("bn-BD", {
+                hour: "2-digit",
+                minute: "2-digit"
+              })
+            : "পাঠানো হচ্ছে...";
+
+          bubble.append(messageText, time);
+          box.appendChild(bubble);
+        });
+
+        box.scrollTop = box.scrollHeight;
+      },
+      error => {
+        console.error(error);
+        chatElement("chatMessages").textContent =
+          "মেসেজ লোড হয়নি: " + error.message;
+      }
+    );
+
+  } catch (error) {
+    console.error(error);
+    chatStatus("চ্যাট খোলা যায়নি: " + error.message);
+  }
+}
+
+chatElement("sendMessage").addEventListener("click", async () => {
+  const input = chatElement("chatText");
+  const text = input.value.trim();
+
+  if (!text || !activeChatId || !currentUser) return;
+
+  const button = chatElement("sendMessage");
+  button.disabled = true;
+  chatStatus("মেসেজ পাঠানো হচ্ছে...");
+
+  try {
+    await addDoc(
+      collection(
+        db,
+        "conversations",
+        activeChatId,
+        "messages"
+      ),
+      {
+        senderId: currentUser.uid,
+        text: text,
+        imageURL: "",
+        createdAt: serverTimestamp()
+      }
+    );
+
+    await updateDoc(
+      doc(db, "conversations", activeChatId),
+      {
+        lastMessage: text,
+        lastSenderId: currentUser.uid,
+        updatedAt: serverTimestamp()
+      }
+    );
+
+    input.value = "";
+    chatStatus("মেসেজ পাঠানো হয়েছে 💙");
+
+  } catch (error) {
+    console.error(error);
+    chatStatus("মেসেজ পাঠানো যায়নি: " + error.message);
+  }
+
+  button.disabled = false;
+});
+
+chatElement("backToMembers").addEventListener("click", () => {
+  if (activeChatUnsubscribe) {
+    activeChatUnsubscribe();
+    activeChatUnsubscribe = null;
+  }
+
+  activeChatId = null;
+
+  chatElement("chatWindow").classList.add("hidden");
+  chatElement("memberList").classList.remove("hidden");
+  chatElement("chatSearch").classList.remove("hidden");
+
+  chatElement("chatText").value = "";
+  chatStatus("");
+});
+
+document.querySelectorAll('[data-view="messenger"]').forEach(button => {
+  button.addEventListener("click", () => {
+    if (currentUser) loadChatMembers();
+  });
+});
 </script>
 </body>
 </html>
