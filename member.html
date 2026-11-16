@@ -233,7 +233,19 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
 <section class="view" id="saved"><div class="panel"><h3 class="title">🔖 Saved Posts</h3><p class="muted">Saved posts-এর ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
 
 <section class="view" id="settings">
- <div class="panel"><h3 class="title">⚙️ Settings & Privacy</h3><p class="muted">তোমার অ্যাকাউন্টের নিরাপত্তা বজায় রাখো।</p><button class="danger" id="logoutBtn2">Logout</button></div>
+ <div class="panel">
+  <h3 class="title">⚙️ Settings & Privacy</h3>
+  <p class="muted">তোমার অ্যাকাউন্টের নিরাপত্তা বজায় রাখো।</p>
+
+  <a href="admin-panel.html"
+     id="adminMoreNav"
+     class="nav-item hidden"
+     style="text-decoration:none;margin-top:15px">
+     🛡️ Admin Panel
+  </a>
+
+  <button class="danger" id="logoutBtn2">Logout</button>
+ </div>
 </section>
 <section class="view" id="admin">
  <div class="panel"><h3 class="title">🛡️ Admin Panel</h3><p class="muted">অ্যাডমিন ব্যবস্থাপনার জন্য বিদ্যমান Admin Panel ব্যবহার করো।</p><a href="admin-panel.html" style="color:var(--cyan);display:inline-block;margin-top:12px">Open Admin Panel ↗</a></div>
@@ -887,10 +899,17 @@ async function checkMember(user){
   try{
    const adminSnap=await getDoc(doc(db,"admins",user.uid));
    if(generation!==authGeneration)return;
-   $("adminNav").classList.toggle("hidden",!adminSnap.exists());
+
+   const isAdmin=adminSnap.exists();
+
+   $("adminNav").classList.toggle("hidden",!isAdmin);
+   $("adminMoreNav").classList.toggle("hidden",!isAdmin);
+
   }catch(adminError){
    console.warn("Admin check:",adminError);
+
    $("adminNav").classList.add("hidden");
+   $("adminMoreNav").classList.add("hidden");
   }
 
  }catch(error){
