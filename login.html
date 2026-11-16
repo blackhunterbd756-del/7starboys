@@ -144,7 +144,6 @@ const firebaseConfig={
 // আলাদা নাম ব্যবহার করে Firebase App-এর সংঘর্ষ এড়ানো
 const app=getApps().find(item=>item.name==="7STARBOYS_LOGIN")
  || initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
-
 const auth=getAuth(app);
 const db=getFirestore(app);
 
