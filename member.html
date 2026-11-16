@@ -75,6 +75,22 @@ textarea.field{min-height:95px;resize:vertical}
 #authError{display:none;margin:18px;padding:18px;border:1px solid #ff557066;border-radius:12px;background:#3b182922;color:#ffb0bd;text-align:center;line-height:1.7;overflow-wrap:anywhere}
 #authError a{color:var(--cyan);font-weight:bold}
 .mobile-nav{display:none}
+
+/* MESSENGER */
+.chat-member{width:100%;display:flex;align-items:center;gap:12px;padding:12px;margin-top:8px;background:#080e1e;border:1px solid #ffffff22;border-radius:12px;color:white;text-align:left}
+.chat-member:hover{border-color:var(--cyan);background:#00e5ff10}
+.chat-member img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.chat-member-info{flex:1;min-width:0}
+.chat-member-info b{display:block;overflow-wrap:anywhere}
+.chat-member-info small{display:block;color:var(--muted);margin-top:5px}
+.chat-header{display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff22;padding-bottom:12px}
+.chat-header img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.chat-messages{height:350px;overflow-y:auto;padding:12px 2px}
+.chat-bubble{max-width:82%;width:max-content;padding:11px 13px;margin:9px 0;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.chat-mine{margin-left:auto;background:#06465a;border:1px solid #00e5ff55}
+.chat-theirs{margin-right:auto;background:#20243a;border:1px solid #9b4dff55}
+.chat-time{display:block;font-size:10px;color:#aab8d2;margin-top:6px;text-align:right}
+.chat-compose{border-top:1px solid #ffffff22;padding-top:10px}
 .hidden{display:none!important}
 .rule{font-size:12px;line-height:1.8;margin:10px 0;color:#dce8ff}
 @media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr)}.right{display:none}}
@@ -82,12 +98,13 @@ textarea.field{min-height:95px;resize:vertical}
  .topbar{height:60px;padding:0 12px}.brand{font-size:18px}
  .layout{display:block;padding:12px}.sidebar{display:none}.panel{padding:14px}
  .mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;justify-content:space-around;background:#090e1ef5;border-top:1px solid #00e5ff44;padding:8px 2px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(18px)}
- .mobile-nav button{background:none;border:0;color:var(--muted);font-size:10px}
+ .mobile-nav button{background:none;border:0;color:var(--muted);font-size:10px;min-width:0;flex:1}
  .mobile-nav button.active{color:var(--cyan)}
  .mobile-nav span{display:block;font-size:19px;margin-bottom:3px}
  .info-grid{grid-template-columns:1fr}
  .profile-head img{width:82px;height:82px}
  .profile-head h2{font-size:18px}
+ .chat-messages{height:55vh;min-height:260px}
  footer{padding-bottom:85px}
 }
 footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
@@ -173,51 +190,41 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
 
 <section class="view" id="feed"><div class="panel"><h3 class="title">🌐 Community Feed</h3><div id="postFeed"><div class="empty">পোস্ট লোড হচ্ছে...</div></div></div></section>
 <section class="view" id="stories"><div class="panel"><h3 class="title">⭕ Stories</h3><p class="muted">Stories-এর ফিচার পরবর্তী ধাপে Firebase-এ সংযুক্ত হবে।</p></div></section>
+
 <section class="view" id="messenger">
-  <div class="panel">
-    <h3 class="title">💬 7STARBOYS Messenger</h3>
-    <p class="muted">সদস্যদের সঙ্গে ব্যক্তিগতভাবে কথা বলো।</p>
+ <div class="panel">
+  <h3 class="title">💬 7STARBOYS Messenger</h3>
+  <p class="muted">সদস্যদের সঙ্গে ব্যক্তিগতভাবে কথা বলো।</p>
 
-    <input
-      class="field"
-      id="chatSearch"
-      type="search"
-      placeholder="🔎 সদস্যের নাম খুঁজুন..."
-    >
+  <input class="field" id="chatSearch" type="search" placeholder="🔎 সদস্যের নাম খুঁজুন...">
 
-    <div id="memberList" style="margin-top:12px">
-      <div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>
-    </div>
-
-    <div id="chatWindow" class="hidden" style="margin-top:15px">
-      <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff22;padding-bottom:12px">
-        <button class="secondary" id="backToMembers">←</button>
-        <img id="chatAvatar" class="avatar" alt="Member">
-        <div>
-          <b id="chatName">Member</b>
-          <div class="muted" id="chatRole"></div>
-        </div>
-      </div>
-
-      <div id="chatMessages"
-        style="height:350px;overflow-y:auto;padding:12px 2px">
-        <div class="empty">মেসেজ লোড হচ্ছে...</div>
-      </div>
-
-      <div style="border-top:1px solid #ffffff22;padding-top:10px">
-        <textarea
-          class="field"
-          id="chatText"
-          rows="2"
-          maxlength="1000"
-          placeholder="মেসেজ লিখুন..."
-        ></textarea>
-        <button class="primary" id="sendMessage">📩 মেসেজ পাঠান</button>
-        <div class="message" id="chatStatus"></div>
-      </div>
-    </div>
+  <div id="memberList" style="margin-top:12px">
+   <div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>
   </div>
+
+  <div id="chatWindow" class="hidden" style="margin-top:15px">
+   <div class="chat-header">
+    <button class="secondary" id="backToMembers">←</button>
+    <img id="chatAvatar" alt="Member">
+    <div>
+     <b id="chatName">Member</b>
+     <div class="muted" id="chatRole"></div>
+    </div>
+   </div>
+
+   <div id="chatMessages" class="chat-messages">
+    <div class="empty">মেসেজ লোড হচ্ছে...</div>
+   </div>
+
+   <div class="chat-compose">
+    <textarea class="field" id="chatText" rows="2" maxlength="1000" placeholder="মেসেজ লিখুন..."></textarea>
+    <button class="primary" id="sendMessage">📩 মেসেজ পাঠান</button>
+    <div class="message" id="chatStatus"></div>
+   </div>
+  </div>
+ </div>
 </section>
+
 <section class="view" id="notifications"><div class="panel"><h3 class="title">🔔 Notifications</h3><p class="muted">Like, comment ও friend request notification পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
 <section class="view" id="friends"><div class="panel"><h3 class="title">🤝 Friends & Requests</h3><p class="muted">Friend request-এর ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
 <section class="view" id="members"><div class="panel"><h3 class="title">🔎 Members Search</h3><p class="muted">সদস্য অনুসন্ধানের ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
@@ -248,8 +255,10 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
  <button data-view="myProfile"><span>👤</span>Profile</button>
  <button data-view="create"><span>✍️</span>Post</button>
  <button data-view="feed"><span>🌐</span>Feed</button>
+ <button data-view="messenger"><span>💬</span>Chat</button>
  <button data-view="settings"><span>⚙️</span>More</button>
 </nav>
+
 <footer>© 2026 7STARBOYS | OFFICIAL COMMUNITY</footer>
 
 <script type="module">
@@ -257,12 +266,12 @@ import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/13.3.0/f
 import {getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,signOut} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 import {
  getFirestore,doc,getDoc,setDoc,updateDoc,
- collection,addDoc,getDocs,query,where,orderBy,
+ collection,addDoc,getDocs,query,orderBy,
  onSnapshot,serverTimestamp,deleteDoc
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
- apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
+ apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
  authDomain:"starboys-7539f.firebaseapp.com",
  projectId:"starboys-7539f",
  storageBucket:"starboys-7539f.firebasestorage.app",
@@ -288,6 +297,12 @@ let postCardUnsubs=[];
 let authGeneration=0;
 let authReady=false;
 
+/* MESSENGER STATE */
+let activeChatId=null;
+let activeChatUnsubscribe=null;
+let chatMembers=[];
+let chatLoading=false;
+
 const $=id=>document.getElementById(id);
 const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
 
@@ -306,6 +321,10 @@ function showView(id){
  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
  document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
  window.scrollTo({top:0,behavior:"smooth"});
+
+ if(id==="messenger" && currentUser){
+  loadChatMembers();
+ }
 }
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.jump)));
@@ -537,7 +556,284 @@ function startFeed(){
  });
 }
 
-/* AUTHENTICATION - FIXED */
+/* ==========================
+   7STARBOYS PRIVATE MESSENGER
+   ========================== */
+
+function stopActiveChat(){
+ if(activeChatUnsubscribe){
+  activeChatUnsubscribe();
+  activeChatUnsubscribe=null;
+ }
+ activeChatId=null;
+}
+
+async function loadChatMembers(){
+ if(!currentUser || chatLoading)return;
+
+ chatLoading=true;
+ const list=$("memberList");
+ list.innerHTML='<div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>';
+
+ try{
+  const snapshot=await getDocs(collection(db,"publicProfiles"));
+
+  if(!currentUser)return;
+
+  chatMembers=[];
+
+  snapshot.forEach(item=>{
+   if(item.id===currentUser.uid)return;
+
+   const data=item.data();
+   if(!data.name)return;
+
+   chatMembers.push({
+    uid:item.id,
+    name:data.name,
+    designation:data.designation||"সদস্য",
+    photoURL:data.photoURL||fallback
+   });
+  });
+
+  chatMembers.sort((a,b)=>a.name.localeCompare(b.name,"bn"));
+  renderChatMembers(chatMembers);
+
+ }catch(error){
+  console.error("Messenger member loading:",error);
+  list.textContent="সদস্য লোড করা যায়নি: "+error.message;
+ }finally{
+  chatLoading=false;
+ }
+}
+
+function renderChatMembers(members){
+ const list=$("memberList");
+ list.innerHTML="";
+
+ if(!members.length){
+  list.innerHTML='<div class="empty">অন্য কোনো অনুমোদিত সদস্য পাওয়া যায়নি।</div>';
+  return;
+ }
+
+ members.forEach(member=>{
+  const button=document.createElement("button");
+  button.className="chat-member";
+
+  const image=document.createElement("img");
+  image.src=member.photoURL;
+  image.alt="";
+  image.onerror=()=>{image.src=fallback};
+
+  const info=document.createElement("div");
+  info.className="chat-member-info";
+
+  const name=document.createElement("b");
+  name.textContent=member.name;
+
+  const role=document.createElement("small");
+  role.textContent=member.designation;
+
+  const icon=document.createElement("span");
+  icon.textContent="💬";
+
+  info.append(name,role);
+  button.append(image,info,icon);
+
+  button.addEventListener("click",()=>openPrivateChat(member));
+  list.appendChild(button);
+ });
+}
+
+$("chatSearch").addEventListener("input",()=>{
+ const search=$("chatSearch").value.trim().toLowerCase();
+
+ renderChatMembers(
+  chatMembers.filter(member=>
+   member.name.toLowerCase().includes(search) ||
+   member.designation.toLowerCase().includes(search)
+  )
+ );
+});
+
+async function openPrivateChat(member){
+ if(!currentUser)return;
+
+ stopActiveChat();
+
+ const participants=[currentUser.uid,member.uid].sort();
+ const chatId=participants.join("_");
+ activeChatId=chatId;
+
+ $("memberList").classList.add("hidden");
+ $("chatSearch").classList.add("hidden");
+ $("chatWindow").classList.remove("hidden");
+
+ $("chatAvatar").src=member.photoURL;
+ $("chatAvatar").onerror=()=>{$("chatAvatar").src=fallback};
+ $("chatName").textContent=member.name;
+ $("chatRole").textContent=member.designation;
+ $("chatMessages").innerHTML='<div class="empty">চ্যাট খুলছে...</div>';
+ chatStatus("চ্যাট লোড হচ্ছে...");
+
+ try{
+  const chatRef=doc(db,"conversations",chatId);
+  const chatSnap=await getDoc(chatRef);
+
+  if(activeChatId!==chatId)return;
+
+  if(!chatSnap.exists()){
+   await setDoc(chatRef,{
+    participants:participants,
+    createdAt:serverTimestamp(),
+    updatedAt:serverTimestamp(),
+    lastMessage:"",
+    lastSenderId:""
+   });
+  }else{
+   const savedParticipants=chatSnap.data().participants||[];
+   if(!savedParticipants.includes(currentUser.uid) ||
+      !savedParticipants.includes(member.uid)){
+    throw new Error("এই কথোপকথনে প্রবেশের অনুমতি নেই।");
+   }
+  }
+
+  if(activeChatId!==chatId)return;
+
+  const messagesQuery=query(
+   collection(db,"conversations",chatId,"messages"),
+   orderBy("createdAt","asc")
+  );
+
+  activeChatUnsubscribe=onSnapshot(
+   messagesQuery,
+   snapshot=>{
+    if(activeChatId!==chatId)return;
+
+    const box=$("chatMessages");
+    box.innerHTML="";
+
+    if(snapshot.empty){
+     box.innerHTML='<div class="empty">এখনো কোনো মেসেজ নেই। প্রথম মেসেজটি পাঠাও! 💙</div>';
+     return;
+    }
+
+    snapshot.forEach(messageDoc=>{
+     const data=messageDoc.data();
+
+     const bubble=document.createElement("div");
+     bubble.className="chat-bubble "+(
+      data.senderId===currentUser.uid
+       ?"chat-mine"
+       :"chat-theirs"
+     );
+
+     const text=document.createElement("div");
+     text.textContent=data.text||"";
+
+     const time=document.createElement("small");
+     time.className="chat-time";
+
+     const date=data.createdAt?.toDate?.();
+     time.textContent=date
+      ?date.toLocaleTimeString("bn-BD",{hour:"2-digit",minute:"2-digit"})
+      :"পাঠানো হচ্ছে...";
+
+     bubble.append(text,time);
+     box.appendChild(bubble);
+    });
+
+    box.scrollTop=box.scrollHeight;
+   },
+   error=>{
+    console.error("Chat listener:",error);
+    if(activeChatId===chatId){
+     $("chatMessages").textContent="মেসেজ লোড হয়নি: "+error.message;
+    }
+   }
+  );
+
+  chatStatus("");
+
+ }catch(error){
+  console.error("Open private chat:",error);
+  chatStatus("চ্যাট খোলা যায়নি: "+error.message);
+ }
+}
+
+$("sendMessage").addEventListener("click",async()=>{
+ const input=$("chatText");
+ const text=input.value.trim();
+
+ if(!text)return;
+ if(!currentUser || !activeChatId){
+  chatStatus("আগে একজন সদস্য নির্বাচন করো।");
+  return;
+ }
+
+ const chatId=activeChatId;
+ const button=$("sendMessage");
+
+ button.disabled=true;
+ chatStatus("মেসেজ পাঠানো হচ্ছে...");
+
+ try{
+  const chatRef=doc(db,"conversations",chatId);
+
+  await addDoc(
+   collection(db,"conversations",chatId,"messages"),
+   {
+    senderId:currentUser.uid,
+    text:text,
+    imageURL:"",
+    createdAt:serverTimestamp()
+   }
+  );
+
+  if(activeChatId===chatId){
+   input.value="";
+  }
+
+  try{
+   await updateDoc(chatRef,{
+    lastMessage:text,
+    lastSenderId:currentUser.uid,
+    updatedAt:serverTimestamp()
+   });
+  }catch(updateError){
+   console.warn("Conversation preview update:",updateError);
+  }
+
+  if(activeChatId===chatId){
+   chatStatus("মেসেজ পাঠানো হয়েছে 💙");
+  }
+
+ }catch(error){
+  console.error("Send message:",error);
+  chatStatus("মেসেজ পাঠানো যায়নি: "+error.message);
+ }finally{
+  button.disabled=false;
+ }
+});
+
+$("chatText").addEventListener("keydown",event=>{
+ if(event.key==="Enter" && !event.shiftKey){
+  event.preventDefault();
+  $("sendMessage").click();
+ }
+});
+
+$("backToMembers").addEventListener("click",()=>{
+ stopActiveChat();
+
+ $("chatWindow").classList.add("hidden");
+ $("memberList").classList.remove("hidden");
+ $("chatSearch").classList.remove("hidden");
+ $("chatText").value="";
+ chatStatus("");
+});
+
+/* AUTHENTICATION */
 async function checkMember(user){
  const generation=++authGeneration;
 
@@ -546,10 +842,10 @@ async function checkMember(user){
   memberData={};
   postsCache=[];
   stopFeed();
+  stopActiveChat();
   $("dashboard").classList.add("hidden");
   $("adminNav").classList.add("hidden");
-  showError("লগইন সেশন পাওয়া যায়নি। একই ব্রাউজারে Login পেজে গিয়ে আবার লগইন করুন। <a href='login.html'>Login Page</a>");
-  console.warn("Firebase Auth user is null. URL:",location.href);
+  showError("লগইন সেশন পাওয়া যায়নি। একই ব্রাউজারে Login পেজে গিয়ে আবার লগইন করুন।");
   return;
  }
 
@@ -599,12 +895,6 @@ async function checkMember(user){
  }
 }
 
-/*
-  গুরুত্বপূর্ণ:
-  এখানে auth.currentUser-কে আগে পরীক্ষা করা হচ্ছে না।
-  Persistence প্রস্তুত হওয়ার পর Auth listener নিজেই
-  প্রথমবারের বর্তমান লগইন অবস্থা জানাবে।
-*/
 async function startAuthentication(){
  try{
   await setPersistence(auth,browserLocalPersistence);
@@ -612,7 +902,7 @@ async function startAuthentication(){
   if(authReady)return;
   authReady=true;
 
-  onAuthStateChanged(auth,async(user)=>{
+  onAuthStateChanged(auth,async user=>{
    await checkMember(user);
   },error=>{
    console.error("Auth state error:",error);
@@ -698,6 +988,7 @@ $("publishPost").addEventListener("click",async()=>{
 async function logout(){
  if(!confirm("লগআউট করতে চাও?"))return;
  try{
+  stopActiveChat();
   await signOut(auth);
   location.replace("login.html");
  }catch(error){
@@ -706,282 +997,6 @@ async function logout(){
 }
 $("logoutBtn").addEventListener("click",logout);
 $("logoutBtn2").addEventListener("click",logout);
-
-/* ===== 7STARBOYS PRIVATE MESSENGER ===== */
-
-let activeChatId = null;
-let activeChatUnsubscribe = null;
-let chatMembers = [];
-
-const chatElement = id => document.getElementById(id);
-
-function chatStatus(message) {
-  chatElement("chatStatus").textContent = message;
-}
-
-async function loadChatMembers() {
-  const list = chatElement("memberList");
-
-  list.innerHTML = "সদস্যদের তালিকা লোড হচ্ছে...";
-
-  try {
-    const snapshot = await getDocs(
-      collection(db, "publicProfiles")
-    );
-
-    chatMembers = [];
-
-    snapshot.forEach(item => {
-      if (item.id === currentUser.uid) return;
-
-      const data = item.data();
-
-      if (!data.name) return;
-
-      chatMembers.push({
-        uid: item.id,
-        name: data.name,
-        designation: data.designation || "সদস্য",
-        photoURL: data.photoURL || ""
-      });
-    });
-
-    renderChatMembers(chatMembers);
-
-  } catch (error) {
-    console.error(error);
-    list.textContent = "সদস্য লোড হয়নি: " + error.message;
-  }
-}
-
-function renderChatMembers(members) {
-  const list = chatElement("memberList");
-  list.innerHTML = "";
-
-  if (!members.length) {
-    list.textContent = "কোনো সদস্য পাওয়া যায়নি।";
-    return;
-  }
-
-  members.forEach(member => {
-    const button = document.createElement("button");
-
-    button.style.cssText =
-      "width:100%;display:flex;align-items:center;gap:12px;padding:12px;margin:6px 0;background:#080e1e;border:1px solid #00e5ff44;border-radius:12px;color:white;text-align:left;";
-
-    const image = document.createElement("img");
-    image.src = member.photoURL;
-    image.alt = "";
-    image.style.cssText =
-      "width:45px;height:45px;border-radius:50%;object-fit:cover;background:#222;";
-
-    const info = document.createElement("div");
-    info.style.flex = "1";
-
-    const name = document.createElement("b");
-    name.textContent = member.name;
-
-    const role = document.createElement("div");
-    role.className = "muted";
-    role.textContent = member.designation;
-
-    const icon = document.createElement("span");
-    icon.textContent = "💬";
-
-    info.append(name, role);
-    button.append(image, info, icon);
-
-    button.addEventListener("click", () => {
-      openPrivateChat(member);
-    });
-
-    list.appendChild(button);
-  });
-}
-
-chatElement("chatSearch").addEventListener("input", event => {
-  const search = event.target.value.trim().toLowerCase();
-
-  renderChatMembers(
-    chatMembers.filter(member =>
-      member.name.toLowerCase().includes(search) ||
-      member.designation.toLowerCase().includes(search)
-    )
-  );
-});
-
-async function openPrivateChat(member) {
-  if (!currentUser) return;
-
-  if (activeChatUnsubscribe) {
-    activeChatUnsubscribe();
-    activeChatUnsubscribe = null;
-  }
-
-  const participants = [
-    currentUser.uid,
-    member.uid
-  ].sort();
-
-  const chatId = participants.join("_");
-  activeChatId = chatId;
-
-  chatElement("memberList").classList.add("hidden");
-  chatElement("chatSearch").classList.add("hidden");
-  chatElement("chatWindow").classList.remove("hidden");
-
-  chatElement("chatAvatar").src = member.photoURL;
-  chatElement("chatName").textContent = member.name;
-  chatElement("chatRole").textContent = member.designation;
-  chatElement("chatMessages").textContent = "চ্যাট লোড হচ্ছে...";
-
-  try {
-    const chatRef = doc(db, "conversations", chatId);
-    const chatSnap = await getDoc(chatRef);
-
-    if (!chatSnap.exists()) {
-      await setDoc(chatRef, {
-        participants: participants,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        lastMessage: "",
-        lastSenderId: ""
-      });
-    }
-
-    if (activeChatId !== chatId) return;
-
-    const messagesQuery = query(
-      collection(db, "conversations", chatId, "messages"),
-      orderBy("createdAt", "asc")
-    );
-
-    activeChatUnsubscribe = onSnapshot(
-      messagesQuery,
-      snapshot => {
-        if (activeChatId !== chatId) return;
-
-        const box = chatElement("chatMessages");
-        box.innerHTML = "";
-
-        if (snapshot.empty) {
-          box.textContent = "এখনো কোনো মেসেজ নেই। প্রথম মেসেজ পাঠাও! 💙";
-          return;
-        }
-
-        snapshot.forEach(item => {
-          const data = item.data();
-
-          const bubble = document.createElement("div");
-
-          bubble.style.cssText =
-            "max-width:82%;width:max-content;padding:11px 13px;margin:9px 0;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere;" +
-            (data.senderId === currentUser.uid
-              ? "margin-left:auto;background:#06465a;"
-              : "margin-right:auto;background:#20243a;");
-
-          const messageText = document.createElement("div");
-          messageText.textContent = data.text || "";
-
-          const time = document.createElement("small");
-          time.style.cssText =
-            "display:block;text-align:right;color:#aab8d2;margin-top:6px;";
-
-          const date = data.createdAt?.toDate?.();
-
-          time.textContent = date
-            ? date.toLocaleTimeString("bn-BD", {
-                hour: "2-digit",
-                minute: "2-digit"
-              })
-            : "পাঠানো হচ্ছে...";
-
-          bubble.append(messageText, time);
-          box.appendChild(bubble);
-        });
-
-        box.scrollTop = box.scrollHeight;
-      },
-      error => {
-        console.error(error);
-        chatElement("chatMessages").textContent =
-          "মেসেজ লোড হয়নি: " + error.message;
-      }
-    );
-
-  } catch (error) {
-    console.error(error);
-    chatStatus("চ্যাট খোলা যায়নি: " + error.message);
-  }
-}
-
-chatElement("sendMessage").addEventListener("click", async () => {
-  const input = chatElement("chatText");
-  const text = input.value.trim();
-
-  if (!text || !activeChatId || !currentUser) return;
-
-  const button = chatElement("sendMessage");
-  button.disabled = true;
-  chatStatus("মেসেজ পাঠানো হচ্ছে...");
-
-  try {
-    await addDoc(
-      collection(
-        db,
-        "conversations",
-        activeChatId,
-        "messages"
-      ),
-      {
-        senderId: currentUser.uid,
-        text: text,
-        imageURL: "",
-        createdAt: serverTimestamp()
-      }
-    );
-
-    await updateDoc(
-      doc(db, "conversations", activeChatId),
-      {
-        lastMessage: text,
-        lastSenderId: currentUser.uid,
-        updatedAt: serverTimestamp()
-      }
-    );
-
-    input.value = "";
-    chatStatus("মেসেজ পাঠানো হয়েছে 💙");
-
-  } catch (error) {
-    console.error(error);
-    chatStatus("মেসেজ পাঠানো যায়নি: " + error.message);
-  }
-
-  button.disabled = false;
-});
-
-chatElement("backToMembers").addEventListener("click", () => {
-  if (activeChatUnsubscribe) {
-    activeChatUnsubscribe();
-    activeChatUnsubscribe = null;
-  }
-
-  activeChatId = null;
-
-  chatElement("chatWindow").classList.add("hidden");
-  chatElement("memberList").classList.remove("hidden");
-  chatElement("chatSearch").classList.remove("hidden");
-
-  chatElement("chatText").value = "";
-  chatStatus("");
-});
-
-document.querySelectorAll('[data-view="messenger"]').forEach(button => {
-  button.addEventListener("click", () => {
-    if (currentUser) loadChatMembers();
-  });
-});
 </script>
 </body>
 </html>
