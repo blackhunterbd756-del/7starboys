@@ -306,7 +306,7 @@ let chatLoading=false;
 const $=id=>document.getElementById(id);
 const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
 
-function msg(id,text){$(id).textContent=text}
+function chatStatus(text){msg("chatStatus",text)}
 function showError(text){
  $("authError").style.display="block";
  $("authError").textContent=text;
@@ -1000,3 +1000,24 @@ $("logoutBtn2").addEventListener("click",logout);
 </script>
 </body>
 </html>
+async function startAuthentication(){
+  try{
+    await auth.authStateReady();
+
+    if(authReady)return;
+    authReady=true;
+
+    onAuthStateChanged(auth,async user=>{
+      console.log("Firebase session:",user?.uid || "No user");
+      await checkMember(user);
+    },error=>{
+      console.error("Auth state error:",error);
+      showError("Firebase Authentication সমস্যা: "+error.message);
+    });
+
+  }catch(error){
+    console.error("Authentication setup error:",error);
+    showError("Firebase চালু করা যায়নি: "+error.message);
+  }
+}
+startAuthentication();
