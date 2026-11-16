@@ -4,44 +4,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070914">
 <title>7STARBOYS Admin Panel</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#090909;color:white}
-header{background:#171717;border-bottom:2px solid #e00000;padding:20px;display:flex;justify-content:space-between;align-items:center}
-h1{font-size:22px;color:#ff2424;margin:0}
-main{max-width:850px;margin:auto;padding:18px}
-.card{background:#191919;border:1px solid #383838;border-radius:12px;padding:16px;margin:14px 0}
-button,select{padding:11px;border:0;border-radius:7px;font-size:14px;margin:5px 3px}
-button{cursor:pointer;font-weight:bold}
+body{
+ margin:0;padding:15px;
+ font-family:Arial,sans-serif;
+ background:#070914;color:white
+}
+header,.card,.panel{
+ background:#101729;
+ border:1px solid #263750;
+ border-radius:13px;
+ padding:16px;margin-bottom:14px
+}
+header{display:flex;justify-content:space-between;align-items:center}
+h1{font-size:20px;color:#00e5ff;margin:0}
+h2{font-size:19px}
+.info{color:#aab8ce;font-size:14px;line-height:1.8}
+.status{color:#ffcc45;font-weight:bold}
+button,select{
+ padding:11px;border:0;border-radius:7px;
+ font-size:14px;margin:5px 3px;cursor:pointer
+}
+button:disabled{opacity:.5;cursor:not-allowed}
 .approve{background:#168b45;color:white}
 .reject{background:#c52323;color:white}
-.save{background:#b90000;color:white}
+.save{background:#087fbd;color:white}
 .logout,.refresh{background:#333;color:white}
-select{background:#292929;color:white;border:1px solid #555}
-.info{color:#bbb;font-size:14px;line-height:1.8}
-.status{color:#ffcc45;font-weight:bold}
-#message{padding:12px;color:#ffcc45}
+select{background:#202c40;color:white;border:1px solid #555}
+#message{
+ padding:12px;background:#101729;
+ border-radius:9px;color:#00e5ff;
+ margin:12px 0;overflow-wrap:anywhere
+}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:8px;margin-bottom:14px
+}
+.stat{
+ background:#101729;padding:13px;
+ border-radius:10px;text-align:center
+}
+.stat strong{display:block;color:#00e5ff;font-size:24px}
+.stat span{font-size:12px;color:#aab8ce}
+.card h3{margin-top:0}
+.actions{margin-top:10px}
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>7STARBOYS ADMIN</h1>
-<button class="logout" id="logout">Logout</button>
+ <h1>🛡️ 7STARBOYS ADMIN</h1>
+ <button class="logout" id="logout">Logout</button>
 </header>
 
 <main>
-<h2>সদস্য নিয়ন্ত্রণ</h2>
-<p class="info">সদস্যদের অনুমোদন এবং পদবি নির্ধারণ করো।</p>
-<button class="refresh" id="refresh">তালিকা Refresh</button>
-<div id="message">লোড হচ্ছে...</div>
-<div id="members"></div>
+ <section class="panel">
+  <h2>সদস্য নিয়ন্ত্রণ</h2>
+  <p class="info">সদস্যদের অনুমোদন, বাতিল এবং পদবি নির্ধারণ করো।</p>
+  <p class="info" id="adminEmail"></p>
+ </section>
+
+ <div id="message">Admin যাচাই হচ্ছে...</div>
+
+ <div id="dashboard" style="display:none">
+
+  <div class="stats">
+   <div class="stat">
+    <strong id="pendingCount">0</strong>
+    <span>Pending</span>
+   </div>
+   <div class="stat">
+    <strong id="approvedCount">0</strong>
+    <span>Approved</span>
+   </div>
+   <div class="stat">
+    <strong id="rejectedCount">0</strong>
+    <span>Rejected</span>
+   </div>
+  </div>
+
+  <button class="refresh" id="refresh">↻ তালিকা Refresh</button>
+
+  <div id="members"></div>
+
+ </div>
 </main>
 
 <script type="module">
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+ initializeApp,getApps
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
  getAuth,onAuthStateChanged,signOut
@@ -52,8 +110,10 @@ import {
  updateDoc,setDoc,deleteDoc
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
+
+/* Firebase Configuration */
 const firebaseConfig={
- apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
+ apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
  authDomain:"starboys-7539f.firebaseapp.com",
  projectId:"starboys-7539f",
  storageBucket:"starboys-7539f.firebasestorage.app",
@@ -62,7 +122,12 @@ const firebaseConfig={
  measurementId:"G-RES9E2QY2N"
 };
 
-const app=initializeApp(firebaseConfig);
+
+/* একই Firebase App ব্যবহার */
+const app=
+ getApps().find(a=>a.name==="7STARBOYS_LOGIN") ||
+ initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
+
 const auth=getAuth(app);
 const db=getFirestore(app);
 
@@ -75,15 +140,21 @@ function showMessage(text){
 
 function safe(text){
  return String(text??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#39;"
  }[c]));
 }
 
-// অনুমোদিত সদস্যের Public Profile তৈরি বা আপডেট
+
+/* Public Profile Sync */
 async function syncPublicProfile(uid){
+
  const snap=await getDoc(doc(db,"members",uid));
 
- if(!snap.exists()) return;
+ if(!snap.exists())return;
 
  const m=snap.data();
 
@@ -101,58 +172,113 @@ async function syncPublicProfile(uid){
   profile.photoURL=m.photoURL;
  }
 
- await setDoc(doc(db,"publicProfiles",uid),profile);
+ await setDoc(
+  doc(db,"publicProfiles",uid),
+  profile,
+  {merge:true}
+ );
 }
 
+
+/* Load Members */
 async function loadMembers(){
+
  showMessage("সদস্যদের তথ্য লোড হচ্ছে...");
- membersBox.innerHTML="";
+ membersBox.replaceChildren();
 
  try{
+
   const result=await getDocs(collection(db,"members"));
 
-  if(result.empty){
+  let pending=0;
+  let approved=0;
+  let rejected=0;
+
+  const records=[];
+
+  result.forEach(memberDoc=>{
+   const m=memberDoc.data();
+   const status=m.status||"pending";
+
+   if(status==="pending")pending++;
+   if(status==="approved")approved++;
+   if(status==="rejected")rejected++;
+
+   records.push({
+    uid:memberDoc.id,
+    data:m,
+    status
+   });
+  });
+
+  document.getElementById("pendingCount").textContent=pending;
+  document.getElementById("approvedCount").textContent=approved;
+  document.getElementById("rejectedCount").textContent=rejected;
+
+  /* Pending Members আগে দেখাবে */
+  records.sort((a,b)=>{
+   const order={pending:0,approved:1,rejected:2};
+   return order[a.status]-order[b.status];
+  });
+
+  if(records.length===0){
    showMessage("কোনো সদস্য পাওয়া যায়নি।");
    return;
   }
 
-  result.forEach(memberDoc=>{
-   const m=memberDoc.data();
-   const uid=memberDoc.id;
+  records.forEach(item=>{
+
+   const uid=item.uid;
+   const m=item.data;
 
    const card=document.createElement("div");
    card.className="card";
 
    card.innerHTML=`
-   <h3>${safe(m.name||"নাম নেই")}</h3>
-   <div class="info">
-   ইমেইল: ${safe(m.email||"")}<br>
-   জন্ম তারিখ: ${safe(m.birthDate||"")}<br>
-   বর্তমান পদ: ${safe(m.designation||"নির্ধারিত নয়")}<br>
-   অবস্থা: <span class="status">${safe(m.status||"অজানা")}</span>
-   </div>
+    <h3>👤 ${safe(m.name||"নাম নেই")}</h3>
 
-   <div>
-   <button class="approve" data-action="approve" data-id="${safe(uid)}">অনুমোদন</button>
-   <button class="reject" data-action="reject" data-id="${safe(uid)}">বাতিল</button>
-   </div>
+    <div class="info">
+     ইমেইল: ${safe(m.email||"পাওয়া যায়নি")}<br>
+     জন্ম তারিখ: ${safe(m.birthDate||"পাওয়া যায়নি")}<br>
+     বর্তমান পদ: ${safe(m.designation||"নির্ধারিত নয়")}<br>
+     অবস্থা:
+     <span class="status">${safe(item.status)}</span>
+    </div>
 
-   <div>
-   <select class="designation">
-   <option value="">পদবি নির্বাচন</option>
-   <option value="সভাপতি">সভাপতি</option>
-   <option value="সহ-সভাপতি">সহ-সভাপতি</option>
-   <option value="সাধারণ সম্পাদক">সাধারণ সম্পাদক</option>
-   <option value="সাংগঠনিক সম্পাদক">সাংগঠনিক সম্পাদক</option>
-   <option value="সদস্য">সদস্য</option>
-   </select>
-   <button class="save" data-action="designation" data-id="${safe(uid)}">পদবি Save</button>
-   </div>
+    <div class="actions">
+     <button class="approve" data-action="approve">
+      ✓ অনুমোদন
+     </button>
+
+     <button class="reject" data-action="reject">
+      ✕ বাতিল
+     </button>
+    </div>
+
+    <div class="actions">
+     <select class="designation">
+      <option value="">পদবি নির্বাচন</option>
+      <option value="সভাপতি">সভাপতি</option>
+      <option value="সহ-সভাপতি">সহ-সভাপতি</option>
+      <option value="সাধারণ সম্পাদক">সাধারণ সম্পাদক</option>
+      <option value="সাংগঠনিক সম্পাদক">সাংগঠনিক সম্পাদক</option>
+      <option value="সদস্য">সদস্য</option>
+     </select>
+
+     <button class="save" data-action="designation">
+      পদবি Save
+     </button>
+    </div>
    `;
+
+   card.querySelector(".designation").value=m.designation||"";
+
+   card.querySelectorAll("button").forEach(button=>{
+    button.dataset.id=uid;
+   });
 
    membersBox.appendChild(card);
 
-   card.querySelector(".designation").value=m.designation||"";
   });
 
   showMessage("মোট সদস্য: "+result.size);
@@ -163,7 +289,10 @@ async function loadMembers(){
  }
 }
 
-membersBox.addEventListener("click",async(event)=>{
+
+/* Button Actions */
+membersBox.addEventListener("click",async event=>{
+
  const button=event.target.closest("button[data-action]");
  if(!button)return;
 
@@ -173,25 +302,43 @@ membersBox.addEventListener("click",async(event)=>{
  button.disabled=true;
 
  try{
+
   if(action==="approve"){
+
+   if(!confirm("এই সদস্যকে অনুমোদন করতে চাও?")){
+    button.disabled=false;
+    return;
+   }
+
    await updateDoc(doc(db,"members",uid),{
     status:"approved"
    });
 
    await syncPublicProfile(uid);
-   showMessage("সদস্য অনুমোদন হয়েছে এবং তালিকায় যোগ হয়েছে।");
+
+   showMessage("সদস্য অনুমোদন হয়েছে।");
   }
 
+
   if(action==="reject"){
+
+   if(!confirm("এই সদস্যকে বাতিল করতে চাও?")){
+    button.disabled=false;
+    return;
+   }
+
    await updateDoc(doc(db,"members",uid),{
     status:"rejected"
    });
 
    await deleteDoc(doc(db,"publicProfiles",uid));
+
    showMessage("সদস্য বাতিল হয়েছে।");
   }
 
+
   if(action==="designation"){
+
    const select=button.parentElement.querySelector(".designation");
 
    if(!select.value){
@@ -204,11 +351,7 @@ membersBox.addEventListener("click",async(event)=>{
     designation:select.value
    });
 
-   const memberSnap=await getDoc(doc(db,"members",uid));
-
-   if(memberSnap.exists()&&memberSnap.data().status==="approved"){
-    await syncPublicProfile(uid);
-   }
+   await syncPublicProfile(uid);
 
    showMessage("পদবি পরিবর্তন হয়েছে।");
   }
@@ -216,41 +359,60 @@ membersBox.addEventListener("click",async(event)=>{
   await loadMembers();
 
  }catch(error){
+
   console.error(error);
   showMessage("কাজটি হয়নি: "+error.message);
   button.disabled=false;
+
  }
+
 });
 
+
+/* Refresh */
 document.getElementById("refresh").onclick=loadMembers;
 
+
+/* Logout */
 document.getElementById("logout").onclick=async()=>{
  await signOut(auth);
  location.href="login.html";
 };
 
-onAuthStateChanged(auth,async(user)=>{
+
+/* Admin Verification */
+onAuthStateChanged(auth,async user=>{
+
  if(!user){
-  location.href="login.html";
+  showMessage("লগইন পাওয়া যায়নি। আগে Login পেজে লগইন করো।");
   return;
  }
 
  try{
+
   const adminDoc=await getDoc(doc(db,"admins",user.uid));
 
   if(!adminDoc.exists()){
    showMessage("তোমার Admin অনুমতি নেই।");
-   await signOut(auth);
    return;
   }
+
+  document.getElementById("adminEmail").textContent=
+   "Admin: "+(user.email||"");
+
+  document.getElementById("dashboard").style.display="block";
 
   await loadMembers();
 
  }catch(error){
+
   console.error(error);
   showMessage("Admin যাচাই করা যায়নি: "+error.message);
+
  }
+
 });
+
 </script>
 </body>
 </html>
