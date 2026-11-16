@@ -306,8 +306,13 @@ let chatLoading=false;
 const $=id=>document.getElementById(id);
 const fallback="https://placehold.co/150x150/101729/00e5ff?text=7SB";
 
-function chatStatus(text){msg("chatStatus",text)}
-function showError(text){
+function msg(id,text){
+  $(id).textContent=text;
+}
+
+function chatStatus(text){
+  msg("chatStatus",text);
+}
  $("authError").style.display="block";
  $("authError").textContent=text;
 }
