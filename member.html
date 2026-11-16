@@ -1002,27 +1002,6 @@ async function logout(){
 }
 $("logoutBtn").addEventListener("click",logout);
 $("logoutBtn2").addEventListener("click",logout);
-async function startAuthentication(){
-  try{
-    await auth.authStateReady();
-
-    if(authReady)return;
-    authReady=true;
-
-    onAuthStateChanged(auth,async user=>{
-      console.log("Firebase session:",user?.uid || "No user");
-      await checkMember(user);
-    },error=>{
-      console.error("Auth state error:",error);
-      showError("Firebase Authentication সমস্যা: "+error.message);
-    });
-
-  }catch(error){
-    console.error("Authentication setup error:",error);
-    showError("Firebase চালু করা যায়নি: "+error.message);
-  }
-}
-startAuthentication();
 </script>
 </body>
 </html>
