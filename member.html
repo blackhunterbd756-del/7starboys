@@ -173,7 +173,51 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
 
 <section class="view" id="feed"><div class="panel"><h3 class="title">🌐 Community Feed</h3><div id="postFeed"><div class="empty">পোস্ট লোড হচ্ছে...</div></div></div></section>
 <section class="view" id="stories"><div class="panel"><h3 class="title">⭕ Stories</h3><p class="muted">Stories-এর ফিচার পরবর্তী ধাপে Firebase-এ সংযুক্ত হবে।</p></div></section>
-<section class="view" id="messenger"><div class="panel"><h3 class="title">💬 Messenger</h3><p class="muted">Private chat এখনো Firebase-এ সংযুক্ত নয়।</p></div></section>
+<section class="view" id="messenger">
+  <div class="panel">
+    <h3 class="title">💬 7STARBOYS Messenger</h3>
+    <p class="muted">সদস্যদের সঙ্গে ব্যক্তিগতভাবে কথা বলো।</p>
+
+    <input
+      class="field"
+      id="chatSearch"
+      type="search"
+      placeholder="🔎 সদস্যের নাম খুঁজুন..."
+    >
+
+    <div id="memberList" style="margin-top:12px">
+      <div class="empty">সদস্যদের তালিকা লোড হচ্ছে...</div>
+    </div>
+
+    <div id="chatWindow" class="hidden" style="margin-top:15px">
+      <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff22;padding-bottom:12px">
+        <button class="secondary" id="backToMembers">←</button>
+        <img id="chatAvatar" class="avatar" alt="Member">
+        <div>
+          <b id="chatName">Member</b>
+          <div class="muted" id="chatRole"></div>
+        </div>
+      </div>
+
+      <div id="chatMessages"
+        style="height:350px;overflow-y:auto;padding:12px 2px">
+        <div class="empty">মেসেজ লোড হচ্ছে...</div>
+      </div>
+
+      <div style="border-top:1px solid #ffffff22;padding-top:10px">
+        <textarea
+          class="field"
+          id="chatText"
+          rows="2"
+          maxlength="1000"
+          placeholder="মেসেজ লিখুন..."
+        ></textarea>
+        <button class="primary" id="sendMessage">📩 মেসেজ পাঠান</button>
+        <div class="message" id="chatStatus"></div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="view" id="notifications"><div class="panel"><h3 class="title">🔔 Notifications</h3><p class="muted">Like, comment ও friend request notification পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
 <section class="view" id="friends"><div class="panel"><h3 class="title">🤝 Friends & Requests</h3><p class="muted">Friend request-এর ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
 <section class="view" id="members"><div class="panel"><h3 class="title">🔎 Members Search</h3><p class="muted">সদস্য অনুসন্ধানের ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।</p></div></section>
@@ -211,7 +255,11 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
 <script type="module">
 import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,signOut} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,deleteDoc} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+import {
+ getFirestore,doc,getDoc,setDoc,updateDoc,
+ collection,addDoc,getDocs,query,where,orderBy,
+ onSnapshot,serverTimestamp,deleteDoc
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
