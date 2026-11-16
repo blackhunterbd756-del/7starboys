@@ -214,7 +214,7 @@ import {getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,signOu
 import {getFirestore,doc,getDoc,setDoc,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,deleteDoc} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
- apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs",
+ apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
  authDomain:"starboys-7539f.firebaseapp.com",
  projectId:"starboys-7539f",
  storageBucket:"starboys-7539f.firebasestorage.app",
@@ -226,7 +226,9 @@ const firebaseConfig={
 const CLOUDINARY_CLOUD_NAME="iwza5did";
 const CLOUDINARY_UPLOAD_PRESET="sevenstarboys";
 
-const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const app=getApps().find(item=>item.name==="7STARBOYS_LOGIN")
+ || initializeApp(firebaseConfig,"7STARBOYS_LOGIN");
+
 const auth=getAuth(app);
 const db=getFirestore(app);
 
