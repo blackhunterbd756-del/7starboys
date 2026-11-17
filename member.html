@@ -90,6 +90,59 @@ footer{padding-bottom:85px}
 footer{text-align:center;padding:20px;color:var(--muted);font-size:11px}
 </style>
 <link rel="stylesheet" href="theme.css">
+
+<style id="community-redesign-v2">
+:root{--bg:#080d19;--panel:#101b2d;--cyan:#55e5ef;--purple:#8b79ff;--text:#f4f7fb;--muted:#9aabc2;--line:rgba(170,205,230,.13)}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 12% 0%,rgba(35,113,140,.2),transparent 34%),radial-gradient(ellipse at 90% 85%,rgba(96,65,150,.13),transparent 32%),#080d19;color:var(--text);font-family:Inter,"Noto Sans Bengali",system-ui,sans-serif}
+.topbar{height:68px;padding:0 clamp(14px,3vw,34px);background:rgba(7,13,25,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+.brand{color:#f3d58f;font-size:20px;letter-spacing:.13em}
+.brand small{letter-spacing:.2em;color:#93a6bd}
+.top-right{font-size:13px;color:#d9e5f2}
+.avatar,.side-profile img,.post-head img{border-color:#e6c982}
+.layout{max-width:1320px;grid-template-columns:250px minmax(0,1fr) 210px;gap:18px;padding:22px}
+.panel{background:linear-gradient(155deg,rgba(19,33,53,.97),rgba(11,20,35,.97));border:1px solid rgba(174,203,228,.13);border-radius:19px;box-shadow:0 16px 40px rgba(0,0,0,.22)}
+.sidebar,.right{top:84px}
+.side-profile{padding:12px 0 18px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.side-profile img{width:82px;height:82px}
+.nav-item{padding:12px 13px;margin:3px 0;border-radius:11px;color:#c6d3e2;font-size:13px;transition:background .18s,color .18s,transform .18s}
+.nav-item:hover,.nav-item.active{background:linear-gradient(90deg,rgba(85,229,239,.13),rgba(230,201,130,.07));color:#f2d58f;transform:translateX(2px)}
+.title{font-size:17px;color:#f0d28b;letter-spacing:.01em}
+.welcome{padding:26px 24px;border-radius:19px;background:linear-gradient(115deg,rgba(18,48,69,.98),rgba(20,28,52,.98) 65%,rgba(55,39,79,.85));border:1px solid rgba(85,229,239,.18);box-shadow:inset 0 1px rgba(255,255,255,.04)}
+.welcome h2{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em}
+.welcome p,.muted{font-size:13px;line-height:1.8}
+.field{background:#0a1423;border:1px solid var(--line);border-radius:12px;padding:14px;color:#f5f7fb}
+.primary{background:linear-gradient(100deg,#c6a65d,#f0d895);color:#172033;border-radius:12px;min-height:46px;box-shadow:0 8px 22px rgba(196,163,89,.12)}
+.secondary,.danger{border-radius:10px;padding:10px 13px}
+.post{padding:16px!important;border-radius:17px!important;background:linear-gradient(155deg,#142239,#0d1728)!important;border:1px solid var(--line)!important;box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.post-content{font-size:14px;line-height:1.85}
+.post-media{max-height:560px;border-radius:13px}
+.post-actions button{min-height:40px;border-radius:10px;background:#182941;border-color:var(--line);font-size:12px}
+.item,.info,.comment,.chat-member,.story{background:#0b1728;border-color:var(--line);border-radius:12px}
+.mobile-nav{background:rgba(7,13,25,.96);border-top:1px solid rgba(230,201,130,.2);backdrop-filter:blur(18px)}
+.mobile-nav button{color:#a8b7ca}
+.mobile-nav button.active{color:#f0d28b}
+@media(max-width:1100px){.layout{grid-template-columns:230px minmax(0,1fr)}.right{display:none}}
+@media(max-width:900px){
+ .topbar{height:60px;padding:0 14px}
+ .layout{display:block;padding:12px 12px 92px;max-width:720px}
+ .sidebar,.right{display:none!important}
+ .main{width:100%;min-width:0}
+ .panel{padding:14px;margin-bottom:13px}
+ .welcome{padding:20px 17px;margin-bottom:13px}
+ .welcome h2{font-size:21px}
+ .title{font-size:16px}
+ .post{padding:13px!important;margin-top:11px!important}
+ .post-media{max-height:62vh}
+ .post-actions{gap:6px}
+ .post-actions button{min-height:42px;font-size:12px}
+ .mobile-nav{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));border:1px solid rgba(230,201,130,.22);border-radius:17px;padding:8px 3px;box-shadow:0 12px 35px #0008}
+ .mobile-nav button{font-size:10px}
+ .mobile-nav span{font-size:19px}
+ footer{padding-bottom:105px}
+}
+@media(max-width:380px){.layout{padding-left:8px;padding-right:8px}.mobile-nav button{font-size:9px}.mobile-nav span{font-size:17px}.top-right span{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+</style>
 </head>
 <body>
 
