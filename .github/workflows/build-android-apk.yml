@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p app/src/main/java/com/sevenstarboys/app
-          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/res/values app/src/main/res/drawable
           cat > settings.gradle <<'EOF'
           pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
           dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }
@@ -69,7 +69,7 @@ jobs:
               <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
               <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
               <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-              <application android:label="7STARBOYS" android:theme="@style/AppTheme" android:usesCleartextTraffic="false">
+              <application android:label="7STARBOYS" android:icon="@drawable/ic_launcher" android:roundIcon="@drawable/ic_launcher" android:theme="@style/AppTheme" android:usesCleartextTraffic="false">
                   <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden">
                       <intent-filter>
                           <action android:name="android.intent.action.MAIN" />
@@ -78,6 +78,17 @@ jobs:
                   </activity>
               </application>
           </manifest>
+          EOF
+          cat > app/src/main/res/drawable/ic_launcher.xml <<'EOF'
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:width="108dp" android:height="108dp"
+              android:viewportWidth="108" android:viewportHeight="108">
+              <path android:fillColor="#080511" android:pathData="M0,0h108v108h-108z"/>
+              <path android:fillColor="#241044" android:pathData="M54,5a49,49 0,1 0,0 98a49,49 0,1 0,0 -98"/>
+              <path android:fillColor="#D6B34A" android:pathData="M18,66 L25,34 L43,51 L54,22 L65,51 L83,34 L90,66 Z"/>
+              <path android:fillColor="#F4D77A" android:pathData="M22,70h64v8h-64z"/>
+              <path android:fillColor="#FFFFFF" android:pathData="M34,84h42v7h-42z M69,84 L48,101h-10l21,-17z"/>
+          </vector>
           EOF
           cat > app/src/main/res/values/styles.xml <<'EOF'
           <resources>
