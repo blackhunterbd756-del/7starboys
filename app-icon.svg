@@ -1,12 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
 <defs>
- <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#090512"/><stop offset="1" stop-color="#24103d"/></linearGradient>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b0"/><stop offset=".5" stop-color="#e8bd59"/><stop offset="1" stop-color="#9e6720"/></linearGradient>
- <filter id="glow"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#05030b"/><stop offset=".55" stop-color="#10051e"/><stop offset="1" stop-color="#240044"/></linearGradient>
+ <linearGradient id="silver" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#c9cbd7"/><stop offset="1" stop-color="#777b8e"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a8"/><stop offset=".5" stop-color="#ffc928"/><stop offset="1" stop-color="#b66a00"/></linearGradient>
+ <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ed9cff"/><stop offset=".5" stop-color="#8d16ff"/><stop offset="1" stop-color="#4b00a8"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<rect width="512" height="512" rx="112" fill="url(#bg)"/>
-<rect x="15" y="15" width="482" height="482" rx="100" fill="none" stroke="#b77aff" stroke-opacity=".5" stroke-width="5"/>
-<path d="M104 178l78 57 74-113 74 113 78-57-32 160H136z" fill="url(#gold)" stroke="#fff0b0" stroke-width="9" stroke-linejoin="round" filter="url(#glow)"/>
-<circle cx="104" cy="178" r="15" fill="#fff0b0"/><circle cx="256" cy="122" r="17" fill="#fff0b0"/><circle cx="408" cy="178" r="15" fill="#fff0b0"/>
-<text x="256" y="397" text-anchor="middle" font-family="Arial,sans-serif" font-size="100" font-weight="900" letter-spacing="-5" fill="#fff4dc">7SB</text>
+<rect width="512" height="512" rx="104" fill="url(#bg)"/>
+<circle cx="256" cy="245" r="215" fill="#08050e" stroke="url(#purple)" stroke-width="9" filter="url(#glow)"/>
+<circle cx="256" cy="245" r="197" fill="none" stroke="#b75cff" stroke-opacity=".42" stroke-width="2"/>
+<path d="M102 178L170 215L252 92L326 206L399 166" fill="none" stroke="url(#gold)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M110 184L182 222L252 111L315 219" fill="none" stroke="url(#silver)" stroke-width="8" stroke-linecap="round"/>
+<path d="M377 105l13 29 32 4-24 21 7 31-28-16-28 16 7-31-24-21 32-4z" fill="url(#gold)" stroke="#fff0b0" stroke-width="3"/>
+<g fill="#08040d" stroke="#bd68ff" stroke-width="3">
+ <circle cx="163" cy="269" r="16"/><path d="M137 319q2-38 26-38t26 38z"/>
+ <circle cx="209" cy="254" r="18"/><path d="M180 319q2-43 29-43t29 43z"/>
+ <circle cx="256" cy="246" r="20"/><path d="M224 320q2-49 32-49t32 49z"/>
+ <circle cx="303" cy="254" r="18"/><path d="M274 319q2-43 29-43t29 43z"/>
+ <circle cx="349" cy="269" r="16"/><path d="M323 319q2-38 26-38t26 38z"/>
+</g>
+<text x="256" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-size="54" font-weight="900" font-style="italic" letter-spacing="-2" fill="url(#silver)">STAR</text>
+<text x="256" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="40" font-weight="900" letter-spacing="3" fill="url(#gold)">BOYS</text>
+<path d="M126 455H386" stroke="url(#purple)" stroke-width="5" stroke-linecap="round"/>
 </svg>
