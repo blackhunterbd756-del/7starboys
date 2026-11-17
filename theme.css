@@ -9,33 +9,33 @@ button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 header:not(.topbar){background:rgba(9,17,27,.92)!important;border-color:var(--line)!important;box-shadow:none!important;backdrop-filter:blur(18px)}
 /* PUBLIC LANDING */
-body:has(.hero-content)>header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:17px clamp(18px,5vw,72px)!important;border-bottom:1px solid var(--line)}
-body:has(.hero-content) .logo{color:var(--lime)!important;font-size:20px!important;letter-spacing:.16em}
-body:has(.hero-content) nav{display:flex;align-items:center;gap:26px}
-body:has(.hero-content) nav a{font-size:11px;letter-spacing:.13em;text-decoration:none;color:#d4ddd6}
-body:has(.hero-content) nav a:hover{color:var(--lime)}
-body:has(.hero-content) .menu-btn{display:none;background:transparent;color:var(--lime);border:1px solid var(--line);padding:8px 12px;border-radius:10px}
-body:has(.hero-content) .hero{min-height:680px;display:flex;align-items:center;padding:clamp(45px,9vw,120px) clamp(20px,9vw,140px)!important;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 46%,rgba(125,224,192,.12),transparent 31%),linear-gradient(115deg,#0b1720 0%,#0b1923 54%,#17252b 100%)!important}
-body:has(.hero-content) .hero:after{content:"7";position:absolute;right:9%;top:50%;transform:translateY(-50%);font-size:clamp(300px,48vw,700px);line-height:.8;font-weight:800;color:rgba(201,239,112,.045);pointer-events:none}
-body:has(.hero-content) .hero-content{max-width:720px;position:relative;z-index:2}
-body:has(.hero-content) .tag{display:inline-flex;padding:9px 13px;border:1px solid rgba(201,239,112,.35);border-radius:4px;color:var(--lime);font-size:10px;letter-spacing:.2em}
-body:has(.hero-content) .hero h1{font-size:clamp(44px,8vw,100px)!important;line-height:.98;letter-spacing:-.06em;margin:26px 0!important;color:var(--white)}
-body:has(.hero-content) .hero h1 span{color:var(--lime)!important}
-body:has(.hero-content) .hero p{max-width:510px;color:#aab9b6;line-height:1.95;font-size:15px}
-body:has(.hero-content) .buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
-body:has(.hero-content) .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 21px!important;border-radius:4px!important;background:var(--lime)!important;color:#142016!important;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:.06em;border:1px solid var(--lime)!important}
-body:has(.hero-content) .btn.secondary{background:transparent!important;color:var(--white)!important;border-color:rgba(255,255,255,.22)!important}
-body:has(.hero-content) .section{padding:80px clamp(20px,8vw,120px)!important;background:#0d1922!important}
-body:has(.hero-content) .heading{text-align:left!important;max-width:700px;margin:0 auto 35px}
-body:has(.hero-content) .heading small{color:var(--mint);letter-spacing:.2em;font-size:10px}
-body:has(.hero-content) .heading h2{font-size:clamp(28px,4vw,48px);color:var(--paper);margin:12px 0}
-body:has(.hero-content) .heading p,body:has(.hero-content) .card p{color:#9cacab;line-height:1.8}
-body:has(.hero-content) .cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-body:has(.hero-content) .card,body:has(.hero-content) .join{background:#12232b!important;border:1px solid var(--line)!important;border-radius:5px!important;padding:25px!important;box-shadow:none!important}
-body:has(.hero-content) .number{color:var(--lime)!important;font-size:12px;margin-bottom:25px}
-body:has(.hero-content) .card h3{color:var(--paper);margin-bottom:10px}
-body:has(.hero-content) .join{max-width:1100px;margin:auto;background:linear-gradient(110deg,#172c30,#18251f)!important}
-body:has(.hero-content) footer{padding:30px;color:#899b98;border-top:1px solid var(--line)}
+body:has(.hero)>header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:17px clamp(18px,5vw,72px)!important;border-bottom:1px solid var(--line)}
+body:has(.hero) .logo{color:var(--lime)!important;font-size:20px!important;letter-spacing:.16em}
+body:has(.hero) nav{display:flex;align-items:center;gap:26px}
+body:has(.hero) nav a{font-size:11px;letter-spacing:.13em;text-decoration:none;color:#d4ddd6}
+body:has(.hero) nav a:hover{color:var(--lime)}
+body:has(.hero) .menu-btn{display:none;background:transparent;color:var(--lime);border:1px solid var(--line);padding:8px 12px;border-radius:10px}
+body:has(.hero) .hero{min-height:680px;display:flex;align-items:center;padding:clamp(45px,9vw,120px) clamp(20px,9vw,140px)!important;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 46%,rgba(125,224,192,.12),transparent 31%),linear-gradient(115deg,#0b1720 0%,#0b1923 54%,#17252b 100%)!important}
+body:has(.hero) .hero:after{content:"7";position:absolute;right:9%;top:50%;transform:translateY(-50%);font-size:clamp(300px,48vw,700px);line-height:.8;font-weight:800;color:rgba(201,239,112,.045);pointer-events:none}
+body:has(.hero) .hero-content{max-width:720px;position:relative;z-index:2}
+body:has(.hero) .tag{display:inline-flex;padding:9px 13px;border:1px solid rgba(201,239,112,.35);border-radius:4px;color:var(--lime);font-size:10px;letter-spacing:.2em}
+body:has(.hero) .hero h1{font-size:clamp(44px,8vw,100px)!important;line-height:.98;letter-spacing:-.06em;margin:26px 0!important;color:var(--white)}
+body:has(.hero) .hero h1 span{color:var(--lime)!important}
+body:has(.hero) .hero p{max-width:510px;color:#aab9b6;line-height:1.95;font-size:15px}
+body:has(.hero) .buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
+body:has(.hero) .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 21px!important;border-radius:4px!important;background:var(--lime)!important;color:#142016!important;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:.06em;border:1px solid var(--lime)!important}
+body:has(.hero) .btn.secondary{background:transparent!important;color:var(--white)!important;border-color:rgba(255,255,255,.22)!important}
+body:has(.hero) .section,body:has(.hero) .container{max-width:1100px;margin:0 auto;padding:80px clamp(20px,8vw,120px)!important;background:#0d1922!important}
+body:has(.hero) .heading{text-align:left!important;max-width:700px;margin:0 auto 35px;border:0!important}
+body:has(.hero) .heading small{color:var(--mint);letter-spacing:.2em;font-size:10px}
+body:has(.hero) .heading h2{font-size:clamp(28px,4vw,48px);color:var(--paper);margin:12px 0}
+body:has(.hero) .heading p,body:has(.hero) .card p{color:#9cacab;line-height:1.8}
+body:has(.hero) .cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+body:has(.hero) .card,body:has(.hero) .join{background:#12232b!important;border:1px solid var(--line)!important;border-radius:5px!important;padding:25px!important;box-shadow:none!important}
+body:has(.hero) .number{color:var(--lime)!important;font-size:12px;margin-bottom:25px}
+body:has(.hero) .card h3{color:var(--paper);margin-bottom:10px}
+body:has(.hero) .join{max-width:1100px;margin:auto;background:linear-gradient(110deg,#172c30,#18251f)!important}
+body:has(.hero) footer{padding:30px;color:#899b98;border-top:1px solid var(--line)}
 /* AUTH PAGES — calm editorial membership, no shooter illustration */
 body:has(#loginForm),body:has(#registerForm){min-height:100vh;background:radial-gradient(ellipse at 12% 15%,rgba(125,224,192,.15),transparent 34%),radial-gradient(ellipse at 88% 90%,rgba(201,239,112,.08),transparent 30%),#09131c!important}
 body:has(#loginForm) .page{min-height:100vh;max-width:1180px;margin:auto;padding:42px clamp(18px,5vw,70px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.8fr);align-items:center;gap:clamp(25px,7vw,100px)}
@@ -102,6 +102,6 @@ body:has(#adminEmail) .refresh{background:var(--lime)!important;color:#152219!im
 body:has(#adminEmail) .approve{background:#4b9b78!important}body:has(#adminEmail) .reject{background:#ad5156!important}
 body:has(#members) h3,body:has(#profile) h3,body:has(#adminEmail) h2{color:var(--lime)}
 /* RESPONSIVE */
-@media(max-width:900px){body:has(.hero-content) .cards{grid-template-columns:1fr}body:has(#loginForm) .page{grid-template-columns:1fr;max-width:600px;padding:24px 18px}body:has(#loginForm) .scene{min-height:230px}body:has(#loginForm) .scene:before{font-size:170px}body:has(#loginForm) .scene:after{font-size:27px;bottom:20px}body:has(#registerForm) .main{grid-template-columns:1fr;gap:18px;margin:10px auto 35px;max-width:560px}body:has(#registerForm) .visual{padding:12px 5px}body:has(#registerForm) .visual .character{height:150px}}
-@media(max-width:760px){body:has(.hero-content)>header{padding:13px 16px!important}body:has(.hero-content) .menu-btn{display:block}body:has(.hero-content) nav{display:none;position:absolute;left:12px;right:12px;top:60px;padding:16px;background:#10212a;border:1px solid var(--line);border-radius:5px;flex-direction:column;align-items:stretch}body:has(.hero-content) nav.open{display:flex}body:has(.hero-content) .hero{min-height:620px;padding:70px 22px!important}body:has(.hero-content) .hero h1{font-size:clamp(43px,13vw,70px)!important}body:has(.hero-content) .section{padding:55px 20px!important}body:has(#loginForm) .page{padding:18px 14px;gap:15px}body:has(#loginForm) .scene{min-height:190px;padding:20px}body:has(#loginForm) .scene-title{top:16px;left:18px}body:has(#loginForm) .scene:after{font-size:23px;left:20px;bottom:18px}body:has(#loginForm) .login-card{max-width:none;padding:25px 21px}body:has(#registerForm) .main{padding:0 14px}body:has(#registerForm) .card{padding:24px 20px!important}body:has(#dashboard) .layout{display:block!important;width:100%;max-width:none;margin:0;padding:14px 12px calc(100px + env(safe-area-inset-bottom))}body:has(#dashboard) .sidebar,body:has(#dashboard) .right{display:none!important}body:has(#dashboard) .main{width:100%;max-width:none}body:has(#dashboard) .view,body:has(#dashboard) .view.active{width:100%;min-width:0}body:has(#dashboard) .post{padding:13px!important}body:has(#dashboard) .post-media{max-height:52vh}body:has(#dashboard) .mobile-nav{left:8px;right:8px;bottom:calc(7px + env(safe-area-inset-bottom));display:flex!important;gap:2px;padding:6px 3px}body:has(#dashboard) .mobile-nav button{flex:1;min-width:0;font-size:9px}body:has(#dashboard) .mobile-nav button span{font-size:16px}}
+@media(max-width:900px){body:has(.hero) .cards{grid-template-columns:1fr}body:has(#loginForm) .page{grid-template-columns:1fr;max-width:600px;padding:24px 18px}body:has(#loginForm) .scene{min-height:230px}body:has(#loginForm) .scene:before{font-size:170px}body:has(#loginForm) .scene:after{font-size:27px;bottom:20px}body:has(#registerForm) .main{grid-template-columns:1fr;gap:18px;margin:10px auto 35px;max-width:560px}body:has(#registerForm) .visual{padding:12px 5px}body:has(#registerForm) .visual .character{height:150px}}
+@media(max-width:760px){body:has(.hero)>header{padding:13px 16px!important}body:has(.hero) .menu-btn{display:block}body:has(.hero) nav{display:none;position:absolute;left:12px;right:12px;top:60px;padding:16px;background:#10212a;border:1px solid var(--line);border-radius:5px;flex-direction:column;align-items:stretch}body:has(.hero) nav.open{display:flex}body:has(.hero) .hero{min-height:620px;padding:70px 22px!important}body:has(.hero) .hero h1{font-size:clamp(43px,13vw,70px)!important}body:has(.hero) .section{padding:55px 20px!important}body:has(#loginForm) .page{padding:18px 14px;gap:15px}body:has(#loginForm) .scene{min-height:190px;padding:20px}body:has(#loginForm) .scene-title{top:16px;left:18px}body:has(#loginForm) .scene:after{font-size:23px;left:20px;bottom:18px}body:has(#loginForm) .login-card{max-width:none;padding:25px 21px}body:has(#registerForm) .main{padding:0 14px}body:has(#registerForm) .card{padding:24px 20px!important}body:has(#dashboard) .layout{display:block!important;width:100%;max-width:none;margin:0;padding:14px 12px calc(100px + env(safe-area-inset-bottom))}body:has(#dashboard) .sidebar,body:has(#dashboard) .right{display:none!important}body:has(#dashboard) .main{width:100%;max-width:none}body:has(#dashboard) .view,body:has(#dashboard) .view.active{width:100%;min-width:0}body:has(#dashboard) .post{padding:13px!important}body:has(#dashboard) .post-media{max-height:52vh}body:has(#dashboard) .mobile-nav{left:8px;right:8px;bottom:calc(7px + env(safe-area-inset-bottom));display:flex!important;gap:2px;padding:6px 3px}body:has(#dashboard) .mobile-nav button{flex:1;min-width:0;font-size:9px}body:has(#dashboard) .mobile-nav button span{font-size:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
