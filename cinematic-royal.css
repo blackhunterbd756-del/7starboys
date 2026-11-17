@@ -158,3 +158,55 @@ nav a:hover,.register a:hover{color:#fff0c5!important;text-shadow:0 0 16px rgba(
 footer{border-color:rgba(232,199,123,.22)!important;color:#bcaec8!important}
 @media(max-width:800px){.hero{min-height:670px!important}.hero h1{font-size:clamp(36px,10vw,58px)!important}.scene{min-height:220px!important}.page{gap:18px!important}}
 @media(max-width:640px){body:has(.page){padding:12px!important}.hero:after{inset:7px}.buttons{gap:11px!important}.btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center}.join{padding:38px 18px!important}}
+
+
+/* ===== FINAL RESPONSIVE FINISH / ALL PAGES ===== */
+:root{color-scheme:dark;--royal-gold:#e8c77b;--royal-gold2:#fff0c5;--royal-purple:#a855f7}
+html{scroll-padding-top:88px}
+body{min-height:100vh}
+a,button{ -webkit-tap-highlight-color:transparent }
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #f3d48f!important;outline-offset:3px}
+img,video{max-width:100%}
+input,textarea,select{max-width:100%;font:inherit}
+.card,.panel,.login-card,.profile,.join,.stat,.home-tile{box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.035)!important}
+.card,.panel,.login-card,.profile,.join{backdrop-filter:blur(18px)}
+/* registration header and form spacing */
+body:has(.topbar) .topbar{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;flex-wrap:wrap!important;min-height:64px!important;padding:14px clamp(16px,4vw,38px)!important}
+body:has(.topbar) .topbar .logo{line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere}
+body:has(.topbar) .main{width:min(1120px,100%)!important;margin:clamp(16px,4vh,42px) auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(320px,.86fr)!important;gap:clamp(18px,4vw,48px)!important;align-items:center!important}
+body:has(.topbar) .visual{min-width:0!important;min-height:440px!important;position:relative!important;overflow:hidden!important;border:1px solid rgba(232,199,123,.3)!important;background:radial-gradient(ellipse at 50% 50%,rgba(151,74,213,.32),transparent 55%),linear-gradient(145deg,#1c0d2b,#090510)!important}
+body:has(.topbar) .card{min-width:0!important;width:100%!important;padding:clamp(22px,3.5vw,38px)!important}
+body:has(.topbar) .subtitle,body:has(.topbar) .bottom,body:has(.topbar) .footer{line-height:1.75!important;overflow-wrap:anywhere}
+body:has(.topbar) .orb{pointer-events:none}
+/* social dashboard: reserve room for the mobile dock and prevent overlap */
+#dashboard{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+.layout{min-width:0!important;align-items:start!important}
+.main,.view,.panel,.sidebar{min-width:0!important}
+.view{scroll-margin-top:90px}
+.mobile-nav{z-index:60!important;position:fixed!important;left:10px!important;right:10px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:720px!important;margin:0 auto!important;border:1px solid rgba(232,199,123,.35)!important;border-radius:18px!important;background:rgba(12,7,20,.94)!important;box-shadow:0 12px 40px rgba(0,0,0,.6)!important;backdrop-filter:blur(22px)!important}
+.mobile-nav>*{min-width:0!important}
+#homeFeed,#postFeed,#myPosts,#videoFeed,#storyList,#searchResults,#friendsList,#requestList,#notificationList,#groupList,#savedList{min-width:0!important;overflow-wrap:anywhere}
+.chat-messages{min-width:0!important;overflow-x:hidden!important}
+.post img,.post video,.item img,.story img,.story video{max-width:100%!important;height:auto}
+.profile-cover{overflow:hidden!important}
+@media(max-width:850px){
+ body:has(.topbar) .main{display:flex!important;flex-direction:column!important;width:100%!important;max-width:560px!important;padding:0 14px!important;margin:18px auto!important}
+ body:has(.topbar) .visual{width:100%!important;min-height:190px!important;height:190px!important}
+ body:has(.topbar) .card{width:100%!important}
+ .layout{grid-template-columns:1fr!important}
+ .sidebar{display:none!important}
+ .main{width:100%!important}
+ #dashboard{padding-left:12px!important;padding-right:12px!important}
+ .mobile-nav{display:flex!important;justify-content:space-around!important;gap:3px!important;padding:9px 5px!important}
+ .mobile-nav button,.mobile-nav a{flex:1!important;min-width:0!important;padding:9px 2px!important;font-size:11px!important}
+}
+@media(max-width:480px){
+ body:has(.topbar) .topbar{justify-content:center!important;text-align:center!important}
+ body:has(.topbar) .topbar .logo{font-size:20px!important;letter-spacing:.08em!important}
+ body:has(.topbar) .visual{min-height:150px!important;height:150px!important}
+ .club-hero{padding:20px 16px!important}
+ .home-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .home-tile{min-width:0!important;padding:13px 9px!important}
+ .mobile-nav{left:6px!important;right:6px!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
