@@ -241,3 +241,33 @@ input:focus,textarea:focus,select:focus{transform:translateZ(5px);box-shadow:0 0
 @keyframes royalButtonShine{0%,15%{left:-35%;opacity:0}35%{opacity:1}65%,100%{left:125%;opacity:0}}
 @media(max-width:800px){body:after{opacity:.12}.card:hover,.panel:hover,.post:hover,.home-tile:hover{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){body:after,.scene:before,.cinematic-figure:before,.cinematic-figure:after,.figure-light,.figure-beam,.login-card .logo,.login-card button,.login-card button:after{animation:none!important}}
+
+
+/* === 7STARBOYS cinematic shooter-to-title intro === */
+.hero{isolation:isolate!important;}
+.seven-intro{position:relative;width:min(850px,94vw);height:clamp(235px,34vw,360px);margin:0 auto 22px;overflow:hidden;isolation:isolate;perspective:1000px;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);}
+.intro-grid{position:absolute;inset:35% -15% -50%;background:linear-gradient(#a66aff24 1px,transparent 1px),linear-gradient(90deg,#a66aff24 1px,transparent 1px);background-size:38px 38px;transform:rotateX(66deg);transform-origin:top;animation:introGridMove 5s linear infinite;opacity:.55}
+.shooter{position:absolute;left:8%;bottom:12%;width:150px;height:210px;filter:drop-shadow(0 0 18px #9f50ff88);animation:shooterAim 5s ease-in-out infinite;transform-style:preserve-3d}
+.shooter i{position:absolute;display:block;background:linear-gradient(135deg,#f6d89a,#8f59bb 48%,#171021);box-shadow:inset -5px -4px 10px #0008,0 0 12px #b36cff30}
+.sh-head{width:38px;height:48px;border-radius:48% 48% 42% 42%;left:47px;top:12px;transform:rotate(8deg)}
+.sh-body{width:72px;height:104px;left:31px;top:57px;border-radius:24px 22px 12px 12px;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.sh-arm{width:82px;height:17px;left:73px;top:75px;border-radius:12px;transform:rotate(-8deg);transform-origin:left center}
+.sh-gun{width:63px;height:11px;left:137px;top:68px;border-radius:3px;background:linear-gradient(#ddd,#54465f)!important;box-shadow:0 0 7px #fff8!important}
+.sh-leg{width:23px;height:83px;left:46px;top:148px;border-radius:8px;transform:rotate(8deg)}
+.muzzle{position:absolute;left:31%;top:31%;width:16px;height:16px;border-radius:50%;background:#fff6c8;box-shadow:0 0 12px 8px #ffe59b,0 0 38px 20px #a34cff;animation:muzzleFire 5s steps(1,end) infinite;opacity:0}
+.bullet-trail{position:absolute;left:30%;top:34%;width:0;height:3px;border-radius:50%;background:linear-gradient(90deg,#fff,#ffe6a0 30%,#bd7aff 75%,transparent);box-shadow:0 0 15px 5px #eacbff;transform:rotate(-8deg);animation:bulletShot 5s ease-out infinite}
+.impact-burst{position:absolute;left:78%;top:35%;width:8px;height:8px;border-radius:50%;background:#fff3c5;box-shadow:0 0 0 0 #ffe6a0;animation:impactBurst 5s ease-out infinite}
+.intro-title{position:absolute;left:50%;top:48%;width:100%;text-align:center;white-space:nowrap;font:900 clamp(30px,7vw,72px)/1 Cinzel,Georgia,serif;letter-spacing:.11em;color:#fff0c5;text-shadow:0 2px 0 #815324,0 5px 0 #55306e,0 10px 0 #26152f,0 18px 28px #000,0 0 35px #e4bd72;transform:translate(-50%,-50%) rotateX(65deg) scale(.25);opacity:0;animation:titleBlast 5s cubic-bezier(.16,.8,.25,1) infinite}
+.intro-title span{color:#ffe7a5;text-shadow:0 0 24px #fff0b0,0 0 50px #b36cff}
+.intro-subtitle{position:absolute;left:50%;top:70%;transform:translate(-50%,15px);font:700 11px Inter,sans-serif;letter-spacing:.48em;color:#e5c8ff;opacity:0;animation:subtitleReveal 5s ease infinite}
+.intro-sparks{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,#fff0b8 0 2px,transparent 3px) 78% 35%/28px 28px,radial-gradient(circle,#c58aff 0 1px,transparent 2px) 80% 38%/19px 19px;opacity:0;animation:sparksFlash 5s ease-out infinite}
+@keyframes shooterAim{0%,12%,100%{transform:translateY(0) rotateY(-8deg)}18%{transform:translateY(-3px) rotateY(0)}22%{transform:translateY(2px) rotateY(5deg)}30%,85%{transform:translateY(0) rotateY(0)}}
+@keyframes muzzleFire{0%,17%,25%,100%{opacity:0;transform:scale(.2)}19%,22%{opacity:1;transform:scale(1.8)}}
+@keyframes bulletShot{0%,18%{width:0;opacity:0}19%{width:4%;opacity:1}27%{width:50%;opacity:1}34%,100%{width:50%;opacity:0}}
+@keyframes impactBurst{0%,27%{opacity:0;transform:scale(.1)}29%{opacity:1;transform:scale(4);box-shadow:0 0 0 14px #ffe7a455,0 0 55px 30px #a34cffaa}40%,100%{opacity:0;transform:scale(16);box-shadow:0 0 0 0 transparent}}
+@keyframes titleBlast{0%,29%{opacity:0;transform:translate(-50%,-50%) rotateX(65deg) scale(.2);filter:blur(10px)}37%{opacity:1;transform:translate(-50%,-50%) rotateX(0) scale(1.12);filter:blur(0)}43%,78%{opacity:1;transform:translate(-50%,-50%) rotateX(0) scale(1);filter:drop-shadow(0 0 28px #b77aff)}90%,100%{opacity:0;transform:translate(-50%,-50%) rotateX(-15deg) scale(1.25);filter:blur(5px)}}
+@keyframes subtitleReveal{0%,39%{opacity:0;transform:translate(-50%,15px)}46%,78%{opacity:1;transform:translate(-50%,0)}90%,100%{opacity:0}}
+@keyframes sparksFlash{0%,27%{opacity:0}31%{opacity:1}43%,100%{opacity:0}}
+@keyframes introGridMove{to{background-position:0 76px,76px 0}}
+@media(max-width:600px){.seven-intro{height:220px;margin-bottom:8px}.shooter{transform:scale(.72);transform-origin:left bottom;left:1%;bottom:9%}.intro-title{font-size:clamp(25px,7vw,43px);letter-spacing:.06em}.intro-subtitle{font-size:9px;letter-spacing:.3em;top:72%}.bullet-trail{top:38%}}
+@media(prefers-reduced-motion:reduce){.seven-intro *{animation:none!important}.intro-title{opacity:1!important;transform:translate(-50%,-50%)!important}.intro-subtitle{opacity:1!important}}
