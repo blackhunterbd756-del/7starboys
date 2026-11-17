@@ -247,6 +247,11 @@ footer span{color:var(--cyan)}
  .btn{width:100%;max-width:300px}
 }
 </style>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="./app-icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="7STARBOYS">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="club-design.css?v=20261117-purplegold3">
     <link rel="stylesheet" href="cinematic-royal.css?v=20261117-shooter8">
     <link rel="stylesheet" href="mobile-responsive.css?v=20261117-mobilefix1">
@@ -426,5 +431,12 @@ function closeMenu(){
 }
 </script>
 
+<script>
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
 </body>
 </html>
