@@ -133,6 +133,25 @@ body:has(.topbar) .visual p{text-align:center}
 @media(prefers-reduced-motion:reduce){.auth-shooter *{animation:none!important}.as-title,.as-tagline{opacity:1!important;filter:none!important;transform:translate(-50%,-50%)!important}.as-tagline{transform:translate(-50%,0)!important}}
 </style>
     <link rel="stylesheet" href="mobile-responsive.css?v=20261117-mobilefix1">
+
+<style id="auth-content-final-fix">
+/* Keep the login form visible below the intro; remove old decorative overlays. */
+html,body{min-height:100%;height:auto!important}
+body:has(.login-card){display:block!important;min-height:100svh!important;overflow-x:hidden!important;overflow-y:auto!important;align-items:initial!important;justify-content:initial!important}
+body:has(.login-card) .page{position:relative!important;z-index:2!important;width:min(1120px,100%)!important;max-width:1120px!important;margin:0 auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(320px,440px)!important;align-items:center!important;gap:clamp(18px,4vw,44px)!important}
+body:has(.login-card) .scene{position:relative!important;display:flex!important;visibility:visible!important;opacity:1!important;min-height:420px!important;height:auto!important;overflow:hidden!important}
+body:has(.login-card) .scene:before,body:has(.login-card) .scene:after{content:none!important;display:none!important}
+body:has(.login-card) .auth-shooter{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;width:100%!important;height:clamp(230px,30vw,340px)!important;min-height:230px!important}
+body:has(.login-card) .login-card{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:3!important;width:100%!important;height:auto!important;max-width:460px!important;align-self:center!important}
+@media(max-width:800px){
+ body:has(.login-card){padding:12px 12px 30px!important}
+ body:has(.login-card) .page{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:12px!important;width:100%!important;max-width:480px!important;margin:0 auto!important}
+ body:has(.login-card) .scene{width:100%!important;min-height:0!important;height:auto!important;padding:8px!important}
+ body:has(.login-card) .scene-title{position:relative!important;top:auto!important;left:auto!important;margin:2px 0 8px!important;text-align:center!important}
+ body:has(.login-card) .auth-shooter{height:clamp(190px,55vw,235px)!important;min-height:190px!important}
+ body:has(.login-card) .login-card{width:100%!important;max-width:none!important;margin:0!important;padding:24px 19px!important}
+}
+</style>
 </head>
 
 <body>
