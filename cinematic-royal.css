@@ -210,3 +210,34 @@ body:has(.topbar) .orb{pointer-events:none}
  .mobile-nav{left:6px!important;right:6px!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* === 7STARBOYS: PREMIUM 3D MOTION SUITE === */
+:root{--motion-gold:#f4d58a;--motion-violet:#b76bff}
+body{perspective:1200px}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.2;background-image:radial-gradient(2px 2px at 12% 22%,#ffe8b8 45%,transparent 60%),radial-gradient(1.5px 1.5px at 72% 16%,#d8a8ff 45%,transparent 60%),radial-gradient(2px 2px at 88% 72%,#ffe8b8 45%,transparent 60%);background-size:240px 220px,310px 280px,270px 260px;animation:royalStardust 22s linear infinite}
+@keyframes royalStardust{to{background-position:240px -440px,-310px 560px,270px -520px}}
+.card,.panel,.post,.profile,.login-card,.home-tile,.club-hero{transform-style:preserve-3d;backface-visibility:hidden;transition:transform .45s cubic-bezier(.2,.75,.25,1),box-shadow .45s ease,border-color .45s ease}
+.card:hover,.panel:hover,.post:hover,.home-tile:hover{transform:translateY(-7px) rotateX(1.2deg) rotateY(-1deg);box-shadow:0 25px 55px #0008,0 0 24px #a34cff18;border-color:#e4bd7270}
+button,.btn{transform:translateZ(0);transition:transform .28s ease,filter .28s ease,box-shadow .28s ease}
+button:hover,.btn:hover{transform:translateY(-3px) translateZ(8px);filter:brightness(1.13);box-shadow:0 12px 30px #9b4dff35,0 0 22px #e4bd7240}
+input,textarea,select{transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+input:focus,textarea:focus,select:focus{transform:translateZ(5px);box-shadow:0 0 0 3px #a34cff20,0 0 24px #a34cff20}
+.scene{isolation:isolate;transform-style:preserve-3d}
+.scene:before{animation:royalStagePulse 7s ease-in-out infinite}
+.cinematic-figure{transform-style:preserve-3d}
+.cinematic-figure:before{animation:royalCrownFloat 5s ease-in-out infinite,royalCrownShine 6s linear infinite!important;filter:drop-shadow(0 20px 24px #000b)}
+.cinematic-figure:after{animation:royalRing 12s linear infinite!important}
+.figure-light{animation:royalLightBreath 4s ease-in-out infinite alternate}
+.figure-beam{animation:royalBeamSweep 6s ease-in-out infinite}
+.login-card{transform-style:preserve-3d;box-shadow:0 35px 90px #0009,0 0 0 1px #e8c77b16,0 0 55px #a855f71c!important}
+.login-card .logo{background:linear-gradient(100deg,#fff2c8,#e5bd70 38%,#fff4d2 55%,#b77aff 78%,#f7dfaa);background-size:220% auto;background-clip:text;-webkit-background-clip:text;color:transparent!important;animation:royalGoldFlow 7s linear infinite}
+.login-card button{position:relative;overflow:hidden;background:linear-gradient(105deg,#e7c27a,#fff0c4 35%,#b36cff 75%,#e7c27a)!important;background-size:220% 100%!important;animation:royalGoldFlow 5s linear infinite}
+.login-card button:after{content:"";position:absolute;top:-60%;left:-35%;width:22%;height:220%;transform:rotate(24deg);background:#fff9;filter:blur(9px);animation:royalButtonShine 4.5s ease-in-out infinite}
+@keyframes royalStagePulse{0%,100%{box-shadow:0 0 0 #a855f700,inset 0 0 35px #a855f70a}50%{box-shadow:0 0 45px #a855f725,inset 0 0 65px #a855f718}}
+@keyframes royalCrownShine{0%,100%{filter:drop-shadow(0 20px 24px #000b) drop-shadow(0 0 20px #e8c77b88)}50%{filter:drop-shadow(0 20px 24px #000b) drop-shadow(0 0 38px #ffe8a9) drop-shadow(0 0 70px #a855f7bb)}}
+@keyframes royalLightBreath{from{opacity:.45;transform:translate(-50%,-50%) scale(.82)}to{opacity:.95;transform:translate(-50%,-50%) scale(1.18)}}
+@keyframes royalBeamSweep{0%,100%{opacity:.1;transform:translate(-50%,-50%) rotate(-35deg) scaleX(.55)}50%{opacity:.9;transform:translate(-50%,-50%) rotate(25deg) scaleX(1.2)}}
+@keyframes royalGoldFlow{to{background-position:220% center}}
+@keyframes royalButtonShine{0%,15%{left:-35%;opacity:0}35%{opacity:1}65%,100%{left:125%;opacity:0}}
+@media(max-width:800px){body:after{opacity:.12}.card:hover,.panel:hover,.post:hover,.home-tile:hover{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){body:after,.scene:before,.cinematic-figure:before,.cinematic-figure:after,.figure-light,.figure-beam,.login-card .logo,.login-card button,.login-card button:after{animation:none!important}}
