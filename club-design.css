@@ -25,33 +25,33 @@ img,video{max-width:100%}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--club-mint);outline-offset:3px}
 
 /* PUBLIC LANDING PAGE */
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)){
+body:has(#navigation){
   min-height:100vh;background:
   radial-gradient(ellipse at 12% 15%,rgba(91,140,130,.15),transparent 34%),
   radial-gradient(ellipse at 90% 60%,rgba(111,76,125,.16),transparent 36%),
   #0b0a12!important;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm))>header{
+body:has(#navigation)>header{
   position:sticky;top:0;z-index:50;min-height:78px;padding:14px clamp(18px,6vw,88px);
   display:flex;align-items:center;justify-content:space-between;gap:20px;
   background:rgba(11,10,18,.9);border-bottom:1px solid var(--club-line);backdrop-filter:blur(18px);
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .logo{
+body:has(#navigation) .logo{
   color:var(--club-gold2)!important;font-size:clamp(20px,2vw,27px)!important;
   font-weight:900;letter-spacing:.19em;text-shadow:none!important;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .logo span{color:var(--club-mint)!important}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav{display:flex;align-items:center;gap:clamp(12px,2.4vw,30px)}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav a{
+body:has(#navigation) .logo span{color:var(--club-mint)!important}
+body:has(#navigation) nav{display:flex;align-items:center;gap:clamp(12px,2.4vw,30px)}
+body:has(#navigation) nav a{
   color:#d8d0d9;background:transparent;padding:10px 0;border:0;border-radius:0;
   text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.12em;transition:color .2s;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav a:hover{color:var(--club-gold2);background:transparent}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .menu-btn{
+body:has(#navigation) nav a:hover{color:var(--club-gold2);background:transparent}
+body:has(#navigation) .menu-btn{
   display:none;background:transparent;border:1px solid var(--club-line);color:var(--club-gold2);
   padding:9px 13px;border-radius:12px;font-size:20px;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero{
+body:has(#navigation) .hero{
   min-height:min(760px,calc(100svh - 78px));display:flex;align-items:center;justify-content:flex-start;
   padding:clamp(65px,10vw,130px) clamp(22px,9vw,140px);text-align:left;position:relative;isolation:isolate;
   background:linear-gradient(100deg,rgba(11,10,18,.96),rgba(11,10,18,.66) 58%,rgba(11,10,18,.22)),
@@ -59,64 +59,64 @@ body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero{
   linear-gradient(135deg,#1b2430,#171222 65%,#241b2e);
   overflow:hidden;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero:before{
+body:has(#navigation) .hero:before{
   content:"7S";position:absolute;z-index:-1;right:5%;top:48%;transform:translateY(-50%);
   font-size:clamp(190px,38vw,560px);font-weight:950;letter-spacing:-.13em;line-height:.8;
   color:rgba(217,173,114,.075);text-shadow:0 0 90px rgba(217,173,114,.12);
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero:after{
+body:has(#navigation) .hero:after{
   content:"";position:absolute;z-index:-1;right:12%;top:18%;width:clamp(160px,24vw,340px);aspect-ratio:1;
   border:1px solid rgba(154,210,195,.22);border-radius:50%;box-shadow:0 0 0 24px rgba(154,210,195,.025),0 0 0 52px rgba(154,210,195,.02);
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .orb{display:none!important}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero-content{max-width:760px;position:relative;z-index:2}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .tag{
+body:has(#navigation) .orb{display:none!important}
+body:has(#navigation) .hero-content{max-width:760px;position:relative;z-index:2}
+body:has(#navigation) .tag{
   display:inline-flex;padding:9px 14px;border:1px solid rgba(217,173,114,.4);border-radius:99px;
   color:var(--club-mint);background:rgba(154,210,195,.055);font-size:10px;letter-spacing:.2em;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero h1{
+body:has(#navigation) .hero h1{
   margin:25px 0 20px;font-size:clamp(45px,8vw,94px);line-height:1.02;letter-spacing:-.06em;font-weight:950;color:#fff;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero h1 span{
+body:has(#navigation) .hero h1 span{
   color:var(--club-gold2);background:none;-webkit-text-fill-color:currentColor;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero p{
+body:has(#navigation) .hero p{
   max-width:580px;color:#c2b9c7;font-size:clamp(14px,1.6vw,17px);line-height:2;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .buttons{
+body:has(#navigation) .buttons{
   display:flex;flex-wrap:wrap;justify-content:flex-start;gap:11px;margin-top:29px;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .btn{
+body:has(#navigation) .btn{
   display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 21px;
   border-radius:12px;border:1px solid var(--club-gold);background:var(--club-gold2);
   color:#241a12;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:.07em;transition:.2s;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .btn.secondary{
+body:has(#navigation) .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+body:has(#navigation) .btn.secondary{
   background:rgba(255,255,255,.035);color:var(--club-text);border-color:var(--club-line);
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .section{width:min(1160px,100%);margin:auto;padding:clamp(55px,8vw,95px) 22px}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .heading{margin-bottom:27px;text-align:left}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .heading small{color:var(--club-mint);font-size:10px;font-weight:800;letter-spacing:.2em}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .heading h2{font-size:clamp(28px,4vw,42px);margin:9px 0;color:#fff}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .heading p{color:var(--club-muted);line-height:1.9}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .card{
+body:has(#navigation) .section{width:min(1160px,100%);margin:auto;padding:clamp(55px,8vw,95px) 22px}
+body:has(#navigation) .heading{margin-bottom:27px;text-align:left}
+body:has(#navigation) .heading small{color:var(--club-mint);font-size:10px;font-weight:800;letter-spacing:.2em}
+body:has(#navigation) .heading h2{font-size:clamp(28px,4vw,42px);margin:9px 0;color:#fff}
+body:has(#navigation) .heading p{color:var(--club-muted);line-height:1.9}
+body:has(#navigation) .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+body:has(#navigation) .card{
   padding:26px;border:1px solid var(--club-line);border-radius:20px;
   background:linear-gradient(145deg,#211d2e,#14121d);box-shadow:var(--club-shadow);transition:.2s;
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .card:hover{transform:translateY(-4px);border-color:rgba(217,173,114,.45)}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .card .number{font-size:24px;color:var(--club-gold);margin-bottom:16px}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .card h3{font-size:18px;margin-bottom:9px}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .card p{color:var(--club-muted);font-size:13px;line-height:1.9}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .join{
+body:has(#navigation) .card:hover{transform:translateY(-4px);border-color:rgba(217,173,114,.45)}
+body:has(#navigation) .card .number{font-size:24px;color:var(--club-gold);margin-bottom:16px}
+body:has(#navigation) .card h3{font-size:18px;margin-bottom:9px}
+body:has(#navigation) .card p{color:var(--club-muted);font-size:13px;line-height:1.9}
+body:has(#navigation) .join{
   padding:clamp(28px,5vw,55px);border:1px solid var(--club-line);border-radius:24px;
   background:radial-gradient(circle at 90% 10%,rgba(154,210,195,.12),transparent 40%),linear-gradient(130deg,#211d2e,#14121d);
 }
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .join h2{font-size:clamp(25px,4vw,38px);margin-bottom:12px}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .join p{color:var(--club-muted);line-height:1.9}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) footer{padding:28px 16px 40px;border-top:1px solid var(--club-line);color:#8e8495;font-size:11px;line-height:2;text-align:center}
-body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) footer span{color:var(--club-gold2)}
+body:has(#navigation) .join h2{font-size:clamp(25px,4vw,38px);margin-bottom:12px}
+body:has(#navigation) .join p{color:var(--club-muted);line-height:1.9}
+body:has(#navigation) footer{padding:28px 16px 40px;border-top:1px solid var(--club-line);color:#8e8495;font-size:11px;line-height:2;text-align:center}
+body:has(#navigation) footer span{color:var(--club-gold2)}
 
 /* LOGIN — calm cinematic brand panel, no weapons or shooting */
 body:has(.login-card){
@@ -395,8 +395,8 @@ body:has(#memberList):not(:has(#dashboard)) .muted{color:var(--club-muted)}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero{min-height:620px;padding:80px 7vw}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .cards{grid-template-columns:1fr 1fr}
+  body:has(#navigation) .hero{min-height:620px;padding:80px 7vw}
+  body:has(#navigation) .cards{grid-template-columns:1fr 1fr}
   body:has(.login-card) .page,body:has(#registerForm) .main{grid-template-columns:1fr;max-width:560px}
   body:has(.login-card) .scene,body:has(#registerForm) .visual{min-height:180px;padding:22px}
   body:has(.login-card) .scene:after{font-size:30px;bottom:18%}
@@ -405,22 +405,22 @@ body:has(#memberList):not(:has(#dashboard)) .muted{color:var(--club-muted)}
   body:has(#dashboard) .right{display:none}
 }
 @media(max-width:680px){
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm))>header{min-height:65px;padding:10px 16px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .menu-btn{display:block}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav{
+  body:has(#navigation)>header{min-height:65px;padding:10px 16px}
+  body:has(#navigation) .menu-btn{display:block}
+  body:has(#navigation) nav{
     display:none;position:absolute;top:64px;left:12px;right:12px;padding:13px;flex-direction:column;gap:5px;
     border:1px solid var(--club-line);border-radius:15px;background:#171521;box-shadow:var(--club-shadow);
   }
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav.open{display:flex}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav a{padding:12px 10px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero{min-height:590px;padding:72px 22px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero:before{right:-8%;font-size:250px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero:after{right:-7%;top:15%;width:190px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero h1{font-size:clamp(42px,12vw,64px)}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .buttons{gap:8px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .btn{min-height:44px;padding:11px 14px;font-size:10px}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .cards{grid-template-columns:1fr}
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .section{padding:48px 17px}
+  body:has(#navigation) nav.open{display:flex}
+  body:has(#navigation) nav a{padding:12px 10px}
+  body:has(#navigation) .hero{min-height:590px;padding:72px 22px}
+  body:has(#navigation) .hero:before{right:-8%;font-size:250px}
+  body:has(#navigation) .hero:after{right:-7%;top:15%;width:190px}
+  body:has(#navigation) .hero h1{font-size:clamp(42px,12vw,64px)}
+  body:has(#navigation) .buttons{gap:8px}
+  body:has(#navigation) .btn{min-height:44px;padding:11px 14px;font-size:10px}
+  body:has(#navigation) .cards{grid-template-columns:1fr}
+  body:has(#navigation) .section{padding:48px 17px}
   body:has(.login-card){padding:20px 14px 28px;align-items:flex-start}
   body:has(.login-card) .page{display:flex;flex-direction:column;gap:13px;width:100%;max-width:470px;margin:auto}
   body:has(.login-card) .scene{width:100%;min-height:135px;height:135px;border-radius:19px;padding:16px}
