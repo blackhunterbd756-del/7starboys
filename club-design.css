@@ -1122,3 +1122,9 @@ body:has(#memberList):not(:has(#dashboard)) .muted{color:#b9adc7}
 @keyframes clubMarkFloat{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(calc(-50% - 10px)) scale(1.015)}}
 @keyframes clubGlow{from{opacity:.09;transform:scale(.92)}to{opacity:.19;transform:scale(1.08)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Final small-screen typography guard */
+body:has(.login-card) .scene:after{white-space:normal;max-width:82%;line-height:1.08}
+@media(max-width:680px){
+ body:has(.login-card) .scene:after{max-width:84%;white-space:normal}
+}
