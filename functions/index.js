@@ -22,7 +22,7 @@ exports.createMediaUploadSignature = onRequest(
       const match = header.match(/^Bearer (.+)$/);
       if (!match) return res.status(401).json({ error: "Authentication required" });
 
-      const decoded = await getAuth().verifyIdToken(match[1]);
+      const decoded = await getAuth().verifyIdToken(match[1], true);
       const db = getFirestore();
       const member = await db.collection("members").doc(decoded.uid).get();
       if (!member.exists || member.data().status !== "approved") {
@@ -30,7 +30,10 @@ exports.createMediaUploadSignature = onRequest(
       }
 
       const body = req.body || {};
-      const resourceType = body.resourceType === "video" ? "video" : "image";
+      if (body.resourceType !== "image" && body.resourceType !== "video") {
+        return res.status(400).json({ error: "Invalid media type" });
+      }
+      const resourceType = body.resourceType;
       const timestamp = Math.floor(Date.now() / 1000);
       const folder = "7starboys";
       const publicId = `${decoded.uid}_${require("crypto").randomUUID()}`;
