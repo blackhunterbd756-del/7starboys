@@ -411,7 +411,7 @@ body:has(#memberList):not(:has(#dashboard)) .muted{color:var(--club-muted)}
     display:none;position:absolute;top:64px;left:12px;right:12px;padding:13px;flex-direction:column;gap:5px;
     border:1px solid var(--club-line);border-radius:15px;background:#171521;box-shadow:var(--club-shadow);
   }
-  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav.show{display:flex}
+  body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav.open{display:flex}
   body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) nav a{padding:12px 10px}
   body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero{min-height:590px;padding:72px 22px}
   body:has(.hero):not(:has(.login-card)):not(:has(#registerForm)) .hero:before{right:-8%;font-size:250px}
