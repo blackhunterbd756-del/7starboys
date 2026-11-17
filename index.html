@@ -250,6 +250,59 @@ footer span{color:var(--cyan)}
     <link rel="stylesheet" href="club-design.css?v=20261117-purplegold3">
     <link rel="stylesheet" href="cinematic-royal.css?v=20261117-shooter8">
     <link rel="stylesheet" href="mobile-responsive.css?v=20261117-mobilefix1">
+
+    <style>
+    /* FINAL HOME PAGE VISIBILITY + PHONE LAYOUT FIX */
+    body:after{z-index:-1!important}
+    body:has(#navigation)>header{position:sticky!important;z-index:50!important}
+    body:has(#navigation)>.hero,
+    body:has(#navigation)>.section,
+    body:has(#navigation)>footer{position:relative!important;z-index:1!important}
+    body:has(#navigation) .hero{
+      display:flex!important;flex-direction:column!important;justify-content:center!important;
+      align-items:center!important;min-height:0!important;height:auto!important;
+      padding:clamp(28px,5vh,58px) 16px!important;overflow:visible!important;
+      isolation:isolate!important;
+    }
+    body:has(#navigation) .hero-content,
+    body:has(#navigation) .hero-content *{
+      opacity:1!important;visibility:visible!important;filter:none!important;
+      color:inherit;
+    }
+    body:has(#navigation) .hero-content{position:relative!important;z-index:5!important;width:100%!important}
+    body:has(#navigation) .hero p,
+    body:has(#navigation) .heading p,
+    body:has(#navigation) .card p,
+    body:has(#navigation) .join p{color:#e0d8ec!important}
+    body:has(#navigation) .heading h2,
+    body:has(#navigation) .card h3,
+    body:has(#navigation) .join h2{color:#fff4df!important}
+    body:has(#navigation) .seven-intro{flex:none!important;max-width:100%!important}
+    body:has(#navigation) .seven-intro .intro-title{
+      animation:none!important;opacity:1!important;visibility:visible!important;
+      transform:translate(-50%,-50%)!important;filter:drop-shadow(0 0 28px #b77aff)!important;
+    }
+    body:has(#navigation) .seven-intro .intro-subtitle{
+      animation:none!important;opacity:1!important;visibility:visible!important;
+      transform:translate(-50%,0)!important;
+    }
+    body:has(#navigation) .section{height:auto!important;overflow:visible!important}
+    body:has(#navigation) .cards{align-items:stretch!important}
+    @media(max-width:700px){
+      body:has(#navigation) .hero{padding:26px 14px 36px!important;gap:4px!important}
+      body:has(#navigation) .seven-intro{width:100%!important;height:220px!important;min-height:220px!important;margin:0 auto 12px!important}
+      body:has(#navigation) .hero-content{padding:0 3px!important}
+      body:has(#navigation) .hero h1{font-size:clamp(34px,10vw,48px)!important;line-height:1.12!important;margin:18px 0 14px!important}
+      body:has(#navigation) .hero p{font-size:15px!important;line-height:1.9!important}
+      body:has(#navigation) .buttons{width:100%!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:10px!important;margin-top:22px!important}
+      body:has(#navigation) .btn{width:100%!important;max-width:340px!important;text-align:center!important;font-size:13px!important}
+      body:has(#navigation) .section{padding:38px 14px!important}
+      body:has(#navigation) .cards{grid-template-columns:minmax(0,1fr)!important;gap:13px!important}
+      body:has(#navigation) .card{padding:22px!important}
+      body:has(#navigation) .join{padding:34px 18px!important}
+      body:has(#navigation) footer{padding:26px 12px!important}
+    }
+    </style>
 </head>
 
 <body>
