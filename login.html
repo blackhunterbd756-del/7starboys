@@ -56,6 +56,7 @@ button.loading .spinner{display:inline-block}
 @media(max-width:800px){.page{max-width:430px;grid-template-columns:1fr;gap:8px}.scene{min-height:210px}.scene-title{top:5px;left:0;right:0;text-align:center}.character{max-width:230px}.energy{top:50%;right:4%}.flash{top:43%}.impact{top:44%;right:4%}.login-card{padding:30px 23px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
@@ -65,34 +66,7 @@ button.loading .spinner{display:inline-block}
 <div class="scene-title">✦ 7STARBOYS • MEMBER ACCESS ✦</div>
 <div class="scene-glow"></div>
 
-<svg class="character" viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="সিনেমাটিক মানব অবয়ব">
-<defs>
- <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#344c70"/><stop offset="1" stop-color="#10182a"/></linearGradient>
- <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2c6a0"/><stop offset="1" stop-color="#a96d55"/></linearGradient>
- <linearGradient id="pants" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#26344e"/><stop offset="1" stop-color="#0b1220"/></linearGradient>
- <filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
-</defs>
-<ellipse cx="210" cy="378" rx="135" ry="17" fill="#00d9ff" opacity=".14"/>
-<ellipse cx="210" cy="350" rx="95" ry="48" fill="#00d9ff" opacity=".08" filter="url(#soft)"/>
-<!-- natural human silhouette, jacket and trousers -->
-<path d="M154 235 Q135 267 132 321 L118 363 Q115 374 128 378 L170 378 Q180 373 176 362 L190 300 L211 300 L229 362 Q225 375 239 378 L281 378 Q294 372 286 361 L272 307 Q275 265 251 235Z" fill="url(#pants)" stroke="#516a8d" stroke-width="2"/>
-<path d="M148 155 Q164 135 194 132 L226 132 Q256 140 270 167 L278 252 Q239 276 143 257 L137 190Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="2"/>
-<path d="M193 133 L209 161 L228 133 L242 252 L181 252Z" fill="#18263d" stroke="#6a7f9e" stroke-width="2"/>
-<path d="M195 128 L224 128 L229 153 Q210 168 190 151Z" fill="url(#skin)"/>
-<!-- neck and head -->
-<path d="M177 62 Q181 28 216 26 Q252 30 255 68 L247 111 Q239 137 214 139 Q188 134 179 108Z" fill="url(#skin)" stroke="#d59c7d" stroke-width="2"/>
-<path d="M176 75 Q169 34 207 20 Q248 16 260 56 L252 74 Q239 54 219 52 Q199 70 178 69Z" fill="#111b2d"/>
-<path d="M185 83 Q198 76 207 83 M224 83 Q236 77 246 84" stroke="#513a35" stroke-width="3" stroke-linecap="round"/>
-<path d="M210 91 L205 105 L217 107" fill="none" stroke="#9a5e4c" stroke-width="2" stroke-linecap="round"/>
-<path d="M199 119 Q214 126 229 117" fill="none" stroke="#75453e" stroke-width="2" stroke-linecap="round"/>
-<!-- bent arms, hands and non-detailed prop -->
-<path d="M151 169 Q125 176 111 203 L164 232 L191 211 L178 184Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="3"/>
-<path d="M253 169 Q279 158 296 181 L324 194 L309 216 L271 204 L246 195Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="3"/>
-<path d="M292 185 Q308 178 326 187 L350 190 L350 202 L322 204 L304 213Z" fill="url(#skin)"/>
-<g class="weapon"><path d="M325 188 L376 188 L382 198 L326 200Z" fill="#202a3a" stroke="#9eb4d0" stroke-width="2"/><path d="M340 199 L354 199 L350 219 L337 219Z" fill="#182334" stroke="#8499b4" stroke-width="1.5"/><path d="M376 191 L389 191" stroke="#00e5ff" stroke-width="2" stroke-linecap="round"/></g>
-<path d="M136 194 L160 211 M267 189 L292 198" stroke="#00e5ff" stroke-width="2" opacity=".55"/>
-<circle cx="391" cy="195" r="6" fill="#fff1c7" opacity=".9"><animate attributeName="opacity" values="0;1;0" dur="3.2s" repeatCount="indefinite"/></circle>
-</svg>
+<div class="cinematic-figure" aria-hidden="true"><span class="figure-light"></span><span class="figure-beam"></span></div>
 
 <div class="energy"></div>
 <div class="flash"></div>
