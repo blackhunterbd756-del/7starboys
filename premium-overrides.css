@@ -1,0 +1,256 @@
+
+/* =========================================================
+   7STARBOYS PREMIUM CINEMATIC SYSTEM — final responsive layer
+   Keeps all existing page markup and application logic intact.
+   ========================================================= */
+:root{
+ --club-bg:#080410;--club-bg2:#10091b;--club-panel:#170d27;--club-panel2:#211033;
+ --club-gold:#e8bd62;--club-gold2:#ffe3a0;--club-purple:#8d2cff;--club-purple2:#c18bff;
+ --club-text:#fff8ee;--club-muted:#b9adc8;--club-line:rgba(190,132,255,.28);
+ --club-shadow:0 24px 70px rgba(0,0,0,.48);
+ color-scheme:dark;
+}
+html{background:#080410;scroll-padding-top:88px}
+body{background-color:#080410!important;color:#fff8ee}
+a,button,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+img{height:auto}
+::selection{background:#8d2cff;color:#fff}
+
+/* shared cinematic light, fine star field and gold-violet identity */
+body:has(#navigation),body:has(.login-card),body:has(#registerForm),body:has(#dashboard){
+ background-color:#080410!important;
+ background-image:
+  radial-gradient(ellipse at 8% 12%,rgba(116,31,210,.20),transparent 34%),
+  radial-gradient(ellipse at 94% 40%,rgba(184,111,255,.16),transparent 34%),
+  radial-gradient(ellipse at 50% 100%,rgba(232,189,98,.07),transparent 42%)!important;
+}
+body:has(#navigation)>header{
+ border-bottom:1px solid rgba(193,139,255,.32);
+ box-shadow:0 12px 35px #0008,0 1px 0 rgba(255,220,150,.08);
+}
+body:has(#navigation) .logo{
+ position:relative;color:#ffe3a0!important;
+ background:linear-gradient(100deg,#fff0b7 0%,#e8bd62 42%,#c18bff 76%,#fff0b7 100%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+ filter:drop-shadow(0 0 18px #a64cff30);
+}
+body:has(#navigation) .logo:before{
+ content:"♛";display:inline-block;margin-right:10px;font-size:1.2em;
+ -webkit-text-fill-color:#f5cc72;filter:drop-shadow(0 0 9px #f5cc7260);
+}
+body:has(#navigation) nav a{font-size:11px;letter-spacing:.14em}
+body:has(#navigation) nav a:hover{color:#ffe3a0;text-shadow:0 0 16px #b65cff}
+body:has(#navigation) .hero{
+ min-height:min(790px,calc(100svh - 78px));
+ background-image:
+  linear-gradient(90deg,rgba(7,3,15,.97) 0%,rgba(12,5,23,.82) 42%,rgba(12,5,23,.22) 100%),
+  var(--club-cinematic-art);
+ background-size:cover;background-position:center right;
+}
+body:has(#navigation) .hero:before{
+ color:rgba(189,139,255,.10);text-shadow:0 0 100px rgba(161,65,255,.24);
+}
+body:has(#navigation) .hero:after{
+ border-color:rgba(255,220,150,.32);
+ box-shadow:0 0 0 22px rgba(168,86,255,.045),0 0 0 52px rgba(255,220,150,.025),0 0 70px #8d2cff24;
+}
+body:has(#navigation) .tag{
+ color:#e3c4ff;border-color:#b879ff80;background:rgba(84,28,132,.22);
+ box-shadow:inset 0 0 18px #9d49ff12,0 0 24px #9d49ff12;
+}
+body:has(#navigation) .hero h1{letter-spacing:-.055em;text-shadow:0 8px 35px #0009}
+body:has(#navigation) .hero h1 span{
+ background:linear-gradient(95deg,#fff0b7,#e8bd62 42%,#c18bff 88%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+body:has(#navigation) .hero p{color:#e0d5e9;text-shadow:0 2px 15px #000}
+body:has(#navigation) .btn{
+ min-height:54px;border-radius:999px;border:1px solid #ffe2a0;
+ background:linear-gradient(110deg,#d69d35,#ffe4a0 55%,#dba83f);
+ box-shadow:0 10px 30px #e6b34a25,inset 0 1px #fff8;
+}
+body:has(#navigation) .btn.secondary{
+ border-color:#a66ae0a6;background:linear-gradient(135deg,#1b102bdf,#0b0714eF);
+ color:#f7eaff;box-shadow:inset 0 0 20px #9b45ff12,0 8px 26px #0005;
+}
+body:has(#navigation) .card,body:has(#navigation) .join{
+ border-color:#a65ce05c;background:linear-gradient(145deg,#211133ed,#0e0819f5);
+ box-shadow:0 18px 55px #0008,inset 0 1px #fff1;
+}
+body:has(#navigation) .card .number,body:has(#navigation) .heading small{color:#f4cf79}
+body:has(#navigation) footer{border-color:#a65ce04d}
+
+/* Login: cinematic split composition on desktop, clean stacked card on phones */
+body:has(.login-card){background-image:radial-gradient(ellipse at 18% 48%,#7d26c52b,transparent 42%),radial-gradient(ellipse at 92% 14%,#e8bd6217,transparent 34%),linear-gradient(135deg,#080410,#12091d)!important}
+body:has(.login-card) .page{gap:clamp(22px,4vw,56px)}
+body:has(.login-card) .scene{
+ border-color:#b66aff85;
+ background-image:linear-gradient(90deg,rgba(7,3,15,.42),rgba(7,3,15,.08)),var(--club-cinematic-art);
+ background-size:cover;background-position:62% center;
+ box-shadow:0 30px 100px #000b,0 0 45px #8d2cff1c,inset 0 0 40px #a44dff12;
+}
+body:has(.login-card) .scene:before{color:#f3d17a36;text-shadow:0 0 55px #c28bff38}
+body:has(.login-card) .scene-title{color:#e7ccff;text-shadow:0 2px 15px #000}
+body:has(.login-card) .login-card{
+ border-color:#c18bff80;
+ background:linear-gradient(155deg,rgba(31,16,48,.97),rgba(8,4,17,.98) 68%,rgba(35,19,48,.97));
+ box-shadow:0 30px 90px #000b,0 0 36px #8d2cff22,inset 0 1px #fff2;
+}
+body:has(.login-card) .logo{
+ background:linear-gradient(90deg,#fff0b7,#e8bd62 48%,#c18bff);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+body:has(.login-card) .login-card input{
+ min-height:56px;border:1px solid #75528f;background:#090512;color:#fff;
+ border-radius:14px;box-shadow:inset 0 2px 12px #0008;
+}
+body:has(.login-card) .login-card input:focus{border-color:#c18bff;box-shadow:0 0 0 3px #a64cff26}
+body:has(.login-card) #loginBtn{
+ min-height:56px;border-radius:999px;color:#1b1026;
+ background:linear-gradient(105deg,#dca73e,#ffe5a4 55%,#c18bff);
+ box-shadow:0 10px 32px #c18bff26,0 0 20px #e8bd6220;
+}
+
+/* Registration page */
+body:has(#registerForm) .topbar{
+ border:1px solid #a65ce04d;border-radius:22px;
+ background:linear-gradient(110deg,#13091f,#090512);
+ box-shadow:0 12px 36px #0006;
+}
+body:has(#registerForm) .topbar .logo{
+ background:linear-gradient(90deg,#fff0b7,#e8bd62 48%,#c18bff);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+body:has(#registerForm) .visual{
+ border-color:#b66aff80;
+ background-image:linear-gradient(90deg,rgba(7,3,15,.5),rgba(7,3,15,.12)),var(--club-cinematic-art);
+ background-size:cover;background-position:62% center;
+ box-shadow:0 30px 90px #0009,0 0 35px #8d2cff1c;
+}
+body:has(#registerForm) .card{
+ border:1px solid #b66aff75;
+ background:linear-gradient(155deg,#211132f7,#0c0716fa);
+ box-shadow:0 25px 75px #0009,0 0 35px #8d2cff18,inset 0 1px #fff2;
+}
+body:has(#registerForm) .card h1 span{color:#f4cf79}
+body:has(#registerForm) input,body:has(#registerForm) select{
+ min-height:54px;border:1px solid #76548f!important;border-radius:14px!important;
+ background:#090512!important;color:#fff!important;
+}
+body:has(#registerForm) input:focus,body:has(#registerForm) select:focus{border-color:#c18bff!important;box-shadow:0 0 0 3px #a64cff26}
+body:has(#registerForm) #submitBtn{
+ min-height:56px;border-radius:999px;background:linear-gradient(105deg,#dca73e,#ffe5a4 58%,#c18bff);
+ color:#1b1026;box-shadow:0 10px 32px #c18bff26;
+}
+
+/* Member dashboard — richer hierarchy and readable cards */
+body:has(#dashboard) .topbar{
+ border-bottom:1px solid #a65ce04d;background:rgba(8,4,16,.94);
+ box-shadow:0 10px 32px #0008,0 1px #fff1;backdrop-filter:blur(18px);
+}
+body:has(#dashboard) .brand{color:#ffe3a0;text-shadow:0 0 20px #e8bd6224}
+body:has(#dashboard) .brand:before{content:"♛";color:#f4cf79;margin-right:9px}
+body:has(#dashboard) .layout{gap:20px}
+body:has(#dashboard) .panel,body:has(#dashboard) .sidebar,body:has(#dashboard) .right{
+ border-color:#a65ce05c;background:linear-gradient(150deg,#211132f5,#0c0715f7);
+ box-shadow:0 18px 48px #0008,inset 0 1px #fff1;
+}
+body:has(#dashboard) .club-hero{
+ border:1px solid #b66aff80;
+ background-image:linear-gradient(90deg,rgba(9,4,18,.96) 0%,rgba(24,11,39,.82) 55%,rgba(24,11,39,.25) 100%),var(--club-cinematic-art);
+ background-size:cover;background-position:center right;
+ box-shadow:0 22px 55px #0008,0 0 32px #8d2cff1c;
+}
+body:has(#dashboard) .club-copy h1 em{color:#f5d17e}
+body:has(#dashboard) .club-symbol{border-color:#f1ca78;box-shadow:0 0 0 8px #a64cff1c,0 0 34px #f1ca7830}
+body:has(#dashboard) .home-tile{
+ border:1px solid #a65ce05c;background:linear-gradient(145deg,#211132,#10091b);
+ box-shadow:0 12px 30px #0006,inset 0 1px #fff1;
+}
+body:has(#dashboard) .home-tile:hover{border-color:#e8bd62;transform:translateY(-3px);box-shadow:0 16px 35px #8d2cff25}
+body:has(#dashboard) .home-tile>span{color:#f4cf79;text-shadow:0 0 18px #e8bd6240}
+body:has(#dashboard) .home-feed-heading h2{color:#fff0d3}
+body:has(#dashboard) .post{
+ border:1px solid #a65ce04d;background:linear-gradient(145deg,#1a1028,#0c0715);
+ border-radius:18px;box-shadow:0 12px 32px #0006;
+}
+body:has(#dashboard) .post-actions button,body:has(#dashboard) .secondary{
+ border:1px solid #76528f;background:#1b102b;color:#e9d8ff;border-radius:999px;
+}
+body:has(#dashboard) .primary{
+ border:1px solid #f2d28a;background:linear-gradient(100deg,#d69d35,#ffe3a0);
+ color:#1b1026;border-radius:999px;font-weight:900;
+}
+body:has(#dashboard) .field,body:has(#dashboard) textarea,body:has(#dashboard) input{
+ border:1px solid #76528f;background:#090512;color:#fff;border-radius:13px;
+}
+body:has(#dashboard) .field:focus,body:has(#dashboard) textarea:focus,body:has(#dashboard) input:focus{
+ border-color:#c18bff;box-shadow:0 0 0 3px #a64cff24;outline:0;
+}
+body:has(#dashboard) .nav-item.active{background:linear-gradient(100deg,#6720b8,#34115e);color:#fff;box-shadow:0 8px 25px #8d2cff35}
+body:has(#dashboard) .mobile-nav{border:1px solid #a65ce080;background:rgba(12,6,22,.96);box-shadow:0 -10px 35px #0008,0 0 25px #8d2cff18;backdrop-filter:blur(18px)}
+
+/* Public member directory has its own legacy inline palette: unify it here. */
+body:has(#members.grid) header{background:linear-gradient(110deg,#13091f,#090512);border-bottom:1px solid #a65ce080;box-shadow:0 12px 32px #0008}
+body:has(#members.grid) header h2,body:has(#members.grid) h3{color:#f4cf79}
+body:has(#members.grid) #message{color:#d8b8ff}
+body:has(#members.grid) .grid .card{
+ border:1px solid #a65ce080;border-radius:22px;
+ background:linear-gradient(145deg,#211132,#0c0715);
+ box-shadow:0 18px 48px #0008,inset 0 1px #fff1;
+}
+body:has(#members.grid) .grid .card:hover{border-color:#f0c96f;box-shadow:0 0 32px #8d2cff30}
+body:has(#members.grid) .card img,body:has(#members.grid) .avatar{border-color:#e8bd62;box-shadow:0 0 0 5px #a64cff18}
+body:has(#members.grid) button{background:linear-gradient(105deg,#6b20b9,#a34bfa);border:1px solid #c18bff;color:#fff;border-radius:999px}
+body:has(#members.grid) .details{background:#0a0612;border-color:#76528f;border-radius:15px}
+
+/* Tablet and phone refinements */
+@media(max-width:900px){
+ body:has(#dashboard) .layout{grid-template-columns:190px minmax(0,1fr);gap:12px}
+ body:has(#dashboard) .right{display:none}
+}
+@media(max-width:680px){
+ html,body{overflow-x:hidden}
+ body:has(#navigation)>header{padding:10px 15px;min-height:66px}
+ body:has(#navigation) .logo{font-size:19px!important;letter-spacing:.12em}
+ body:has(#navigation) .logo:before{margin-right:6px}
+ body:has(#navigation) .hero{
+  min-height:calc(100svh - 66px);padding:74px 22px 62px;
+  background-image:linear-gradient(90deg,rgba(7,3,15,.94),rgba(7,3,15,.64)),var(--club-cinematic-art);
+  background-position:65% center;
+ }
+ body:has(#navigation) .hero h1{font-size:clamp(39px,11vw,58px);line-height:1.03}
+ body:has(#navigation) .hero p{font-size:15px;line-height:1.95}
+ body:has(#navigation) .buttons{display:grid;grid-template-columns:1fr;width:100%;gap:12px}
+ body:has(#navigation) .btn{width:100%;min-height:54px}
+ body:has(#navigation) .section{padding:48px 18px}
+ body:has(#navigation) .cards{grid-template-columns:1fr;gap:12px}
+ body:has(#navigation) .card{padding:22px}
+ body:has(.login-card){padding:16px 13px calc(22px + env(safe-area-inset-bottom))}
+ body:has(.login-card) .page{gap:12px}
+ body:has(.login-card) .scene{height:190px;min-height:190px;background-position:68% center}
+ body:has(.login-card) .login-card{padding:27px 21px}
+ body:has(.login-card) .login-card input{min-height:54px;font-size:16px}
+ body:has(#registerForm){padding:12px 13px calc(26px + env(safe-area-inset-bottom))}
+ body:has(#registerForm) .main{margin:12px auto;gap:12px}
+ body:has(#registerForm) .visual{min-height:210px;background-position:68% center}
+ body:has(#registerForm) .card{padding:24px 18px}
+ body:has(#registerForm) input,body:has(#registerForm) select{min-height:54px;font-size:16px}
+ body:has(#dashboard) .topbar{padding:10px 14px}
+ body:has(#dashboard) .layout{padding:12px 12px calc(104px + env(safe-area-inset-bottom))}
+ body:has(#dashboard) .club-hero{min-height:270px;padding:22px 17px;background-position:70% center}
+ body:has(#dashboard) .club-copy h1{font-size:clamp(27px,7.8vw,36px)}
+ body:has(#dashboard) .home-actions{gap:9px}
+ body:has(#dashboard) .home-tile{min-width:0;padding:13px 8px}
+ body:has(#dashboard) .home-tile b{font-size:11px}
+ body:has(#dashboard) .home-tile small{font-size:10px}
+ body:has(#dashboard) .post{overflow-wrap:anywhere}
+ body:has(#dashboard) .post-actions{display:flex;flex-wrap:wrap;gap:7px}
+ body:has(#dashboard) .post-actions button{min-height:36px;padding:8px 11px;font-size:11px}
+ body:has(#members.grid) main{padding:18px 14px}
+ body:has(#members.grid) .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:13px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
