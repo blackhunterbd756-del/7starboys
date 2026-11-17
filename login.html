@@ -152,6 +152,23 @@ body:has(.login-card) .login-card{display:block!important;visibility:visible!imp
  body:has(.login-card) .login-card{width:100%!important;max-width:none!important;margin:0!important;padding:24px 19px!important}
 }
 </style>
+<style id="auth-final-visibility">
+/* Keep the brand reveal and all login controls fully readable. */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+body:has(.login-card){display:block!important;min-height:100svh!important}
+body:has(.login-card) .page{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(320px,440px)!important;align-items:center!important;height:auto!important;min-height:0!important;margin:0 auto!important;padding:12px 0!important}
+body:has(.login-card) .scene,body:has(.login-card) .login-card{opacity:1!important;visibility:visible!important;filter:none!important}
+body:has(.login-card) .auth-shooter{height:clamp(230px,32vw,340px)!important;min-height:220px!important;overflow:hidden!important}
+body:has(.login-card) .as-title{opacity:1!important;visibility:visible!important;animation:none!important;transform:translate(-50%,-50%)!important;filter:drop-shadow(0 0 22px #b77aff)!important;white-space:normal!important;font-size:clamp(23px,5.5vw,58px)!important;line-height:1.1!important}
+body:has(.login-card) .as-tagline{opacity:1!important;visibility:visible!important;animation:none!important;transform:translate(-50%,0)!important;filter:none!important;white-space:normal!important;text-align:center!important;width:90%!important;letter-spacing:.2em!important}
+body:has(.login-card) .login-card{animation:none!important;opacity:1!important;visibility:visible!important}
+@media(max-width:800px){
+ body:has(.login-card) .page{display:flex!important;flex-direction:column!important;width:100%!important;max-width:480px!important;gap:12px!important;padding:0!important}
+ body:has(.login-card) .scene{width:100%!important;min-height:0!important;height:auto!important}
+ body:has(.login-card) .auth-shooter{height:clamp(205px,58vw,245px)!important;min-height:205px!important}
+ body:has(.login-card) .login-card{width:100%!important;max-width:none!important}
+}
+</style>
 </head>
 
 <body>
