@@ -83,9 +83,25 @@ footer{padding-bottom:100px}
 
 <main class="main">
 <section class="view active" id="home">
- <div class="welcome"><h2>Welcome to 7STARBOYS ✨</h2><p>একতা, সম্মান ও বন্ধুত্বের বন্ধনে আমাদের কমিউনিটি।</p></div>
- <div class="panel"><h3 class="title">🌌 Community Dashboard</h3><p class="muted">তোমার কমিউনিটির সব আপডেট এখানে।</p><button class="primary" data-jump="create">✍️ Create Post</button></div>
- <div class="panel" style="margin-top:12px"><h3 class="title">Latest Posts</h3><div id="homeFeed"></div></div>
+ <div class="club-hero">
+  <div class="club-copy">
+   <span class="club-kicker">7STARBOYS • PRIVATE COMMUNITY</span>
+   <h1>একসাথে থাকি,<br><em>একসাথে এগিয়ে যাই।</em></h1>
+   <p>বন্ধুত্ব, সম্মান আর স্মৃতির জন্য আমাদের নিজস্ব জায়গা।</p>
+   <button class="club-cta" data-jump="create">✍️ নতুন কিছু শেয়ার করো</button>
+  </div>
+  <div class="club-symbol" aria-hidden="true"><span>7S</span><small>EST. 2026</small></div>
+ </div>
+ <div class="home-actions">
+  <button class="home-tile" data-jump="create"><span>✍️</span><b>মুহূর্ত শেয়ার</b><small>ছবি, ভিডিও বা লেখা</small></button>
+  <button class="home-tile" data-view="feed"><span>◈</span><b>কমিউনিটি ওয়াল</b><small>সবার নতুন পোস্ট</small></button>
+  <button class="home-tile" data-view="messenger"><span>✉</span><b>বন্ধুদের সাথে কথা</b><small>ব্যক্তিগত মেসেজ</small></button>
+ </div>
+ <div class="home-feed-heading">
+  <div><span>FROM YOUR COMMUNITY</span><h2>সাম্প্রতিক মুহূর্ত</h2></div>
+  <button data-view="feed">সব পোস্ট দেখো ↗</button>
+ </div>
+ <div id="homeFeed" class="home-feed"></div>
 </section>
 
 <section class="view" id="myProfile">
