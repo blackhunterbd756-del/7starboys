@@ -1,0 +1,127 @@
+
+/* 7STARBOYS — CINEMATIC ROYAL OVERRIDE */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+:root{
+ --royal-bg:#07040d;--royal-bg2:#10091c;--royal-panel:rgba(22,14,34,.88);
+ --royal-panel2:rgba(35,20,51,.82);--royal-gold:#e4bd72;--royal-gold2:#ffe4a8;
+ --royal-purple:#a34cff;--royal-violet:#6f2bb5;--royal-text:#fff8ee;
+ --royal-muted:#b9a9c8;--royal-line:rgba(228,189,114,.25);
+ --royal-shadow:0 24px 70px rgba(0,0,0,.55);
+}
+html{background:var(--royal-bg)!important;scroll-behavior:smooth}
+body{
+ color:var(--royal-text)!important;
+ font-family:Inter,"Noto Sans Bengali",system-ui,sans-serif!important;
+ background:
+  radial-gradient(ellipse at 15% 10%,rgba(117,43,177,.28),transparent 34%),
+  radial-gradient(ellipse at 85% 22%,rgba(228,189,114,.11),transparent 28%),
+  radial-gradient(ellipse at 50% 100%,rgba(91,32,145,.22),transparent 42%),
+  linear-gradient(135deg,#07040d 0%,#10091b 48%,#08050e 100%)!important;
+ background-attachment:fixed!important;
+}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.23;
+ background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+ background-size:52px 52px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+a{color:var(--royal-gold2)}
+button,.btn,[role=button]{transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 10px 28px rgba(163,76,255,.25)}
+input,textarea,select{background:rgba(8,5,15,.82)!important;color:var(--royal-text)!important;border:1px solid rgba(228,189,114,.32)!important;border-radius:12px!important}
+input:focus,textarea:focus,select:focus{outline:2px solid rgba(163,76,255,.5)!important;border-color:var(--royal-gold)!important}
+::selection{background:rgba(163,76,255,.45);color:white}
+.logo,.brand,h1,h2,h3{letter-spacing:.035em}
+.logo,.brand{color:var(--royal-gold2)!important;text-shadow:0 0 22px rgba(228,189,114,.25)}
+/* Public landing */
+body:has(.hero) header,body:has(#navigation) header{
+ background:rgba(8,5,15,.82)!important;border-bottom:1px solid var(--royal-line)!important;
+ backdrop-filter:blur(20px);box-shadow:0 10px 40px rgba(0,0,0,.25)
+}
+.hero{position:relative;isolation:isolate;overflow:hidden!important;
+ background:radial-gradient(ellipse at 50% 42%,rgba(123,46,188,.34),transparent 52%),linear-gradient(120deg,rgba(13,7,22,.94),rgba(31,13,47,.86),rgba(8,5,15,.96))!important;
+ border-block:1px solid rgba(228,189,114,.2);padding:clamp(65px,10vw,125px) 20px!important}
+.hero:before{content:"♛";position:absolute;z-index:-1;left:50%;top:48%;transform:translate(-50%,-50%);font-family:Georgia,serif;font-size:clamp(220px,42vw,520px);line-height:1;color:rgba(228,189,114,.055);text-shadow:0 0 80px rgba(163,76,255,.15)}
+.hero:after{content:"";position:absolute;inset:12px;border:1px solid rgba(228,189,114,.12);pointer-events:none}
+.hero h1,.hero h2{font-family:Cinzel,Georgia,serif!important;color:var(--royal-gold2)!important;text-shadow:0 4px 28px rgba(163,76,255,.35)}
+.tag{color:var(--royal-gold2)!important;letter-spacing:.2em}
+.btn{background:linear-gradient(110deg,#6c2ba5,#a34cff 55%,#d7a84e)!important;color:#fff!important;border:1px solid rgba(255,228,168,.5)!important;border-radius:999px!important;box-shadow:0 8px 30px rgba(111,43,181,.28)}
+.btn.secondary{background:rgba(14,8,23,.75)!important;color:var(--royal-gold2)!important;border:1px solid var(--royal-line)!important}
+.section{background:transparent!important}
+.heading{color:var(--royal-gold2)!important;font-family:Cinzel,Georgia,serif!important}
+.cards,.grid{gap:20px!important}
+.card,.cards .card,.grid .card{
+ background:linear-gradient(145deg,rgba(37,21,54,.92),rgba(12,8,19,.96))!important;
+ color:var(--royal-text)!important;border:1px solid var(--royal-line)!important;
+ border-radius:20px!important;box-shadow:var(--royal-shadow)!important;
+}
+.card:hover,.grid .card:hover{border-color:rgba(255,228,168,.65)!important;box-shadow:0 18px 55px rgba(111,43,181,.28)!important}
+/* Cinematic login */
+body:has(.page){min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vw,36px)!important}
+.page{width:min(1180px,100%)!important;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)!important;gap:clamp(22px,5vw,70px)!important}
+.scene{min-height:570px!important;border-radius:28px;isolation:isolate;
+ background:radial-gradient(ellipse at 50% 45%,rgba(139,53,208,.34),transparent 46%),linear-gradient(145deg,rgba(19,9,30,.45),rgba(7,4,13,.2))}
+.scene:before{content:"♛";position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-family:Georgia,serif;font-size:clamp(250px,36vw,480px);color:rgba(228,189,114,.12);text-shadow:0 0 55px rgba(163,76,255,.28);z-index:0}
+.scene:after{content:"7STARBOYS";position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font:700 clamp(24px,4vw,46px) Cinzel,Georgia,serif;letter-spacing:.22em;white-space:nowrap;color:var(--royal-gold2);text-shadow:0 0 25px rgba(228,189,114,.4);z-index:3}
+.scene-title{color:var(--royal-gold2)!important;letter-spacing:.25em!important;z-index:4}
+.scene-glow,.figure-light{background:radial-gradient(circle,rgba(163,76,255,.6),transparent 70%)!important}
+.cinematic-figure{filter:drop-shadow(0 0 35px rgba(163,76,255,.35))}
+.login-card,.card{
+ background:linear-gradient(155deg,rgba(35,20,51,.96),rgba(11,7,17,.97))!important;
+ border:1px solid rgba(228,189,114,.42)!important;border-radius:25px!important;
+ box-shadow:0 25px 90px rgba(0,0,0,.62),0 0 45px rgba(111,43,181,.16)!important;
+ backdrop-filter:blur(22px)
+}
+.login-card{padding:clamp(25px,4vw,42px)!important}
+.login-card .logo,.topbar .logo{font-family:Cinzel,Georgia,serif!important;color:var(--royal-gold2)!important;text-shadow:0 0 24px rgba(228,189,114,.3)}
+.login-card button,.login-card .btn,.card button{
+ background:linear-gradient(110deg,#6e2aa6,#a34cff 55%,#d7a84e)!important;color:white!important;border:1px solid rgba(255,228,168,.48)!important;border-radius:12px!important
+}
+.line{background:linear-gradient(90deg,transparent,var(--royal-gold),transparent)!important}
+/* Registration */
+.topbar{border-bottom:1px solid var(--royal-line)!important}
+body:has(.topbar) .visual{border-radius:24px}
+.visual:before{content:"♛";font-family:Georgia,serif;color:rgba(228,189,114,.12);font-size:clamp(180px,30vw,360px);position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+body:has(.topbar) .card{background:linear-gradient(155deg,rgba(35,20,51,.96),rgba(11,7,17,.97))!important;border:1px solid rgba(228,189,114,.42)!important;border-radius:24px!important;box-shadow:var(--royal-shadow)!important}
+/* Member dashboard */
+.topbar{background:rgba(8,5,15,.9)!important;border-bottom:1px solid var(--royal-line)!important;backdrop-filter:blur(18px)!important}
+.layout{gap:20px!important}
+.panel,.sidebar,.main,.view,.home-tile,.profile-cover,.stat{
+ background:linear-gradient(145deg,rgba(31,18,46,.94),rgba(12,8,19,.97))!important;
+ border:1px solid var(--royal-line)!important;border-radius:18px!important;box-shadow:0 16px 45px rgba(0,0,0,.3)!important
+}
+.nav-item{border-radius:12px!important;color:#d9cce6!important}
+.nav-item.active,.nav-item:hover{background:linear-gradient(100deg,rgba(111,43,181,.48),rgba(228,189,114,.12))!important;color:var(--royal-gold2)!important;border:1px solid rgba(228,189,114,.22)!important}
+.club-hero{position:relative;overflow:hidden!important;background:radial-gradient(ellipse at 80% 20%,rgba(163,76,255,.28),transparent 42%),linear-gradient(120deg,#170c25,#090610)!important;border:1px solid rgba(228,189,114,.42)!important;border-radius:24px!important}
+.club-hero:after{content:"♛";position:absolute;right:5%;top:50%;transform:translateY(-50%);font:clamp(110px,18vw,230px) Georgia,serif;color:rgba(228,189,114,.12);pointer-events:none}
+.club-kicker,.muted,.info{color:var(--royal-muted)!important}
+.club-copy h1,.club-copy h2,.title,.view h2,.view h3{color:var(--royal-gold2)!important;font-family:Cinzel,Georgia,serif!important}
+.club-symbol{color:var(--royal-gold2)!important;text-shadow:0 0 30px rgba(228,189,114,.4)}
+.home-tile:hover{border-color:rgba(255,228,168,.65)!important;transform:translateY(-3px)}
+/* Member directory and profile */
+body:has(.grid) header,body:has(.profile) header{background:rgba(8,5,15,.92)!important;border-bottom:1px solid var(--royal-line)!important}
+body:has(.grid) header h2,body:has(.profile) header h2{color:var(--royal-gold2)!important;font-family:Cinzel,Georgia,serif!important}
+.grid .card img,.card img,.profile img,.avatar{border-color:var(--royal-gold)!important;box-shadow:0 0 24px rgba(163,76,255,.25)}
+.profile{background:linear-gradient(145deg,rgba(35,20,51,.96),rgba(11,7,17,.97))!important;border:1px solid var(--royal-line)!important;border-radius:22px!important}
+/* Admin */
+body:has(.stats) header,body:has(.stats) .panel,body:has(.stats) .card{background:linear-gradient(145deg,rgba(35,20,51,.96),rgba(11,7,17,.97))!important;border:1px solid var(--royal-line)!important;border-radius:18px!important;box-shadow:var(--royal-shadow)!important}
+body:has(.stats) h1,body:has(.stats) h2{color:var(--royal-gold2)!important}
+body:has(.stats) button{border-radius:10px!important}
+/* Responsive */
+@media(max-width:850px){
+ .page{grid-template-columns:1fr!important;max-width:560px!important;gap:12px!important}
+ .scene{min-height:260px!important;max-height:300px}
+ .scene:before{font-size:230px}
+ .scene:after{font-size:24px;bottom:5%}
+ body:has(.page){align-items:flex-start;padding:16px!important}
+}
+@media(max-width:640px){
+ header{gap:12px;flex-wrap:wrap}
+ .hero{padding:58px 16px!important}
+ .hero h1{font-size:clamp(28px,8vw,42px)!important}
+ .cards,.grid{grid-template-columns:1fr!important}
+ .login-card{padding:24px 19px!important}
+ .topbar{height:auto!important;min-height:60px;padding:12px!important}
+ .layout{grid-template-columns:1fr!important}
+ .sidebar{position:static!important}
+ .club-hero{padding:24px!important}
+ .club-hero:after{right:0;opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
