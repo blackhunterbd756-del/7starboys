@@ -1,0 +1,53 @@
+/* 7STARBOYS — MOBILE-FIRST RESPONSIVE FIXES */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:clip}
+img,video,svg,canvas,iframe{max-width:100%}
+img,video{height:auto}
+button,input,select,textarea{max-width:100%;font:inherit}
+input,select,textarea{min-width:0}
+a,button{overflow-wrap:anywhere}
+main,header,footer,section,article,aside,nav,.container,.content,.wrapper,.page,.main,.layout,.panel,.card,.post{min-width:0}
+p,h1,h2,h3,h4,h5,h6,li,td,th{overflow-wrap:anywhere}
+table{max-width:100%;border-collapse:collapse}
+pre,code{white-space:pre-wrap;overflow-wrap:anywhere}
+.post img,.post video,.card img,.card video{width:100%;object-fit:contain}
+@media(max-width:760px){
+ body{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+ header{flex-wrap:wrap;gap:10px}
+ nav{flex-wrap:wrap;justify-content:center;max-width:100%}
+ nav a{max-width:100%;white-space:normal}
+ main,.container,.content,.wrapper{width:100%;max-width:100%;padding-left:12px;padding-right:12px}
+ .main,.page{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr)!important}
+ .cards,.grid,.stats,.features,.columns{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .card,.panel,.post{max-width:100%;padding:clamp(12px,3.5vw,20px)}
+ .buttons,.actions{display:flex;flex-wrap:wrap;gap:8px}
+ button,.btn,[role=button]{max-width:100%;white-space:normal;min-height:40px}
+ input,select,textarea{width:100%;font-size:16px}
+ .topbar{height:auto;min-height:58px;flex-wrap:wrap;gap:8px;padding:10px 12px}
+ .top-right{max-width:100%;flex-wrap:wrap}
+ .brand,.logo{max-width:100%;font-size:clamp(17px,5vw,24px);letter-spacing:.08em}
+ .hero{min-height:0;padding:48px 14px}
+ .hero h1{font-size:clamp(26px,7vw,42px);line-height:1.2}
+ .section{padding:34px 12px}
+ .post img,.post video{max-height:65vh}
+ .auth-shooter{width:100%!important;max-width:100%!important;min-height:205px}
+ body:has(.page) .scene{display:block!important;width:100%!important;min-height:0!important;height:auto!important;padding:8px!important}
+ body:has(.page) .scene .auth-shooter{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:clamp(205px,58vw,255px)!important;min-height:205px!important}
+ body:has(.page) .scene:before,body:has(.page) .scene:after{display:none!important}
+ body:has(.page) .page{display:flex!important;flex-direction:column!important;gap:14px!important}
+ body:has(.page) .login-card{width:100%;max-width:480px;margin:0 auto}
+}
+@media(max-width:480px){
+ .cards,.grid,.stats,.features,.columns{grid-template-columns:minmax(0,1fr)!important}
+ h1{font-size:clamp(23px,7vw,34px)}
+ h2{font-size:clamp(20px,6vw,28px)}
+ .hero{padding:38px 12px}
+ .card,.panel,.post{border-radius:14px}
+ .auth-shooter .as-title{font-size:clamp(21px,7vw,31px)!important;letter-spacing:.025em!important}
+ .auth-shooter .as-person{transform:scale(.58)!important;transform-origin:left bottom!important;left:0!important}
+ .auth-shooter .as-tagline{font-size:7px!important;letter-spacing:.18em!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
