@@ -14,7 +14,13 @@ body{min-height:100vh;background:radial-gradient(circle at 15% 30%,#073b5740,tra
 .page{width:100%;max-width:1050px;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:45px}
 .scene{position:relative;min-height:460px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .scene-title{position:absolute;top:15px;left:10px;color:var(--cyan);letter-spacing:4px;font-size:13px}
-.character{width:100%;max-width:420px;position:relative;z-index:2;animation:characterIn 1.2s ease both,float 4s ease-in-out infinite 1.2s;filter:drop-shadow(0 0 20px #00e5ff40)}
+ .character{width:100%;max-width:420px;position:relative;z-index:2;animation:characterIn 1.2s ease both,float 4s ease-in-out infinite 1.2s;filter:drop-shadow(0 18px 28px #0009)}
+.person{transform-origin:285px 230px;animation:aim 3.2s ease-in-out infinite}
+.weapon{transform-origin:320px 195px;animation:recoil 3.2s ease-in-out infinite}
+@keyframes aim{0%,100%{transform:translateY(0) rotate(0)}48%,56%{transform:translateY(-2px) rotate(-.6deg)}}
+@keyframes recoil{0%,46%,62%,100%{transform:translate(0,0)}49%{transform:translate(-5px,2px)}53%{transform:translate(1px,-1px)}}
+.impact{position:absolute;right:3%;top:44%;width:22px;height:22px;border-radius:50%;background:#ff526d;filter:blur(2px);opacity:0;box-shadow:0 0 18px 9px #ff526d;animation:impact 3.2s infinite;z-index:4}
+@keyframes impact{0%,48%,100%{opacity:0;transform:scale(.2)}51%{opacity:.95;transform:scale(1.6)}58%{opacity:0;transform:scale(3.2)}}
 @keyframes characterIn{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:translateX(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .energy{position:absolute;width:0;height:5px;right:3%;top:48%;border-radius:20px;background:linear-gradient(90deg,#fff,#00e5ff,#9b4dff,transparent);box-shadow:0 0 12px #00e5ff,0 0 30px #00e5ff;animation:fire 2.7s infinite;z-index:3}
@@ -47,7 +53,7 @@ button.loading .spinner{display:inline-block}
 .register a:hover{text-decoration:underline}
 .back{display:block;text-align:center;margin-top:20px;color:#8491a9;text-decoration:none;font-size:13px}
 .back:hover{color:var(--cyan)}
-@media(max-width:800px){.page{max-width:430px;grid-template-columns:1fr;gap:8px}.scene{min-height:210px}.scene-title{top:5px;left:0;right:0;text-align:center}.character{max-width:230px}.energy{top:50%;right:4%}.flash{top:43%}.login-card{padding:30px 23px}}
+@media(max-width:800px){.page{max-width:430px;grid-template-columns:1fr;gap:8px}.scene{min-height:210px}.scene-title{top:5px;left:0;right:0;text-align:center}.character{max-width:230px}.energy{top:50%;right:4%}.flash{top:43%}.impact{top:44%;right:4%}.login-card{padding:30px 23px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -56,38 +62,41 @@ button.loading .spinner{display:inline-block}
 <main class="page">
 
 <section class="scene">
-<div class="scene-title">✦ FUTURE TECHNOLOGY ✦</div>
+<div class="scene-title">✦ 7STARBOYS • MEMBER ACCESS ✦</div>
 <div class="scene-glow"></div>
 
-<svg class="character" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+<svg class="character" viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="সিনেমাটিক মানব অবয়ব">
 <defs>
-<linearGradient id="armor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#3441a0"/></linearGradient>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#293d63"/><stop offset="1" stop-color="#101729"/></linearGradient>
+ <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#344c70"/><stop offset="1" stop-color="#10182a"/></linearGradient>
+ <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2c6a0"/><stop offset="1" stop-color="#a96d55"/></linearGradient>
+ <linearGradient id="pants" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#26344e"/><stop offset="1" stop-color="#0b1220"/></linearGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
 </defs>
-<ellipse cx="200" cy="370" rx="115" ry="18" fill="#00e5ff" opacity=".12"/>
-<path d="M145 255 L125 350 L170 350 L195 265Z" fill="url(#body)" stroke="#00e5ff" stroke-width="3"/>
-<path d="M195 265 L210 350 L260 350 L250 250Z" fill="#111c35" stroke="#00e5ff" stroke-width="3"/>
-<path d="M125 345 L175 345 L180 370 L115 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
-<path d="M210 345 L260 345 L280 370 L210 370Z" fill="#192a48" stroke="#00e5ff" stroke-width="2"/>
-<path d="M135 155 L205 135 L275 165 L260 275 L145 275 L120 205Z" fill="url(#body)" stroke="url(#armor)" stroke-width="5"/>
-<path d="M165 170 L205 155 L245 173 L235 245 L170 245Z" fill="#14243c" stroke="#00e5ff" stroke-width="2"/>
-<path d="M180 190 L205 178 L230 190 L220 222 L185 222Z" fill="#00e5ff" opacity=".18"/>
-<path d="M155 75 Q165 35 210 38 Q260 40 270 88 L260 145 Q210 175 160 140Z" fill="#17243e" stroke="#00e5ff" stroke-width="5"/>
-<path d="M160 95 Q210 65 263 95 L255 125 Q210 145 168 125Z" fill="#07101d" stroke="#9b4dff" stroke-width="3"/>
-<path d="M175 103 Q210 85 247 103" fill="none" stroke="#00e5ff" stroke-width="5" stroke-linecap="round"/>
-<path d="M120 160 Q85 145 70 180 L90 220 L145 210Z" fill="#172943" stroke="#00e5ff" stroke-width="4"/>
-<path d="M255 165 Q290 145 315 175 L300 220 L250 210Z" fill="#172943" stroke="#00e5ff" stroke-width="4"/>
-<path d="M95 205 L65 245 L100 265 L145 220Z" fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
-<path d="M290 205 L315 220 L350 190 L330 170Z" fill="#263b5d" stroke="#00e5ff" stroke-width="3"/>
-<path d="M300 174 L355 160 L380 174 L355 192 L300 190Z" fill="#17243e" stroke="#00e5ff" stroke-width="3"/>
-<path d="M340 191 L350 218 L365 216 L360 187Z" fill="#293d63" stroke="#9b4dff" stroke-width="2"/>
-<circle cx="371" cy="176" r="7" fill="#00e5ff"/><circle cx="371" cy="176" r="3" fill="white"/>
-<circle cx="145" cy="190" r="5" fill="#00e5ff"/><circle cx="265" cy="190" r="5" fill="#9b4dff"/>
-<path d="M185 250 L225 250" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="210" cy="378" rx="135" ry="17" fill="#00d9ff" opacity=".14"/>
+<ellipse cx="210" cy="350" rx="95" ry="48" fill="#00d9ff" opacity=".08" filter="url(#soft)"/>
+<!-- natural human silhouette, jacket and trousers -->
+<path d="M154 235 Q135 267 132 321 L118 363 Q115 374 128 378 L170 378 Q180 373 176 362 L190 300 L211 300 L229 362 Q225 375 239 378 L281 378 Q294 372 286 361 L272 307 Q275 265 251 235Z" fill="url(#pants)" stroke="#516a8d" stroke-width="2"/>
+<path d="M148 155 Q164 135 194 132 L226 132 Q256 140 270 167 L278 252 Q239 276 143 257 L137 190Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="2"/>
+<path d="M193 133 L209 161 L228 133 L242 252 L181 252Z" fill="#18263d" stroke="#6a7f9e" stroke-width="2"/>
+<path d="M195 128 L224 128 L229 153 Q210 168 190 151Z" fill="url(#skin)"/>
+<!-- neck and head -->
+<path d="M177 62 Q181 28 216 26 Q252 30 255 68 L247 111 Q239 137 214 139 Q188 134 179 108Z" fill="url(#skin)" stroke="#d59c7d" stroke-width="2"/>
+<path d="M176 75 Q169 34 207 20 Q248 16 260 56 L252 74 Q239 54 219 52 Q199 70 178 69Z" fill="#111b2d"/>
+<path d="M185 83 Q198 76 207 83 M224 83 Q236 77 246 84" stroke="#513a35" stroke-width="3" stroke-linecap="round"/>
+<path d="M210 91 L205 105 L217 107" fill="none" stroke="#9a5e4c" stroke-width="2" stroke-linecap="round"/>
+<path d="M199 119 Q214 126 229 117" fill="none" stroke="#75453e" stroke-width="2" stroke-linecap="round"/>
+<!-- bent arms, hands and non-detailed prop -->
+<path d="M151 169 Q125 176 111 203 L164 232 L191 211 L178 184Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="3"/>
+<path d="M253 169 Q279 158 296 181 L324 194 L309 216 L271 204 L246 195Z" fill="url(#jacket)" stroke="#6683a8" stroke-width="3"/>
+<path d="M292 185 Q308 178 326 187 L350 190 L350 202 L322 204 L304 213Z" fill="url(#skin)"/>
+<g class="weapon"><path d="M325 188 L376 188 L382 198 L326 200Z" fill="#202a3a" stroke="#9eb4d0" stroke-width="2"/><path d="M340 199 L354 199 L350 219 L337 219Z" fill="#182334" stroke="#8499b4" stroke-width="1.5"/><path d="M376 191 L389 191" stroke="#00e5ff" stroke-width="2" stroke-linecap="round"/></g>
+<path d="M136 194 L160 211 M267 189 L292 198" stroke="#00e5ff" stroke-width="2" opacity=".55"/>
+<circle cx="391" cy="195" r="6" fill="#fff1c7" opacity=".9"><animate attributeName="opacity" values="0;1;0" dur="3.2s" repeatCount="indefinite"/></circle>
 </svg>
 
 <div class="energy"></div>
 <div class="flash"></div>
+<div class="impact" aria-hidden="true"></div>
 </section>
 
 <section class="login-card">
@@ -132,7 +141,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
- apiKey:"AIzaSyAPxEjhDfgChzxcSSeYREDZgmN33OIwW-c",
+ apiKey:"AIzaSyCHveS2kKQztiMAPPhXryVNFrElEvehFs4",
  authDomain:"starboys-7539f.firebaseapp.com",
  projectId:"starboys-7539f",
  storageBucket:"starboys-7539f.firebasestorage.app",
