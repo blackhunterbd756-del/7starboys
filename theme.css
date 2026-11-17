@@ -1,107 +1,193 @@
-/* 7STARBOYS — ORBIT / EDITORIAL CLUB SYSTEM */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
-:root{--ink:#09111b;--ink2:#101d29;--paper:#f1eee5;--paper2:#e7e2d5;--lime:#c9ef70;--mint:#7de0c0;--copper:#c18b64;--white:#f8f7f1;--muted:#a5b3b7;--line:rgba(224,235,221,.13);--shadow:0 25px 80px rgba(0,0,0,.28)}
+/* 7STARBOYS — V2 / MIDNIGHT ATELIER */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+:root{
+ --ink:#0d0b14;--ink2:#151321;--panel:#1b1928;--panel2:#242033;
+ --paper:#f5f0e8;--text:#f2edf5;--muted:#aaa3b5;
+ --accent:#e6b98c;--accent2:#b8a4ed;--mint:#91d7c7;
+ --line:rgba(230,185,140,.16);--shadow:0 24px 70px rgba(0,0,0,.34);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:"DM Sans","Noto Sans Bengali",system-ui,sans-serif!important;background:var(--ink)!important;color:var(--white)!important}
-a{color:inherit}
+body{font-family:"DM Sans","Noto Sans Bengali",system-ui,sans-serif!important;background:var(--ink)!important;color:var(--text)!important}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-header:not(.topbar){background:rgba(9,17,27,.92)!important;border-color:var(--line)!important;box-shadow:none!important;backdrop-filter:blur(18px)}
-/* PUBLIC LANDING */
-body:has(.hero)>header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:17px clamp(18px,5vw,72px)!important;border-bottom:1px solid var(--line)}
-body:has(.hero) .logo{color:var(--lime)!important;font-size:20px!important;letter-spacing:.16em}
-body:has(.hero) nav{display:flex;align-items:center;gap:26px}
-body:has(.hero) nav a{font-size:11px;letter-spacing:.13em;text-decoration:none;color:#d4ddd6}
-body:has(.hero) nav a:hover{color:var(--lime)}
-body:has(.hero) .menu-btn{display:none;background:transparent;color:var(--lime);border:1px solid var(--line);padding:8px 12px;border-radius:10px}
-body:has(.hero) .hero{min-height:680px;display:flex;align-items:center;padding:clamp(45px,9vw,120px) clamp(20px,9vw,140px)!important;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 46%,rgba(125,224,192,.12),transparent 31%),linear-gradient(115deg,#0b1720 0%,#0b1923 54%,#17252b 100%)!important}
-body:has(.hero) .hero:after{content:"7";position:absolute;right:9%;top:50%;transform:translateY(-50%);font-size:clamp(300px,48vw,700px);line-height:.8;font-weight:800;color:rgba(201,239,112,.045);pointer-events:none}
-body:has(.hero) .hero-content{max-width:720px;position:relative;z-index:2}
-body:has(.hero) .tag{display:inline-flex;padding:9px 13px;border:1px solid rgba(201,239,112,.35);border-radius:4px;color:var(--lime);font-size:10px;letter-spacing:.2em}
-body:has(.hero) .hero h1{font-size:clamp(44px,8vw,100px)!important;line-height:.98;letter-spacing:-.06em;margin:26px 0!important;color:var(--white)}
-body:has(.hero) .hero h1 span{color:var(--lime)!important}
-body:has(.hero) .hero p{max-width:510px;color:#aab9b6;line-height:1.95;font-size:15px}
-body:has(.hero) .buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
-body:has(.hero) .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 21px!important;border-radius:4px!important;background:var(--lime)!important;color:#142016!important;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:.06em;border:1px solid var(--lime)!important}
-body:has(.hero) .btn.secondary{background:transparent!important;color:var(--white)!important;border-color:rgba(255,255,255,.22)!important}
-body:has(.hero) .section,body:has(.hero) .container{max-width:1100px;margin:0 auto;padding:80px clamp(20px,8vw,120px)!important;background:#0d1922!important}
-body:has(.hero) .heading{text-align:left!important;max-width:700px;margin:0 auto 35px;border:0!important}
-body:has(.hero) .heading small{color:var(--mint);letter-spacing:.2em;font-size:10px}
-body:has(.hero) .heading h2{font-size:clamp(28px,4vw,48px);color:var(--paper);margin:12px 0}
-body:has(.hero) .heading p,body:has(.hero) .card p{color:#9cacab;line-height:1.8}
-body:has(.hero) .cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-body:has(.hero) .card,body:has(.hero) .join{background:#12232b!important;border:1px solid var(--line)!important;border-radius:5px!important;padding:25px!important;box-shadow:none!important}
-body:has(.hero) .number{color:var(--lime)!important;font-size:12px;margin-bottom:25px}
+a{color:inherit}
+img,video{max-width:100%}
+::selection{background:#b8a4ed55;color:#fff}
+
+/* PUBLIC HOME */
+body:has(.hero)>header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,5vw,72px)!important;background:rgba(13,11,20,.94)!important;border-bottom:1px solid var(--line)!important;backdrop-filter:blur(18px)}
+body:has(.hero) .logo{color:var(--accent)!important;font-size:20px!important;letter-spacing:.16em;text-shadow:none!important}
+body:has(.hero) nav{display:flex;align-items:center;gap:24px}
+body:has(.hero) nav a{font-size:12px;letter-spacing:.04em;text-decoration:none;color:#d8d0df}
+body:has(.hero) nav a:hover{color:var(--accent)}
+body:has(.hero) .menu-btn{display:none;background:transparent;color:var(--accent);border:1px solid var(--line);padding:8px 12px;border-radius:12px}
+body:has(.hero) .hero{min-height:650px;display:flex;align-items:center;justify-content:flex-start;text-align:left;padding:clamp(55px,9vw,120px) clamp(22px,10vw,145px)!important;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 48%,rgba(184,164,237,.16),transparent 32%),radial-gradient(ellipse at 15% 88%,rgba(145,215,199,.10),transparent 35%),linear-gradient(125deg,#100e1a,#171426 65%,#201b2c)!important}
+body:has(.hero) .hero:after{content:"7S";position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:clamp(260px,45vw,620px);line-height:.8;font-weight:900;letter-spacing:-.12em;color:rgba(230,185,140,.055);pointer-events:none}
+body:has(.hero) .hero-content{max-width:740px;position:relative;z-index:2}
+body:has(.hero) .tag{display:inline-flex;padding:9px 14px;border:1px solid rgba(230,185,140,.35);border-radius:99px;color:var(--accent);font-size:10px;letter-spacing:.18em;background:#e6b98c0c}
+body:has(.hero) .hero h1{font-size:clamp(42px,7.5vw,88px)!important;line-height:1.02;letter-spacing:-.055em;margin:25px 0!important;color:var(--paper)}
+body:has(.hero) .hero h1 span{color:var(--accent)!important}
+body:has(.hero) .hero p{max-width:540px;color:#b9b1c2;line-height:1.95;font-size:15px}
+body:has(.hero) .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+body:has(.hero) .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px!important;border-radius:99px!important;background:var(--accent)!important;color:#211a20!important;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:.04em;border:1px solid var(--accent)!important;box-shadow:0 8px 24px #e6b98c22}
+body:has(.hero) .btn.secondary{background:transparent!important;color:var(--paper)!important;border-color:#ffffff35!important}
+body:has(.hero) .section,body:has(.hero) .container{max-width:1120px;margin:0 auto;padding:76px clamp(18px,6vw,72px)!important;background:transparent!important}
+body:has(.hero) .heading{text-align:left!important;max-width:720px;margin:0 0 30px;border:0!important}
+body:has(.hero) .heading small{color:var(--mint);letter-spacing:.18em;font-size:10px}
+body:has(.hero) .heading h2{font-size:clamp(28px,4vw,46px);color:var(--paper);margin:12px 0}
+body:has(.hero) .heading p,body:has(.hero) .card p{color:#aaa3b5;line-height:1.85}
+body:has(.hero) .cards{max-width:1120px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+body:has(.hero) .card,body:has(.hero) .join{background:linear-gradient(145deg,#211e30,#171522)!important;border:1px solid var(--line)!important;border-radius:20px!important;padding:25px!important;box-shadow:0 12px 38px #0002!important;text-align:left}
+body:has(.hero) .number{color:var(--accent2)!important;font-size:13px;margin-bottom:22px}
 body:has(.hero) .card h3{color:var(--paper);margin-bottom:10px}
-body:has(.hero) .join{max-width:1100px;margin:auto;background:linear-gradient(110deg,#172c30,#18251f)!important}
-body:has(.hero) footer{padding:30px;color:#899b98;border-top:1px solid var(--line)}
-/* AUTH PAGES — calm editorial membership, no shooter illustration */
-body:has(#loginForm),body:has(#registerForm){min-height:100vh;background:radial-gradient(ellipse at 12% 15%,rgba(125,224,192,.15),transparent 34%),radial-gradient(ellipse at 88% 90%,rgba(201,239,112,.08),transparent 30%),#09131c!important}
-body:has(#loginForm) .page{min-height:100vh;max-width:1180px;margin:auto;padding:42px clamp(18px,5vw,70px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.8fr);align-items:center;gap:clamp(25px,7vw,100px)}
-body:has(#loginForm) .scene{min-height:560px;position:relative;overflow:hidden;border:1px solid rgba(201,239,112,.18);border-radius:8px;background:linear-gradient(145deg,#172c34,#0d1a24 65%,#1b302c);display:flex;align-items:flex-end;padding:clamp(25px,5vw,55px);box-shadow:var(--shadow)}
-body:has(#loginForm) .scene:before{content:"7S";position:absolute;top:8%;left:7%;font-size:clamp(120px,22vw,270px);font-weight:800;letter-spacing:-.12em;line-height:1;color:rgba(201,239,112,.11)}
-body:has(#loginForm) .scene:after{content:"A COMMUNITY\A BUILT ON\A FRIENDSHIP.";white-space:pre;position:absolute;left:9%;bottom:12%;font-size:clamp(25px,4vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.04em;color:var(--paper)}
-body:has(#loginForm) .scene-title{position:absolute;top:25px;left:28px;color:var(--lime);font-size:10px;letter-spacing:.2em}
-body:has(#loginForm) .scene-glow{position:absolute;width:260px;height:260px;right:-50px;top:25%;border:1px solid rgba(125,224,192,.32);border-radius:50%;box-shadow:0 0 0 25px rgba(125,224,192,.035),0 0 0 60px rgba(125,224,192,.025)}
+body:has(.hero) .join{max-width:1120px;margin:auto;background:radial-gradient(ellipse at 90% 10%,#b8a4ed20,transparent 40%),linear-gradient(110deg,#211e30,#171522)!important}
+body:has(.hero) footer{padding:30px;color:#92899d;border-top:1px solid var(--line)}
+
+/* LOGIN — responsive membership portal */
+body:has(#loginForm){min-height:100svh;background:radial-gradient(ellipse at 12% 10%,rgba(145,215,199,.13),transparent 34%),radial-gradient(ellipse at 90% 85%,rgba(184,164,237,.13),transparent 34%),#0d0b14!important;color:var(--text)!important}
+body:has(#loginForm) .page{width:min(1080px,100%)!important;max-width:1080px!important;min-height:100svh;display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(340px,.82fr)!important;align-items:center!important;gap:clamp(22px,5vw,68px)!important;margin:auto!important;padding:36px clamp(18px,5vw,64px)!important}
+body:has(#loginForm) .scene{min-height:510px!important;position:relative!important;display:block!important;overflow:hidden!important;border:1px solid rgba(230,185,140,.22)!important;border-radius:28px!important;background:radial-gradient(ellipse at 50% 78%,rgba(145,215,199,.16),transparent 40%),linear-gradient(145deg,#242034,#151321 68%,#211b2c)!important;box-shadow:inset 0 1px #ffffff0c,var(--shadow)!important}
+body:has(#loginForm) .scene:before{content:"7S";position:absolute;inset:auto 0 15%;text-align:center;font-size:clamp(150px,25vw,300px);font-weight:900;letter-spacing:-.13em;line-height:.8;color:rgba(230,185,140,.10);border:0!important;box-shadow:none!important}
+body:has(#loginForm) .scene:after{content:"YOUR PEOPLE.\\A YOUR PLACE.";white-space:pre;position:absolute;left:9%;right:9%;bottom:11%;text-align:center;font-size:clamp(23px,3.5vw,40px);font-weight:800;line-height:1.18;letter-spacing:-.035em;color:var(--paper)}
+body:has(#loginForm) .scene-title{position:absolute!important;top:27px!important;left:25px!important;right:25px;text-align:center;color:var(--accent)!important;font-size:10px!important;letter-spacing:.2em!important;z-index:2}
 body:has(#loginForm) .cinematic-figure,body:has(#loginForm) .figure-light,body:has(#loginForm) .figure-beam,body:has(#loginForm) .energy,body:has(#loginForm) .flash,body:has(#loginForm) .impact{display:none!important}
-body:has(#loginForm) .login-card{width:100%;max-width:440px;padding:clamp(25px,4vw,42px);background:#f1eee5!important;color:#14221f!important;border:0!important;border-radius:7px!important;box-shadow:0 25px 80px #0006!important}
-body:has(#loginForm) .login-card .logo{color:#16251f!important;font-size:30px!important;letter-spacing:.08em}
-body:has(#loginForm) .subtitle{color:#66736a!important;font-size:10px;letter-spacing:.16em}
-body:has(#loginForm) .line{width:55px;height:3px;background:var(--copper);margin:20px 0 25px}
-body:has(#loginForm) label,body:has(#registerForm) label{display:block;color:#35453e!important;font-size:12px;margin:16px 0 7px}
-body:has(#loginForm) input,body:has(#registerForm) input{width:100%;padding:14px 13px!important;background:#fff!important;color:#14221f!important;border:1px solid #d5d8cd!important;border-radius:4px!important;outline:none}
-body:has(#loginForm) input:focus,body:has(#registerForm) input:focus{border-color:#638b71!important;box-shadow:0 0 0 3px #638b711a}
-body:has(#loginForm) #loginBtn,body:has(#registerForm) #submitBtn{width:100%;margin-top:23px;padding:15px;background:#172b26!important;color:#e8f2d7!important;border:0!important;border-radius:4px!important;font-weight:800;letter-spacing:.08em}
-body:has(#loginForm) .register,body:has(#loginForm) .back,body:has(#registerForm) .bottom{display:block;text-align:center;color:#65746a!important;font-size:12px;margin-top:18px}
-body:has(#loginForm) a,body:has(#registerForm) a{color:#497a61!important;font-weight:700}
-body:has(#loginForm) #message,body:has(#registerForm) #message{color:#a33c43!important;font-size:12px;margin-top:12px}
-body:has(#registerForm) .topbar{max-width:1180px;margin:auto;padding:22px clamp(18px,5vw,70px);display:flex;justify-content:space-between;align-items:center;background:transparent!important;border:0!important}
-body:has(#registerForm) .topbar .logo{font-size:21px;color:var(--lime)}
-body:has(#registerForm) .main{max-width:1000px;margin:35px auto 55px;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:55px}
-body:has(#registerForm) .visual{padding:30px 0}
-body:has(#registerForm) .visual .character{height:240px;max-width:300px;position:relative;margin-bottom:25px;border:1px solid rgba(201,239,112,.2);border-radius:7px;background:linear-gradient(140deg,#1b3638,#10202a);overflow:hidden}
-body:has(#registerForm) .visual .character:before{content:"7S";position:absolute;left:25px;top:10px;font-size:170px;font-weight:800;letter-spacing:-.13em;color:rgba(201,239,112,.13)}
-body:has(#registerForm) .visual .cinematic-figure{display:none!important}
+body:has(#loginForm) .scene-glow{position:absolute;width:240px;height:240px;left:calc(50% - 120px);top:20%;border-radius:50%;background:var(--mint);filter:blur(95px);opacity:.12}
+body:has(#loginForm) .login-card{width:100%!important;max-width:460px!important;padding:clamp(27px,4vw,42px)!important;background:linear-gradient(150deg,#211e30,#171522)!important;color:var(--paper)!important;border:1px solid var(--line)!important;border-radius:26px!important;box-shadow:var(--shadow)!important;backdrop-filter:blur(18px)}
+body:has(#loginForm) .login-card .logo{color:var(--accent)!important;font-size:clamp(27px,3vw,34px)!important;letter-spacing:.12em!important;text-shadow:none!important}
+body:has(#loginForm) .subtitle{color:#aaa3b5!important;font-size:11px;letter-spacing:.16em}
+body:has(#loginForm) .line{width:58px;height:3px;background:linear-gradient(90deg,var(--mint),var(--accent2));margin:18px auto 26px;border-radius:9px;box-shadow:none}
+body:has(#loginForm) label,body:has(#registerForm) label{display:block;color:#d6cedd!important;font-size:13px;margin:17px 0 8px}
+body:has(#loginForm) input,body:has(#registerForm) input{width:100%;min-height:50px;padding:14px 15px!important;background:#100f19!important;color:var(--paper)!important;border:1px solid rgba(230,185,140,.20)!important;border-radius:13px!important;outline:none}
+body:has(#loginForm) input:focus,body:has(#registerForm) input:focus{border-color:var(--mint)!important;box-shadow:0 0 0 3px #91d7c71c}
+body:has(#loginForm) input::placeholder,body:has(#registerForm) input::placeholder{color:#777184}
+body:has(#loginForm) #loginBtn,body:has(#registerForm) #submitBtn{width:100%;min-height:52px;margin-top:23px;padding:14px;background:linear-gradient(100deg,#d9aa7e,#edc9a4)!important;color:#251b21!important;border:0!important;border-radius:13px!important;font-weight:900;letter-spacing:.06em;box-shadow:0 10px 26px #e6b98c20}
+body:has(#loginForm) .register,body:has(#loginForm) .back,body:has(#registerForm) .bottom{display:block;text-align:center;color:#aaa3b5!important;font-size:12px;margin-top:18px;line-height:1.8}
+body:has(#loginForm) a,body:has(#registerForm) a{color:var(--mint)!important;font-weight:700}
+body:has(#loginForm) #message,body:has(#registerForm) #message{color:#f0a1a9!important;font-size:12px;margin-top:12px}
+
+/* SIGNUP */
+body:has(#registerForm){min-height:100svh;background:radial-gradient(ellipse at 15% 10%,rgba(145,215,199,.12),transparent 35%),radial-gradient(ellipse at 85% 85%,rgba(184,164,237,.13),transparent 32%),#0d0b14!important}
+body:has(#registerForm) .topbar{max-width:1080px;margin:auto;padding:22px clamp(18px,5vw,64px);display:flex;justify-content:space-between;align-items:center;background:transparent!important;border:0!important}
+body:has(#registerForm) .topbar .logo{font-size:21px;color:var(--accent)!important;text-shadow:none!important}
+body:has(#registerForm) .main{max-width:1080px;margin:24px auto 55px;padding:0 clamp(18px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.9fr);align-items:center;gap:clamp(22px,5vw,64px)}
+body:has(#registerForm) .visual{padding:25px 0;text-align:left}
+body:has(#registerForm) .visual .character{height:300px;width:100%;max-width:420px;position:relative;margin:0 0 24px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(ellipse at 50% 75%,#91d7c71f,transparent 45%),linear-gradient(145deg,#242034,#151321);overflow:hidden;box-shadow:var(--shadow)}
+body:has(#registerForm) .visual .character:before{content:"7S";position:absolute;left:8%;top:8%;font-size:clamp(130px,20vw,220px);font-weight:900;letter-spacing:-.13em;color:#e6b98c18}
+body:has(#registerForm) .visual .character svg{opacity:.25}
 body:has(#registerForm) .visual h2{font-size:clamp(27px,4vw,44px);line-height:1.1;color:var(--paper)}
-body:has(#registerForm) .visual h2 span{color:var(--lime)}
-body:has(#registerForm) .visual p{color:#aab9b6;line-height:1.9}
-body:has(#registerForm) .card{padding:clamp(25px,4vw,40px)!important;background:#f1eee5!important;color:#14221f!important;border:0!important;border-radius:7px!important;box-shadow:var(--shadow)!important}
-body:has(#registerForm) .card h1{color:#16251f!important;font-size:24px}
-body:has(#registerForm) .card h1 span{color:#668b61}
-body:has(#registerForm) .card .subtitle{color:#66736a!important}
-body:has(#registerForm) .footer{padding:20px;color:#84958e;text-align:center}
-/* MEMBER DASHBOARD — private club workspace */
-body:has(#dashboard) .topbar{height:72px;padding:0 clamp(16px,4vw,55px);background:#09131c!important;border-bottom:1px solid var(--line)}
-body:has(#dashboard) .brand{font-size:17px;letter-spacing:.2em;color:var(--lime)}
-body:has(#dashboard) .brand small{font-size:8px;letter-spacing:.24em;color:#93a6a0}
-body:has(#dashboard) .layout{max-width:1440px;grid-template-columns:225px minmax(0,1fr) 190px;gap:20px;padding:25px clamp(12px,3vw,38px)}
-body:has(#dashboard) .panel,body:has(#dashboard) .post{background:#12212a!important;border:1px solid rgba(204,225,203,.12)!important;border-radius:6px!important;box-shadow:none!important}
-body:has(#dashboard) .welcome{background:linear-gradient(110deg,#1c3734,#132a2d 58%,#202d29)!important;border:1px solid rgba(201,239,112,.2)!important;border-radius:6px!important}
-body:has(#dashboard) .welcome h2,body:has(#dashboard) .title{color:var(--lime)!important}
-body:has(#dashboard) .nav-item{border-radius:4px!important;color:#bdcbc3}
-body:has(#dashboard) .nav-item.active,body:has(#dashboard) .nav-item:hover{background:#203b34!important;border-color:rgba(201,239,112,.24)!important;color:var(--lime)!important}
-body:has(#dashboard) .primary{background:var(--lime)!important;color:#152219!important;border-radius:4px!important;box-shadow:none!important}
-body:has(#dashboard) .secondary,body:has(#dashboard) .post-actions button{background:#1b3034!important;border:1px solid rgba(125,224,192,.18)!important;border-radius:4px!important}
-body:has(#dashboard) .danger{background:#a84c4f!important;border-radius:4px!important}
-body:has(#dashboard) .field{background:#0b171e!important;border:1px solid rgba(204,225,203,.18)!important;border-radius:4px!important}
-body:has(#dashboard) .post{padding:17px!important}
-body:has(#dashboard) .post-media{border-radius:4px!important}
-body:has(#dashboard) .info{background:#0d1a21!important;border:1px solid var(--line)!important;border-radius:4px!important}
-body:has(#dashboard) .mobile-nav{border-radius:5px!important;background:rgba(9,19,28,.97)!important;border:1px solid rgba(201,239,112,.22)!important}
-body:has(#dashboard) .mobile-nav button.active{background:#203b34!important;color:var(--lime)!important}
-/* OTHER CONTENT + ADMIN PAGES */
+body:has(#registerForm) .visual h2 span{color:var(--accent)}
+body:has(#registerForm) .visual p{color:#aaa3b5;line-height:1.9}
+body:has(#registerForm) .card{padding:clamp(25px,4vw,40px)!important;background:linear-gradient(150deg,#211e30,#171522)!important;color:var(--paper)!important;border:1px solid var(--line)!important;border-radius:26px!important;box-shadow:var(--shadow)!important}
+body:has(#registerForm) .card h1{color:var(--paper)!important;font-size:26px}
+body:has(#registerForm) .card h1 span{color:var(--accent)}
+body:has(#registerForm) .card .subtitle{color:#aaa3b5!important}
+body:has(#registerForm) input[type="date"]{color-scheme:dark!important}
+body:has(#registerForm) .footer{padding:20px;color:#92899d;text-align:center}
+
+/* MEMBER DASHBOARD — new private club workspace */
+body:has(#dashboard){background:radial-gradient(ellipse at 8% 0%,rgba(145,215,199,.10),transparent 34%),radial-gradient(ellipse at 92% 75%,rgba(184,164,237,.10),transparent 34%),var(--ink)!important;color:var(--text)!important}
+body:has(#dashboard) .topbar{height:70px;padding:0 clamp(16px,4vw,56px);background:rgba(13,11,20,.94)!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important;backdrop-filter:blur(18px)}
+body:has(#dashboard) .brand{font-size:18px;letter-spacing:.19em;color:var(--accent)!important}
+body:has(#dashboard) .brand small{font-size:8px;letter-spacing:.25em;color:#a69caf}
+body:has(#dashboard) .top-right{color:#e7dfee}
+body:has(#dashboard) .avatar{border:2px solid var(--accent)!important}
+body:has(#dashboard) .layout{max-width:1450px;grid-template-columns:230px minmax(0,1fr) 190px;gap:20px;padding:24px clamp(12px,3vw,38px)}
+body:has(#dashboard) .panel,body:has(#dashboard) .post{background:linear-gradient(150deg,#211e30,#171522)!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:0 12px 38px #0002!important}
+body:has(#dashboard) .sidebar,body:has(#dashboard) .right{top:84px}
+body:has(#dashboard) .side-profile{border-color:var(--line)}
+body:has(#dashboard) .side-profile img{border:2px solid var(--accent)!important}
+body:has(#dashboard) .side-profile h3{color:var(--paper)}
+body:has(#dashboard) .nav-item{border-radius:12px!important;color:#c6bdce!important;transition:background .2s,border-color .2s}
+body:has(#dashboard) .nav-item.active,body:has(#dashboard) .nav-item:hover{background:#b8a4ed18!important;border-color:#b8a4ed35!important;color:var(--accent)!important}
+body:has(#dashboard) .welcome{position:relative;overflow:hidden;padding:27px!important;background:radial-gradient(ellipse at 90% 10%,#b8a4ed24,transparent 40%),linear-gradient(120deg,#29243a,#1b1928 70%,#262033)!important;border:1px solid rgba(230,185,140,.2)!important;border-radius:22px!important}
+body:has(#dashboard) .welcome:after{content:"7S";position:absolute;right:22px;bottom:-28px;font-size:130px;font-weight:900;letter-spacing:-.12em;color:#e6b98c0c;pointer-events:none}
+body:has(#dashboard) .welcome h2,body:has(#dashboard) .title{color:var(--accent)!important}
+body:has(#dashboard) .welcome p,body:has(#dashboard) .muted{color:#aaa3b5!important}
+body:has(#dashboard) .primary{background:linear-gradient(100deg,#d9aa7e,#edc9a4)!important;color:#251b21!important;border-radius:13px!important;box-shadow:0 8px 24px #e6b98c1c!important}
+body:has(#dashboard) .secondary,body:has(#dashboard) .post-actions button{background:#29253a!important;color:#e8e1ed!important;border:1px solid rgba(184,164,237,.18)!important;border-radius:12px!important}
+body:has(#dashboard) .post-actions button.liked{color:var(--mint)!important;border-color:var(--mint)!important;background:#91d7c710!important}
+body:has(#dashboard) .danger{background:linear-gradient(110deg,#8f465b,#bd6574)!important;color:white!important;border:0!important;border-radius:12px!important}
+body:has(#dashboard) .field{background:#100f19!important;color:var(--paper)!important;border:1px solid rgba(230,185,140,.18)!important;border-radius:13px!important}
+body:has(#dashboard) .field:focus{border-color:var(--mint)!important}
+body:has(#dashboard) .post{padding:18px!important}
+body:has(#dashboard) .post-head img{border:2px solid rgba(230,185,140,.65)!important}
+body:has(#dashboard) .post-media{border-radius:15px!important;background:#090811!important}
+body:has(#dashboard) .post-content{color:#eee8f1}
+body:has(#dashboard) .info,body:has(#dashboard) .item,body:has(#dashboard) .comment,body:has(#dashboard) .chat-member,body:has(#dashboard) .story{background:#171522!important;border:1px solid var(--line)!important;border-radius:14px!important}
+body:has(#dashboard) .profile-cover{background:radial-gradient(ellipse at 75% 20%,#b8a4ed77,transparent 45%),linear-gradient(110deg,#2c263c,#17423e)!important}
+body:has(#dashboard) .profile-head img{border-color:#211e30!important}
+body:has(#dashboard) .chat-bubble.chat-mine{background:#57476f!important}
+body:has(#dashboard) .chat-bubble.chat-theirs{background:#29253a!important}
+body:has(#dashboard) .mobile-nav{border-radius:19px!important;background:rgba(20,18,29,.97)!important;border:1px solid rgba(230,185,140,.22)!important;box-shadow:0 14px 38px #0009!important}
+body:has(#dashboard) .mobile-nav button{color:#aaa3b5!important;border-radius:13px!important}
+body:has(#dashboard) .mobile-nav button.active{background:#b8a4ed22!important;color:var(--accent)!important}
+body:has(#dashboard) .mobile-nav button span{filter:saturate(.75)}
+body:has(#dashboard) .right .rule{color:#b7afbf}
+
+/* MEMBERS, PROFILE, ADMIN */
 body:has(#members) header,body:has(#profile) header,body:has(#dashboard) header{color:var(--paper)}
-body:has(#members) main,body:has(#profile) main,body:has(#dashboard) main{max-width:1180px;margin:28px auto;padding:0 18px}
-body:has(#members) .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-body:has(#members) .grid>*,body:has(#profile) .profile,body:has(#adminEmail),body:has(#dashboard) .item{background:#12232b!important;border:1px solid var(--line)!important;border-radius:5px!important;padding:18px}
-body:has(#members) button,body:has(#profile) button,body:has(#adminEmail) button{background:#c9ef70;color:#142016;border:0;border-radius:4px;padding:11px 16px;font-weight:700}
-body:has(#adminEmail) .panel,body:has(#adminEmail) .stat{background:#12232b!important;border:1px solid var(--line)!important;border-radius:5px!important}
-body:has(#adminEmail) .stat strong{color:var(--lime)}
-body:has(#adminEmail) .refresh{background:var(--lime)!important;color:#152219!important;border:0;border-radius:4px;padding:12px 18px}
-body:has(#adminEmail) .approve{background:#4b9b78!important}body:has(#adminEmail) .reject{background:#ad5156!important}
-body:has(#members) h3,body:has(#profile) h3,body:has(#adminEmail) h2{color:var(--lime)}
-/* RESPONSIVE */
-@media(max-width:900px){body:has(.hero) .cards{grid-template-columns:1fr}body:has(#loginForm) .page{grid-template-columns:1fr;max-width:600px;padding:24px 18px}body:has(#loginForm) .scene{min-height:230px}body:has(#loginForm) .scene:before{font-size:170px}body:has(#loginForm) .scene:after{font-size:27px;bottom:20px}body:has(#registerForm) .main{grid-template-columns:1fr;gap:18px;margin:10px auto 35px;max-width:560px}body:has(#registerForm) .visual{padding:12px 5px}body:has(#registerForm) .visual .character{height:150px}}
-@media(max-width:760px){body:has(.hero)>header{padding:13px 16px!important}body:has(.hero) .menu-btn{display:block}body:has(.hero) nav{display:none;position:absolute;left:12px;right:12px;top:60px;padding:16px;background:#10212a;border:1px solid var(--line);border-radius:5px;flex-direction:column;align-items:stretch}body:has(.hero) nav.open{display:flex}body:has(.hero) .hero{min-height:620px;padding:70px 22px!important}body:has(.hero) .hero h1{font-size:clamp(43px,13vw,70px)!important}body:has(.hero) .section{padding:55px 20px!important}body:has(#loginForm) .page{padding:18px 14px;gap:15px}body:has(#loginForm) .scene{min-height:190px;padding:20px}body:has(#loginForm) .scene-title{top:16px;left:18px}body:has(#loginForm) .scene:after{font-size:23px;left:20px;bottom:18px}body:has(#loginForm) .login-card{max-width:none;padding:25px 21px}body:has(#registerForm) .main{padding:0 14px}body:has(#registerForm) .card{padding:24px 20px!important}body:has(#dashboard) .layout{display:block!important;width:100%;max-width:none;margin:0;padding:14px 12px calc(100px + env(safe-area-inset-bottom))}body:has(#dashboard) .sidebar,body:has(#dashboard) .right{display:none!important}body:has(#dashboard) .main{width:100%;max-width:none}body:has(#dashboard) .view,body:has(#dashboard) .view.active{width:100%;min-width:0}body:has(#dashboard) .post{padding:13px!important}body:has(#dashboard) .post-media{max-height:52vh}body:has(#dashboard) .mobile-nav{left:8px;right:8px;bottom:calc(7px + env(safe-area-inset-bottom));display:flex!important;gap:2px;padding:6px 3px}body:has(#dashboard) .mobile-nav button{flex:1;min-width:0;font-size:9px}body:has(#dashboard) .mobile-nav button span{font-size:16px}}
+body:has(#members) main,body:has(#profile) main{max-width:1120px;margin:30px auto;padding:0 18px}
+body:has(#members) .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+body:has(#members) .grid>*,body:has(#profile) .profile{background:linear-gradient(150deg,#211e30,#171522)!important;border:1px solid var(--line)!important;border-radius:20px!important;padding:22px;box-shadow:0 12px 38px #0002}
+body:has(#members) .card img,body:has(#members) .avatar,body:has(#profile) .profile img,body:has(#profile) .avatar{border-color:var(--accent)!important}
+body:has(#members) button,body:has(#profile) button,body:has(#adminEmail) button{background:linear-gradient(100deg,#d9aa7e,#edc9a4)!important;color:#251b21!important;border:0!important;border-radius:12px!important;padding:11px 16px;font-weight:800}
+body:has(#adminEmail) body,body:has(#adminEmail) .panel,body:has(#adminEmail) .card,body:has(#adminEmail) .stat,body:has(#adminEmail) header{background:#1b1928!important;border:1px solid var(--line)!important;border-radius:18px!important;color:var(--paper)!important}
+body:has(#adminEmail) h1,body:has(#adminEmail) h2,body:has(#adminEmail) h3{color:var(--accent)!important}
+body:has(#adminEmail) .stat strong{color:var(--mint)!important}
+body:has(#adminEmail) .refresh{background:var(--accent)!important;color:#211a20!important;border:0!important;border-radius:12px!important;padding:12px 18px}
+body:has(#adminEmail) .approve{background:#398e70!important;color:white!important}
+body:has(#adminEmail) .reject{background:#ad5368!important;color:white!important}
+
+/* BREAKPOINTS: treat most Android phones and compact tablets as mobile */
+@media(max-width:1100px){
+ body:has(.hero) .cards{grid-template-columns:1fr}
+ body:has(.hero)>header{padding:13px 17px!important}
+ body:has(.hero) .menu-btn{display:block}
+ body:has(.hero) nav{display:none;position:absolute;left:12px;right:12px;top:60px;padding:16px;background:#211e30;border:1px solid var(--line);border-radius:16px;flex-direction:column;align-items:stretch}
+ body:has(.hero) nav.open{display:flex}
+ body:has(.hero) .hero{min-height:580px;padding:65px 22px!important}
+ body:has(.hero) .hero h1{font-size:clamp(42px,10vw,68px)!important}
+ body:has(.hero) .section,body:has(.hero) .container{padding:55px 20px!important}
+ body:has(#loginForm) .page{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important;max-width:500px!important;min-height:100svh!important;padding:18px 14px 28px!important;margin:0 auto!important;align-content:center!important}
+ body:has(#loginForm) .scene{height:112px!important;min-height:112px!important;width:100%!important;border-radius:19px!important}
+ body:has(#loginForm) .scene:before{font-size:74px!important;inset:auto 0 6px!important}
+ body:has(#loginForm) .scene:after{top:45%!important;bottom:auto!important;font-size:clamp(19px,5vw,25px)!important;left:8%!important;right:8%!important}
+ body:has(#loginForm) .scene-title{top:12px!important;left:10px!important;right:10px!important;font-size:8px!important}
+ body:has(#loginForm) .scene-glow{width:120px!important;height:70px!important;left:calc(50% - 60px)!important;top:20%!important;filter:blur(45px)!important}
+ body:has(#loginForm) .login-card{max-width:none!important;padding:27px 22px!important;border-radius:21px!important}
+ body:has(#loginForm) .line{margin:15px auto 20px!important}
+ body:has(#loginForm) label{margin-top:15px!important}
+ body:has(#registerForm) .main{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;margin:8px auto 30px!important;max-width:500px!important;padding:0 14px!important}
+ body:has(#registerForm) .visual{padding:8px 4px!important}
+ body:has(#registerForm) .visual .character{height:110px!important;max-width:none!important;margin-bottom:14px!important}
+ body:has(#registerForm) .visual .character:before{font-size:88px!important}
+ body:has(#registerForm) .visual h2{font-size:25px!important}
+ body:has(#registerForm) .card{padding:25px 21px!important;border-radius:21px!important}
+ body:has(#dashboard) .layout{display:block!important;width:100%!important;max-width:760px!important;margin:0 auto!important;padding:15px 13px calc(105px + env(safe-area-inset-bottom))!important}
+ body:has(#dashboard) .sidebar,body:has(#dashboard) .right{display:none!important}
+ body:has(#dashboard) .main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important}
+ body:has(#dashboard) .view,body:has(#dashboard) .view.active{width:100%!important;min-width:0!important}
+ body:has(#dashboard) .panel{width:100%;padding:17px!important;margin:0 0 13px!important;border-radius:18px!important}
+ body:has(#dashboard) .welcome{padding:23px 19px!important}
+ body:has(#dashboard) .post{width:100%;padding:14px!important;margin-top:12px!important;border-radius:17px!important}
+ body:has(#dashboard) .post-media{max-height:58svh!important}
+ body:has(#dashboard) .post video.post-media{max-height:56svh!important}
+ body:has(#dashboard) .post-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ body:has(#dashboard) .post-actions button{min-height:42px!important;font-size:11px!important;padding:8px 3px!important}
+ body:has(#dashboard) .mobile-nav{left:8px!important;right:8px!important;bottom:calc(7px + env(safe-area-inset-bottom))!important;display:flex!important;gap:3px!important;padding:7px 5px!important}
+ body:has(#dashboard) .mobile-nav button{flex:1 0 0!important;min-width:0!important;font-size:9px!important;padding:5px 1px!important}
+ body:has(#dashboard) .mobile-nav button span{font-size:16px!important;margin-bottom:3px!important}
+ body:has(#dashboard) .mobile-nav button[data-view="friends"],body:has(#dashboard) .mobile-nav button[data-view="members"]{display:none!important}
+ body:has(#dashboard) footer{padding-bottom:110px!important}
+ body:has(#members) main,body:has(#profile) main{padding:0 14px!important}
+}
+@media(max-width:420px){
+ body:has(#loginForm) .page{padding:12px 10px 24px!important}
+ body:has(#loginForm) .login-card{padding:23px 17px!important}
+ body:has(#dashboard) .layout{padding-left:9px!important;padding-right:9px!important}
+ body:has(#dashboard) .panel{padding:14px!important}
+ body:has(#dashboard) .post{padding:11px!important}
+ body:has(#dashboard) .mobile-nav button{font-size:8px!important}
+}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
