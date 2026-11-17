@@ -272,6 +272,24 @@ body:has(.topbar) .visual p{text-align:center}
 </style>
     <link rel="stylesheet" href="mobile-responsive.css?v=20261117-mobilefix1">
 <style id="register-visible-fix">body:has(#registerForm){display:block!important;overflow-y:auto!important}body:has(#registerForm) .main{display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important}body:has(#registerForm) .visual{display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important;overflow:visible!important}body:has(#registerForm) .auth-shooter{height:220px!important;min-height:190px!important}body:has(#registerForm) .visual h2,body:has(#registerForm) .visual p,body:has(#registerForm) .card{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:3!important}</style>
+<style id="auth-final-visibility">
+/* Keep the welcome copy and registration controls fully readable. */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+body:has(#registerForm){display:block!important;min-height:100svh!important}
+body:has(#registerForm) .main{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(320px,470px)!important;align-items:center!important;height:auto!important;min-height:0!important;margin:12px auto!important}
+body:has(#registerForm) .visual,body:has(#registerForm) .visual h2,body:has(#registerForm) .visual p,body:has(#registerForm) .card{opacity:1!important;visibility:visible!important;filter:none!important}
+body:has(#registerForm) .visual{display:flex!important;flex-direction:column!important;justify-content:center!important;height:auto!important;min-height:0!important;overflow:visible!important}
+body:has(#registerForm) .auth-shooter{height:clamp(230px,32vw,340px)!important;min-height:220px!important;overflow:hidden!important}
+body:has(#registerForm) .as-title{opacity:1!important;visibility:visible!important;animation:none!important;transform:translate(-50%,-50%)!important;filter:drop-shadow(0 0 22px #b77aff)!important;white-space:normal!important;font-size:clamp(23px,5.5vw,58px)!important;line-height:1.1!important}
+body:has(#registerForm) .as-tagline{opacity:1!important;visibility:visible!important;animation:none!important;transform:translate(-50%,0)!important;filter:none!important;white-space:normal!important;text-align:center!important;width:90%!important;letter-spacing:.2em!important}
+@media(max-width:800px){
+ body:has(#registerForm) .main{display:flex!important;flex-direction:column!important;width:100%!important;max-width:500px!important;gap:12px!important;margin:10px auto!important}
+ body:has(#registerForm) .visual{width:100%!important;padding:15px!important}
+ body:has(#registerForm) .auth-shooter{height:clamp(205px,58vw,245px)!important;min-height:205px!important}
+ body:has(#registerForm) .visual h2,body:has(#registerForm) .visual p{display:block!important}
+ body:has(#registerForm) .card{width:100%!important;max-width:none!important}
+}
+</style>
 </head>
 
 <body>
