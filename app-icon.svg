@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#090512"/><stop offset="1" stop-color="#24103d"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b0"/><stop offset=".5" stop-color="#e8bd59"/><stop offset="1" stop-color="#9e6720"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="512" height="512" rx="112" fill="url(#bg)"/>
+<rect x="15" y="15" width="482" height="482" rx="100" fill="none" stroke="#b77aff" stroke-opacity=".5" stroke-width="5"/>
+<path d="M104 178l78 57 74-113 74 113 78-57-32 160H136z" fill="url(#gold)" stroke="#fff0b0" stroke-width="9" stroke-linejoin="round" filter="url(#glow)"/>
+<circle cx="104" cy="178" r="15" fill="#fff0b0"/><circle cx="256" cy="122" r="17" fill="#fff0b0"/><circle cx="408" cy="178" r="15" fill="#fff0b0"/>
+<text x="256" y="397" text-anchor="middle" font-family="Arial,sans-serif" font-size="100" font-weight="900" letter-spacing="-5" fill="#fff4dc">7SB</text>
+</svg>
