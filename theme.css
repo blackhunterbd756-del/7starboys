@@ -191,3 +191,47 @@ body:has(#adminEmail) .reject{background:#ad5368!important;color:white!important
  body:has(#dashboard) .mobile-nav button{font-size:8px!important}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+
+/* HOME DASHBOARD — new editorial layout */
+body:has(#dashboard) .club-hero{
+ position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(170px,.75fr);align-items:center;gap:18px;
+ min-height:285px;padding:clamp(24px,4vw,42px);margin-bottom:15px;
+ border:1px solid rgba(230,185,140,.22);border-radius:25px;
+ background:radial-gradient(ellipse at 83% 48%,rgba(184,164,237,.23),transparent 35%),radial-gradient(ellipse at 12% 100%,rgba(145,215,199,.12),transparent 42%),linear-gradient(125deg,#282238,#191725 68%,#242033);
+ box-shadow:0 18px 50px #0003;
+}
+body:has(#dashboard) .club-copy{position:relative;z-index:2}
+body:has(#dashboard) .club-kicker{display:inline-block;color:var(--mint);font-size:9px;font-weight:800;letter-spacing:.2em;margin-bottom:17px}
+body:has(#dashboard) .club-copy h1{font-size:clamp(28px,4vw,46px);line-height:1.2;letter-spacing:-.045em;color:var(--paper);margin:0}
+body:has(#dashboard) .club-copy h1 em{font-style:normal;color:var(--accent)}
+body:has(#dashboard) .club-copy p{font-size:13px;color:#b7afbf;line-height:1.8;margin:12px 0 19px}
+body:has(#dashboard) .club-cta{border:0;border-radius:99px;padding:12px 18px;background:linear-gradient(100deg,#d9aa7e,#edc9a4);color:#251b21;font-weight:900;font-size:12px;box-shadow:0 8px 22px #e6b98c24}
+body:has(#dashboard) .club-symbol{position:relative;justify-self:center;display:grid;place-items:center;width:min(100%,220px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(230,185,140,.35);background:radial-gradient(circle at 50% 45%,#b8a4ed20,transparent 65%),#151321;box-shadow:0 0 0 13px #ffffff05,0 0 0 28px #ffffff03,inset 0 0 40px #b8a4ed12}
+body:has(#dashboard) .club-symbol:before,body:has(#dashboard) .club-symbol:after{content:"";position:absolute;inset:13px;border:1px solid rgba(145,215,199,.28);border-radius:50%}
+body:has(#dashboard) .club-symbol:after{inset:27px;border-color:rgba(230,185,140,.18)}
+body:has(#dashboard) .club-symbol span{font-size:clamp(48px,7vw,78px);font-weight:900;letter-spacing:-.13em;color:var(--accent);padding-right:10px;text-shadow:0 8px 28px #e6b98c25}
+body:has(#dashboard) .club-symbol small{position:absolute;bottom:22%;font-size:8px;letter-spacing:.24em;color:#aaa3b5}
+body:has(#dashboard) .home-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0 0 27px}
+body:has(#dashboard) .home-tile{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;min-height:112px;padding:17px 16px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#211e30,#171522);color:var(--paper);text-align:left;transition:transform .2s,border-color .2s}
+body:has(#dashboard) .home-tile:hover{transform:translateY(-3px);border-color:#b8a4ed66}
+body:has(#dashboard) .home-tile span{font-size:20px;color:var(--accent2)}
+body:has(#dashboard) .home-tile b{font-size:12px;font-weight:800}
+body:has(#dashboard) .home-tile small{font-size:10px;color:#aaa3b5;line-height:1.5}
+body:has(#dashboard) .home-feed-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:5px 2px 12px}
+body:has(#dashboard) .home-feed-heading span{font-size:9px;font-weight:800;letter-spacing:.19em;color:var(--mint)}
+body:has(#dashboard) .home-feed-heading h2{font-size:22px;color:var(--paper);margin-top:5px}
+body:has(#dashboard) .home-feed-heading button{background:transparent;border:1px solid var(--line);border-radius:99px;padding:9px 13px;color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}
+body:has(#dashboard) .home-feed .post{margin-top:11px}
+@media(max-width:560px){
+ body:has(#dashboard) .club-hero{grid-template-columns:minmax(0,1fr);min-height:245px;padding:23px 20px;border-radius:21px}
+ body:has(#dashboard) .club-symbol{position:absolute;right:-32px;bottom:-42px;width:180px;opacity:.42}
+ body:has(#dashboard) .club-copy h1{font-size:29px;max-width:260px}
+ body:has(#dashboard) .club-copy p{max-width:245px}
+ body:has(#dashboard) .home-actions{gap:7px}
+ body:has(#dashboard) .home-tile{min-height:104px;padding:12px 9px;border-radius:14px}
+ body:has(#dashboard) .home-tile b{font-size:10px}
+ body:has(#dashboard) .home-tile small{font-size:9px}
+ body:has(#dashboard) .home-feed-heading h2{font-size:19px}
+ body:has(#dashboard) .home-feed-heading button{padding:8px 10px;font-size:9px}
+}
