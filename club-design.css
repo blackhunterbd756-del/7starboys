@@ -495,3 +495,316 @@ body:has(#memberList):not(:has(#dashboard)) .muted{color:var(--club-muted)}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
+
+/* =========================================================
+   7STARBOYS — CINEMATIC PRIVATE CLUB / FULL VISUAL REDESIGN
+   Shared visual system for all public and member pages.
+   ========================================================= */
+:root{
+  --club-bg:#070b12;--club-bg2:#0b1420;--club-panel:#101c2b;--club-panel2:#17283a;
+  --club-paper:#f4ecdf;--club-paper2:#e9d8bd;--club-gold:#cda66c;--club-gold2:#f3d7a2;
+  --club-mint:#8fc8bc;--club-text:#f5f1e9;--club-muted:#9eabb8;
+  --club-line:rgba(226,194,143,.19);--club-shadow:0 28px 80px rgba(0,0,0,.42);
+}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:radial-gradient(ellipse at 4% 8%,rgba(31,100,105,.20),transparent 34%),radial-gradient(ellipse at 96% 84%,rgba(95,56,103,.17),transparent 38%),#070b12!important;color:var(--club-text)!important;font-family:"Noto Sans Bengali",Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important}
+button,input,textarea,select{font-family:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(243,215,162,.32);color:#fff}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:rgba(205,166,108,.35);border-radius:20px}
+::-webkit-scrollbar-track{background:#080d15}
+
+/* PUBLIC LANDING */
+body:has(#navigation)>header{min-height:76px;padding:12px clamp(18px,6vw,88px);background:rgba(7,11,18,.88);border-bottom:1px solid var(--club-line);box-shadow:0 10px 40px rgba(0,0,0,.18);backdrop-filter:blur(22px)}
+body:has(#navigation) .logo{color:var(--club-gold2)!important;font-size:clamp(20px,2vw,28px)!important;letter-spacing:.22em;font-weight:950}
+body:has(#navigation) .logo span{color:var(--club-mint)!important}
+body:has(#navigation) nav a{padding:10px 2px;color:#d6dce0;border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;font-size:10px;letter-spacing:.16em}
+body:has(#navigation) nav a:hover{color:var(--club-gold2);border-bottom-color:var(--club-gold)}
+body:has(#navigation) .menu-btn{border:1px solid var(--club-line);border-radius:12px;background:#101b29;color:var(--club-gold2)}
+body:has(#navigation) .hero{min-height:min(790px,calc(100svh - 76px));padding:clamp(70px,10vw,135px) clamp(22px,9vw,145px);background:linear-gradient(90deg,rgba(7,11,18,.98) 0%,rgba(7,11,18,.88) 42%,rgba(7,11,18,.28) 100%),radial-gradient(ellipse at 80% 42%,rgba(205,166,108,.18),transparent 42%),linear-gradient(135deg,#102b35 0%,#111726 48%,#21162b 100%);border-bottom:1px solid var(--club-line);overflow:hidden}
+body:has(#navigation) .hero:before{content:"7S";right:4%;top:48%;font-size:clamp(230px,40vw,590px);color:rgba(243,215,162,.085);letter-spacing:-.16em;text-shadow:0 0 100px rgba(205,166,108,.18);animation:clubMarkFloat 9s ease-in-out infinite}
+body:has(#navigation) .hero:after{right:13%;top:18%;width:clamp(190px,27vw,390px);border-color:rgba(143,200,188,.28);box-shadow:0 0 0 25px rgba(143,200,188,.035),0 0 0 58px rgba(143,200,188,.025),0 0 80px rgba(143,200,188,.08)}
+body:has(#navigation) .hero-content{max-width:760px}
+body:has(#navigation) .tag{padding:10px 15px;border:1px solid rgba(143,200,188,.35);background:rgba(143,200,188,.07);color:var(--club-mint);font-size:9px;letter-spacing:.23em;box-shadow:0 0 28px rgba(143,200,188,.06)}
+body:has(#navigation) .hero h1{margin:28px 0 22px;font-size:clamp(48px,8.5vw,102px);line-height:1.02;letter-spacing:-.065em;font-weight:950;text-shadow:0 15px 45px rgba(0,0,0,.3)}
+body:has(#navigation) .hero h1 span{background:linear-gradient(100deg,#f6e2b8,#cda66c 52%,#8fc8bc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+body:has(#navigation) .hero p{max-width:560px;color:#bdc8ce;font-size:clamp(14px,1.6vw,17px);line-height:2.1}
+body:has(#navigation) .buttons{gap:12px;margin-top:32px}
+body:has(#navigation) .btn{min-height:50px;padding:14px 23px;border-radius:999px;border:1px solid var(--club-gold);background:linear-gradient(110deg,#c99d62,#f3d7a2);color:#171a20;font-size:10px;letter-spacing:.1em;box-shadow:0 12px 32px rgba(205,166,108,.15)}
+body:has(#navigation) .btn.secondary{background:rgba(255,255,255,.035);color:#e9e4da;border-color:rgba(226,194,143,.28);backdrop-filter:blur(12px)}
+body:has(#navigation) .section{width:min(1180px,100%);padding:clamp(60px,8vw,105px) 24px}
+body:has(#navigation) .heading small{color:var(--club-mint);letter-spacing:.24em}
+body:has(#navigation) .heading h2{font-size:clamp(30px,4.4vw,48px);letter-spacing:-.04em}
+body:has(#navigation) .heading p{max-width:650px;color:#aeb9c3}
+body:has(#navigation) .cards{gap:17px}
+body:has(#navigation) .card{min-height:210px;padding:30px;border-radius:22px;border:1px solid var(--club-line);background:linear-gradient(145deg,rgba(23,40,58,.92),rgba(12,19,31,.94));box-shadow:0 18px 48px rgba(0,0,0,.22)}
+body:has(#navigation) .card .number{color:var(--club-gold2);font-size:29px;letter-spacing:.08em}
+body:has(#navigation) .card h3{font-size:18px;color:#f5ead8}
+body:has(#navigation) .card p{color:#aab6c0;font-size:13px;line-height:2}
+body:has(#navigation) .join{padding:clamp(30px,6vw,65px);border-radius:28px;border:1px solid rgba(205,166,108,.27);background:radial-gradient(circle at 90% 10%,rgba(143,200,188,.16),transparent 36%),linear-gradient(125deg,#142b35,#121b2b 55%,#21172b);box-shadow:var(--club-shadow)}
+body:has(#navigation) .join h2{font-size:clamp(27px,4vw,43px)}
+body:has(#navigation) .join p{max-width:650px;color:#b5c0c7}
+body:has(#navigation) footer{border-color:var(--club-line);color:#8997a3}
+
+/* CINEMATIC LOGIN */
+body:has(.login-card){min-height:100svh;padding:clamp(18px,4vw,48px);background:radial-gradient(ellipse at 12% 18%,rgba(22,102,108,.25),transparent 38%),radial-gradient(ellipse at 92% 82%,rgba(92,56,111,.23),transparent 38%),#070b12!important}
+body:has(.login-card) .page{width:min(1120px,100%);max-width:1120px;grid-template-columns:minmax(0,1fr) minmax(340px,440px);gap:clamp(20px,4vw,52px);align-items:center}
+body:has(.login-card) .scene{min-height:590px;padding:34px;border-radius:30px;border:1px solid rgba(205,166,108,.28);background:radial-gradient(ellipse at 70% 70%,rgba(143,200,188,.19),transparent 38%),radial-gradient(ellipse at 22% 20%,rgba(205,166,108,.10),transparent 42%),linear-gradient(145deg,#142b37 0%,#101a29 48%,#20172b 100%);box-shadow:0 35px 100px rgba(0,0,0,.48)}
+body:has(.login-card) .scene:before{content:"7S";right:5%;top:20%;font-size:clamp(170px,22vw,310px);color:rgba(243,215,162,.16);letter-spacing:-.17em;text-shadow:0 0 80px rgba(205,166,108,.18);animation:clubMarkFloat 8s ease-in-out infinite}
+body:has(.login-card) .scene:after{content:"YOUR PEOPLE.\A YOUR PLACE.";white-space:pre;left:9%;bottom:13%;font-size:clamp(32px,4.2vw,54px);line-height:1.05;letter-spacing:-.045em;color:#f7eddd;text-shadow:0 12px 40px rgba(0,0,0,.4)}
+body:has(.login-card) .scene-title{color:var(--club-mint);font-size:10px;letter-spacing:.22em}
+body:has(.login-card) .cinematic-figure,body:has(.login-card) .energy,body:has(.login-card) .flash,body:has(.login-card) .impact{display:none!important}
+body:has(.login-card) .scene-glow{position:absolute;width:300px;height:300px;right:8%;bottom:5%;background:#69c3b5;filter:blur(100px);opacity:.14;animation:clubGlow 7s ease-in-out infinite alternate}
+body:has(.login-card) .login-card{max-width:460px;padding:clamp(29px,3.8vw,43px);border:1px solid rgba(226,194,143,.27);border-radius:26px;background:linear-gradient(155deg,rgba(21,34,51,.98),rgba(10,16,27,.98));color:#f4eee4;box-shadow:0 30px 90px rgba(0,0,0,.48);backdrop-filter:blur(22px)}
+body:has(.login-card) .logo{color:var(--club-gold2);font-size:clamp(28px,3vw,36px);letter-spacing:.19em;text-shadow:0 0 35px rgba(205,166,108,.17)}
+body:has(.login-card) .subtitle{color:#aebac4;letter-spacing:.2em;font-size:10px}
+body:has(.login-card) .line{width:76px;height:3px;margin:20px auto 27px;border-radius:99px;background:linear-gradient(90deg,var(--club-mint),var(--club-gold2));box-shadow:0 0 22px rgba(143,200,188,.28)}
+body:has(.login-card) label{color:#c5cdd1;font-size:12px;margin:17px 0 8px}
+body:has(.login-card) input{min-height:52px;padding:14px 16px;border-radius:13px;border:1px solid rgba(183,198,207,.18);background:rgba(4,10,18,.62);color:#fff;font-size:14px}
+body:has(.login-card) input::placeholder{color:#71808e}
+body:has(.login-card) input:focus{border-color:var(--club-mint);box-shadow:0 0 0 3px rgba(143,200,188,.11)}
+body:has(.login-card) button{min-height:53px;margin-top:23px;border-radius:13px;background:linear-gradient(105deg,#c99d62,#f3d7a2);color:#1a1b20;font-size:12px;letter-spacing:.12em;box-shadow:0 14px 35px rgba(205,166,108,.16)}
+body:has(.login-card) .register{color:#aeb8c1;font-size:12px;margin-top:22px}
+body:has(.login-card) .register a{color:var(--club-mint)}
+body:has(.login-card) .back{color:#8d9aa6}
+body:has(.login-card) #message{color:var(--club-mint)}
+
+/* CINEMATIC REGISTRATION */
+body:has(#registerForm){min-height:100svh;padding:18px clamp(14px,4vw,44px) 28px;background:radial-gradient(ellipse at 10% 16%,rgba(22,102,108,.22),transparent 38%),radial-gradient(ellipse at 92% 86%,rgba(92,56,111,.22),transparent 38%),#070b12!important}
+body:has(#registerForm) .topbar{width:min(1120px,100%);margin:auto;padding:8px 0 15px}
+body:has(#registerForm) .topbar .logo{color:var(--club-gold2);font-size:23px;letter-spacing:.2em}
+body:has(#registerForm) .topbar .logo span{color:var(--club-mint)}
+body:has(#registerForm) .topbar a{padding:10px 17px;border:1px solid var(--club-line);border-radius:99px;color:var(--club-mint);background:rgba(255,255,255,.025)}
+body:has(#registerForm) .main{width:min(1120px,100%);margin:22px auto 18px;grid-template-columns:minmax(0,1fr) minmax(340px,470px);gap:clamp(20px,4vw,48px);align-items:center}
+body:has(#registerForm) .visual{min-height:590px;padding:clamp(28px,4vw,48px);border-radius:30px;border:1px solid rgba(205,166,108,.27);background:radial-gradient(ellipse at 75% 25%,rgba(143,200,188,.19),transparent 42%),radial-gradient(ellipse at 15% 90%,rgba(205,166,108,.13),transparent 40%),linear-gradient(145deg,#142b37,#101a29 50%,#20172b);box-shadow:0 35px 100px rgba(0,0,0,.46)}
+body:has(#registerForm) .visual:before{content:"7S";right:5%;top:7%;font-size:clamp(180px,24vw,330px);color:rgba(243,215,162,.15);letter-spacing:-.17em;text-shadow:0 0 80px rgba(205,166,108,.17);animation:clubMarkFloat 8s ease-in-out infinite}
+body:has(#registerForm) .visual:after{content:"PRIVATE COMMUNITY  •  EST. 2026";position:absolute;left:clamp(28px,4vw,48px);top:clamp(28px,4vw,48px);color:var(--club-mint);font-size:9px;letter-spacing:.2em;font-weight:800}
+body:has(#registerForm) .visual .character{display:none!important}
+body:has(#registerForm) .visual h2{font-size:clamp(32px,4.5vw,55px);line-height:1.08;letter-spacing:-.05em;color:#f8efe2;margin-bottom:15px}
+body:has(#registerForm) .visual h2 span{display:block;margin-top:7px;color:var(--club-gold2)}
+body:has(#registerForm) .visual p{color:#b9c4ca;font-size:14px;line-height:2}
+body:has(#registerForm) .card{width:100%;align-self:center;padding:clamp(26px,3.3vw,40px);border:1px solid rgba(226,194,143,.26);border-radius:26px;background:linear-gradient(155deg,rgba(21,34,51,.98),rgba(10,16,27,.98));color:#f4eee4;box-shadow:0 30px 90px rgba(0,0,0,.48);backdrop-filter:blur(22px)}
+body:has(#registerForm) .card h1{color:var(--club-gold2);font-size:clamp(23px,3vw,30px);letter-spacing:.05em}
+body:has(#registerForm) .card h1 span{color:#f2e9d9}
+body:has(#registerForm) .subtitle{color:#aebac4;letter-spacing:.08em}
+body:has(#registerForm) label{color:#c5cdd1;font-size:12px;margin:15px 0 8px}
+body:has(#registerForm) input{min-height:50px;padding:13px 15px;border-radius:12px;border:1px solid rgba(183,198,207,.18);background:rgba(4,10,18,.62);color:#fff;font-size:14px}
+body:has(#registerForm) input::placeholder{color:#71808e}
+body:has(#registerForm) input:focus{border-color:var(--club-mint);box-shadow:0 0 0 3px rgba(143,200,188,.11)}
+body:has(#registerForm) input[type=date]{color-scheme:dark}
+body:has(#registerForm) button{min-height:52px;border-radius:13px;background:linear-gradient(105deg,#c99d62,#f3d7a2);color:#1a1b20;font-size:12px;letter-spacing:.12em;box-shadow:0 14px 35px rgba(205,166,108,.15)}
+body:has(#registerForm) .bottom{color:#aeb8c1}
+body:has(#registerForm) .bottom a{color:var(--club-mint)}
+body:has(#registerForm) #message{color:var(--club-mint)}
+body:has(#registerForm) .footer{color:#7f8b96;letter-spacing:.12em}
+
+/* MEMBER DASHBOARD — premium private-club workspace */
+body:has(#dashboard){min-height:100vh;background:radial-gradient(ellipse at 4% 0%,rgba(24,94,102,.18),transparent 32%),radial-gradient(ellipse at 95% 45%,rgba(86,54,105,.15),transparent 35%),#070b12!important}
+body:has(#dashboard) .topbar{height:76px;padding:0 clamp(16px,4vw,58px);background:rgba(7,11,18,.91);border-bottom:1px solid var(--club-line);box-shadow:0 12px 40px rgba(0,0,0,.2);backdrop-filter:blur(22px)}
+body:has(#dashboard) .brand{color:var(--club-gold2);font-size:21px;letter-spacing:.2em}
+body:has(#dashboard) .brand small{color:var(--club-mint);font-size:8px;letter-spacing:.25em}
+body:has(#dashboard) .top-right{color:#dce0df}
+body:has(#dashboard) .avatar{border:2px solid var(--club-gold2);box-shadow:0 0 0 4px rgba(205,166,108,.08)}
+body:has(#dashboard) .layout{width:min(1500px,100%);max-width:1500px;padding:25px clamp(12px,2.5vw,34px);grid-template-columns:238px minmax(0,1fr) 205px;gap:18px}
+body:has(#dashboard) .panel{border:1px solid rgba(183,198,207,.13);border-radius:21px;background:linear-gradient(150deg,rgba(18,32,49,.96),rgba(9,16,27,.97));box-shadow:0 18px 48px rgba(0,0,0,.24)}
+body:has(#dashboard) .sidebar,body:has(#dashboard) .right{top:92px}
+body:has(#dashboard) .side-profile{padding:10px 0 19px;border-color:var(--club-line)}
+body:has(#dashboard) .side-profile img{width:82px;height:82px;border:2px solid var(--club-gold2);box-shadow:0 0 0 6px rgba(205,166,108,.08),0 10px 28px rgba(0,0,0,.25)}
+body:has(#dashboard) .side-profile h3{color:#f7eddd;font-size:15px}
+body:has(#dashboard) .side-profile p{color:var(--club-mint);font-size:8px;letter-spacing:.2em}
+body:has(#dashboard) .nav-item{margin-top:5px;padding:12px 13px;border-radius:12px;color:#b9c5ce;font-size:11px;letter-spacing:.015em}
+body:has(#dashboard) .nav-item:hover,body:has(#dashboard) .nav-item.active{color:var(--club-gold2);border-color:rgba(205,166,108,.25);background:linear-gradient(100deg,rgba(205,166,108,.13),rgba(143,200,188,.045))}
+body:has(#dashboard) .danger{background:linear-gradient(100deg,#7f354b,#b34c5d);border-radius:12px}
+body:has(#dashboard) .club-hero{min-height:310px;padding:clamp(25px,4vw,48px);margin-bottom:17px;border-radius:28px;border:1px solid rgba(205,166,108,.28);background:radial-gradient(ellipse at 82% 50%,rgba(143,200,188,.2),transparent 35%),linear-gradient(110deg,rgba(8,15,25,.97),rgba(16,39,49,.91) 55%,rgba(34,24,44,.94));box-shadow:0 30px 75px rgba(0,0,0,.3)}
+body:has(#dashboard) .club-hero:after{content:"7S";position:absolute;z-index:0;right:8%;top:50%;transform:translateY(-50%);font-size:clamp(130px,19vw,260px);line-height:.8;letter-spacing:-.17em;font-weight:950;color:rgba(243,215,162,.08);pointer-events:none}
+body:has(#dashboard) .club-copy{max-width:68%}
+body:has(#dashboard) .club-kicker{color:var(--club-mint);font-size:9px;letter-spacing:.23em}
+body:has(#dashboard) .club-copy h1,body:has(#dashboard) .club-copy h2{margin-top:20px;color:#f8efe2;font-size:clamp(27px,3.4vw,45px);line-height:1.28;letter-spacing:-.035em}
+body:has(#dashboard) .club-copy h1 em{color:var(--club-gold2)}
+body:has(#dashboard) .club-copy p{color:#b8c5ca;font-size:13px;line-height:2}
+body:has(#dashboard) .club-cta{margin-top:22px;padding:14px 20px;border-radius:999px;background:linear-gradient(105deg,#c99d62,#f3d7a2);color:#1a1b20;font-size:11px;letter-spacing:.06em;box-shadow:0 12px 30px rgba(205,166,108,.14)}
+body:has(#dashboard) .club-symbol{min-width:clamp(120px,15vw,180px);min-height:clamp(120px,15vw,180px);border:1px solid rgba(243,215,162,.4);border-radius:50%;background:radial-gradient(circle,rgba(205,166,108,.12),rgba(7,11,18,.35) 70%);box-shadow:0 0 0 14px rgba(205,166,108,.035),0 0 70px rgba(143,200,188,.12)}
+body:has(#dashboard) .club-symbol span{color:var(--club-gold2);font-size:clamp(45px,6vw,76px);text-shadow:0 0 35px rgba(205,166,108,.2)}
+body:has(#dashboard) .club-symbol small{color:var(--club-mint);font-size:8px;letter-spacing:.23em}
+body:has(#dashboard) .home-actions{gap:12px;margin-bottom:24px}
+body:has(#dashboard) .home-tile{min-height:130px;padding:18px;border-radius:18px;border:1px solid rgba(183,198,207,.14);background:linear-gradient(145deg,#17283a,#0d1725);box-shadow:0 15px 35px rgba(0,0,0,.16)}
+body:has(#dashboard) .home-tile:hover{border-color:rgba(205,166,108,.42);background:linear-gradient(145deg,#1b3041,#111c2b)}
+body:has(#dashboard) .home-tile span{color:var(--club-gold2);font-size:24px}
+body:has(#dashboard) .home-tile b{color:#f1e9dd;font-size:12px}
+body:has(#dashboard) .home-tile small{color:#9eabb8;font-size:10px}
+body:has(#dashboard) .home-feed-heading{margin:27px 3px 14px}
+body:has(#dashboard) .home-feed-heading span{color:var(--club-mint);font-size:9px;letter-spacing:.22em}
+body:has(#dashboard) .home-feed-heading h2{color:#f5ebde;font-size:clamp(23px,3vw,33px)}
+body:has(#dashboard) .home-feed-heading button{padding:11px 16px;border-radius:999px;border-color:var(--club-line);background:rgba(205,166,108,.08);color:var(--club-gold2)}
+body:has(#dashboard) .welcome{padding:22px;border-radius:20px;border:1px solid var(--club-line);background:linear-gradient(115deg,#142d37,#17243a 60%,#21192d)}
+body:has(#dashboard) .welcome h2{color:#f5ebde}
+body:has(#dashboard) .welcome p,body:has(#dashboard) .muted{color:#9eabb8}
+body:has(#dashboard) .field{border:1px solid rgba(183,198,207,.18);border-radius:13px;background:rgba(4,10,18,.58);color:#fff}
+body:has(#dashboard) .field::placeholder{color:#71808e}
+body:has(#dashboard) .field:focus{border-color:var(--club-mint);box-shadow:0 0 0 3px rgba(143,200,188,.10)}
+body:has(#dashboard) .primary{border-radius:13px;background:linear-gradient(105deg,#c99d62,#f3d7a2);color:#1a1b20;letter-spacing:.04em}
+body:has(#dashboard) .secondary{border:1px solid var(--club-line);border-radius:12px;background:#172638;color:#e9e5dc}
+body:has(#dashboard) .message{color:var(--club-mint)}
+body:has(#dashboard) .info{border:1px solid rgba(183,198,207,.12);border-radius:13px;background:rgba(15,27,42,.8)}
+body:has(#dashboard) .info small{color:var(--club-gold2)}
+body:has(#dashboard) .post{margin-top:15px;padding:18px;border:1px solid rgba(183,198,207,.14);border-radius:22px;background:linear-gradient(150deg,#142338,#0d1725);box-shadow:0 20px 48px rgba(0,0,0,.22);overflow:hidden}
+body:has(#dashboard) .post-head img{border:2px solid rgba(243,215,162,.75)}
+body:has(#dashboard) .post-name{color:#f5eadb;font-size:13px}
+body:has(#dashboard) .post-time{color:#8e9eaa}
+body:has(#dashboard) .post-content{color:#e8e5df;line-height:1.95;font-size:14px}
+body:has(#dashboard) .post-media{max-height:650px;border-radius:16px;background:#03070d;box-shadow:0 12px 35px rgba(0,0,0,.24)}
+body:has(#dashboard) .post video.post-media{max-height:560px}
+body:has(#dashboard) .post-actions{gap:8px;margin-top:14px}
+body:has(#dashboard) .post-actions button{min-height:42px;padding:9px 12px;border-radius:999px;border:1px solid rgba(183,198,207,.15);background:rgba(255,255,255,.025);color:#c9d2d5;font-size:11px;transition:.2s}
+body:has(#dashboard) .post-actions button:hover,body:has(#dashboard) .post-actions button.liked{color:var(--club-gold2);border-color:rgba(205,166,108,.48);background:rgba(205,166,108,.09)}
+body:has(#dashboard) .comment,body:has(#dashboard) .item{border:1px solid rgba(183,198,207,.13);border-radius:14px;background:#111f30;color:#e7e5df}
+body:has(#dashboard) .empty{color:#9eabb8}
+body:has(#dashboard) .profile-cover{border:1px solid var(--club-line);border-radius:18px;background:radial-gradient(circle at 75% 20%,rgba(143,200,188,.22),transparent 40%),linear-gradient(120deg,#142d37,#1b253a,#251b31)}
+body:has(#dashboard) .profile-head img{border:3px solid #132337;box-shadow:0 0 0 2px var(--club-gold)}
+body:has(#dashboard) .chat-member,body:has(#dashboard) .story{border:1px solid rgba(183,198,207,.14);border-radius:14px;background:#111f30;color:#e9e5dc}
+body:has(#dashboard) .chat-bubble{border-radius:16px}
+body:has(#dashboard) .chat-mine{background:#23594f}
+body:has(#dashboard) .chat-theirs{background:#263449}
+body:has(#dashboard) .rule{color:#aab6bf}
+body:has(#dashboard) .right .title{color:var(--club-gold2)}
+body:has(#dashboard) footer{color:#788895}
+
+/* PROFILE, MEMBER DIRECTORY AND ADMIN */
+body:not(:has(#dashboard)):has(#profile),body:not(:has(#dashboard)):has(#members){background:radial-gradient(ellipse at 8% 8%,rgba(24,94,102,.18),transparent 36%),radial-gradient(ellipse at 95% 90%,rgba(86,54,105,.16),transparent 38%),#070b12!important}
+body:not(:has(#dashboard)):has(#profile)>header,body:not(:has(#dashboard)):has(#members)>header{padding:25px 18px;background:rgba(7,11,18,.9);border-bottom:1px solid var(--club-line);backdrop-filter:blur(20px)}
+body:not(:has(#dashboard)):has(#profile)>header h2,body:not(:has(#dashboard)):has(#members)>header h2{color:var(--club-gold2);letter-spacing:.2em}
+body:not(:has(#dashboard)):has(#profile)>header p,body:not(:has(#dashboard)):has(#members)>header p{color:var(--club-mint);letter-spacing:.2em}
+body:not(:has(#dashboard)):has(#profile) main,body:not(:has(#dashboard)):has(#members) main{width:min(1050px,100%);padding:25px}
+body:not(:has(#dashboard)):has(#profile) main>div:first-child,body:not(:has(#dashboard)):has(#members) .top-buttons{gap:10px}
+body:not(:has(#dashboard)):has(#profile) button,body:not(:has(#dashboard)):has(#members) button{border:1px solid var(--club-line);border-radius:999px;background:#142337;color:var(--club-gold2);padding:12px 18px}
+body:not(:has(#dashboard)):has(#profile) .profile,body:not(:has(#dashboard)):has(#members) .grid>*,body:not(:has(#dashboard)):has(#members) .card{border:1px solid var(--club-line);border-radius:21px;background:linear-gradient(145deg,#17283a,#0e1827);box-shadow:var(--club-shadow)}
+body:not(:has(#dashboard)):has(#profile) #name{color:#f5eadb}
+body:not(:has(#dashboard)):has(#profile) .designation{color:var(--club-mint)}
+body:not(:has(#dashboard)):has(#profile) #message,body:not(:has(#dashboard)):has(#members) #message{color:var(--club-mint)}
+body:not(:has(#dashboard)):has(#profile) main>h3,body:not(:has(#dashboard)):has(#members) h3{color:var(--club-gold2)}
+body:has(#adminEmail){background:radial-gradient(ellipse at 8% 10%,rgba(24,94,102,.17),transparent 36%),#070b12!important}
+body:has(#adminEmail)>header,body:has(#adminEmail) .panel{border:1px solid var(--club-line);border-radius:21px;background:linear-gradient(145deg,#17283a,#0e1827);box-shadow:var(--club-shadow)}
+body:has(#adminEmail) h1,body:has(#adminEmail) h2{color:var(--club-gold2)}
+body:has(#adminEmail) .stat{border:1px solid var(--club-line);border-radius:17px;background:#142337}
+body:has(#adminEmail) .stat strong{color:var(--club-gold2)}
+body:has(#adminEmail) button{border-radius:11px;background:linear-gradient(105deg,#c99d62,#f3d7a2);color:#1a1b20}
+body:has(#adminEmail) .logout{background:linear-gradient(100deg,#7f354b,#b34c5d);color:#fff}
+body:has(.note):not(:has(#registerForm)){background:radial-gradient(ellipse at 8% 10%,rgba(24,94,102,.17),transparent 36%),#070b12!important}
+body:has(.note):not(:has(#registerForm)) header,body:has(.note):not(:has(#registerForm)) .card{border:1px solid var(--club-line);border-radius:20px;background:linear-gradient(145deg,#17283a,#0e1827);box-shadow:var(--club-shadow)}
+body:has(.note):not(:has(#registerForm)) header h1,body:has(.note):not(:has(#registerForm)) .card h2{color:var(--club-gold2)}
+body:has(.note):not(:has(#registerForm)) header p{color:var(--club-mint)}
+body:has(.note):not(:has(#registerForm)) .card p{color:#aeb9c2}
+body:has(.note):not(:has(#registerForm)) button,body:has(.note):not(:has(#registerForm)) select{border:1px solid var(--club-line);border-radius:11px;background:#142337;color:#e9e5dc}
+body:has(.note):not(:has(#registerForm)) a{color:var(--club-mint)}
+
+/* SECONDARY LEGACY HOME */
+body:has(#memberList):not(:has(#dashboard)){background:radial-gradient(ellipse at 8% 10%,rgba(24,94,102,.17),transparent 36%),#070b12!important}
+body:has(#memberList):not(:has(#dashboard)) header{padding:25px 18px;background:rgba(7,11,18,.92);border-bottom:1px solid var(--club-line)}
+body:has(#memberList):not(:has(#dashboard)) .logo{color:var(--club-gold2);letter-spacing:.2em}
+body:has(#memberList):not(:has(#dashboard)) header p{color:var(--club-mint)}
+body:has(#memberList):not(:has(#dashboard)) nav a{border:1px solid var(--club-line);border-radius:999px;background:#142337;color:#e9e5dc}
+body:has(#memberList):not(:has(#dashboard)) .hero{padding:85px 22px;background:radial-gradient(ellipse at 80% 30%,rgba(205,166,108,.17),transparent 38%),linear-gradient(120deg,#102b35,#111a2b 60%,#21172b)}
+body:has(#memberList):not(:has(#dashboard)) .hero h1{color:#f5eadb}
+body:has(#memberList):not(:has(#dashboard)) .hero p{color:#b8c4cb;line-height:2}
+body:has(#memberList):not(:has(#dashboard)) .container{border:1px solid var(--club-line);border-radius:22px;background:linear-gradient(145deg,#17283a,#0e1827);box-shadow:var(--club-shadow)}
+body:has(#memberList):not(:has(#dashboard)) .heading{color:var(--club-gold2)}
+body:has(#memberList):not(:has(#dashboard)) .card{border:1px solid var(--club-line);border-radius:16px;background:#101e2e}
+body:has(#memberList):not(:has(#dashboard)) .muted{color:#aeb9c2}
+
+/* Restrained cinematic motion */
+@keyframes clubMarkFloat{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(calc(-50% - 10px)) scale(1.015)}}
+@keyframes clubGlow{from{opacity:.09;transform:scale(.92)}to{opacity:.19;transform:scale(1.08)}}
+
+/* RESPONSIVE — designed for phones first */
+@media(max-width:980px){
+ body:has(#dashboard) .layout{grid-template-columns:205px minmax(0,1fr);gap:13px}
+ body:has(#dashboard) .right{display:none}
+ body:has(.login-card) .page,body:has(#registerForm) .main{grid-template-columns:1fr;max-width:620px}
+ body:has(.login-card) .scene,body:has(#registerForm) .visual{min-height:230px}
+ body:has(.login-card) .scene:after{font-size:35px}
+}
+@media(max-width:680px){
+ body:has(#navigation)>header{min-height:65px;padding:10px 16px}
+ body:has(#navigation) nav{display:none;position:absolute;top:64px;left:12px;right:12px;padding:13px;flex-direction:column;gap:5px;border:1px solid var(--club-line);border-radius:17px;background:rgba(13,23,37,.98);box-shadow:var(--club-shadow)}
+ body:has(#navigation) nav.open{display:flex}
+ body:has(#navigation) nav a{width:100%;padding:12px;border-bottom:0}
+ body:has(#navigation) .hero{min-height:600px;padding:76px 22px}
+ body:has(#navigation) .hero:before{right:-9%;font-size:260px}
+ body:has(#navigation) .hero:after{right:-9%;top:14%;width:190px}
+ body:has(#navigation) .hero h1{font-size:clamp(43px,12vw,66px)}
+ body:has(#navigation) .buttons{gap:8px}
+ body:has(#navigation) .btn{min-height:45px;padding:12px 15px;font-size:9px}
+ body:has(#navigation) .cards{grid-template-columns:1fr}
+ body:has(#navigation) .section{padding:52px 17px}
+ body:has(#navigation) .card{min-height:0;padding:23px}
+ body:has(.login-card){min-height:100svh;padding:24px 15px 32px;align-items:center}
+ body:has(.login-card) .page{display:flex;flex-direction:column;gap:14px;width:100%;max-width:480px;margin:auto}
+ body:has(.login-card) .scene{width:100%;height:190px;min-height:190px;padding:17px;border-radius:22px}
+ body:has(.login-card) .scene:before{top:3%;right:8%;font-size:130px}
+ body:has(.login-card) .scene:after{left:7%;bottom:17%;font-size:clamp(27px,7vw,36px)}
+ body:has(.login-card) .scene-title{font-size:8px;letter-spacing:.16em}
+ body:has(.login-card) .login-card{max-width:none;padding:27px 21px;border-radius:22px}
+ body:has(#registerForm){padding:12px 14px 26px}
+ body:has(#registerForm) .topbar{padding:7px 2px}
+ body:has(#registerForm) .main{display:flex;flex-direction:column;gap:14px;margin:14px auto}
+ body:has(#registerForm) .visual{min-height:205px;padding:22px;border-radius:22px}
+ body:has(#registerForm) .visual:before{font-size:135px;top:5%;right:6%}
+ body:has(#registerForm) .visual:after{left:22px;top:22px;font-size:8px}
+ body:has(#registerForm) .visual h2{font-size:30px;margin-bottom:9px}
+ body:has(#registerForm) .visual p{font-size:12px;line-height:1.8}
+ body:has(#registerForm) .card{padding:25px 20px;border-radius:22px}
+ body:has(#dashboard) .topbar{height:64px;padding:0 14px}
+ body:has(#dashboard) .brand{font-size:17px}
+ body:has(#dashboard) .brand small{font-size:7px}
+ body:has(#dashboard) .avatar{width:36px;height:36px}
+ body:has(#dashboard) .layout{display:block;width:100%;max-width:none;margin:0;padding:13px 12px calc(100px + env(safe-area-inset-bottom))}
+ body:has(#dashboard) .sidebar,body:has(#dashboard) .right{display:none!important}
+ body:has(#dashboard) .main{display:block;width:100%;max-width:none;min-width:0}
+ body:has(#dashboard) .panel{width:100%;padding:15px;margin:0 0 12px;border-radius:18px}
+ body:has(#dashboard) .club-hero{min-height:260px;padding:24px 19px;border-radius:23px;align-items:flex-end}
+ body:has(#dashboard) .club-copy{max-width:100%}
+ body:has(#dashboard) .club-kicker{font-size:8px}
+ body:has(#dashboard) .club-copy h1{font-size:clamp(26px,7vw,34px);max-width:90%}
+ body:has(#dashboard) .club-copy p{font-size:12px;max-width:250px}
+ body:has(#dashboard) .club-hero:after{right:7%;top:24%;font-size:125px}
+ body:has(#dashboard) .club-symbol{position:absolute;right:18px;top:60px;min-width:74px;min-height:74px;box-shadow:0 0 0 8px rgba(205,166,108,.04)}
+ body:has(#dashboard) .club-symbol span{font-size:33px}
+ body:has(#dashboard) .club-symbol small{font-size:6px}
+ body:has(#dashboard) .club-cta{padding:12px 16px;font-size:10px}
+ body:has(#dashboard) .home-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:20px}
+ body:has(#dashboard) .home-tile{min-height:112px;padding:13px 9px;border-radius:15px}
+ body:has(#dashboard) .home-tile span{font-size:20px}
+ body:has(#dashboard) .home-tile b{font-size:10px;line-height:1.45}
+ body:has(#dashboard) .home-tile small{font-size:9px;line-height:1.45}
+ body:has(#dashboard) .home-feed-heading{margin:22px 2px 11px}
+ body:has(#dashboard) .home-feed-heading span{font-size:8px}
+ body:has(#dashboard) .home-feed-heading h2{font-size:22px}
+ body:has(#dashboard) .home-feed-heading button{padding:9px 11px;font-size:9px}
+ body:has(#dashboard) .post{padding:14px;margin-top:12px;border-radius:18px}
+ body:has(#dashboard) .post-media{max-height:62vh}
+ body:has(#dashboard) .post video.post-media{max-height:58vh}
+ body:has(#dashboard) .post-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ body:has(#dashboard) .post-actions button{min-height:40px;padding:8px 2px;font-size:10px}
+ body:has(#dashboard) .info-grid{grid-template-columns:1fr 1fr}
+ body:has(#dashboard) .mobile-nav{position:fixed;left:9px;right:9px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:100;display:flex!important;align-items:stretch;justify-content:space-around;gap:3px;padding:7px 5px;border:1px solid rgba(205,166,108,.25);border-radius:20px;background:rgba(8,14,23,.96);backdrop-filter:blur(22px);box-shadow:0 14px 42px rgba(0,0,0,.55)}
+ body:has(#dashboard) .mobile-nav button{display:block;flex:1 0 0;min-width:0;padding:6px 1px;border:0;border-radius:13px;background:transparent;color:#9eabb8;font-size:9px;line-height:1.25}
+ body:has(#dashboard) .mobile-nav button span{display:block;font-size:18px;margin-bottom:3px}
+ body:has(#dashboard) .mobile-nav button.active{color:var(--club-gold2);background:rgba(205,166,108,.12)}
+ body:has(#dashboard) .mobile-nav button[data-view="friends"],body:has(#dashboard) .mobile-nav button[data-view="members"]{display:none}
+ body:has(#dashboard) footer{padding-bottom:110px}
+ body:not(:has(#dashboard)):has(#profile) main,body:not(:has(#dashboard)):has(#members) main{padding:15px}
+ body:has(#adminEmail) .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ body:has(#adminEmail) .stat{padding:13px 6px}
+ body:has(#adminEmail) .stat strong{font-size:22px}
+}
+@media(max-width:390px){
+ body:has(#dashboard) .club-hero{min-height:245px}
+ body:has(#dashboard) .club-symbol{min-width:65px;min-height:65px}
+ body:has(#dashboard) .club-symbol span{font-size:28px}
+ body:has(#dashboard) .home-tile{padding:10px 6px}
+ body:has(#dashboard) .home-tile b{font-size:9px}
+ body:has(#dashboard) .post{padding:12px}
+ body:has(#dashboard) .post-actions button{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
