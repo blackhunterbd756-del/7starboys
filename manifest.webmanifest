@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "7STARBOYS Official Community",
+  "short_name": "7STARBOYS",
+  "description": "7STARBOYS Official Community",
+  "lang": "bn",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080511",
+  "theme_color": "#080511",
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
