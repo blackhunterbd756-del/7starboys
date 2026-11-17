@@ -123,7 +123,7 @@ body{background:radial-gradient(ellipse at 12% 0%,rgba(35,113,140,.2),transparen
 .mobile-nav button{color:#a8b7ca}
 .mobile-nav button.active{color:#f0d28b}
 @media(max-width:1100px){.layout{grid-template-columns:230px minmax(0,1fr)}.right{display:none}}
-@media(max-width:900px){
+@media(max-width:1100px){
  .topbar{height:60px;padding:0 14px}
  .layout{display:block;padding:12px 12px 92px;max-width:720px}
  .sidebar,.right{display:none!important}
@@ -136,7 +136,7 @@ body{background:radial-gradient(ellipse at 12% 0%,rgba(35,113,140,.2),transparen
  .post-media{max-height:62vh}
  .post-actions{gap:6px}
  .post-actions button{min-height:42px;font-size:12px}
- .mobile-nav{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));border:1px solid rgba(230,201,130,.22);border-radius:17px;padding:8px 3px;box-shadow:0 12px 35px #0008}
+ .mobile-nav{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:100;display:flex!important;justify-content:space-around;gap:2px;overflow-x:auto;white-space:nowrap;border:1px solid rgba(230,201,130,.22);border-radius:17px;padding:8px 3px;box-shadow:0 12px 35px #0008}.mobile-nav button{flex:1 0 58px;min-width:58px;padding:4px 1px}
  .mobile-nav button{font-size:10px}
  .mobile-nav span{font-size:19px}
  footer{padding-bottom:105px}
