@@ -125,3 +125,36 @@ body:has(.stats) button{border-radius:10px!important}
  .club-hero:after{right:0;opacity:.7}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* FINAL ROYAL CINEMATIC POLISH — 17 NOV 2026 */
+:root{--royal-gold:#e8c77b;--royal-gold2:#fff0c5;--royal-purple:#a855f7}
+body{background-color:#07040d!important}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22;background:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.22),transparent 55%),linear-gradient(115deg,transparent 0 48%,rgba(255,230,180,.025) 49%,transparent 50% 100%);mix-blend-mode:screen}
+body>*{position:relative;z-index:1}
+.hero{min-height:min(780px,88svh)!important}
+.hero-content{max-width:940px!important}
+.hero h1{font-size:clamp(42px,8.5vw,92px)!important;line-height:1.08!important;letter-spacing:.045em!important}
+.hero h1 span{background:linear-gradient(100deg,#fff2c9 5%,#d9a84d 42%,#b77aff 75%,#fff0c5);-webkit-background-clip:text;background-clip:text;color:transparent!important;filter:drop-shadow(0 0 22px rgba(175,105,255,.28))}
+.tag{border-color:rgba(255,226,166,.48)!important;background:rgba(26,13,39,.7)!important;box-shadow:0 0 28px rgba(168,85,247,.17),inset 0 0 18px rgba(255,226,166,.06)!important}
+.hero p{font-size:clamp(15px,1.6vw,18px)!important;color:#e0d5e9!important}
+.orb.one{background:#9b4dff!important;opacity:.26!important}.orb.two{background:#e7b95f!important;opacity:.18!important}
+.card,.login-card,.panel,.sidebar,.main,.view,.profile,.join{backdrop-filter:blur(20px)!important}
+.card{position:relative;overflow:hidden}
+.card:before,.login-card:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,233,184,.75),rgba(168,85,247,.6),transparent);pointer-events:none}
+.btn{font-weight:800!important;letter-spacing:.035em!important}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #f4d58f!important;outline-offset:3px}
+body:has(.page){background:radial-gradient(ellipse at 18% 22%,rgba(112,42,160,.34),transparent 42%),radial-gradient(ellipse at 82% 75%,rgba(221,174,91,.13),transparent 35%),#07040d!important}
+.page{max-width:1240px!important}
+.scene{border:1px solid rgba(238,204,130,.35)!important;background:radial-gradient(ellipse at 50% 42%,rgba(147,67,208,.34),transparent 52%),linear-gradient(145deg,#1b0d2b,#090510 72%)!important;box-shadow:0 28px 90px rgba(0,0,0,.65),inset 0 0 80px rgba(151,75,220,.12)!important}
+.scene:before{content:"♛"!important;color:rgba(255,226,166,.16)!important;font-size:clamp(260px,38vw,500px)!important;text-shadow:0 0 75px rgba(168,85,247,.35)!important}
+.scene:after{content:"7STARBOYS" counter(none)!important;color:#ffedc0!important;text-shadow:0 0 28px rgba(231,185,95,.5)!important;letter-spacing:.2em!important}
+.scene-title{color:#f8dfaa!important}
+.login-card{position:relative!important;overflow:hidden!important}
+.login-card .logo{font-family:Cinzel,Georgia,serif!important;color:#ffedc0!important}
+.login-card button{background:linear-gradient(105deg,#6d28a5,#9b4dff 55%,#d6a64f)!important;color:#fff!important}
+.topbar{box-shadow:0 10px 40px rgba(0,0,0,.32)!important}
+nav a:hover,.register a:hover{color:#fff0c5!important;text-shadow:0 0 16px rgba(231,185,95,.55)}
+footer{border-color:rgba(232,199,123,.22)!important;color:#bcaec8!important}
+@media(max-width:800px){.hero{min-height:670px!important}.hero h1{font-size:clamp(36px,10vw,58px)!important}.scene{min-height:220px!important}.page{gap:18px!important}}
+@media(max-width:640px){body:has(.page){padding:12px!important}.hero:after{inset:7px}.buttons{gap:11px!important}.btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center}.join{padding:38px 18px!important}}
