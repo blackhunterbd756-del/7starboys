@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - ".github/workflows/build-android-apk.yml"
+      - "app-icon.svg"
 
 permissions:
   contents: read
