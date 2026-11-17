@@ -189,9 +189,18 @@ document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>showView(b.dat
 document.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>showView(b.dataset.jump));
 
 async function uploadFile(file){
- const f=new FormData();f.append("file",file);f.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
- const r=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,{method:"POST",body:f});
- const d=await r.json();if(!r.ok)throw Error(d.error?.message||"Upload failed");return d.secure_url;
+ if(!file)throw Error("ফাইল নির্বাচন করুন");
+ const allowed=["image/jpeg","image/png","image/webp","image/gif","video/mp4","video/quicktime","video/webm"];
+ if(!allowed.includes(file.type))throw Error("শুধু JPG, PNG, WEBP, GIF, MP4, MOV বা WEBM ফাইল আপলোড করা যাবে");
+ if(file.size>25*1024*1024)throw Error("ফাইল ২৫ MB-এর বেশি হতে পারবে না");
+ const form=new FormData();
+ form.append("file",file);
+ form.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
+ const response=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,{method:"POST",body:form});
+ const data=await response.json();
+ if(!response.ok)throw Error(data.error?.message||"আপলোড ব্যর্থ হয়েছে");
+ if(!data.secure_url||!/^https:\/\//i.test(data.secure_url))throw Error("নিরাপদ মিডিয়া URL পাওয়া যায়নি");
+ return data.secure_url;
 }
 function renderProfile(){
  const n=safeName(memberData),role=memberData.designation||"Member",photo=profilePhoto(memberData);
