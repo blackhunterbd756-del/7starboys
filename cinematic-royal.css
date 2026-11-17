@@ -271,3 +271,22 @@ input:focus,textarea:focus,select:focus{transform:translateZ(5px);box-shadow:0 0
 @keyframes introGridMove{to{background-position:0 76px,76px 0}}
 @media(max-width:600px){.seven-intro{height:220px;margin-bottom:8px}.shooter{transform:scale(.72);transform-origin:left bottom;left:1%;bottom:9%}.intro-title{font-size:clamp(25px,7vw,43px);letter-spacing:.06em}.intro-subtitle{font-size:9px;letter-spacing:.3em;top:72%}.bullet-trail{top:38%}}
 @media(prefers-reduced-motion:reduce){.seven-intro *{animation:none!important}.intro-title{opacity:1!important;transform:translate(-50%,-50%)!important}.intro-subtitle{opacity:1!important}}
+
+
+/* === VISIBILITY FIX: SHOOTER INTRO === */
+.seven-intro{
+ position:relative!important;z-index:3!important;display:block!important;
+ flex:0 0 auto!important;width:min(920px,94vw)!important;
+ height:clamp(260px,38vw,390px)!important;min-height:260px!important;
+ margin:0 auto 24px!important;overflow:hidden!important;opacity:1!important;visibility:visible!important;
+}
+.seven-intro .shooter{z-index:4!important;opacity:1!important;visibility:visible!important}
+.seven-intro .intro-title{z-index:5!important;animation:titleBlast 5s cubic-bezier(.16,.8,.25,1) infinite!important}
+@keyframes titleBlast{
+ 0%,28%{opacity:0;transform:translate(-50%,-50%) rotateX(65deg) scale(.2);filter:blur(10px)}
+ 36%{opacity:1;transform:translate(-50%,-50%) rotateX(0) scale(1.12);filter:blur(0)}
+ 43%,100%{opacity:1;transform:translate(-50%,-50%) rotateX(0) scale(1);filter:drop-shadow(0 0 28px #b77aff)}
+}
+@media(max-width:600px){
+ .seven-intro{height:250px!important;min-height:250px!important;margin-bottom:12px!important}
+}
