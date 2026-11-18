@@ -64,3 +64,13 @@ footer{color:#9eacbc!important;border-color:var(--sb-line)!important}
 @media(max-width:800px){.auth-shooter{height:clamp(205px,58vw,250px)!important}.as-person{transform:scale(.72);transform-origin:left bottom;left:1%;bottom:7%}.as-title{font-size:clamp(24px,7vw,42px)!important;letter-spacing:.045em!important}.as-tagline{font-size:8px!important;letter-spacing:.25em!important;top:72%!important}}
 @media(max-width:390px){.as-person{transform:scale(.58);left:0}.as-title{font-size:23px!important}.as-tagline{font-size:7px!important}}
 @media(prefers-reduced-motion:reduce){.auth-shooter *{animation:none!important}.as-title,.as-tagline{opacity:1!important;filter:none!important;transform:translate(-50%,-50%)!important}.as-tagline{transform:translate(-50%,0)!important}}
+
+/* Restore the requested reveal animation after older emergency visibility overrides. */
+body:has(.login-card) .auth-shooter .as-title,
+body:has(#registerForm) .auth-shooter .as-title{opacity:0!important;visibility:visible!important;animation:asTitle 5s cubic-bezier(.16,.8,.25,1) infinite!important;transform:translate(-50%,-50%) rotateX(65deg) scale(.2)!important}
+body:has(.login-card) .auth-shooter .as-tagline,
+body:has(#registerForm) .auth-shooter .as-tagline{opacity:0!important;visibility:visible!important;animation:asTag 5s ease infinite!important;transform:translate(-50%,15px)!important}
+@media(prefers-reduced-motion:reduce){
+ body:has(.login-card) .auth-shooter .as-title,body:has(#registerForm) .auth-shooter .as-title{opacity:1!important;animation:none!important;transform:translate(-50%,-50%)!important}
+ body:has(.login-card) .auth-shooter .as-tagline,body:has(#registerForm) .auth-shooter .as-tagline{opacity:1!important;animation:none!important;transform:translate(-50%,0)!important}
+}
