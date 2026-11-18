@@ -98,3 +98,50 @@ body{font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif!im
  }
  body:has(#dashboard) #dashboard{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
 }
+
+
+/* 7STARBOYS — visible dashboard layout redesign, Nov 2026 */
+@media(min-width:1101px){
+ body:has(#dashboard) .layout{max-width:1500px!important;grid-template-columns:250px minmax(0,1fr) 220px!important;gap:22px!important;padding:28px!important}
+ body:has(#dashboard) .sidebar,body:has(#dashboard) .right{border-radius:22px!important;padding:20px!important}
+ body:has(#dashboard) .main{min-width:0!important}
+ body:has(#dashboard) .club-hero{min-height:310px!important;padding:42px!important;border-radius:28px!important}
+ body:has(#dashboard) .club-symbol{width:170px;height:170px;border:1px solid #e8bd6866;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle,#e8bd6822,transparent 68%);font-size:54px}
+ body:has(#dashboard) .home-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;margin:18px 0 26px!important}
+ body:has(#dashboard) .home-tile{min-height:135px!important;padding:22px!important;border-radius:20px!important;text-align:left!important}
+}
+body:has(#dashboard) .club-hero{isolation:isolate!important;box-shadow:0 22px 60px #0005,inset 0 1px #ffffff12!important}
+body:has(#dashboard) .club-copy h1{font-size:clamp(30px,4vw,48px)!important;line-height:1.2!important}
+body:has(#dashboard) .club-kicker{display:inline-flex!important;padding:7px 11px!important;border:1px solid #e8bd6844!important;border-radius:99px!important;background:#e8bd6810!important}
+body:has(#dashboard) .home-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin:14px 0 22px!important}
+body:has(#dashboard) .home-tile{min-width:0!important;min-height:112px!important;padding:15px!important;border:1px solid #e8bd6838!important;border-radius:17px!important;background:linear-gradient(145deg,#142d45,#091827)!important}
+body:has(#dashboard) .home-tile>span{display:block!important;font-size:24px!important;margin-bottom:10px!important;color:#ffe7ad!important}
+body:has(#dashboard) .home-tile b{display:block!important;font-size:13px!important;color:#fff0c5!important}
+body:has(#dashboard) .home-tile small{display:block!important;margin-top:5px!important;color:#9eacbc!important;font-size:10px!important}
+body:has(#dashboard) .home-feed-heading{display:flex!important;align-items:end!important;justify-content:space-between!important;gap:12px!important;padding:12px 2px!important;border-bottom:1px solid #e8bd6833!important}
+body:has(#dashboard) .home-feed-heading span{font-size:9px!important;letter-spacing:.2em!important;color:#d6b56f!important}
+body:has(#dashboard) .home-feed-heading h2{font-size:21px!important;color:#fff0c5!important;margin-top:5px!important}
+body:has(#dashboard) .home-feed-heading button{background:#e8bd6814!important;border:1px solid #e8bd6844!important;color:#ffe7ad!important;padding:9px 12px!important;border-radius:10px!important}
+body:has(#dashboard) .post{border-radius:19px!important;padding:17px!important}
+body:has(#dashboard) .panel{border-radius:20px!important}
+body:has(#dashboard) .mobile-nav{position:fixed!important;inset:auto 10px calc(8px + env(safe-area-inset-bottom)) 10px!important;z-index:2147483000!important;display:flex!important;visibility:visible!important;opacity:1!important;transform:none!important;max-width:720px!important;width:auto!important;margin-inline:auto!important;contain:layout paint!important}
+@media(max-width:1100px){
+ body:has(#dashboard) .layout{padding:12px 12px calc(130px + env(safe-area-inset-bottom))!important}
+ body:has(#dashboard) .club-hero{min-height:245px!important;padding:23px 18px!important;border-radius:21px!important}
+ body:has(#dashboard) .club-copy{max-width:100%!important}
+ body:has(#dashboard) .club-copy h1{font-size:clamp(27px,7vw,36px)!important}
+ body:has(#dashboard) .club-symbol{min-width:76px!important;min-height:76px!important;font-size:30px!important;opacity:.85}
+ body:has(#dashboard) .home-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ body:has(#dashboard) .home-tile{min-height:105px!important;padding:11px 8px!important}
+ body:has(#dashboard) .home-tile>span{font-size:20px!important}
+ body:has(#dashboard) .home-tile b{font-size:11px!important}
+ body:has(#dashboard) .home-tile small{font-size:9px!important;line-height:1.4!important}
+ body:has(#dashboard) .mobile-nav{padding:8px 4px!important;min-height:62px!important;border-radius:17px!important}
+ body:has(#dashboard) .mobile-nav button{display:block!important;flex:1 1 0!important;min-width:0!important;padding:5px 1px!important;font-size:10px!important}
+ body:has(#dashboard) .mobile-nav button[data-view="friends"],body:has(#dashboard) .mobile-nav button[data-view="members"]{display:none!important}
+}
+@media(max-width:390px){
+ body:has(#dashboard) .club-symbol{display:none!important}
+ body:has(#dashboard) .home-tile{padding:9px 5px!important}
+ body:has(#dashboard) .home-tile small{display:none!important}
+}
