@@ -145,3 +145,61 @@ body:has(#dashboard) .mobile-nav{position:fixed!important;inset:auto 10px calc(8
  body:has(#dashboard) .home-tile{padding:9px 5px!important}
  body:has(#dashboard) .home-tile small{display:none!important}
 }
+
+
+/* Accessibility and fixed mobile dock correction — 7STARBOYS */
+:root{--sb-text:#f5f7fb;--sb-muted:#c0ccda}
+body:has(#dashboard){color:#f5f7fb!important}
+body:has(#dashboard) .muted,
+body:has(#dashboard) .welcome p,
+body:has(#dashboard) .club-copy p,
+body:has(#dashboard) .home-tile small,
+body:has(#dashboard) .post-time,
+body:has(#dashboard) .rule,
+body:has(#dashboard) .side-profile p,
+body:has(#dashboard) .empty,
+body:has(#dashboard) label,
+body:has(#dashboard) .message{color:#c5d0de!important}
+body:has(#dashboard) .post-content,
+body:has(#dashboard) .post-name,
+body:has(#dashboard) .info p,
+body:has(#dashboard) .item,
+body:has(#dashboard) .comment,
+body:has(#dashboard) .chat-member,
+body:has(#dashboard) .chat-bubble,
+body:has(#dashboard) .field,
+body:has(#dashboard) input,
+body:has(#dashboard) textarea,
+body:has(#dashboard) select{color:#f5f7fb!important}
+body:has(#dashboard) .title,
+body:has(#dashboard) h1,
+body:has(#dashboard) h2,
+body:has(#dashboard) h3,
+body:has(#dashboard) h4{color:#ffe7ad!important}
+@media(max-width:1100px){
+ body:has(#dashboard) .mobile-nav{
+  position:fixed!important;
+  inset:auto 10px calc(8px + env(safe-area-inset-bottom)) 10px!important;
+  display:flex!important;visibility:visible!important;opacity:1!important;
+  z-index:2147483647!important;transform:none!important;
+  width:auto!important;max-width:720px!important;
+  margin:0 auto!important;overflow:visible!important;
+  background:#071525!important;border:1px solid #e8bd6870!important;
+  box-shadow:0 8px 28px #000b!important;
+ }
+ body:has(#dashboard) .mobile-nav button{
+  display:flex!important;flex:1 1 0!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  min-width:0!important;min-height:48px!important;
+  color:#f0f4fa!important;font-size:10px!important;
+  white-space:nowrap!important;opacity:1!important;
+ }
+ body:has(#dashboard) .mobile-nav button[data-view="friends"],
+ body:has(#dashboard) .mobile-nav button[data-view="members"]{display:none!important}
+ body:has(#dashboard) #dashboard{padding-bottom:calc(120px + env(safe-area-inset-bottom))!important}
+}
+@media(min-width:1101px){
+ body:has(#dashboard) .layout{grid-template-columns:250px minmax(0,1fr) 220px!important}
+ body:has(#dashboard) .nav-item{color:#f0f4fa!important}
+ body:has(#dashboard) .right .rule{color:#d4deea!important}
+}
