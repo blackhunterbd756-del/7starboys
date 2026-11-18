@@ -1,5 +1,4 @@
 /* 7STARBOYS — unified navy & gold visual refresh. Presentation only; app logic is untouched. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
 :root{--sb-bg:#07111f;--sb-bg2:#0b1b2d;--sb-panel:#10243a;--sb-panel2:#142c45;--sb-gold:#e8bd68;--sb-gold2:#ffe7ad;--sb-ink:#101a28;--sb-text:#f7f5ef;--sb-muted:#b9c4d1;--sb-line:rgba(232,189,104,.24);--sb-shadow:0 22px 60px rgba(0,0,0,.34);color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--sb-bg)}
@@ -74,3 +73,17 @@ body:has(#registerForm) .auth-shooter .as-tagline{opacity:0!important;visibility
  body:has(.login-card) .auth-shooter .as-title,body:has(#registerForm) .auth-shooter .as-title{opacity:1!important;animation:none!important;transform:translate(-50%,-50%)!important}
  body:has(.login-card) .auth-shooter .as-tagline,body:has(#registerForm) .auth-shooter .as-tagline{opacity:1!important;animation:none!important;transform:translate(-50%,0)!important}
 }
+
+
+/* Mobile performance safeguards: trim costly decorative effects. */
+@media(max-width:768px){
+ html{scroll-behavior:auto!important}
+ body{background:#081522!important}
+ body:before{filter:none!important}
+ .orb,.scene-glow{filter:none!important;animation:none!important;opacity:.06!important}
+ header,.topbar,.mobile-nav,.login-card,.card,.panel,.post,.auth-shooter{backdrop-filter:none!important}
+ .card:hover,.btn:hover,button:hover{transform:none!important}
+ .panel,.post,.item,.chat-member,.story,.card,.join{box-shadow:0 6px 18px #0003!important}
+ img,video{filter:none!important}
+}
+body{font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif!important}
