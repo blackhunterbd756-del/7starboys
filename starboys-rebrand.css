@@ -203,3 +203,26 @@ body:has(#dashboard) h4{color:#ffe7ad!important}
  body:has(#dashboard) .nav-item{color:#f0f4fa!important}
  body:has(#dashboard) .right .rule{color:#d4deea!important}
 }
+
+
+/* MOBILE PERFORMANCE: retain the visual style, reduce costly GPU effects on small screens */
+@media (max-width: 760px){
+ html{scroll-behavior:auto!important}
+ body{background-attachment:scroll!important}
+ body:before,body:after{background-attachment:scroll!important}
+ header,nav,.topbar,.panel,.card,.post,.modal,.dropdown,.mobile-nav{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ }
+ .seven-intro,.auth-shooter,.shooter,.bullet-trail,.intro-title{
+  animation-duration:7s!important;animation-timing-function:linear!important;
+ }
+ .seven-intro .intro-title{animation:none!important;opacity:1!important;transform:translate(-50%,-50%)!important;filter:none!important;text-shadow:0 2px 12px #000!important}
+ .seven-intro .shooter,.seven-intro .bullet-trail{animation:none!important;filter:none!important}
+ .seven-intro{box-shadow:none!important}
+ *{text-shadow:none!important}
+ .card,.panel,.post,.home-tile,.welcome,.club-card{box-shadow:0 5px 16px #0005!important}
+}
+@media (max-width: 420px){
+ .seven-intro{min-height:190px!important;height:190px!important}
+ .seven-intro .shooter{transform:scale(.72)!important;transform-origin:left bottom!important}
+}
