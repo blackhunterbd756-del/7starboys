@@ -78,6 +78,34 @@ footer{padding-bottom:100px}
  body:has(#dashboard) #dashboard *{box-sizing:border-box!important}
 }
 </style>
+
+<style id="mobile-performance-hard-reduction">
+@media(max-width:760px){
+ body:has(#dashboard){background:#080d18!important;background-image:none!important}
+ body:has(#dashboard):after,body:has(#dashboard):before{display:none!important;content:none!important}
+ body:has(#dashboard) #dashboard,
+ body:has(#dashboard) #dashboard .panel,
+ body:has(#dashboard) #dashboard .post,
+ body:has(#dashboard) #dashboard .welcome,
+ body:has(#dashboard) #dashboard .home-tile,
+ body:has(#dashboard) #dashboard .mobile-nav,
+ body:has(#dashboard) header.topbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}
+ body:has(#dashboard) #dashboard .panel,
+ body:has(#dashboard) #dashboard .post,
+ body:has(#dashboard) #dashboard .welcome,
+ body:has(#dashboard) #dashboard .home-tile,
+ body:has(#dashboard) #dashboard .mobile-nav{box-shadow:none!important;background-image:none!important}
+ body:has(#dashboard) #dashboard .club-hero:before,
+ body:has(#dashboard) #dashboard .club-hero:after,
+ body:has(#dashboard) #dashboard .welcome:before,
+ body:has(#dashboard) #dashboard .welcome:after{display:none!important}
+ body:has(#dashboard) #dashboard *{animation:none!important;transition:none!important;scroll-behavior:auto!important;text-shadow:none!important;filter:none!important}
+ body:has(#dashboard) #dashboard .welcome{background:#122b42!important}
+ body:has(#dashboard) #dashboard .panel,body:has(#dashboard) #dashboard .post,body:has(#dashboard) #dashboard .home-tile{background:#10243a!important}
+ body:has(#dashboard) header.topbar{background:#081525!important}
+ body:has(#dashboard) #dashboard .mobile-nav{background:#081525!important}
+}
+</style>
 </head>
 <body>
 
